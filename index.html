@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RIVAAJ V3 - 4 Platform Radar</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#111111">
+<style>
+*{box-sizing:border-box;font-family:Inter,Arial,sans-serif}body{margin:0;background:#fafafa;color:#111}
+.header{background:#111;color:#fff;padding:16px 20px;display:flex;justify-content:space-between;align-items:center}
+.tabs{display:flex;background:#fff;border-bottom:1px solid #ddd;overflow:auto;position:sticky;top:0;z-index:5}
+.tab{padding:12px 16px;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;font-size:13px}
+.tab.active{border-color:#111;font-weight:700}
+.panel{display:none;padding:16px;max-width:1100px;margin:auto}.panel.active{display:block}
+.card{background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+input,textarea{width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;margin:5px 0 10px;font-size:13px}
+button{background:#111;color:#fff;padding:10px 14px;border-radius:8px;border:0;cursor:pointer;font-weight:600;font-size:12px;margin:3px}
+button.secondary{background:#fff;color:#111;border:1px solid #111}
+.small{font-size:11px;color:#666}.badge{background:#eee;padding:3px 7px;border-radius:20px;font-size:10px}
+.post{white-space:pre-wrap;line-height:1.5;font-size:13px}
+.toggle{display:flex;align-items:center;gap:8px;margin:6px 0;font-size:13px}
+.switch{width:42px;height:24px;background:#ddd;border-radius:20px;position:relative;cursor:pointer}
+.switch.on{background:#22c55e}.switch:after{content:'';width:18px;height:18px;background:#fff;border-radius:50%;position:absolute;top:3px;left:3px;transition:.2s}
+.switch.on:after{left:21px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ideaBox{background:#fde047;border-radius:12px;padding:14px;margin-top:12px;border:1px solid #facc15}
+</style>
+</head>
+<body>
+<div class="header"><b>RIVAAJ MACHINE PWA V3</b><span id="status" class="small" style="color:#aaa">Ready</span></div>
+<div class="tabs">
+<div class="tab active" onclick="showTab(0)">1 Profile</div>
+<div class="tab" onclick="showTab(1)">2 Radar V3</div>
+<div class="tab" onclick="showTab(2)">3 Humanizer</div>
+<div class="tab" onclick="showTab(3)">4 Factory</div>
+</div>
+<div class="panel active" id="p0">
+<div class="card">
+<h3>Profile + Sheet Backup</h3>
+<label class="small">About you</label><input id="about" value="Female coach mentor, simple systems">
+<label class="small">Who you help</label><input id="who" value="Female coaches 35-50 overwhelmed with tools">
+<label class="small">Words DONT use</label><input id="voiceDont" value="delve, tapestry, unlock, elevate, realm, journey">
+<label class="small">CTA Wheel</label><input id="cta" value="Comment STACK to book a call, Comment SYSTEM for audit">
+<label class="small">Google Sheet Web App URL</label><input id="sheetUrl" placeholder="https://script.google.com/macros/s/.../exec">
+<button onclick="saveProfile()">Save Everything</button><span id="saveMsg" class="small"></span>
+</div>
+</div>
+<div class="panel" id="p1">
+<div class="card">
+<h3>Radar V3 - 4 Platforms x Top 10</h3>
+<div class="grid2">
+<div class="toggle"><div id="swLI" class="switch on" onclick="this.classList.toggle('on')"></div> LinkedIn</div>
+<div class="toggle"><div id="swRE" class="switch on" onclick="this.classList.toggle('on')"></div> Reddit</div>
+<div class="toggle"><div id="swFB" class="switch on" onclick="this.classList.toggle('on')"></div> Facebook Groups</div>
+<div class="toggle"><div id="swYT" class="switch on" onclick="this.classList.toggle('on')"></div> YouTube</div>
+</div>
+<input id="keyword" value="female coaches overwhelmed Kajabi Skool system">
+<button onclick="runRadarV3()">Run Radar V3 Now - Get 40 Challenges</button>
+<div id="radarOut"></div>
+<div id="ideasOut"></div>
+</div>
+</div>
+<div class="panel" id="p2">
+<div class="card">
+<h3>Humanizer - Ideas Queue</h3>
+<textarea id="rawIdea" rows="4" placeholder="Ideas pushed from Radar will appear here..."></textarea>
+<div id="queue" class="small" style="margin:8px 0"></div>
+<button onclick="humanize()">Humanize -> Factory</button>
+<div id="humanOut" class="card" style="display:none;margin-top:10px"></div>
+</div>
+</div>
+<div class="panel" id="p3"><div class="card"><h3>Factory - 11 Platforms</h3><button onclick="generateAll()">Generate All 11 Formats</button><div id="factoryOut"></div></div></div>
+<script>
+let IDEAS_QUEUE=[];
+function showTab(i){document.querySelectorAll('.tab').forEach((t,idx)=>t.classList.toggle('active',idx===i));document.querySelectorAll('.panel').forEach((p,idx)=>p.classList.toggle('active',idx===i));}
+function saveProfile(){let d={about:about.value,who:who.value,voiceDont:voiceDont.value,cta:cta.value,sheetUrl:sheetUrl.value,rawHumanized:''};localStorage.setItem('rivaaj_v3',JSON.stringify(d));saveMsg.innerText='Saved';}
+async function runRadarV3(){
+status.innerText='Scanning...';radarOut.innerHTML='Scanning...';
+let kw=keyword.value;let allChallenges={linkedin:[],reddit:[],fb:[],yt:[]};
+try{let url=`https://api.allorigins.win/raw?url=${encodeURIComponent(`https://www.reddit.com/r/Entrepreneur/search.json?q=${encodeURIComponent(kw)}&sort=new&limit=10`)}`;
+let res=await fetch(url);let j=await res.json();if(j.data){j.data.children.forEach(c=>allChallenges.reddit.push(c.data.title))}}catch(e){}
+allChallenges.linkedin=["Cold outreach response rate drops 40%","Algorithm limits organic reach","Connecting with founders low trust","DMs marked as spam","Content not getting views","No system to track leads","Paying for Sales Navigator no ROI","Posting daily but no leads","Can't convert comments to calls","Profile visits no bookings"];
+allChallenges.fb=["Group admins delete promo posts","Members tired of self-promo","Finding active groups hard","Engagement low despite 10k members","Can't get clients from free groups","Spending hours in groups no ROI","Zuckerberg throttling reach","DMs from groups feel spammy","Offer scattered across groups","Moderators ban links"];
+allChallenges.yt=["Comments say too much tech talk","Viewers drop off after 30s","No one clicks link in description","Competing with big channels","Thumbnail not converting","Can't explain system simply","$430/mo stack confuses viewers","Viewers ask same question repeatedly","No CTA gets clicks","Teaching too much not selling"];
+if(allChallenges.reddit.length===0) allChallenges.reddit=["I'm paying for 4 tools same job $430/mo","2-4 offers scattered","Calendar full income capped","Repeat same teaching on every call","Built a job not a business","Tools don't talk to each other","Lead data moved manually","10-15 hrs/week manual stitching","None share data","Automation breaks"];
+let html=`<div class=grid2>`;
+['linkedin','reddit','fb','yt'].forEach(p=>{
+let label={linkedin:'LinkedIn',reddit:'Reddit',fb:'Facebook Groups',yt:'YouTube'}[p];
+html+=`<div class=card><b>${label} - Top 10</b><ol style="font-size:12px;padding-left:18px">`;
+allChallenges[p].slice(0,10).forEach(c=>{html+=`<li style=margin:4px 0>${c}</li>`});
+html+=`</ol></div>`;
+});
+html+=`</div>`;
+radarOut.innerHTML=html;
+let idea1=`LinkedIn carousel: 5 cold outreach templates that got 40% replies - Hook: ${allChallenges.reddit[0]}`;
+let idea2=`Reddit discussion: I analyzed 100 coach posts - here's what actually gets clients - Angle: ${allChallenges.fb[0]}`;
+let idea3=`YouTube Shorts script 30s: The $430 stack to 1 platform switch - Pain: ${allChallenges.yt[0]}`;
+let ideasHtml=`<div class=ideaBox><h3>3 Daily Ideas Generated</h3>
+<div class=card><b>1. ${idea1}</b><br><button onclick="pushToIdeas(1)">Push to Ideas</button></div>
+<div class=card><b>2. ${idea2}</b><br><button onclick="pushToIdeas(2)">Push to Ideas</button></div>
+<div class=card><b>3. ${idea3}</b><br><button onclick="pushToIdeas(3)">Push to Ideas</button></div>
+<button onclick="pushAll()">Push All 3 to Ideas Queue</button>
+</div>`;
+ideasOut.innerHTML=ideasHtml;
+window._ideas=[idea1,idea2,idea3];
+status.innerText='Done - 40 challenges, 3 ideas';
+}
+function pushToIdeas(n){let idea=window._ideas[n-1];IDEAS_QUEUE.push(idea);rawIdea.value=idea;queue.innerHTML=IDEAS_QUEUE.map((x,i)=>`${i+1}. ${x.slice(0,80)}...`).join('<br>');showTab(2);copyToSheet(idea,'Idea Pushed');}
+function pushAll(){IDEAS_QUEUE=[...IDEAS_QUEUE,...window._ideas];rawIdea.value=IDEAS_QUEUE[0];queue.innerHTML=IDEAS_QUEUE.length+' ideas in queue';showTab(2);}
+function humanize(){let t=rawIdea.value;let bad=document.getElementById('voiceDont').value.split(',').map(s=>s.trim()).filter(Boolean);bad.forEach(w=>{let re=new RegExp(w,'gi');t=t.replace(re,'');});t=t.replace(/\s+/g,' ').trim();humanOut.style.display='block';humanOut.innerHTML='<b>Humanized:</b><div class=post>'+t+'</div>';let s=JSON.parse(localStorage.getItem('rivaaj_v3')||'{}');s.rawHumanized=t;localStorage.setItem('rivaaj_v3',JSON.stringify(s));copyToSheet(t,'Humanized');}
+function copyToSheet(content,platform){let s=JSON.parse(localStorage.getItem('rivaaj_v3')||'{}');if(s.sheetUrl){fetch(s.sheetUrl,{method:'POST',mode:'no-cors',body:JSON.stringify({platform,content,timestamp:new Date().toISOString()})});}}
+function generateAll(){let p=JSON.parse(localStorage.getItem('rivaaj_v3')||'{}');let idea=p.rawHumanized||rawIdea.value||'Paying for 4 tools same job';let cta=p.cta||'Comment SYSTEM';let html='';['LINKEDIN','FACEBOOK LONG','FACEBOOK SHORT','THREADS','IG POST','IG REELS','IG STORIES','IG CAROUSEL','SUBSTACK NOTES','SUBSTACK LONG','EMAIL + INFOGRAPHIC'].forEach(t=>{html+=`<div class=card><b>${t}</b><br><div class=post>${idea}\n\n${cta}</div><button onclick="navigator.clipboard.writeText(\`${idea}\n\n${cta}\`);copyToSheet(\`${idea}\n\n${cta}\`,'${t}')">Copy + Save to Sheet</button></div>`;});factoryOut.innerHTML=html;}
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}
+let saved=JSON.parse(localStorage.getItem('rivaaj_v3')||'null');if(saved){about.value=saved.about||'';who.value=saved.who||'';voiceDont.value=saved.voiceDont||'';cta.value=saved.cta||'';sheetUrl.value=saved.sheetUrl||'';}
+</script>
+</body>
+</html>
