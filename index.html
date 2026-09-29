@@ -8,88 +8,85 @@
 <meta name="theme-color" content="#111111">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="description" content="Multi-platform content conversion engine with 11 factory output formats, radar discovery, and brand vault.">
+<meta name="description" content="A focused space for founders with something real to say. Bring the rough thought; leave with a post that sounds like you.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg-page: #fafafa;
-  --bg-header: #111111;
+  --bg-main: #fafafa;
   --bg-card: #ffffff;
-  --bg-card-sub: #f8fafc;
-  --border-color: #e2e8f0;
-  --border-dark: #111111;
-  --text-main: #0f172a;
-  --text-muted: #64748b;
+  --bg-header: #111111;
+  --border-color: #e5e5e5;
+  --border-dark: #222222;
+  --text-dark: #111111;
+  --text-muted: #666666;
   --accent-orange: #d94e1f;
-  --accent-blue: #0A66C2;
-  --accent-fb: #1877F2;
-  --accent-ig: #E4405F;
-  --accent-substack: #FF6719;
-  --accent-reddit: #FF4500;
   --accent-green: #10b981;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-serif: 'Newsreader', Georgia, serif;
-  --font-mono: 'SF Mono', 'Courier New', monospace;
+  --font-serif: "Newsreader", "Georgia", serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "SF Mono", "Courier New", monospace;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  background-color: var(--bg-page);
-  color: var(--text-main);
+  background-color: var(--bg-main);
+  color: var(--text-dark);
   font-family: var(--font-sans);
-  line-height: 1.5;
-  padding-bottom: 3rem;
+  font-size: 13px;
+  line-height: 1.6;
   min-height: 100vh;
+  padding-bottom: 3rem;
 }
 
-/* TOP HEADER BAR */
-.top-header {
+/* Header Bar */
+.top-header-bar {
   background-color: var(--bg-header);
   color: #ffffff;
   padding: 1.25rem 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.header-inner {
+  max-width: 1320px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
-.header-brand {
+.header-brand-group {
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
+  flex-direction: column;
 }
 
-.brand-badge {
-  background: var(--accent-orange);
-  color: #ffffff;
+.header-badge {
   font-size: 0.7rem;
   font-weight: 800;
-  letter-spacing: 0.1em;
-  padding: 0.25rem 0.6rem;
-  border-radius: 4px;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
+  color: var(--accent-orange);
+  margin-bottom: 0.2rem;
 }
 
-.brand-title {
+.header-title {
   font-family: var(--font-serif);
-  font-size: 1.6rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1.1;
 }
 
-.header-meta {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+.header-sub {
   font-size: 0.8rem;
-  color: #94a3b8;
+  color: #a1a1aa;
 }
 
-/* APP NAVIGATION TABS */
+/* 4-Tab Navigation */
 .nav-tabs-container {
   max-width: 1320px;
   margin: 0 auto 1.5rem auto;
@@ -99,47 +96,41 @@ body {
 .nav-tabs {
   display: flex;
   gap: 0.5rem;
-  background: #ffffff;
-  border: 1px solid var(--border-color);
-  padding: 0.4rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+  border-bottom: 2px solid var(--border-color);
   overflow-x: auto;
+  padding-bottom: 2px;
 }
 
 .tab-btn {
-  flex: 1;
-  min-width: 180px;
-  background: transparent;
-  border: none;
-  border-radius: 8px;
-  padding: 0.75rem 1rem;
-  font-family: var(--font-sans);
-  font-size: 0.85rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  padding: 0.65rem 1.25rem;
+  font-size: 0.82rem;
   font-weight: 700;
   color: var(--text-muted);
   cursor: pointer;
+  transition: all 0.15s ease;
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 0.5rem;
-  transition: all 0.2s ease;
   white-space: nowrap;
 }
 
 .tab-btn:hover {
-  background: #f1f5f9;
-  color: var(--text-main);
+  background: #ffffff;
+  color: var(--text-dark);
 }
 
 .tab-btn.active {
   background: var(--bg-header);
   color: #ffffff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  border-color: var(--bg-header);
 }
 
-/* MAIN LAYOUT WRAPPER */
-.main-wrapper {
+/* App Main Container */
+.app-container {
   max-width: 1320px;
   margin: 0 auto;
   padding: 0 1.5rem;
@@ -153,100 +144,94 @@ body {
   display: block;
 }
 
-/* CARDS & CONTAINERS */
-.factory-card {
+/* Tool Cards */
+.tool-card {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+  border-radius: 10px;
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.02);
 }
 
-.card-header-row {
+.tool-card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
-  padding-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--border-color);
 }
 
-.card-title-group {
+.tool-card-title {
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dark);
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.5rem;
 }
 
-.card-title-text {
-  font-size: 0.9rem;
-  font-weight: 800;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--text-main);
-}
-
-/* BRAND VAULT & RADAR GRID */
-.tools-two-col {
+/* Brainbook Grid */
+.brainbook-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 0.85rem;
 }
 
-.vault-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
-}
-
-.form-group {
+.field-group {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: 0.3rem;
 }
 
-.form-group.full-width {
-  grid-column: span 2;
-}
-
-.form-group label {
+.field-group label {
   font-size: 0.72rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-weight: 700;
   color: var(--text-muted);
+  text-transform: uppercase;
 }
 
-.form-group input {
-  background: var(--bg-card-sub);
+.field-group input {
+  width: 100%;
+  background: #fafafa;
   border: 1px solid var(--border-color);
   border-radius: 6px;
   padding: 0.5rem 0.75rem;
   font-size: 0.85rem;
-  color: var(--text-main);
+  color: var(--text-dark);
   font-family: inherit;
 }
 
-.form-group input:focus {
+.field-group input:focus {
   outline: none;
-  border-color: var(--bg-header);
+  border-color: var(--text-dark);
   background: #ffffff;
 }
 
-/* RADAR SOURCE TOGGLES */
-.radar-source-bar {
+/* Radar Controls */
+.radar-controls-row {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 0.75rem;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.platform-toggles {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
 }
 
 .source-toggle-btn {
-  background: var(--bg-card-sub);
+  background: #fafafa;
   border: 1px solid var(--border-color);
-  border-radius: 20px;
-  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  padding: 0.35rem 0.65rem;
   font-size: 0.75rem;
   font-weight: 700;
   color: var(--text-muted);
@@ -254,60 +239,48 @@ body {
   display: flex;
   align-items: center;
   gap: 0.35rem;
-  transition: all 0.2s;
 }
 
 .source-toggle-btn.active {
-  background: #f1f5f9;
-  border-color: var(--text-main);
-  color: var(--text-main);
+  background: #ffffff;
+  border-color: var(--text-dark);
+  color: var(--text-dark);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
-.source-toggle-btn.active::after {
-  content: "ON";
-  font-size: 0.65rem;
-  background: var(--accent-green);
-  color: #ffffff;
-  padding: 0.1rem 0.3rem;
-  border-radius: 4px;
-  margin-left: 0.2rem;
-}
-
-.radar-mode-row {
+.mode-pill-group {
   display: flex;
-  justify-content: space-between;
-  gap: 0.5rem;
-  margin-bottom: 0.75rem;
+  background: #f0f0f0;
+  padding: 2px;
+  border-radius: 6px;
 }
 
 .mode-pill-btn {
-  flex: 1;
-  background: var(--bg-card-sub);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  padding: 0.4rem;
+  border: none;
+  background: transparent;
+  padding: 0.35rem 0.75rem;
   font-size: 0.75rem;
   font-weight: 700;
   color: var(--text-muted);
   cursor: pointer;
-  text-align: center;
+  border-radius: 4px;
 }
 
 .mode-pill-btn.active {
-  background: var(--bg-header);
-  color: #ffffff;
-  border-color: var(--bg-header);
+  background: #ffffff;
+  color: var(--text-dark);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 }
 
-.radar-search-row {
+.search-bar-row {
   display: flex;
   gap: 0.5rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
 }
 
-.radar-search-row input {
+.search-bar-row input {
   flex: 1;
-  background: var(--bg-card-sub);
+  background: #fafafa;
   border: 1px solid var(--border-color);
   border-radius: 6px;
   padding: 0.5rem 0.75rem;
@@ -323,162 +296,188 @@ body {
   font-size: 0.8rem;
   font-weight: 700;
   cursor: pointer;
+  white-space: nowrap;
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  transition: opacity 0.2s;
 }
 
-.btn-black:hover { opacity: 0.9; }
+.btn-black:hover {
+  opacity: 0.9;
+}
 
+.btn-opt {
+  background: #ffffff;
+  color: var(--text-dark);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-opt:hover {
+  border-color: var(--text-dark);
+}
+
+/* Radar Output List */
 .radar-ideas-list {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
-  max-height: 220px;
-  overflow-y: auto;
+  gap: 0.75rem;
 }
 
 .radar-idea-item {
-  background: var(--bg-card-sub);
+  background: #fafafa;
   border: 1px solid var(--border-color);
   border-radius: 8px;
-  padding: 0.6rem 0.8rem;
-  font-size: 0.8rem;
+  padding: 0.85rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
 .radar-idea-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-dark);
 }
 
 .radar-idea-actions {
   display: flex;
-  gap: 0.4rem;
-  align-self: flex-end;
+  gap: 0.5rem;
+  align-items: center;
 }
 
-.btn-opt {
-  background: #ffffff;
-  border: 1px solid var(--border-color);
-  color: var(--text-main);
-  border-radius: 4px;
-  padding: 0.2rem 0.5rem;
-  font-size: 0.72rem;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.btn-opt:hover {
-  border-color: var(--bg-header);
-  background: #f8fafc;
-}
-
-/* WORKSPACE SPLIT GRID */
-.draft-workspace-grid {
+/* Editor Workspace Grid */
+.editor-workspace-grid {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 1.5rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  align-items: start;
 }
 
-.main-draft-textarea {
+.main-textarea {
   width: 100%;
-  min-height: 240px;
-  background: var(--bg-card-sub);
+  min-height: 280px;
   border: 1px solid var(--border-color);
+  background: #fafafa;
   border-radius: 8px;
   padding: 1rem;
-  font-family: var(--font-sans);
   font-size: 13px;
   line-height: 1.6;
-  color: var(--text-main);
+  color: var(--text-dark);
+  font-family: inherit;
   resize: vertical;
-  margin-bottom: 0.75rem;
 }
 
-.main-draft-textarea:focus {
+.main-textarea:focus {
   outline: none;
-  border-color: var(--bg-header);
+  border-color: var(--text-dark);
   background: #ffffff;
 }
 
-/* 11 OUTPUT FORMAT CARDS */
-.format-output-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 1.25rem;
-  margin-bottom: 1.25rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+/* Factory Output Cards Grid (Screens 2, 3, 4) */
+.factory-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 1.25rem;
 }
 
-.format-card-header {
+.factory-output-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 1.25rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+  display: flex;
+  flex-direction: column;
+}
+
+.card-top-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.85rem;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--border-color);
 }
 
-.format-card-title {
+.card-title-text {
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.85rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  color: var(--text-main);
 }
 
-.format-card-actions {
+.card-action-btns {
   display: flex;
   gap: 0.4rem;
 }
 
-.post-content-box {
-  background: var(--bg-card-sub);
+.card-body-text {
+  background: #fafafa;
   border: 1px solid var(--border-color);
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 1rem;
-  font-family: var(--font-sans);
   font-size: 13px;
-  line-height: 1.65;
-  color: var(--text-main);
+  line-height: 1.6;
+  color: var(--text-dark);
   white-space: pre-wrap;
   word-wrap: break-word;
-  min-height: 120px;
+  min-height: 180px;
+  flex: 1;
 }
 
-/* PLATFORM ICONS SVG */
-.platform-icon {
-  width: 18px;
-  height: 18px;
-  display: inline-block;
-  vertical-align: middle;
+/* Rules & Metrics */
+.score-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1rem;
 }
 
-/* Byron 8 Rules Checklist */
-.rules-checklist-box {
-  background: var(--bg-card-sub);
+.score-badge-card {
+  background: #fafafa;
   border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 1rem;
+  border-radius: 6px;
+  padding: 0.65rem;
+  text-align: center;
+}
+
+.score-num {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--accent-orange);
+  line-height: 1;
+}
+
+.score-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.rules-list {
+  background: #fafafa;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 0.85rem;
 }
 
 .rule-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.8rem;
-  padding: 0.35rem 0;
+  font-size: 0.78rem;
+  padding: 0.3rem 0;
   border-bottom: 1px dashed var(--border-color);
 }
+
 .rule-row:last-child { border-bottom: none; }
 
 .status-badge {
@@ -487,153 +486,155 @@ body {
   padding: 0.15rem 0.4rem;
   border-radius: 4px;
 }
+
 .status-pass { background: #d1fae5; color: #065f46; }
 .status-warn { background: #fef3c7; color: #92400e; }
 
-/* TOAST NOTIFICATION */
-#toast-notification {
+/* SVG Icon Helper */
+.platform-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Toast Notification */
+.toast-notice {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: 20px;
+  right: 20px;
   background: var(--bg-header);
   color: #ffffff;
   padding: 0.75rem 1.25rem;
   border-radius: 8px;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   display: none;
-  z-index: 1000;
+  z-index: 9999;
 }
 
 @media (max-width: 900px) {
-  .tools-two-col, .draft-workspace-grid { grid-template-columns: 1fr; }
-  .vault-grid { grid-template-columns: 1fr; }
-  .form-group.full-width { grid-column: span 1; }
+  .editor-workspace-grid, .factory-cards-grid { grid-template-columns: 1fr; }
+  .header-inner { flex-direction: column; align-items: flex-start; }
 }
 </style>
 </head>
 <body>
 
 <!-- TOP HEADER -->
-<header class="top-header">
-  <div class="header-brand">
-    <span class="brand-badge">FACTORY ENGINE v11</span>
-    <span class="brand-title">Draft Desk</span>
+<div class="top-header-bar">
+  <div class="header-inner">
+    <div class="header-brand-group">
+      <span class="header-badge">• DRAFT DESK / FACTORY ENGINE v12</span>
+      <h1 class="header-title">Draft Desk — The Swap Test Content Engine</h1>
+      <span class="header-sub">Transform unpolished thoughts into 11 high-converting social formats.</span>
+    </div>
+    <span style="font-size:0.75rem; font-weight:800; color:#10b981; background:rgba(16,185,129,0.15); border:1px solid #10b981; padding:0.3rem 0.75rem; border-radius:20px;">
+      OFFLINE READY 🖥️
+    </span>
   </div>
-  <div class="header-meta">
-    <span>The Swap Test Content Engine</span>
-    <span style="background:rgba(255,255,255,0.15); padding:0.2rem 0.5rem; border-radius:4px; font-weight:700;">OFFLINE READY</span>
-  </div>
-</header>
+</div>
 
-<!-- NAV TABS -->
+<!-- 4-TAB NAVIGATION -->
 <div class="nav-tabs-container">
   <div class="nav-tabs">
-    <button class="tab-btn active" onclick="switchTab('tab-desk')">
+    <button class="tab-btn active" id="tab-btn-desk" onclick="switchTab('tab-desk')">
       🖥️ Screen 1: Draft & Radar
     </button>
-    <button class="tab-btn" onclick="switchTab('tab-text')">
+    <button class="tab-btn" id="tab-btn-text" onclick="switchTab('tab-text')">
       💼 Screen 2: Text Networks
     </button>
-    <button class="tab-btn" onclick="switchTab('tab-insta')">
+    <button class="tab-btn" id="tab-btn-insta" onclick="switchTab('tab-insta')">
       📸 Screen 3: Instagram Suite
     </button>
-    <button class="tab-btn" onclick="switchTab('tab-substack')">
+    <button class="tab-btn" id="tab-btn-substack" onclick="switchTab('tab-substack')">
       📰 Screen 4: Stacks & Email
     </button>
   </div>
 </div>
 
-<div class="main-wrapper">
+<div class="app-container">
 
-  <!-- ============================================================
-       TAB 1: SCREEN 1 - DRAFT DESK & RADAR DISCOVERY
-       ============================================================ -->
-  <div id="tab-desk" class="tab-content-panel active">
+  <!-- SCREEN 1: DRAFT & RADAR -->
+  <div class="tab-content-panel active" id="tab-desk">
 
-    <!-- BRAND VAULT + RADAR RESEARCH -->
-    <div class="tools-two-col">
-
-      <!-- 01 BRAND VAULT -->
-      <div class="factory-card" style="margin-bottom:0;">
-        <div class="card-header-row">
-          <div class="card-title-group">
-            <span class="card-title-text">01 / BRAND VAULT (My Brainbook & Metrics)</span>
-          </div>
-          <span style="font-size:0.7rem; font-weight:800; color:var(--accent-orange); background:#fbebe4; padding:0.2rem 0.5rem; border-radius:4px;">LOCKED VOICE</span>
+    <!-- 01 BRAND VAULT -->
+    <div class="tool-card">
+      <div class="tool-card-header">
+        <span class="tool-card-title">01 / BRAND VAULT (My Brainbook & Metrics)</span>
+        <span style="font-size:0.75rem; color:var(--accent-orange); font-weight:800;">LOCKED VOICE</span>
+      </div>
+      <div class="brainbook-grid">
+        <div class="field-group">
+          <label>Author / Brand Name</label>
+          <input type="text" id="vault-author" value="Byron Redhead">
         </div>
-        <div class="vault-grid">
-          <div class="form-group">
-            <label>Author / Brand Name</label>
-            <input type="text" id="vault-author" value="Byron Redhead">
-          </div>
-          <div class="form-group">
-            <label>Core Niche</label>
-            <input type="text" id="vault-niche" value="B2B Content Strategy">
-          </div>
-          <div class="form-group full-width">
-            <label>Target Audience (ICP)</label>
-            <input type="text" id="vault-icp" value="SaaS Founders & Consultants struggling with quiet checkouts">
-          </div>
-          <div class="form-group full-width">
-            <label>Key Metrics & Case Study Proof</label>
-            <input type="text" id="vault-metrics" value="Scaled agency from 17 to 50 staff in 12 months; generated 5.44x more organic reach">
-          </div>
+        <div class="field-group">
+          <label>Core Niche</label>
+          <input type="text" id="vault-niche" value="B2B Content Strategy">
+        </div>
+        <div class="field-group">
+          <label>Target Audience (ICP)</label>
+          <input type="text" id="vault-icp" value="SaaS Founders & Consultants">
+        </div>
+        <div class="field-group">
+          <label>Key Metrics & Case Study Proof</label>
+          <input type="text" id="vault-metrics" value="Scaled agency to 50 staff; 5.44x reach growth">
         </div>
       </div>
+    </div>
 
-      <!-- 02 MULTI-PLATFORM RADAR DISCOVERY -->
-      <div class="factory-card" style="margin-bottom:0;">
-        <div class="card-header-row">
-          <div class="card-title-group">
-            <span class="card-title-text">02 / MULTI-PLATFORM RADAR (Niche Friction)</span>
-          </div>
-          <span style="font-size:0.7rem; font-weight:800; color:var(--accent-green); background:#d1fae5; padding:0.2rem 0.5rem; border-radius:4px;">LIVE SOURCES</span>
+    <!-- 02 MULTI-PLATFORM RADAR -->
+    <div class="tool-card">
+      <div class="tool-card-header">
+        <span class="tool-card-title">02 / MULTI-PLATFORM RADAR (Niche Friction)</span>
+        <span style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">LIVE SOURCES</span>
+      </div>
+
+      <div class="radar-controls-row">
+        <div class="platform-toggles">
+          <button class="source-toggle-btn active" id="src-linkedin" onclick="toggleRadarSource('linkedin')">
+            <svg class="platform-icon" viewBox="0 0 24 24" fill="#0A66C2"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg> LinkedIn
+          </button>
+          <button class="source-toggle-btn active" id="src-reddit" onclick="toggleRadarSource('reddit')">
+            <svg class="platform-icon" viewBox="0 0 24 24" fill="#FF4500"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m5.01 4.75c.68 0 1.29.43 1.51 1.07.22.64.02 1.35-.5 1.77.16.4.24.84.24 1.31 0 3.01-3.1 5.45-6.93 5.45s-6.93-2.44-6.93-5.45c0-.47.08-.91.24-1.31-.52-.42-.72-1.13-.5-1.77.22-.64.83-1.07 1.51-1.07.37 0 .72.14 1 .39 1.15-.81 2.72-1.33 4.43-1.39l.86-3.86 2.7.58c.06.49.48.87.98.87a1.08 1.08 0 0 0 1.08-1.08c0-.6-.49-1.08-1.08-1.08-.5 0-.92.35-.98.83l-3.02-.65a.25.25 0 0 0-.29.19l-.98 4.41c-1.76.05-3.37.57-4.54 1.41.28-.25.63-.39 1-.39z"/></svg> Reddit
+          </button>
+          <button class="source-toggle-btn active" id="src-fb" onclick="toggleRadarSource('fb')">
+            <svg class="platform-icon" viewBox="0 0 24 24" fill="#1877F2"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z"/></svg> FB Groups
+          </button>
+          <button class="source-toggle-btn active" id="src-x" onclick="toggleRadarSource('x')">
+            <svg class="platform-icon" viewBox="0 0 24 24" fill="#000000"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> X / Twitter
+          </button>
         </div>
 
-        <!-- TOGGLE SOURCES -->
-        <div class="radar-source-bar">
-          <button class="source-toggle-btn active" id="src-linkedin" onclick="toggleRadarSource('linkedin')">LinkedIn</button>
-          <button class="source-toggle-btn active" id="src-reddit" onclick="toggleRadarSource('reddit')">Reddit</button>
-          <button class="source-toggle-btn active" id="src-fb" onclick="toggleRadarSource('fb')">FB Groups</button>
-          <button class="source-toggle-btn active" id="src-x" onclick="toggleRadarSource('x')">X / Twitter</button>
-        </div>
-
-        <!-- MODE SELECTION -->
-        <div class="radar-mode-row">
+        <div class="mode-pill-group">
           <button class="mode-pill-btn active" id="mode-daily" onclick="setRadarMode('daily')">⚡ Today's Daily Research</button>
           <button class="mode-pill-btn" id="mode-weekly" onclick="setRadarMode('weekly')">📅 Weekly ICP Trends</button>
         </div>
-
-        <!-- SEARCH ROW -->
-        <div class="radar-search-row">
-          <input type="text" id="radar-query-input" placeholder="Enter keyword (e.g., pricing, cold outreach, offers)..." value="unclear offers">
-          <button class="btn-black" onclick="runRadarSearch()">🔍 Fetch Insights</button>
-        </div>
-
-        <!-- RESULTS LIST -->
-        <div class="radar-ideas-list" id="radar-ideas-container">
-          <!-- Dynamically populated -->
-        </div>
       </div>
 
+      <div class="search-bar-row">
+        <input type="text" id="radar-query-input" placeholder="Search audience friction topics (e.g. pricing objections, cold outreach)..." value="unclear offers">
+        <button class="btn-black" onclick="runRadarSearch()">🔍 Fetch Insights</button>
+      </div>
+
+      <div class="radar-ideas-list" id="radar-ideas-container">
+        <!-- Rendered dynamically -->
+      </div>
     </div>
 
-    <!-- DRAFT WORKSPACE & ANALYSIS -->
-    <div class="draft-workspace-grid">
+    <!-- WORKSPACE GRID -->
+    <div class="editor-workspace-grid">
 
-      <!-- MAIN INPUT BOX -->
-      <div class="factory-card">
-        <div class="card-header-row">
-          <div class="card-title-group">
-            <span style="font-size:1.1rem;">✏️</span>
-            <span class="card-title-text">YOUR RAW MATERIAL</span>
-          </div>
-          <span style="font-size:0.75rem; font-family:var(--font-mono); color:var(--text-muted);" id="char-counter-display">0 / 8,000</span>
+      <!-- RAW MATERIAL -->
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <span class="tool-card-title">✏️ YOUR RAW MATERIAL</span>
+          <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted);" id="char-counter-display">0 / 8,000</span>
         </div>
 
-        <textarea class="main-draft-textarea" id="main-draft-input" placeholder="Paste your rough draft, thoughts, or raw copy here...">Your audience watches every post. Your checkout stays quiet.
+        <textarea class="main-textarea" id="main-draft-input" placeholder="Paste your rough thought, framework, or client conversation note here...">Your audience watches every post. Your checkout stays quiet.
 
 Tight budgets don't stop people from buying. Unclear offers do. "I love your content" doesn't pay a bill. A clear outcome does.
 
@@ -645,9 +646,9 @@ Comment PATH and I'll send the map.
 
 P.S. The last coach who used this map landed her first paying client from a cold post in four days.</textarea>
 
-        <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.75rem;">
           <span style="font-size:0.75rem; color:var(--text-muted); font-style:italic;">A strong opinion beats a perfectly formed prompt.</span>
-          <div style="display:flex; gap:0.5rem;">
+          <div style="display:flex; gap:0.4rem;">
             <button class="btn-opt" onclick="loadSampleText()">Load Sample</button>
             <button class="btn-opt" onclick="clearDraftText()">Clear</button>
             <button class="btn-black" onclick="processAllFormats()">⚡ Process All Formats</button>
@@ -655,43 +656,62 @@ P.S. The last coach who used this map landed her first paying client from a cold
         </div>
       </div>
 
-      <!-- AUDIT & BYRON'S 8 RULES -->
-      <div class="factory-card">
-        <div class="card-header-row">
-          <div class="card-title-group">
-            <span style="font-size:1.1rem;">🔍</span>
-            <span class="card-title-text">SIGNAL DIAGNOSTICS & BYRON'S 8 RULES</span>
-          </div>
-          <span style="font-size:0.7rem; font-weight:800; color:var(--accent-orange);">AUTOMATED AUDIT</span>
+      <!-- AUDIT & RULES -->
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <span class="tool-card-title">🔍 SIGNAL DIAGNOSTICS & BYRON'S 8 RULES</span>
+          <span style="font-size:0.75rem; color:var(--accent-green); font-weight:800;">AUTOMATED AUDIT</span>
         </div>
 
-        <!-- SCORES SUMMARY -->
-        <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:0.5rem; margin-bottom:1rem; text-align:center;">
-          <div style="background:var(--bg-card-sub); border:1px solid var(--border-color); padding:0.5rem; border-radius:6px;">
-            <div style="font-size:1.3rem; font-weight:800; color:var(--accent-orange);" id="score-thinking">88</div>
-            <div style="font-size:0.65rem; font-weight:800; color:var(--text-muted);">THINKING SIGNAL</div>
+        <div class="score-summary-grid">
+          <div class="score-badge-card">
+            <div class="score-num">88</div>
+            <div class="score-label">Thinking Signal</div>
           </div>
-          <div style="background:var(--bg-card-sub); border:1px solid var(--border-color); padding:0.5rem; border-radius:6px;">
-            <div style="font-size:1.3rem; font-weight:800; color:var(--accent-orange);" id="score-specificity">92</div>
-            <div style="font-size:0.65rem; font-weight:800; color:var(--text-muted);">ICP RECOGNITION</div>
+          <div class="score-badge-card">
+            <div class="score-num">92</div>
+            <div class="score-label">ICP Recognition</div>
           </div>
-          <div style="background:var(--bg-card-sub); border:1px solid var(--border-color); padding:0.5rem; border-radius:6px;">
-            <div style="font-size:1.3rem; font-weight:800; color:var(--accent-orange);" id="score-swap">95</div>
-            <div style="font-size:0.65rem; font-weight:800; color:var(--text-muted);">BYLINE SWAP TEST</div>
+          <div class="score-badge-card">
+            <div class="score-num">95</div>
+            <div class="score-label">Byline Swap Test</div>
           </div>
         </div>
 
-        <!-- 8 RULES CHECKLIST -->
-        <div class="rules-checklist-box">
-          <div style="font-size:0.75rem; font-weight:800; text-transform:uppercase; margin-bottom:0.5rem; color:var(--text-main);">Byron Redhead's Humanisation Rules</div>
-          <div class="rule-row"><span>Rule 1: Manual Intro Rewrite (No AI Clichés)</span><span class="status-badge status-pass" id="r1-status">PASS</span></div>
-          <div class="rule-row"><span>Rule 2: First-Person Ownership ("I", "my")</span><span class="status-badge status-pass" id="r2-status">PASS</span></div>
-          <div class="rule-row"><span>Rule 3: Varied Sentence Length & Rhythm</span><span class="status-badge status-pass" id="r3-status">PASS</span></div>
-          <div class="rule-row"><span>Rule 4: Concrete Data & Named Products</span><span class="status-badge status-pass" id="r4-status">PASS</span></div>
-          <div class="rule-row"><span>Rule 5: Zero Academic Transitions</span><span class="status-badge status-pass" id="r5-status">PASS</span></div>
-          <div class="rule-row"><span>Rule 6: Scrubbed Banned AI Watermarks</span><span class="status-badge status-pass" id="r6-status">PASS</span></div>
-          <div class="rule-row"><span>Rule 7: Compact Paragraph Spacing (&lt; 4 lines)</span><span class="status-badge status-pass" id="r7-status">PASS</span></div>
-          <div class="rule-row"><span>Rule 8: Defensible, High-Friction POV</span><span class="status-badge status-pass" id="r8-status">PASS</span></div>
+        <div class="rules-list">
+          <div style="font-size:0.75rem; font-weight:800; text-transform:uppercase; margin-bottom:0.5rem; color:var(--text-dark);">Byron Redhead's Humanisation Rules</div>
+          <div class="rule-row">
+            <span>Rule 1: Manual Intro Rewrite (No AI Clichés)</span>
+            <span class="status-badge status-pass" id="r1-status">PASS</span>
+          </div>
+          <div class="rule-row">
+            <span>Rule 2: First-Person Ownership ("I", "my")</span>
+            <span class="status-badge status-pass" id="r2-status">PASS</span>
+          </div>
+          <div class="rule-row">
+            <span>Rule 3: Varied Sentence Length & Rhythm</span>
+            <span class="status-badge status-pass" id="r3-status">PASS</span>
+          </div>
+          <div class="rule-row">
+            <span>Rule 4: Concrete Data & Named Products</span>
+            <span class="status-badge status-pass" id="r4-status">PASS</span>
+          </div>
+          <div class="rule-row">
+            <span>Rule 5: Zero Academic Transitions</span>
+            <span class="status-badge status-pass" id="r5-status">PASS</span>
+          </div>
+          <div class="rule-row">
+            <span>Rule 6: Scrubbed Banned AI Watermarks</span>
+            <span class="status-badge status-pass" id="r6-status">PASS</span>
+          </div>
+          <div class="rule-row">
+            <span>Rule 7: Compact Paragraph Spacing (&lt; 4 lines)</span>
+            <span class="status-badge status-pass" id="r7-status">PASS</span>
+          </div>
+          <div class="rule-row">
+            <span>Rule 8: Defensible, High-Friction POV</span>
+            <span class="status-badge status-pass" id="r8-status">PASS</span>
+          </div>
         </div>
       </div>
 
@@ -699,196 +719,184 @@ P.S. The last coach who used this map landed her first paying client from a cold
 
   </div>
 
-  <!-- ============================================================
-       TAB 2: SCREEN 2 - TEXT NETWORKS (LINKEDIN + FACEBOOK + THREADS)
-       ============================================================ -->
-  <div id="tab-text" class="tab-content-panel">
+  <!-- SCREEN 2: TEXT NETWORKS -->
+  <div class="tab-content-panel" id="tab-text">
+    <div class="factory-cards-grid">
 
-    <!-- 1. LINKEDIN LONG FORM -->
-    <div class="format-output-card">
-      <div class="format-card-header">
-        <div class="format-card-title">
-          <svg class="platform-icon" viewBox="0 0 24 24" fill="#0A66C2"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
-          <span>1. LINKEDIN LONG-FORM</span>
+      <!-- 1. LINKEDIN LONG-FORM -->
+      <div class="factory-output-card">
+        <div class="card-top-bar">
+          <span class="card-title-text">
+            <svg class="platform-icon" viewBox="0 0 24 24" fill="#0A66C2"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg> 1. LINKEDIN LONG-FORM
+          </span>
+          <div class="card-action-btns">
+            <button class="btn-opt" onclick="copyCardContent('fmt-linkedin-long')">📋 Copy</button>
+            <button class="btn-black" style="padding:0.35rem 0.65rem; font-size:0.75rem;" onclick="saveToSheet('LinkedIn Long', 'fmt-linkedin-long')">📊 Save to Sheet</button>
+          </div>
         </div>
-        <div class="format-card-actions">
-          <button class="btn-opt" onclick="copyCardContent('fmt-linkedin-long')">📋 Copy</button>
-          <button class="btn-black" onclick="saveToSheet('LINKEDIN LONG-FORM', 'fmt-linkedin-long')">📊 Save to Sheet</button>
-        </div>
+        <div class="card-body-text" id="fmt-linkedin-long">Loading...</div>
       </div>
-      <div class="post-content-box" id="fmt-linkedin-long">Loading...</div>
-    </div>
 
-    <!-- 2. FACEBOOK LONG FORMAT -->
-    <div class="format-output-card">
-      <div class="format-card-header">
-        <div class="format-card-title">
-          <svg class="platform-icon" viewBox="0 0 24 24" fill="#1877F2"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H7.5v-3H10V9.5C10 7.02 11.48 5.64 13.7 5.64c1.06 0 2.17.19 2.17.19v2.38h-1.22c-1.23 0-1.61.76-1.61 1.54V12h2.69l-.43 3h-2.26v6.8c4.56-.93 8-4.96 8-9.8z"/></svg>
-          <span>2. FACEBOOK LONG FORMAT</span>
+      <!-- 2. FACEBOOK LONG FORMAT -->
+      <div class="factory-output-card">
+        <div class="card-top-bar">
+          <span class="card-title-text">
+            <svg class="platform-icon" viewBox="0 0 24 24" fill="#1877F2"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z"/></svg> 2. FACEBOOK LONG FORMAT
+          </span>
+          <div class="card-action-btns">
+            <button class="btn-opt" onclick="copyCardContent('fmt-fb-long')">📋 Copy</button>
+            <button class="btn-black" style="padding:0.35rem 0.65rem; font-size:0.75rem;" onclick="saveToSheet('Facebook Long', 'fmt-fb-long')">📊 Save to Sheet</button>
+          </div>
         </div>
-        <div class="format-card-actions">
-          <button class="btn-opt" onclick="copyCardContent('fmt-fb-long')">📋 Copy</button>
-          <button class="btn-black" onclick="saveToSheet('FACEBOOK LONG FORMAT', 'fmt-fb-long')">📊 Save to Sheet</button>
-        </div>
+        <div class="card-body-text" id="fmt-fb-long">Loading...</div>
       </div>
-      <div class="post-content-box" id="fmt-fb-long">Loading...</div>
-    </div>
 
-    <!-- 3. FACEBOOK SHORT FORMAT -->
-    <div class="format-output-card">
-      <div class="format-card-header">
-        <div class="format-card-title">
-          <svg class="platform-icon" viewBox="0 0 24 24" fill="#1877F2"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H7.5v-3H10V9.5C10 7.02 11.48 5.64 13.7 5.64c1.06 0 2.17.19 2.17.19v2.38h-1.22c-1.23 0-1.61.76-1.61 1.54V12h2.69l-.43 3h-2.26v6.8c4.56-.93 8-4.96 8-9.8z"/></svg>
-          <span>3. FACEBOOK SHORT FORMAT</span>
+      <!-- 3. FACEBOOK SHORT FORMAT -->
+      <div class="factory-output-card">
+        <div class="card-top-bar">
+          <span class="card-title-text">
+            <svg class="platform-icon" viewBox="0 0 24 24" fill="#1877F2"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z"/></svg> 3. FACEBOOK SHORT FORMAT
+          </span>
+          <div class="card-action-btns">
+            <button class="btn-opt" onclick="copyCardContent('fmt-fb-short')">📋 Copy</button>
+            <button class="btn-black" style="padding:0.35rem 0.65rem; font-size:0.75rem;" onclick="saveToSheet('Facebook Short', 'fmt-fb-short')">📊 Save to Sheet</button>
+          </div>
         </div>
-        <div class="format-card-actions">
-          <button class="btn-opt" onclick="copyCardContent('fmt-fb-short')">📋 Copy</button>
-          <button class="btn-black" onclick="saveToSheet('FACEBOOK SHORT FORMAT', 'fmt-fb-short')">📊 Save to Sheet</button>
-        </div>
+        <div class="card-body-text" id="fmt-fb-short">Loading...</div>
       </div>
-      <div class="post-content-box" id="fmt-fb-short">Loading...</div>
-    </div>
 
-    <!-- 4. THREADS SHORT FORMAT -->
-    <div class="format-output-card">
-      <div class="format-card-header">
-        <div class="format-card-title">
-          <svg class="platform-icon" viewBox="0 0 24 24" fill="#000000"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2zm3.83 12.35c-.32 1.25-1.2 2.18-2.58 2.37-1.55.21-2.92-.38-3.66-1.57h-.08c-.28 1.15-1.22 1.83-2.48 1.83-1.46 0-2.53-.94-2.53-2.35 0-1.89 1.76-2.67 4.14-2.67h.85v-.42c0-.85-.52-1.35-1.5-1.35-.87 0-1.46.36-1.65.98h-1.8c.23-1.6 1.63-2.55 3.47-2.55 2.12 0 3.28 1.05 3.28 2.87v3.25c0 .73.32 1.12.93 1.12.65 0 1.18-.45 1.34-1.12h1.74zM12 13.5c-.95 0-1.72.33-1.72 1.03 0 .5.38.83.95.83.82 0 1.48-.48 1.48-1.25v-.61H12z"/></svg>
-          <span>4. THREADS SHORT FORMAT</span>
+      <!-- 4. THREADS SHORT FORMAT -->
+      <div class="factory-output-card">
+        <div class="card-top-bar">
+          <span class="card-title-text">
+            <svg class="platform-icon" viewBox="0 0 24 24" fill="#000000"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> 4. THREADS SHORT FORMAT
+          </span>
+          <div class="card-action-btns">
+            <button class="btn-opt" onclick="copyCardContent('fmt-threads-short')">📋 Copy</button>
+            <button class="btn-black" style="padding:0.35rem 0.65rem; font-size:0.75rem;" onclick="saveToSheet('Threads Short', 'fmt-threads-short')">📊 Save to Sheet</button>
+          </div>
         </div>
-        <div class="format-card-actions">
-          <button class="btn-opt" onclick="copyCardContent('fmt-threads-short')">📋 Copy</button>
-          <button class="btn-black" onclick="saveToSheet('THREADS SHORT FORMAT', 'fmt-threads-short')">📊 Save to Sheet</button>
-        </div>
+        <div class="card-body-text" id="fmt-threads-short">Loading...</div>
       </div>
-      <div class="post-content-box" id="fmt-threads-short">Loading...</div>
-    </div>
 
+    </div>
   </div>
 
-  <!-- ============================================================
-       TAB 3: SCREEN 3 - INSTAGRAM FULL SUITE
-       ============================================================ -->
-  <div id="tab-insta" class="tab-content-panel">
+  <!-- SCREEN 3: INSTAGRAM SUITE -->
+  <div class="tab-content-panel" id="tab-insta">
+    <div class="factory-cards-grid">
 
-    <!-- 5. INSTAGRAM POST FORMAT -->
-    <div class="format-output-card">
-      <div class="format-card-header">
-        <div class="format-card-title">
-          <svg class="platform-icon" viewBox="0 0 24 24" fill="#E4405F"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-          <span>5. INSTAGRAM POST FORMAT</span>
+      <!-- 5. INSTAGRAM POST FORMAT -->
+      <div class="factory-output-card">
+        <div class="card-top-bar">
+          <span class="card-title-text">
+            <svg class="platform-icon" viewBox="0 0 24 24" fill="#E4405F"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069M12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg> 5. INSTAGRAM POST FORMAT
+          </span>
+          <div class="card-action-btns">
+            <button class="btn-opt" onclick="copyCardContent('fmt-ig-post')">📋 Copy</button>
+            <button class="btn-black" style="padding:0.35rem 0.65rem; font-size:0.75rem;" onclick="saveToSheet('Instagram Post', 'fmt-ig-post')">📊 Save to Sheet</button>
+          </div>
         </div>
-        <div class="format-card-actions">
-          <button class="btn-opt" onclick="copyCardContent('fmt-ig-post')">📋 Copy</button>
-          <button class="btn-black" onclick="saveToSheet('INSTAGRAM POST FORMAT', 'fmt-ig-post')">📊 Save to Sheet</button>
-        </div>
+        <div class="card-body-text" id="fmt-ig-post">Loading...</div>
       </div>
-      <div class="post-content-box" id="fmt-ig-post">Loading...</div>
-    </div>
 
-    <!-- 6. INSTAGRAM REELS SCRIPT -->
-    <div class="format-output-card">
-      <div class="format-card-header">
-        <div class="format-card-title">
-          <svg class="platform-icon" viewBox="0 0 24 24" fill="#E4405F"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/></svg>
-          <span>6. INSTAGRAM REELS SCRIPT (2-COLUMN)</span>
+      <!-- 6. INSTAGRAM REELS SCRIPT -->
+      <div class="factory-output-card">
+        <div class="card-top-bar">
+          <span class="card-title-text">
+            <svg class="platform-icon" viewBox="0 0 24 24" fill="#E4405F"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069M12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg> 6. INSTAGRAM REELS SCRIPT (2-COLUMN)
+          </span>
+          <div class="card-action-btns">
+            <button class="btn-opt" onclick="copyCardContent('fmt-ig-reels')">📋 Copy</button>
+            <button class="btn-black" style="padding:0.35rem 0.65rem; font-size:0.75rem;" onclick="saveToSheet('Instagram Reels', 'fmt-ig-reels')">📊 Save to Sheet</button>
+          </div>
         </div>
-        <div class="format-card-actions">
-          <button class="btn-opt" onclick="copyCardContent('fmt-ig-reels')">📋 Copy</button>
-          <button class="btn-black" onclick="saveToSheet('INSTAGRAM REELS SCRIPT', 'fmt-ig-reels')">📊 Save to Sheet</button>
-        </div>
+        <div class="card-body-text" id="fmt-ig-reels">Loading...</div>
       </div>
-      <div class="post-content-box" id="fmt-ig-reels">Loading...</div>
-    </div>
 
-    <!-- 7. INSTAGRAM STORIES 7-SLIDE MAP -->
-    <div class="format-output-card">
-      <div class="format-card-header">
-        <div class="format-card-title">
-          <svg class="platform-icon" viewBox="0 0 24 24" fill="#E4405F"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/></svg>
-          <span>7. INSTAGRAM STORIES (7-SLIDE MAP)</span>
+      <!-- 7. INSTAGRAM STORIES MAP -->
+      <div class="factory-output-card">
+        <div class="card-top-bar">
+          <span class="card-title-text">
+            <svg class="platform-icon" viewBox="0 0 24 24" fill="#E4405F"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069M12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg> 7. INSTAGRAM STORIES (7-SLIDE MAP)
+          </span>
+          <div class="card-action-btns">
+            <button class="btn-opt" onclick="copyCardContent('fmt-ig-stories')">📋 Copy</button>
+            <button class="btn-black" style="padding:0.35rem 0.65rem; font-size:0.75rem;" onclick="saveToSheet('Instagram Stories', 'fmt-ig-stories')">📊 Save to Sheet</button>
+          </div>
         </div>
-        <div class="format-card-actions">
-          <button class="btn-opt" onclick="copyCardContent('fmt-ig-stories')">📋 Copy</button>
-          <button class="btn-black" onclick="saveToSheet('INSTAGRAM STORIES 7-SLIDE MAP', 'fmt-ig-stories')">📊 Save to Sheet</button>
-        </div>
+        <div class="card-body-text" id="fmt-ig-stories">Loading...</div>
       </div>
-      <div class="post-content-box" id="fmt-ig-stories">Loading...</div>
-    </div>
 
-    <!-- 8. IG CAROUSEL 10-SLIDE -->
-    <div class="format-output-card">
-      <div class="format-card-header">
-        <div class="format-card-title">
-          <svg class="platform-icon" viewBox="0 0 24 24" fill="#E4405F"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/></svg>
-          <span>8. IG CAROUSEL (10-SLIDE BLUEPRINT)</span>
+      <!-- 8. IG CAROUSEL 10-SLIDE -->
+      <div class="factory-output-card">
+        <div class="card-top-bar">
+          <span class="card-title-text">
+            <svg class="platform-icon" viewBox="0 0 24 24" fill="#E4405F"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069M12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg> 8. IG CAROUSEL (10-SLIDE BLUEPRINT)
+          </span>
+          <div class="card-action-btns">
+            <button class="btn-opt" onclick="copyCardContent('fmt-ig-carousel')">📋 Copy</button>
+            <button class="btn-black" style="padding:0.35rem 0.65rem; font-size:0.75rem;" onclick="saveToSheet('Instagram Carousel', 'fmt-ig-carousel')">📊 Save to Sheet</button>
+          </div>
         </div>
-        <div class="format-card-actions">
-          <button class="btn-opt" onclick="copyCardContent('fmt-ig-carousel')">📋 Copy</button>
-          <button class="btn-black" onclick="saveToSheet('IG CAROUSEL 10-SLIDE', 'fmt-ig-carousel')">📊 Save to Sheet</button>
-        </div>
+        <div class="card-body-text" id="fmt-ig-carousel">Loading...</div>
       </div>
-      <div class="post-content-box" id="fmt-ig-carousel">Loading...</div>
-    </div>
 
+    </div>
   </div>
 
-  <!-- ============================================================
-       TAB 4: SCREEN 4 - STACKS & NEWSLETTERS
-       ============================================================ -->
-  <div id="tab-substack" class="tab-content-panel">
+  <!-- SCREEN 4: STACKS & EMAIL -->
+  <div class="tab-content-panel" id="tab-substack">
+    <div class="factory-cards-grid">
 
-    <!-- 9. SUBSTACK NOTES SHORT -->
-    <div class="format-output-card">
-      <div class="format-card-header">
-        <div class="format-card-title">
-          <svg class="platform-icon" viewBox="0 0 24 24" fill="#FF6719"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
-          <span>9. SUBSTACK NOTES SHORT</span>
+      <!-- 9. SUBSTACK NOTES SHORT -->
+      <div class="factory-output-card">
+        <div class="card-top-bar">
+          <span class="card-title-text">
+            <svg class="platform-icon" viewBox="0 0 24 24" fill="#FF6719"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg> 9. SUBSTACK NOTES SHORT
+          </span>
+          <div class="card-action-btns">
+            <button class="btn-opt" onclick="copyCardContent('fmt-substack-notes')">📋 Copy</button>
+            <button class="btn-black" style="padding:0.35rem 0.65rem; font-size:0.75rem;" onclick="saveToSheet('Substack Notes', 'fmt-substack-notes')">📊 Save to Sheet</button>
+          </div>
         </div>
-        <div class="format-card-actions">
-          <button class="btn-opt" onclick="copyCardContent('fmt-substack-notes')">📋 Copy</button>
-          <button class="btn-black" onclick="saveToSheet('SUBSTACK NOTES SHORT', 'fmt-substack-notes')">📊 Save to Sheet</button>
-        </div>
+        <div class="card-body-text" id="fmt-substack-notes">Loading...</div>
       </div>
-      <div class="post-content-box" id="fmt-substack-notes">Loading...</div>
-    </div>
 
-    <!-- 10. SUBSTACK LONG FORM NEWSLETTER -->
-    <div class="format-output-card">
-      <div class="format-card-header">
-        <div class="format-card-title">
-          <svg class="platform-icon" viewBox="0 0 24 24" fill="#FF6719"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
-          <span>10. SUBSTACK LONG FORM NEWSLETTER</span>
+      <!-- 10. SUBSTACK LONG FORM NEWSLETTER -->
+      <div class="factory-output-card">
+        <div class="card-top-bar">
+          <span class="card-title-text">
+            <svg class="platform-icon" viewBox="0 0 24 24" fill="#FF6719"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg> 10. SUBSTACK LONG FORM NEWSLETTER
+          </span>
+          <div class="card-action-btns">
+            <button class="btn-opt" onclick="copyCardContent('fmt-substack-long')">📋 Copy</button>
+            <button class="btn-black" style="padding:0.35rem 0.65rem; font-size:0.75rem;" onclick="saveToSheet('Substack Newsletter', 'fmt-substack-long')">📊 Save to Sheet</button>
+          </div>
         </div>
-        <div class="format-card-actions">
-          <button class="btn-opt" onclick="copyCardContent('fmt-substack-long')">📋 Copy</button>
-          <button class="btn-black" onclick="saveToSheet('SUBSTACK LONG FORM NEWSLETTER', 'fmt-substack-long')">📊 Save to Sheet</button>
-        </div>
+        <div class="card-body-text" id="fmt-substack-long">Loading...</div>
       </div>
-      <div class="post-content-box" id="fmt-substack-long">Loading...</div>
-    </div>
 
-    <!-- 11. EMAIL + INFOGRAPHIC (THE $430 ACCIDENT STACK) -->
-    <div class="format-output-card">
-      <div class="format-card-header">
-        <div class="format-card-title">
-          <svg class="platform-icon" viewBox="0 0 24 24" fill="#111111"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-          <span>11. EMAIL + INFOGRAPHIC (THE $430 ACCIDENT STACK)</span>
+      <!-- 11. EMAIL + INFOGRAPHIC -->
+      <div class="factory-output-card" style="grid-column: span 2;">
+        <div class="card-top-bar">
+          <span class="card-title-text">
+            📧 11. EMAIL + INFOGRAPHIC (THE $430 ACCIDENT STACK)
+          </span>
+          <div class="card-action-btns">
+            <button class="btn-opt" onclick="copyCardContent('fmt-email-stack')">📋 Copy</button>
+            <button class="btn-black" style="padding:0.35rem 0.65rem; font-size:0.75rem;" onclick="saveToSheet('Email Stack', 'fmt-email-stack')">📊 Save to Sheet</button>
+          </div>
         </div>
-        <div class="format-card-actions">
-          <button class="btn-opt" onclick="copyCardContent('fmt-email-stack')">📋 Copy</button>
-          <button class="btn-black" onclick="saveToSheet('EMAIL + INFOGRAPHIC STACK', 'fmt-email-stack')">📊 Save to Sheet</button>
-        </div>
+        <div class="card-body-text" id="fmt-email-stack">Loading...</div>
       </div>
-      <div class="post-content-box" id="fmt-email-stack">Loading...</div>
-    </div>
 
+    </div>
   </div>
 
 </div>
 
-<!-- TOAST NOTIFICATION -->
-<div id="toast-notification">Notification Message</div>
+<div class="toast-notice" id="toast-notification">Notification Message</div>
 
 <script>
 /* ============================================================
@@ -909,8 +917,10 @@ if ('serviceWorker' in navigator) {
 
 document.addEventListener('DOMContentLoaded', () => {
   const textarea = document.getElementById('main-draft-input');
-  updateCharCounter();
-  textarea.addEventListener('input', updateCharCounter);
+  if (textarea) {
+    updateCharCounter();
+    textarea.addEventListener('input', updateCharCounter);
+  }
 
   // Initialize Radar Initial Research
   runRadarSearch();
@@ -927,16 +937,18 @@ function switchTab(tabId) {
   if (targetPanel) targetPanel.classList.add('active');
 
   // Activate matching tab button
-  const btns = document.querySelectorAll('.tab-btn');
-  if (tabId === 'tab-desk') btns[0].classList.add('active');
-  if (tabId === 'tab-text') btns[1].classList.add('active');
-  if (tabId === 'tab-insta') btns[2].classList.add('active');
-  if (tabId === 'tab-substack') btns[3].classList.add('active');
+  if (tabId === 'tab-desk') document.getElementById('tab-btn-desk')?.classList.add('active');
+  if (tabId === 'tab-text') document.getElementById('tab-btn-text')?.classList.add('active');
+  if (tabId === 'tab-insta') document.getElementById('tab-btn-insta')?.classList.add('active');
+  if (tabId === 'tab-substack') document.getElementById('tab-btn-substack')?.classList.add('active');
 }
 
 function updateCharCounter() {
-  const text = document.getElementById('main-draft-input').value;
-  document.getElementById('char-counter-display').textContent = `${text.length.toLocaleString()} / 8,000`;
+  const textarea = document.getElementById('main-draft-input');
+  if (textarea) {
+    const text = textarea.value;
+    document.getElementById('char-counter-display').textContent = `${text.length.toLocaleString()} / 8,000`;
+  }
 }
 
 function loadSampleText() {
@@ -969,10 +981,12 @@ RADAR SEARCH & IDEA GENERATOR LOGIC
 function toggleRadarSource(srcKey) {
   activeRadarSources[srcKey] = !activeRadarSources[srcKey];
   const btn = document.getElementById(`src-${srcKey}`);
-  if (activeRadarSources[srcKey]) {
-    btn.classList.add('active');
-  } else {
-    btn.classList.remove('active');
+  if (btn) {
+    if (activeRadarSources[srcKey]) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
   }
 }
 
@@ -985,17 +999,18 @@ function setRadarMode(mode) {
 }
 
 function runRadarSearch() {
-  const query = document.getElementById('radar-query-input').value || 'unclear offers';
+  const queryInput = document.getElementById('radar-query-input');
+  const query = (queryInput ? queryInput.value : '') || 'unclear offers';
   const container = document.getElementById('radar-ideas-container');
 
   const sourcesUsed = Object.keys(activeRadarSources).filter(k => activeRadarSources[k]).map(k => k.toUpperCase()).join(', ');
 
   if (!sourcesUsed) {
-    container.innerHTML = '<div style="font-size:0.8rem; color:var(--accent-orange);">Please turn ON at least one platform toggle above.</div>';
+    container.innerHTML = '<div style="font-size:0.8rem; color:var(--accent-orange); font-weight:700;">Please turn ON at least one platform toggle above.</div>';
     return;
   }
 
-  const prefix = currentRadarMode === 'daily' ? '⚡ TODAY'S LIVE RESEARCH' : '📅 WEEKLY ICP TRENDS';
+  const prefix = currentRadarMode === 'daily' ? "⚡ TODAY'S LIVE RESEARCH" : "📅 WEEKLY ICP TRENDS";
 
   const mockTrends = [
     {
@@ -1014,14 +1029,16 @@ function runRadarSearch() {
 
   let html = '';
   mockTrends.forEach((t, idx) => {
+    // Escape single quotes safely for inline JS call
+    const safeAngle = t.angle.replace(/'/g, "\'");
     html += `
       <div class="radar-idea-item">
         <div class="radar-idea-top">
           <span><strong>Idea ${idx + 1}:</strong> ${t.title}</span>
         </div>
         <div class="radar-idea-actions">
-          <button class="btn-opt" onclick="injectFriction('${t.angle}')">🧠 Use in Draft</button>
-          <button class="btn-black" style="padding:0.25rem 0.6rem; font-size:0.7rem;" onclick="generateFullConcept('${t.angle}')">⚡ Generate 3 Full Concepts</button>
+          <button class="btn-opt" onclick="injectFriction('${safeAngle}')">🧠 Use in Draft</button>
+          <button class="btn-black" style="padding:0.25rem 0.6rem; font-size:0.7rem;" onclick="generateFullConcept('${safeAngle}')">⚡ Generate 3 Full Concepts</button>
         </div>
       </div>
     `;
@@ -1089,9 +1106,12 @@ function parseStructure(rawText) {
 }
 
 function processAllFormats() {
-  const text = document.getElementById('main-draft-input').value.trim();
-  const author = document.getElementById('vault-author').value || 'Byron Redhead';
-  const niche = document.getElementById('vault-niche').value || 'B2B Strategy';
+  const textarea = document.getElementById('main-draft-input');
+  if (!textarea) return;
+
+  const text = textarea.value.trim();
+  const author = document.getElementById('vault-author')?.value || 'Byron Redhead';
+  const niche = document.getElementById('vault-niche')?.value || 'B2B Strategy';
 
   if (!text) return;
 
@@ -1100,23 +1120,30 @@ function processAllFormats() {
 
 ');
 
+  // Helper setter
+  const setContent = (id, val) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val;
+  };
+
+  const defaultCta = "Comment PATH and I'll send the map.";
+  const defaultPs = "P.S. Landed her first paying client in 4 days.";
+
   // 1. LINKEDIN LONG-FORM
-  document.getElementById('fmt-linkedin-long').textContent =
-`${hook}
+  setContent('fmt-linkedin-long', `${hook}
 
 ${bodyText}
 
-${cta || 'Comment PATH and I'll send the map.'}
+${cta || defaultCta}
 
-${ps || 'P.S. Landed her first paying client in 4 days.'}
+${ps || defaultPs}
 
 —
 🔔 Follow ${author} for ${niche} playbooks.
-♻️ Repost this to help another founder fix their quiet checkout.`;
+♻️ Repost this to help another founder fix their quiet checkout.`);
 
   // 2. FACEBOOK LONG FORMAT
-  document.getElementById('fmt-fb-long').textContent =
-`${hook}
+  setContent('fmt-fb-long', `${hook}
 
 ${bodyText}
 
@@ -1124,21 +1151,19 @@ ${cta || 'Comment PATH below.'}
 
 ${ps}
 
-Have you noticed this in your offer metrics recently? Drop a comment below—I am replying to every comment today.`;
+Have you noticed this in your offer metrics recently? Drop a comment below—I am replying to every comment today.`);
 
   // 3. FACEBOOK SHORT FORMAT
-  document.getElementById('fmt-fb-short').textContent =
-`${hook}
+  setContent('fmt-fb-short', `${hook}
 
 ${body.slice(0, 2).join('
 
 ')}
 
-${cta || 'Comment PATH for the map.'}`;
+${cta || 'Comment PATH for the map.'}`);
 
   // 4. THREADS SHORT FORMAT
-  document.getElementById('fmt-threads-short').textContent =
-`POST 1:
+  setContent('fmt-threads-short', `POST 1:
 ${hook}
 
 ---
@@ -1155,11 +1180,10 @@ ${cta || 'Comment PATH for the map.'}
 
 ---
 POST 5:
-${ps || 'P.S. Landed client in 4 days.'}`;
+${ps || 'P.S. Landed client in 4 days.'}`);
 
   // 5. INSTAGRAM POST FORMAT
-  document.getElementById('fmt-ig-post').textContent =
-`${hook}
+  setContent('fmt-ig-post', `${hook}
 
 ${bodyText}
 
@@ -1169,77 +1193,54 @@ ${ps}
 
 .
 .
-.#contentstrategy #b2bsales #offerladder #copywriting #leadgeneration`;
+.#contentstrategy #b2bsales #offerladder #copywriting #leadgeneration`);
 
   // 6. INSTAGRAM REELS SCRIPT
-  document.getElementById('fmt-ig-reels').textContent =
-`[VISUAL CUE (0:00-0:03)]: On-Screen Text: "${hook}" | Creator points to silent screen.
-` +
-`[SPOKEN AUDIO]: "${hook} ${body.join(' ')}"
-` +
-`[CTA ON SCREEN]: "${cta || 'Comment PATH for the map.'}"
+  setContent('fmt-ig-reels', `[VISUAL CUE (0:00-0:03)]: On-Screen Text: "${hook}" | Creator points to silent screen.
+[SPOKEN AUDIO]: "${hook} ${body.join(' ')}"
+[CTA ON SCREEN]: "${cta || 'Comment PATH for the map.'}"
 
-` +
-`CAPTION:
+CAPTION:
 ${hook}
 
 ${body.slice(0,2).join(' ')}
 
 ${cta}
 
-${ps}`;
+${ps}`);
 
   // 7. INSTAGRAM STORIES 7-SLIDE MAP
-  document.getElementById('fmt-ig-stories').textContent =
-`SLIDE 1 (Hook): ${hook}
-` +
-`SLIDE 2 (Problem): ${body[0] || 'Tight budgets don't stop sales. Unclear offers do.'}
-` +
-`SLIDE 3 (Truth): Clear feels safe. Vague feels risky.
-` +
-`SLIDE 4 (Framework): Inside Offer Ladder, we name 30-day concrete results.
-` +
-`SLIDE 5 (Action): Fix your sales page before the call.
-` +
-`SLIDE 6 (Proof): ${ps || 'Landed client in 4 days.'}
-` +
-`SLIDE 7 (Sticker CTA): Reply "PATH" to get the blueprint.`;
+  setContent('fmt-ig-stories', `SLIDE 1 (Hook): ${hook}
+SLIDE 2 (Problem): ${body[0] || "Tight budgets don't stop sales. Unclear offers do."}
+SLIDE 3 (Truth): Clear feels safe. Vague feels risky.
+SLIDE 4 (Framework): Inside Offer Ladder, we name 30-day concrete results.
+SLIDE 5 (Action): Fix your sales page before the call.
+SLIDE 6 (Proof): ${ps || 'Landed client in 4 days.'}
+SLIDE 7 (Sticker CTA): Reply "PATH" to get the blueprint.`);
 
   // 8. IG CAROUSEL 10-SLIDE
-  document.getElementById('fmt-ig-carousel').textContent =
-`SLIDE 1: ${hook} (Swipe →)
-` +
-`SLIDE 2: ${body[0] || 'Unclear offers stop people from buying.'}
-` +
-`SLIDE 3: "I love your content" doesn't pay a bill. Outcome does.
-` +
-`SLIDE 4: Inside Offer Ladder, we name exact 30-day results.
-` +
-`SLIDE 5: Three offers for three budgets.
-` +
-`SLIDE 6: Fix sales page to sell before calls.
-` +
-`SLIDE 7: Clear feels safe. Vague feels risky.
-` +
-`SLIDE 8: ${ps || 'Landed first client in 4 days.'}
-` +
-`SLIDE 9: Recap: Offer clarity = Conversion.
-` +
-`SLIDE 10: Save this post 🔖 | Comment PATH for the map.`;
+  setContent('fmt-ig-carousel', `SLIDE 1: ${hook} (Swipe →)
+SLIDE 2: ${body[0] || 'Unclear offers stop people from buying.'}
+SLIDE 3: "I love your content" doesn't pay a bill. Outcome does.
+SLIDE 4: Inside Offer Ladder, we name exact 30-day results.
+SLIDE 5: Three offers for three budgets.
+SLIDE 6: Fix sales page to sell before calls.
+SLIDE 7: Clear feels safe. Vague feels risky.
+SLIDE 8: ${ps || 'Landed first client in 4 days.'}
+SLIDE 9: Recap: Offer clarity = Conversion.
+SLIDE 10: Save this post 🔖 | Comment PATH for the map.`);
 
   // 9. SUBSTACK NOTES SHORT
-  document.getElementById('fmt-substack-notes').textContent =
-`${hook}
+  setContent('fmt-substack-notes', `${hook}
 
 ${body[0] || ''}
 
 Clear feels safe. Vague feels risky.
 
-${cta || 'Comment PATH.'}`;
+${cta || 'Comment PATH.'}`);
 
   // 10. SUBSTACK LONG FORM NEWSLETTER
-  document.getElementById('fmt-substack-long').textContent =
-`# ${hook}
+  setContent('fmt-substack-long', `# ${hook}
 
 By ${author} | ${niche}
 
@@ -1252,39 +1253,28 @@ ${cta || 'Comment PATH below.'}
 *${ps}*
 
 ---
-*Subscribe to the ${niche} playbook for weekly operational breakdowns.*`;
+*Subscribe to the ${niche} playbook for weekly operational breakdowns.*`);
 
-  // 11. EMAIL + INFOGRAPHIC (THE $430 ACCIDENT STACK)
-  document.getElementById('fmt-email-stack').textContent =
-`SUBJECT: ${hook}
+  // 11. EMAIL + INFOGRAPHIC
+  setContent('fmt-email-stack', `SUBJECT: ${hook}
 
-` +
-`Hey [First Name],
+Hey [First Name],
 
-` +
-`${hook}
+${hook}
 
-` +
-`${bodyText}
+${bodyText}
 
-` +
-`[INFOGRAPHIC VISUAL EMBED: 3-TIER OFFER LADDER DIAGRAM]
-` +
-`• Tier 1: 30-Day Execution Map ($430)
-` +
-`• Tier 2: Core Offer Implementation
-` +
-`• Tier 3: Private Advisory
+[INFOGRAPHIC VISUAL EMBED: 3-TIER OFFER LADDER DIAGRAM]
+• Tier 1: 30-Day Execution Map ($430)
+• Tier 2: Core Offer Implementation
+• Tier 3: Private Advisory
 
-` +
-`${cta || 'Reply PATH to get the map.'}
+${cta || 'Reply PATH to get the map.'}
 
-` +
-`Best,
+Best,
 ${author}
 
-` +
-`${ps}`;
+${ps}`);
 
   evaluateChecklist(text);
 }
@@ -1312,14 +1302,18 @@ function setRuleStatus(id, isPass) {
 }
 
 function copyCardContent(containerId) {
-  const text = document.getElementById(containerId).textContent;
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  const text = el.textContent;
   navigator.clipboard.writeText(text).then(() => {
     showToast('Copied to clipboard!');
   });
 }
 
 function saveToSheet(formatName, containerId) {
-  const text = document.getElementById(containerId).textContent;
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  const text = el.textContent;
   const timestamp = new Date().toISOString();
 
   // Save to local storage mock sheet
@@ -1332,9 +1326,11 @@ function saveToSheet(formatName, containerId) {
 
 function showToast(message) {
   const toast = document.getElementById('toast-notification');
-  toast.textContent = message;
-  toast.style.display = 'block';
-  setTimeout(() => { toast.style.display = 'none'; }, 2500);
+  if (toast) {
+    toast.textContent = message;
+    toast.style.display = 'block';
+    setTimeout(() => { toast.style.display = 'none'; }, 2500);
+  }
 }
 </script>
 
