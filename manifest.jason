@@ -1,1 +1,14 @@
-{"name":"RIVAAJ MACHINE PWA V3","short_name":"RIVAAJ V3","start_url":".","display":"standalone","background_color":"#fafafa","theme_color":"#111111","icons":[{"src":"https://via.placeholder.com/512/111111/FFFFFF?text=R","sizes":"512x512","type":"image/png"}]}
+{
+  "name": "RIVAAJ MACHINE PWA V3 - LOCKED FINAL NO X YT Premium",
+  "short_name": "RIVAAJ V3",
+  "description": "Daily Radar V3 + Humanizer + Hook Engine + Factory 13 Formats - Platform Best Practices - No X/YouTube - Premium Locked",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#121212",
+  "theme_color": "#121212",
+  "scope": "./",
+  "icons": [
+    {"src": "https://cdn-icons-png.flaticon.com/512/4712/4712109.png","sizes": "192x192","type": "image/png","purpose": "any maskable"},
+    {"src": "https://cdn-icons-png.flaticon.com/512/4712/4712109.png","sizes": "512x512","type": "image/png","purpose": "any maskable"}
+  ]
+}
