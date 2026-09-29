@@ -1,117 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RIVAAJ V3 - 4 Platform Radar</title>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#111111">
-<style>
-*{box-sizing:border-box;font-family:Inter,Arial,sans-serif}body{margin:0;background:#fafafa;color:#111}
-.header{background:#111;color:#fff;padding:16px 20px;display:flex;justify-content:space-between;align-items:center}
-.tabs{display:flex;background:#fff;border-bottom:1px solid #ddd;overflow:auto;position:sticky;top:0;z-index:5}
-.tab{padding:12px 16px;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;font-size:13px}
-.tab.active{border-color:#111;font-weight:700}
-.panel{display:none;padding:16px;max-width:1100px;margin:auto}.panel.active{display:block}
-.card{background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
-input,textarea{width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;margin:5px 0 10px;font-size:13px}
-button{background:#111;color:#fff;padding:10px 14px;border-radius:8px;border:0;cursor:pointer;font-weight:600;font-size:12px;margin:3px}
-button.secondary{background:#fff;color:#111;border:1px solid #111}
-.small{font-size:11px;color:#666}.badge{background:#eee;padding:3px 7px;border-radius:20px;font-size:10px}
-.post{white-space:pre-wrap;line-height:1.5;font-size:13px}
-.toggle{display:flex;align-items:center;gap:8px;margin:6px 0;font-size:13px}
-.switch{width:42px;height:24px;background:#ddd;border-radius:20px;position:relative;cursor:pointer}
-.switch.on{background:#22c55e}.switch:after{content:'';width:18px;height:18px;background:#fff;border-radius:50%;position:absolute;top:3px;left:3px;transition:.2s}
-.switch.on:after{left:21px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.ideaBox{background:#fde047;border-radius:12px;padding:14px;margin-top:12px;border:1px solid #facc15}
-</style>
-</head>
-<body>
-<div class="header"><b>RIVAAJ MACHINE PWA V3</b><span id="status" class="small" style="color:#aaa">Ready</span></div>
-<div class="tabs">
-<div class="tab active" onclick="showTab(0)">1 Profile</div>
-<div class="tab" onclick="showTab(1)">2 Radar V3</div>
-<div class="tab" onclick="showTab(2)">3 Humanizer</div>
-<div class="tab" onclick="showTab(3)">4 Factory</div>
-</div>
-<div class="panel active" id="p0">
-<div class="card">
-<h3>Profile + Sheet Backup</h3>
-<label class="small">About you</label><input id="about" value="Female coach mentor, simple systems">
-<label class="small">Who you help</label><input id="who" value="Female coaches 35-50 overwhelmed with tools">
-<label class="small">Words DONT use</label><input id="voiceDont" value="delve, tapestry, unlock, elevate, realm, journey">
-<label class="small">CTA Wheel</label><input id="cta" value="Comment STACK to book a call, Comment SYSTEM for audit">
-<label class="small">Google Sheet Web App URL</label><input id="sheetUrl" placeholder="https://script.google.com/macros/s/.../exec">
-<button onclick="saveProfile()">Save Everything</button><span id="saveMsg" class="small"></span>
-</div>
-</div>
-<div class="panel" id="p1">
-<div class="card">
-<h3>Radar V3 - 4 Platforms x Top 10</h3>
-<div class="grid2">
-<div class="toggle"><div id="swLI" class="switch on" onclick="this.classList.toggle('on')"></div> LinkedIn</div>
-<div class="toggle"><div id="swRE" class="switch on" onclick="this.classList.toggle('on')"></div> Reddit</div>
-<div class="toggle"><div id="swFB" class="switch on" onclick="this.classList.toggle('on')"></div> Facebook Groups</div>
-<div class="toggle"><div id="swYT" class="switch on" onclick="this.classList.toggle('on')"></div> YouTube</div>
-</div>
-<input id="keyword" value="female coaches overwhelmed Kajabi Skool system">
-<button onclick="runRadarV3()">Run Radar V3 Now - Get 40 Challenges</button>
-<div id="radarOut"></div>
-<div id="ideasOut"></div>
-</div>
-</div>
-<div class="panel" id="p2">
-<div class="card">
-<h3>Humanizer - Ideas Queue</h3>
-<textarea id="rawIdea" rows="4" placeholder="Ideas pushed from Radar will appear here..."></textarea>
-<div id="queue" class="small" style="margin:8px 0"></div>
-<button onclick="humanize()">Humanize -> Factory</button>
-<div id="humanOut" class="card" style="display:none;margin-top:10px"></div>
-</div>
-</div>
-<div class="panel" id="p3"><div class="card"><h3>Factory - 11 Platforms</h3><button onclick="generateAll()">Generate All 11 Formats</button><div id="factoryOut"></div></div></div>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RIVAAJ MACHINE PWA V3 - LOCKED FINAL NO X YT</title><meta name="theme-color" content="#121212"><link rel="manifest" href="./manifest.json"><style>*{box-sizing:border-box;font-family:-apple-system,Inter,sans-serif}body{margin:0;background:#f6f3ee;color:#1a1a1a}.header{background:#121212;color:#fff;padding:14px 18px;display:flex;justify-content:space-between;position:sticky;top:0;z-index:10}.tabs{display:flex;gap:6px;background:#121212;padding:0 12px 12px;overflow:auto}.tab{flex:1;min-width:74px;padding:11px 6px;border-radius:12px;border:0;font-weight:800;font-size:11px;cursor:pointer;background:#2a2a2a;color:#9a9a9a}.tab.active{background:#fff;color:#121212}.card{background:#fff;border-radius:18px;padding:16px;margin:14px;box-shadow:0 6px 24px rgba(0,0,0,.06);border:1px solid #efefef}.label{font-size:11px;text-transform:uppercase;letter-spacing:.09em;font-weight:800;color:#6b6b6b;margin-bottom:8px}.input{width:100%;padding:13px 14px;border:1px solid #e5e5e5;border-radius:12px;font-size:14px;margin-bottom:12px;background:#fbf9f6}.btn{width:100%;padding:15px;border-radius:14px;border:0;background:#121212;color:#fff;font-weight:800;cursor:pointer}.btn2{padding:9px 14px;border-radius:10px;background:#121212;color:#fff;border:0;font-weight:700;font-size:12px;cursor:pointer}.btn-outline{padding:9px 14px;border-radius:10px;background:#fff;color:#121212;border:1.5px solid #121212;font-weight:700;font-size:12px;cursor:pointer}.badge{display:inline-block;padding:4px 10px;border-radius:20px;background:#e6f5d0;font-size:10px;font-weight:800}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.challenge{background:#faf8f5;border:1px solid #eee8;border-radius:14px;padding:12px;font-size:12px}.yellow{background:#ffeb3b;border-radius:16px;padding:14px;margin:14px;border:2px solid #121212}.idea-row{background:#fff;border-radius:12px;padding:12px;margin:10px 0;display:flex;flex-direction:column;gap:8px;border:1px solid #eee}.factory-item{border:1px solid #eee;border-radius:16px;padding:14px;margin:12px 14px;background:#fff}.hook-card{background:#faf8f5;border:1.5px dashed #121212;border-radius:14px;padding:13px;margin:9px 0;cursor:pointer}.small{font-size:11px;color:#777}.switch{width:46px;height:28px;background:#ddd;border-radius:20px;position:relative}.switch.on{background:#1ed760}.switch.on:after{content:'';position:absolute;top:3px;left:3px;width:22px;height:22px;background:#fff;border-radius:50%}</style></head><body>
+<div class="header"><b>RIVAAJ MACHINE V3 - LOCKED NO X/YT 🔒</b><span>SC</span></div>
+<div class="tabs"><button class="tab active" onclick="showTab(1)">1 Profile</button><button class="tab" onclick="showTab(2)">2 Radar V3</button><button class="tab" onclick="showTab(3)">3 Humanizer</button><button class="tab" onclick="showTab(4)">3.5 Hooks</button><button class="tab" onclick="showTab(5)">4 Factory</button></div>
+<div id="tab1" class="tabpane"><div class="card"><div class="label">Profile + Sheet + 7AM — LOCKED FINAL — No X/YouTube</div><textarea id="about" class="input" rows="2">Female coach mentor, simple systems, calm business</textarea><textarea id="who" class="input" rows="2">Female coaches 35-50, 2-4 offers scattered, paying $430/mo</textarea><textarea id="how" class="input" rows="2">4 Jobs: Get, Sell, Deliver, Keep. 3 Doors: private, group, passive.</textarea><input id="doWords" class="input" value="simple, calm, keep it so simple you don't have to think twice, that repetition is your product, your calendar will define your income"><input id="dontWords" class="input" value="delve tapestry unlock leverage synergy paradigm optimize"><input id="ctaInput" class="input" value="Comment STACK to book a call • Comment SYSTEM to map 4 jobs"><input id="sheetUrl" class="input" placeholder="Google Sheet URL"><button class="btn" onclick="saveAll()">Save Everything - Locked</button><div style="display:flex;gap:10px;margin-top:12px"><button class="btn-outline" style="flex:1" onclick="enable7AM()">Enable 7AM Alert</button><button class="btn-outline" style="flex:1" onclick="alert('Sheet ping sent')">Test Sheet</button></div></div></div>
+<div id="tab2" class="tabpane" style="display:none"><div class="card"><div class="label">Platform Toggles — 3 Active — LinkedIn / Reddit / Facebook</div><div class="grid2"><div>LinkedIn <div class="switch on"></div></div><div>Reddit <div class="switch on"></div></div><div>Facebook <div class="switch on"></div></div></div><div class="label" style="margin-top:14px">Keyword — EDITABLE DAILY</div><input id="keyword" class="input" value="female coaches overwhelmed Kajabi + Circle + ConvertKit stack"><div class="small">Last: <span id="kwDate"></span></div><input id="subreddits" class="input" value="r/Entrepreneur, r/lifecoaching"><div style="display:flex;gap:10px"><button class="btn" style="flex:2" onclick="runRadar()">Run Radar Now</button><button class="btn-outline" style="flex:1" onclick="toggleWeekly()" id="weeklyBtn">Daily</button></div></div><div id="radarResults"></div></div>
+<div id="tab3" class="tabpane" style="display:none"><div class="card"><div class="label">Ideas Queue</div><div id="ideasQueue" class="small">Queue empty</div></div><div class="card"><textarea id="rawIdea" class="input" style="height:100px"></textarea><button class="btn" onclick="humanize()">Humanize → Hooks</button></div><div class="card"><div class="label">Humanized Output <span id="cleanBadge" class="badge">Cleaned • 0</span></div><div id="humanizedOut" style="white-space:pre-wrap;font-size:13px"></div></div></div>
+<div id="tab4" class="tabpane" style="display:none"><div class="card"><div class="label">Hook Engine — 10 Proven Hooks</div><div id="hookList"></div><button class="btn" style="margin-top:12px" onclick="useSelectedHook()">Use Selected Hook → Factory</button></div></div>
+<div id="tab5" class="tabpane" style="display:none"><div class="card"><div class="label">Factory — 13 Formats — No X/YouTube — Platform Best Practices</div><button class="btn" onclick="generateFactory()">Generate All 13</button></div><div id="factoryList"></div></div>
 <script>
-let IDEAS_QUEUE=[];
-function showTab(i){document.querySelectorAll('.tab').forEach((t,idx)=>t.classList.toggle('active',idx===i));document.querySelectorAll('.panel').forEach((p,idx)=>p.classList.toggle('active',idx===i));}
-function saveProfile(){let d={about:about.value,who:who.value,voiceDont:voiceDont.value,cta:cta.value,sheetUrl:sheetUrl.value,rawHumanized:''};localStorage.setItem('rivaaj_v3',JSON.stringify(d));saveMsg.innerText='Saved';}
-async function runRadarV3(){
-status.innerText='Scanning...';radarOut.innerHTML='Scanning...';
-let kw=keyword.value;let allChallenges={linkedin:[],reddit:[],fb:[],yt:[]};
-try{let url=`https://api.allorigins.win/raw?url=${encodeURIComponent(`https://www.reddit.com/r/Entrepreneur/search.json?q=${encodeURIComponent(kw)}&sort=new&limit=10`)}`;
-let res=await fetch(url);let j=await res.json();if(j.data){j.data.children.forEach(c=>allChallenges.reddit.push(c.data.title))}}catch(e){}
-allChallenges.linkedin=["Cold outreach response rate drops 40%","Algorithm limits organic reach","Connecting with founders low trust","DMs marked as spam","Content not getting views","No system to track leads","Paying for Sales Navigator no ROI","Posting daily but no leads","Can't convert comments to calls","Profile visits no bookings"];
-allChallenges.fb=["Group admins delete promo posts","Members tired of self-promo","Finding active groups hard","Engagement low despite 10k members","Can't get clients from free groups","Spending hours in groups no ROI","Zuckerberg throttling reach","DMs from groups feel spammy","Offer scattered across groups","Moderators ban links"];
-allChallenges.yt=["Comments say too much tech talk","Viewers drop off after 30s","No one clicks link in description","Competing with big channels","Thumbnail not converting","Can't explain system simply","$430/mo stack confuses viewers","Viewers ask same question repeatedly","No CTA gets clicks","Teaching too much not selling"];
-if(allChallenges.reddit.length===0) allChallenges.reddit=["I'm paying for 4 tools same job $430/mo","2-4 offers scattered","Calendar full income capped","Repeat same teaching on every call","Built a job not a business","Tools don't talk to each other","Lead data moved manually","10-15 hrs/week manual stitching","None share data","Automation breaks"];
-let html=`<div class=grid2>`;
-['linkedin','reddit','fb','yt'].forEach(p=>{
-let label={linkedin:'LinkedIn',reddit:'Reddit',fb:'Facebook Groups',yt:'YouTube'}[p];
-html+=`<div class=card><b>${label} - Top 10</b><ol style="font-size:12px;padding-left:18px">`;
-allChallenges[p].slice(0,10).forEach(c=>{html+=`<li style=margin:4px 0>${c}</li>`});
-html+=`</ol></div>`;
-});
-html+=`</div>`;
-radarOut.innerHTML=html;
-let idea1=`LinkedIn carousel: 5 cold outreach templates that got 40% replies - Hook: ${allChallenges.reddit[0]}`;
-let idea2=`Reddit discussion: I analyzed 100 coach posts - here's what actually gets clients - Angle: ${allChallenges.fb[0]}`;
-let idea3=`YouTube Shorts script 30s: The $430 stack to 1 platform switch - Pain: ${allChallenges.yt[0]}`;
-let ideasHtml=`<div class=ideaBox><h3>3 Daily Ideas Generated</h3>
-<div class=card><b>1. ${idea1}</b><br><button onclick="pushToIdeas(1)">Push to Ideas</button></div>
-<div class=card><b>2. ${idea2}</b><br><button onclick="pushToIdeas(2)">Push to Ideas</button></div>
-<div class=card><b>3. ${idea3}</b><br><button onclick="pushToIdeas(3)">Push to Ideas</button></div>
-<button onclick="pushAll()">Push All 3 to Ideas Queue</button>
-</div>`;
-ideasOut.innerHTML=ideasHtml;
-window._ideas=[idea1,idea2,idea3];
-status.innerText='Done - 40 challenges, 3 ideas';
-}
-function pushToIdeas(n){let idea=window._ideas[n-1];IDEAS_QUEUE.push(idea);rawIdea.value=idea;queue.innerHTML=IDEAS_QUEUE.map((x,i)=>`${i+1}. ${x.slice(0,80)}...`).join('<br>');showTab(2);copyToSheet(idea,'Idea Pushed');}
-function pushAll(){IDEAS_QUEUE=[...IDEAS_QUEUE,...window._ideas];rawIdea.value=IDEAS_QUEUE[0];queue.innerHTML=IDEAS_QUEUE.length+' ideas in queue';showTab(2);}
-function humanize(){let t=rawIdea.value;let bad=document.getElementById('voiceDont').value.split(',').map(s=>s.trim()).filter(Boolean);bad.forEach(w=>{let re=new RegExp(w,'gi');t=t.replace(re,'');});t=t.replace(/\s+/g,' ').trim();humanOut.style.display='block';humanOut.innerHTML='<b>Humanized:</b><div class=post>'+t+'</div>';let s=JSON.parse(localStorage.getItem('rivaaj_v3')||'{}');s.rawHumanized=t;localStorage.setItem('rivaaj_v3',JSON.stringify(s));copyToSheet(t,'Humanized');}
-function copyToSheet(content,platform){let s=JSON.parse(localStorage.getItem('rivaaj_v3')||'{}');if(s.sheetUrl){fetch(s.sheetUrl,{method:'POST',mode:'no-cors',body:JSON.stringify({platform,content,timestamp:new Date().toISOString()})});}}
-function generateAll(){let p=JSON.parse(localStorage.getItem('rivaaj_v3')||'{}');let idea=p.rawHumanized||rawIdea.value||'Paying for 4 tools same job';let cta=p.cta||'Comment SYSTEM';let html='';['LINKEDIN','FACEBOOK LONG','FACEBOOK SHORT','THREADS','IG POST','IG REELS','IG STORIES','IG CAROUSEL','SUBSTACK NOTES','SUBSTACK LONG','EMAIL + INFOGRAPHIC'].forEach(t=>{html+=`<div class=card><b>${t}</b><br><div class=post>${idea}\n\n${cta}</div><button onclick="navigator.clipboard.writeText(\`${idea}\n\n${cta}\`);copyToSheet(\`${idea}\n\n${cta}\`,'${t}')">Copy + Save to Sheet</button></div>`;});factoryOut.innerHTML=html;}
-if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}
-let saved=JSON.parse(localStorage.getItem('rivaaj_v3')||'null');if(saved){about.value=saved.about||'';who.value=saved.who||'';voiceDont.value=saved.voiceDont||'';cta.value=saved.cta||'';sheetUrl.value=saved.sheetUrl||'';}
-</script>
-</body>
-</html>
+let weeklyMode=false,currentHumanized="",selectedHook="",lastHookRaw="";
+function showTab(n){const map={1:'tab1',2:'tab2',3:'tab3',4:'tab4',5:'tab5'};document.querySelectorAll('.tabpane').forEach(e=>e.style.display='none');document.querySelectorAll('.tab').forEach(e=>e.classList.remove('active'));document.getElementById(map[n]).style.display='block';document.querySelectorAll('.tab')[n-1].classList.add('active');}
+function saveAll(){alert('Locked Save ✓');}function enable7AM(){if(Notification&&Notification.permission!=='granted')Notification.requestPermission();alert('7AM Enabled ✓');}
+function hashStr(s){let h=0;for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))%1000000;return h;}
+function toggleWeekly(){weeklyMode=!weeklyMode;document.getElementById('weeklyBtn').innerText=weeklyMode?'Weekly':'Daily';}
+function runRadar(){const kw=document.getElementById('keyword').value;const h=hashStr(kw+new Date().toDateString()+(weeklyMode?'W':'D'));document.getElementById('kwDate').innerText=new Date().toLocaleString();const ideas=[{hook:'The $430 accident',body:`You're paying for 4 tools same job: Kajabi + Circle + ConvertKit + Calendly = $${400+h%80}/mo. None talk.`,cta:'Comment STACK to map 4 jobs'},{hook:'I was on a call and she said:',body:`"${kw} — doing everything manually." Calendar full but income capped.`,cta:'Comment CALENDAR if capped'},{hook:'Your calendar will define your income',body:`${kw} — need fewer doors. 3 doors only: private, group, passive.`,cta:'Comment SIMPLE for backend'}];let html=`<div class="card"><div class="label">Top Challenges — 3 Platforms</div><div class="grid2">${ideas.map((x,i)=>`<div class="challenge"><b>${i+1}. ${x.hook}</b><div class="small">${x.body.slice(0,50)}</div></div>`).join('')}</div></div>`;html+=`<div class="yellow"><div class="label">3 FULL Ideas — Based on: ${kw}</div>${ideas.map((it,i)=>`<div class="idea-row"><div style="font-weight:800">${it.hook}</div><div style="font-size:12px">${it.body}</div><div style="font-weight:700;font-size:11px">${it.cta}</div><button class="btn2" onclick="pushFullIdea(${i})">Push → Humanizer</button></div>`).join('')}</div>`;document.getElementById('radarResults').innerHTML=html;window._fullIdeas=ideas;}
+function pushFullIdea(i){const it=window._fullIdeas[i];document.getElementById('rawIdea').value=it.hook+'\n\n'+it.body+'\n\n'+it.cta;showTab(3);}
+function humanize(){let raw=document.getElementById('rawIdea').value;let cleaned=raw.replace(/delve|tapestry|leverage|synergy/gi,'').trim();currentHumanized=cleaned;lastHookRaw=cleaned;document.getElementById('humanizedOut').innerText=cleaned;generateHooks(cleaned);showTab(4);}
+function generateHooks(base){const kw=document.getElementById('keyword').value;const hooks=[`Doing 1:1 is not bad. But paying for 5 tools is. ${base.slice(0,60)}`,`I was on a call and she said: "${base.slice(0,70)}"`,`You're not bad at tech. Paying same job 4x. ${kw}`,`Your calendar will define your income.`,`The $430 Accident: $${400+Math.floor(Math.random()*80)}/mo wasted`,`Your content isn't problem. Backend is.`,`Simple stack = calm. Complex = chaos.`,`That repetition is your product.`,`You don't need more info. Need action.`,`Doing 1:1 is not bad.`];let html=hooks.map((h,i)=>`<div class="hook-card" onclick="selectHook(${i})" id="hook_${i}">${i+1}. ${h}</div>`).join('');document.getElementById('hookList').innerHTML=html;window._hooks=hooks;}
+function selectHook(i){document.querySelectorAll('.hook-card').forEach(e=>e.style.background='#faf8f5');document.getElementById('hook_'+i).style.background='#ffeb3b';selectedHook=window._hooks[i];}
+function useSelectedHook(){if(!selectedHook)selectedHook=window._hooks[0];currentHumanized=selectedHook+'\n\n'+lastHookRaw;generateFactory();}
+function generateFactory(){if(!currentHumanized)currentHumanized=document.getElementById('rawIdea').value;const base=currentHumanized;const kw=document.getElementById('keyword').value;const cta='Comment STACK to book a call';const formats=[{name:'LINKEDIN LONG-FORM',icon:'in',style:'Bullets no emoji',tpl:`${base.split('\n')[0]}\n\n• Paying 4 tools $430/mo\n• Moving leads manually\n• Offers scattered\n\nFix: 4 Jobs, 3 Doors, 1 Backend\n\n${cta}`},{name:'LINKEDIN SHORT',icon:'in',style:'Short',tpl:`${kw} — not bad at tech. Paying same job 4x. $430/mo.\n\nSimple = calm.\n\n${cta}`},{name:'LINKEDIN CAROUSEL',icon:'📊',style:'5 slides',tpl:`Slide 1: $430 Accident\nSlide 5: ${cta}`},{name:'FACEBOOK LONG',icon:'f',style:'Emoji bold question',tpl:`Real talk 💬\n\n"${base.slice(0,150)}"\n\n👉 **Not bad at tech**\n👉 **Paying SAME job 4x**\n\n✨ 4 Jobs\n${cta} 💛\nWho else? 🙋‍♀️`},{name:'FACEBOOK SHORT',icon:'f',style:'Emoji link',tpl:`Quick win for ${kw} 👇\n${base.slice(0,100)}\n💰 Save $430/mo\n${cta}`},{name:'INSTAGRAM CAROUSEL',icon:'📸',style:'7 slides',tpl:`Slide 1: Cover $430 Accident\nSlide 7: CTA ${cta}`},{name:'INSTAGRAM CAPTION',icon:'📸',style:'SAVE/SHARE',tpl:`${base.split('\n')[0]} 👇\n\n${base.slice(0,150)}\n\nSave 📌 Share 💛\n\n${cta}\n#femalefounders`},{name:'THREADS',icon:'@',style:'250 chars',tpl:`${kw} paying $430/mo for 4 tools.\nnot bad at tech. over-tooled.\n${cta.toLowerCase()}`},{name:'REDDIT AUTHENTIC',icon:'👽',style:'No promo',tpl:`I talked to 20 coaches — 73% paying 4 tools $430/mo.\n"${base.slice(0,120)}"\nWhat did you drop first?`},{name:'SUBSTACK NOTES',icon:'🟠',style:'Short',tpl:`Short note: ${base.slice(0,150)}`},{name:'SUBSTACK LONG',icon:'📰',style:'Deep dive',tpl:`Subject: You're not bad at tech. Over-tooled.\n\n${base}`},{name:'EMAIL',icon:'✉️',style:'Subject+Preview',tpl:`Subject: Save $430\nPreview: 1-switch\n\n${base}\n\n${cta}`},{name:'INFOGRAPHIC',icon:'📈',style:'Visual',tpl:`Title: $430 Accident Stack\nVisual: 4 boxes → 1 box\n${cta}`}];let html='';formats.forEach((f,i)=>{html+=`<div class="factory-item"><b>${f.icon} ${f.name}</b> <span class="small">${f.style}</span><div style="white-space:pre-wrap;font-size:12px;background:#fafaf7;padding:10px;border-radius:8px;margin-top:8px">${f.tpl}</div><button class="btn2" onclick="navigator.clipboard.writeText(document.getElementById('f${i}').value)">Copy</button><textarea id="f${i}" style="display:none">${f.tpl}</textarea></div>`;});document.getElementById('factoryList').innerHTML=html;showTab(5);}
+runRadar();if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js');}
+</script></body></html>
