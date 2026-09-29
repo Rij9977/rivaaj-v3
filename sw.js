@@ -1,5 +1,5 @@
 // Service Worker for Draft Desk PWA
-const CACHE_NAME = 'draft-desk-v3';
+const CACHE_NAME = 'draft-desk-v1';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -7,6 +7,7 @@ const ASSETS_TO_CACHE = [
   './sw.js'
 ];
 
+// Install Event
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
@@ -16,6 +17,7 @@ self.addEventListener('install', (event) => {
   );
 });
 
+// Activate Event
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keyList) => {
@@ -31,6 +33,7 @@ self.addEventListener('activate', (event) => {
   );
 });
 
+// Fetch Event - Cache First, Fallback to Network
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
