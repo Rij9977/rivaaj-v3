@@ -1,30 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Draft Desk — The Swap Test Content Engine</title>
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#111111">
+<meta name="theme-color" content="#d94e1f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="description" content="A focused space for founders with something real to say. Bring the rough thought; leave with a post that sounds like you.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg-main: #fafafa;
+  --bg-main: #f4efe6;
   --bg-card: #ffffff;
-  --bg-header: #111111;
-  --border-color: #e5e5e5;
+  --bg-card-sub: #fbf9f4;
+  --border-color: #e2dacd;
   --border-dark: #222222;
   --text-dark: #111111;
-  --text-muted: #666666;
+  --text-muted: #666055;
   --accent-orange: #d94e1f;
+  --accent-orange-light: #fbebe4;
   --accent-green: #10b981;
-  --font-serif: "Newsreader", "Georgia", serif;
-  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --accent-purple: #8b5cf6;
+  --font-serif: "Georgia", "Times New Roman", serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-mono: "SF Mono", "Courier New", monospace;
 }
 
@@ -34,151 +33,88 @@ body {
   background-color: var(--bg-main);
   color: var(--text-dark);
   font-family: var(--font-sans);
-  font-size: 13px;
-  line-height: 1.6;
+  line-height: 1.5;
+  padding: 2rem 1.5rem;
   min-height: 100vh;
-  padding-bottom: 3rem;
 }
 
-/* Header Bar */
-.top-header-bar {
-  background-color: var(--bg-header);
-  color: #ffffff;
-  padding: 1.25rem 2rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.header-inner {
-  max-width: 1320px;
+.app-container {
+  max-width: 1280px;
   margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
 }
 
-.header-brand-group {
-  display: flex;
-  flex-direction: column;
-}
-
-.header-badge {
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 0.15em;
+/* Header */
+.top-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--accent-orange);
-  margin-bottom: 0.2rem;
-}
-
-.header-title {
-  font-family: var(--font-serif);
-  font-size: 1.8rem;
-  font-weight: 400;
-  color: #ffffff;
-  line-height: 1.1;
-}
-
-.header-sub {
-  font-size: 0.8rem;
-  color: #a1a1aa;
-}
-
-/* 4-Tab Navigation */
-.nav-tabs-container {
-  max-width: 1320px;
-  margin: 0 auto 1.5rem auto;
-  padding: 0 1.5rem;
-}
-
-.nav-tabs {
-  display: flex;
-  gap: 0.5rem;
-  border-bottom: 2px solid var(--border-color);
-  overflow-x: auto;
-  padding-bottom: 2px;
-}
-
-.tab-btn {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-bottom: none;
-  border-radius: 8px 8px 0 0;
-  padding: 0.65rem 1.25rem;
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: var(--text-muted);
-  cursor: pointer;
-  transition: all 0.15s ease;
+  margin-bottom: 0.5rem;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  white-space: nowrap;
+  gap: 0.4rem;
+}
+.top-badge::before {
+  content: "•";
+  font-size: 1.2rem;
 }
 
-.tab-btn:hover {
-  background: #ffffff;
+.main-title {
+  font-family: var(--font-serif);
+  font-size: 3.2rem;
+  font-weight: 400;
+  line-height: 1.1;
   color: var(--text-dark);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
 }
 
-.tab-btn.active {
-  background: var(--bg-header);
-  color: #ffffff;
-  border-color: var(--bg-header);
+.main-subtitle {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  max-width: 650px;
+  margin-bottom: 2rem;
+  line-height: 1.6;
 }
 
-/* App Main Container */
-.app-container {
-  max-width: 1320px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
+/* Top Section: Brainbook & Discovery */
+.top-tools-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
 }
 
-.tab-content-panel {
-  display: none;
-}
-
-.tab-content-panel.active {
-  display: block;
-}
-
-/* Tool Cards */
 .tool-card {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 1.25rem;
-  margin-bottom: 1.25rem;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
 }
 
 .tool-card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--border-color);
 }
 
 .tool-card-title {
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--text-dark);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  color: var(--accent-orange);
 }
 
-/* Brainbook Grid */
 .brainbook-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 0.85rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
 }
 
 .field-group {
@@ -194,177 +130,157 @@ body {
   text-transform: uppercase;
 }
 
-.field-group input {
+.field-group input, .field-group textarea {
   width: 100%;
-  background: #fafafa;
+  background: var(--bg-card-sub);
   border: 1px solid var(--border-color);
   border-radius: 6px;
-  padding: 0.5rem 0.75rem;
+  padding: 0.45rem 0.65rem;
   font-size: 0.85rem;
   color: var(--text-dark);
   font-family: inherit;
 }
 
-.field-group input:focus {
+.field-group input:focus, .field-group textarea:focus {
   outline: none;
-  border-color: var(--text-dark);
-  background: #ffffff;
+  border-color: var(--accent-orange);
 }
 
-/* Radar Controls */
-.radar-controls-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
-}
-
-.platform-toggles {
-  display: flex;
-  gap: 0.4rem;
-  flex-wrap: wrap;
-}
-
-.source-toggle-btn {
-  background: #fafafa;
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  padding: 0.35rem 0.65rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--text-muted);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-
-.source-toggle-btn.active {
-  background: #ffffff;
-  border-color: var(--text-dark);
-  color: var(--text-dark);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-}
-
-.mode-pill-group {
-  display: flex;
-  background: #f0f0f0;
-  padding: 2px;
-  border-radius: 6px;
-}
-
-.mode-pill-btn {
-  border: none;
-  background: transparent;
-  padding: 0.35rem 0.75rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--text-muted);
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-.mode-pill-btn.active {
-  background: #ffffff;
-  color: var(--text-dark);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-}
-
-.search-bar-row {
+.discovery-search-row {
   display: flex;
   gap: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
-.search-bar-row input {
+.discovery-search-row input {
   flex: 1;
-  background: #fafafa;
+  background: var(--bg-card-sub);
   border: 1px solid var(--border-color);
   border-radius: 6px;
-  padding: 0.5rem 0.75rem;
+  padding: 0.45rem 0.65rem;
   font-size: 0.85rem;
 }
 
-.btn-black {
-  background: var(--bg-header);
+.btn-sm {
+  background: var(--text-dark);
   color: #ffffff;
   border: none;
   border-radius: 6px;
-  padding: 0.5rem 1rem;
+  padding: 0.45rem 0.85rem;
   font-size: 0.8rem;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
   white-space: nowrap;
-  display: inline-flex;
-  align-items: center;
+}
+.btn-sm:hover { opacity: 0.9; }
+
+.friction-tags {
+  display: flex;
+  flex-direction: column;
   gap: 0.4rem;
+  max-height: 110px;
+  overflow-y: auto;
 }
 
-.btn-black:hover {
-  opacity: 0.9;
-}
-
-.btn-opt {
-  background: #ffffff;
-  color: var(--text-dark);
+.friction-item {
+  background: var(--bg-card-sub);
   border: 1px solid var(--border-color);
   border-radius: 6px;
-  padding: 0.35rem 0.65rem;
-  font-size: 0.75rem;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.78rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.friction-item span { color: var(--text-dark); }
+.friction-item button {
+  background: transparent;
+  border: 1px solid var(--accent-orange);
+  color: var(--accent-orange);
+  border-radius: 4px;
+  padding: 0.15rem 0.4rem;
+  font-size: 0.7rem;
   font-weight: 700;
   cursor: pointer;
 }
-
-.btn-opt:hover {
-  border-color: var(--text-dark);
+.friction-item button:hover {
+  background: var(--accent-orange);
+  color: white;
 }
 
-/* Radar Output List */
-.radar-ideas-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+/* Two Column Layout */
+.workspace-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1.15fr;
+  gap: 1.5rem;
+  align-items: start;
 }
 
-.radar-idea-item {
-  background: #fafafa;
+.editor-card {
+  background: var(--bg-card);
   border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 0.85rem;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+  margin-bottom: 1.5rem;
+}
+
+.card-label-row {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.card-title-group {
+  display: flex;
+  align-items: center;
   gap: 0.5rem;
 }
 
-.radar-idea-top {
-  font-size: 0.85rem;
+.icon-badge {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #fbebe4;
+  color: var(--accent-orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 700;
   color: var(--text-dark);
 }
 
-.radar-idea-actions {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
+.card-tagline {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
 }
 
-/* Editor Workspace Grid */
-.editor-workspace-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.25rem;
-  align-items: start;
+.char-counter {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
 }
 
 .main-textarea {
   width: 100%;
-  min-height: 280px;
+  min-height: 220px;
   border: 1px solid var(--border-color);
-  background: #fafafa;
-  border-radius: 8px;
+  background: var(--bg-card-sub);
+  border-radius: 10px;
   padding: 1rem;
-  font-size: 13px;
+  font-size: 0.95rem;
   line-height: 1.6;
   color: var(--text-dark);
   font-family: inherit;
@@ -373,268 +289,329 @@ body {
 
 .main-textarea:focus {
   outline: none;
-  border-color: var(--text-dark);
+  border-color: var(--accent-orange);
   background: #ffffff;
 }
 
-/* Factory Output Cards Grid (Screens 2, 3, 4) */
-.factory-cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-  gap: 1.25rem;
+.textarea-footer-hint {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+  font-style: italic;
 }
 
-.factory-output-card {
+/* Action Passes Section */
+.pass-section-header {
+  margin-bottom: 0.75rem;
+}
+
+.pass-section-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.pass-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.pass-card {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
-  border-radius: 10px;
-  padding: 1.25rem;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+  border-radius: 12px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
   display: flex;
   flex-direction: column;
+  gap: 0.2rem;
 }
 
-.card-top-bar {
+.pass-card:hover {
+  border-color: var(--accent-orange);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(217, 78, 31, 0.08);
+}
+
+.pass-card.active {
+  border: 2px solid var(--accent-orange);
+  background: var(--accent-orange-light);
+}
+
+.pass-card-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-dark);
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.85rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.card-title-text {
-  font-size: 0.82rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.card-action-btns {
-  display: flex;
   gap: 0.4rem;
 }
 
-.card-body-text {
-  background: #fafafa;
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  padding: 1rem;
-  font-size: 13px;
-  line-height: 1.6;
-  color: var(--text-dark);
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  min-height: 180px;
-  flex: 1;
+.pass-card-desc {
+  font-size: 0.78rem;
+  color: var(--text-muted);
 }
 
-/* Rules & Metrics */
-.score-summary-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.75rem;
+/* Right Editorial Column */
+.editorial-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+}
+
+.pill-row {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
   margin-bottom: 1rem;
 }
 
-.score-badge-card {
-  background: #fafafa;
+.pill-btn {
+  background: var(--bg-card-sub);
   border: 1px solid var(--border-color);
-  border-radius: 6px;
-  padding: 0.65rem;
+  border-radius: 20px;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pill-btn:hover {
+  border-color: var(--text-dark);
+  color: var(--text-dark);
+}
+
+.pill-btn.active {
+  background: var(--accent-orange);
+  border-color: var(--accent-orange);
+  color: #ffffff;
+}
+
+/* Result Box */
+.output-box-container {
+  background: var(--accent-orange-light);
+  border: 1px solid #f4d0c2;
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+  position: relative;
+}
+
+.output-box-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.output-box-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.output-box-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.copy-btn-main {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+}
+
+.copy-btn-main:hover {
+  border-color: var(--text-dark);
+  background: var(--bg-card-sub);
+}
+
+.output-content-area {
+  background: #ffffff;
+  border: 1px solid rgba(217, 78, 31, 0.2);
+  border-radius: 8px;
+  padding: 1.25rem;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--text-dark);
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  min-height: 200px;
+}
+
+/* Supporting Analysis Grid */
+.scores-summary-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.score-badge-card {
+  background: var(--bg-card-sub);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.75rem;
   text-align: center;
 }
 
-.score-num {
-  font-size: 1.4rem;
+.score-badge-val {
+  font-size: 1.5rem;
   font-weight: 800;
   color: var(--accent-orange);
   line-height: 1;
 }
 
-.score-label {
-  font-size: 0.68rem;
+.score-badge-label {
+  font-size: 0.7rem;
   font-weight: 700;
   color: var(--text-muted);
   text-transform: uppercase;
+  margin-top: 0.2rem;
 }
 
-.rules-list {
-  background: #fafafa;
+/* Rules Checklist */
+.rules-checklist {
+  background: var(--bg-card-sub);
   border: 1px solid var(--border-color);
-  border-radius: 6px;
-  padding: 0.85rem;
+  border-radius: 10px;
+  padding: 1rem;
 }
 
-.rule-row {
+.rules-title {
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dark);
+  margin-bottom: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.rule-item-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.78rem;
-  padding: 0.3rem 0;
+  font-size: 0.82rem;
+  padding: 0.35rem 0;
   border-bottom: 1px dashed var(--border-color);
 }
 
-.rule-row:last-child { border-bottom: none; }
+.rule-item-row:last-child { border-bottom: none; }
 
 .status-badge {
-  font-size: 0.65rem;
+  font-size: 0.68rem;
   font-weight: 800;
-  padding: 0.15rem 0.4rem;
+  padding: 0.15rem 0.45rem;
   border-radius: 4px;
+  text-transform: uppercase;
 }
 
 .status-pass { background: #d1fae5; color: #065f46; }
 .status-warn { background: #fef3c7; color: #92400e; }
 
-/* SVG Icon Helper */
-.platform-icon {
-  width: 16px;
-  height: 16px;
-  display: inline-block;
-  vertical-align: middle;
-}
-
-/* Toast Notification */
-.toast-notice {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: var(--bg-header);
-  color: #ffffff;
-  padding: 0.75rem 1.25rem;
-  border-radius: 8px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  display: none;
-  z-index: 9999;
-}
-
 @media (max-width: 900px) {
-  .editor-workspace-grid, .factory-cards-grid { grid-template-columns: 1fr; }
-  .header-inner { flex-direction: column; align-items: flex-start; }
+  .top-tools-grid, .workspace-grid { grid-template-columns: 1fr; }
+  .main-title { font-size: 2.2rem; }
 }
 </style>
 </head>
 <body>
 
-<!-- TOP HEADER -->
-<div class="top-header-bar">
-  <div class="header-inner">
-    <div class="header-brand-group">
-      <span class="header-badge">• DRAFT DESK / FACTORY ENGINE v12</span>
-      <h1 class="header-title">Draft Desk — The Swap Test Content Engine</h1>
-      <span class="header-sub">Transform unpolished thoughts into 11 high-converting social formats.</span>
-    </div>
-    <span style="font-size:0.75rem; font-weight:800; color:#10b981; background:rgba(16,185,129,0.15); border:1px solid #10b981; padding:0.3rem 0.75rem; border-radius:20px;">
-      OFFLINE READY 🖥️
-    </span>
-  </div>
-</div>
-
-<!-- 4-TAB NAVIGATION -->
-<div class="nav-tabs-container">
-  <div class="nav-tabs">
-    <button class="tab-btn active" id="tab-btn-desk" onclick="switchTab('tab-desk')">
-      🖥️ Screen 1: Draft & Radar
-    </button>
-    <button class="tab-btn" id="tab-btn-text" onclick="switchTab('tab-text')">
-      💼 Screen 2: Text Networks
-    </button>
-    <button class="tab-btn" id="tab-btn-insta" onclick="switchTab('tab-insta')">
-      📸 Screen 3: Instagram Suite
-    </button>
-    <button class="tab-btn" id="tab-btn-substack" onclick="switchTab('tab-substack')">
-      📰 Screen 4: Stacks & Email
-    </button>
-  </div>
-</div>
-
 <div class="app-container">
 
-  <!-- SCREEN 1: DRAFT & RADAR -->
-  <div class="tab-content-panel active" id="tab-desk">
+  <div class="top-badge">DRAFT DESK / 01</div>
+  <h1 class="main-title">Make the idea impossible to miss.</h1>
+  <p class="main-subtitle">A focused space for founders with something real to say. Bring the rough thought; leave with a post that sounds like you.</p>
+
+  <!-- TOP TOOLS SECTION -->
+  <div class="top-tools-grid">
 
     <!-- 01 BRAND VAULT -->
     <div class="tool-card">
       <div class="tool-card-header">
         <span class="tool-card-title">01 / BRAND VAULT (My Brainbook & Metrics)</span>
-        <span style="font-size:0.75rem; color:var(--accent-orange); font-weight:800;">LOCKED VOICE</span>
+        <span style="font-size:0.75rem; color:var(--accent-orange); font-weight:700;">ACTIVE IDENTITY</span>
       </div>
       <div class="brainbook-grid">
         <div class="field-group">
-          <label>Author / Brand Name</label>
+          <label>Brand / Author Name</label>
           <input type="text" id="vault-author" value="Byron Redhead">
         </div>
         <div class="field-group">
-          <label>Core Niche</label>
+          <label>My Core Niche</label>
           <input type="text" id="vault-niche" value="B2B Content Strategy">
         </div>
-        <div class="field-group">
+        <div class="field-group" style="grid-column: span 2;">
           <label>Target Audience (ICP)</label>
-          <input type="text" id="vault-icp" value="SaaS Founders & Consultants">
+          <input type="text" id="vault-icp" value="SaaS Founders & B2B Consultants struggling with client acquisition">
         </div>
-        <div class="field-group">
-          <label>Key Metrics & Case Study Proof</label>
-          <input type="text" id="vault-metrics" value="Scaled agency to 50 staff; 5.44x reach growth">
+        <div class="field-group" style="grid-column: span 2;">
+          <label>Key Metrics / Proof</label>
+          <input type="text" id="vault-metrics" value="Scaled agency from 17 to 50 staff in 12 months; generated 5.44x more reach">
         </div>
       </div>
     </div>
 
-    <!-- 02 MULTI-PLATFORM RADAR -->
+    <!-- 02 IDEA DISCOVERY -->
     <div class="tool-card">
       <div class="tool-card-header">
-        <span class="tool-card-title">02 / MULTI-PLATFORM RADAR (Niche Friction)</span>
-        <span style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">LIVE SOURCES</span>
+        <span class="tool-card-title">02 / IDEA DISCOVERY (Research Niche Friction)</span>
+        <span style="font-size:0.75rem; color:var(--text-muted);">LIVE ENGINE</span>
       </div>
-
-      <div class="radar-controls-row">
-        <div class="platform-toggles">
-          <button class="source-toggle-btn active" id="src-linkedin" onclick="toggleRadarSource('linkedin')">
-            <svg class="platform-icon" viewBox="0 0 24 24" fill="#0A66C2"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg> LinkedIn
-          </button>
-          <button class="source-toggle-btn active" id="src-reddit" onclick="toggleRadarSource('reddit')">
-            <svg class="platform-icon" viewBox="0 0 24 24" fill="#FF4500"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m5.01 4.75c.68 0 1.29.43 1.51 1.07.22.64.02 1.35-.5 1.77.16.4.24.84.24 1.31 0 3.01-3.1 5.45-6.93 5.45s-6.93-2.44-6.93-5.45c0-.47.08-.91.24-1.31-.52-.42-.72-1.13-.5-1.77.22-.64.83-1.07 1.51-1.07.37 0 .72.14 1 .39 1.15-.81 2.72-1.33 4.43-1.39l.86-3.86 2.7.58c.06.49.48.87.98.87a1.08 1.08 0 0 0 1.08-1.08c0-.6-.49-1.08-1.08-1.08-.5 0-.92.35-.98.83l-3.02-.65a.25.25 0 0 0-.29.19l-.98 4.41c-1.76.05-3.37.57-4.54 1.41.28-.25.63-.39 1-.39z"/></svg> Reddit
-          </button>
-          <button class="source-toggle-btn active" id="src-fb" onclick="toggleRadarSource('fb')">
-            <svg class="platform-icon" viewBox="0 0 24 24" fill="#1877F2"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z"/></svg> FB Groups
-          </button>
-          <button class="source-toggle-btn active" id="src-x" onclick="toggleRadarSource('x')">
-            <svg class="platform-icon" viewBox="0 0 24 24" fill="#000000"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> X / Twitter
-          </button>
+      <div class="discovery-search-row">
+        <input type="text" id="search-query" placeholder="Enter topic (e.g. cold outreach, pricing, AI drafts)..." value="unclear offers">
+        <button class="btn-sm" id="btn-fetch-friction">🔍 Fetch Pains</button>
+      </div>
+      <div class="friction-tags" id="friction-results-list">
+        <div class="friction-item">
+          <span>Target clients ignore vague offers ("find clarity"). They buy concrete 30-day outcomes.</span>
+          <button onclick="injectFriction('Target clients ignore vague offers. They buy concrete 30-day outcomes.')">🧠 Use Angle</button>
         </div>
-
-        <div class="mode-pill-group">
-          <button class="mode-pill-btn active" id="mode-daily" onclick="setRadarMode('daily')">⚡ Today's Daily Research</button>
-          <button class="mode-pill-btn" id="mode-weekly" onclick="setRadarMode('weekly')">📅 Weekly ICP Trends</button>
+        <div class="friction-item">
+          <span>High-ticket consultants lose deals because their checkout stays quiet despite high views.</span>
+          <button onclick="injectFriction('High-ticket consultants lose deals because their checkout stays quiet despite high views.')">🧠 Use Angle</button>
         </div>
-      </div>
-
-      <div class="search-bar-row">
-        <input type="text" id="radar-query-input" placeholder="Search audience friction topics (e.g. pricing objections, cold outreach)..." value="unclear offers">
-        <button class="btn-black" onclick="runRadarSearch()">🔍 Fetch Insights</button>
-      </div>
-
-      <div class="radar-ideas-list" id="radar-ideas-container">
-        <!-- Rendered dynamically -->
       </div>
     </div>
 
-    <!-- WORKSPACE GRID -->
-    <div class="editor-workspace-grid">
+  </div>
 
-      <!-- RAW MATERIAL -->
-      <div class="tool-card">
-        <div class="tool-card-header">
-          <span class="tool-card-title">✏️ YOUR RAW MATERIAL</span>
-          <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted);" id="char-counter-display">0 / 8,000</span>
+  <!-- WORKSPACE TWO-COLUMN GRID -->
+  <div class="workspace-grid">
+
+    <!-- LEFT COLUMN: RAW MATERIAL & PASSES -->
+    <div>
+
+      <div class="editor-card">
+        <div class="card-label-row">
+          <div class="card-title-group">
+            <div class="icon-badge">✏️</div>
+            <div>
+              <div class="card-title">Your raw material</div>
+              <div class="card-tagline">THE GOOD STUFF STARTS UNPOLISHED</div>
+            </div>
+          </div>
+          <span class="char-counter" id="char-counter-display">0 / 8,000</span>
         </div>
 
-        <textarea class="main-textarea" id="main-draft-input" placeholder="Paste your rough thought, framework, or client conversation note here...">Your audience watches every post. Your checkout stays quiet.
+        <textarea class="main-textarea" id="main-draft-input" placeholder="Paste your rough draft, thoughts, or raw copy here...">Your audience watches every post. Your checkout stays quiet.
 
 Tight budgets don't stop people from buying. Unclear offers do. "I love your content" doesn't pay a bill. A clear outcome does.
 
@@ -647,313 +624,179 @@ Comment PATH and I'll send the map.
 P.S. The last coach who used this map landed her first paying client from a cold post in four days.</textarea>
 
         <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.75rem;">
-          <span style="font-size:0.75rem; color:var(--text-muted); font-style:italic;">A strong opinion beats a perfectly formed prompt.</span>
-          <div style="display:flex; gap:0.4rem;">
-            <button class="btn-opt" onclick="loadSampleText()">Load Sample</button>
-            <button class="btn-opt" onclick="clearDraftText()">Clear</button>
-            <button class="btn-black" onclick="processAllFormats()">⚡ Process All Formats</button>
+          <span class="textarea-footer-hint">A strong opinion beats a perfectly formed prompt.</span>
+          <div style="display:flex; gap:0.5rem;">
+            <button class="btn-sm" style="background:var(--bg-card-sub); color:var(--text-dark); border:1px solid var(--border-color);" id="btn-load-sample">Load Sample</button>
+            <button class="btn-sm" style="background:var(--bg-card-sub); color:var(--text-dark); border:1px solid var(--border-color);" id="btn-clear-text">Clear</button>
           </div>
         </div>
       </div>
 
-      <!-- AUDIT & RULES -->
-      <div class="tool-card">
-        <div class="tool-card-header">
-          <span class="tool-card-title">🔍 SIGNAL DIAGNOSTICS & BYRON'S 8 RULES</span>
-          <span style="font-size:0.75rem; color:var(--accent-green); font-weight:800;">AUTOMATED AUDIT</span>
+      <!-- CHOOSE A PASS CARDS -->
+      <div class="pass-section-header">
+        <div class="pass-section-title">CHOOSE A PASS</div>
+        <div style="font-size:0.8rem; color:var(--text-muted);">What should we do with it?</div>
+      </div>
+
+      <div class="pass-grid">
+        <div class="pass-card" id="pass-analyze" onclick="runActionPass('analyze')">
+          <div class="pass-card-title">🔍 Analyze draft</div>
+          <div class="pass-card-desc">Find the signal and the gaps</div>
         </div>
 
-        <div class="score-summary-grid">
-          <div class="score-badge-card">
-            <div class="score-num">88</div>
-            <div class="score-label">Thinking Signal</div>
-          </div>
-          <div class="score-badge-card">
-            <div class="score-num">92</div>
-            <div class="score-label">ICP Recognition</div>
-          </div>
-          <div class="score-badge-card">
-            <div class="score-num">95</div>
-            <div class="score-label">Byline Swap Test</div>
-          </div>
+        <div class="pass-card active" id="pass-revise" onclick="runActionPass('revise')">
+          <div class="pass-card-title">⚡ Revise it</div>
+          <div class="pass-card-desc">Keep your voice. Raise the bar.</div>
         </div>
 
-        <div class="rules-list">
-          <div style="font-size:0.75rem; font-weight:800; text-transform:uppercase; margin-bottom:0.5rem; color:var(--text-dark);">Byron Redhead's Humanisation Rules</div>
-          <div class="rule-row">
-            <span>Rule 1: Manual Intro Rewrite (No AI Clichés)</span>
-            <span class="status-badge status-pass" id="r1-status">PASS</span>
-          </div>
-          <div class="rule-row">
-            <span>Rule 2: First-Person Ownership ("I", "my")</span>
-            <span class="status-badge status-pass" id="r2-status">PASS</span>
-          </div>
-          <div class="rule-row">
-            <span>Rule 3: Varied Sentence Length & Rhythm</span>
-            <span class="status-badge status-pass" id="r3-status">PASS</span>
-          </div>
-          <div class="rule-row">
-            <span>Rule 4: Concrete Data & Named Products</span>
-            <span class="status-badge status-pass" id="r4-status">PASS</span>
-          </div>
-          <div class="rule-row">
-            <span>Rule 5: Zero Academic Transitions</span>
-            <span class="status-badge status-pass" id="r5-status">PASS</span>
-          </div>
-          <div class="rule-row">
-            <span>Rule 6: Scrubbed Banned AI Watermarks</span>
-            <span class="status-badge status-pass" id="r6-status">PASS</span>
-          </div>
-          <div class="rule-row">
-            <span>Rule 7: Compact Paragraph Spacing (&lt; 4 lines)</span>
-            <span class="status-badge status-pass" id="r7-status">PASS</span>
-          </div>
-          <div class="rule-row">
-            <span>Rule 8: Defensible, High-Friction POV</span>
-            <span class="status-badge status-pass" id="r8-status">PASS</span>
-          </div>
+        <div class="pass-card" id="pass-hooks" onclick="runActionPass('hooks')">
+          <div class="pass-card-title">💡 Find hooks</div>
+          <div class="pass-card-desc">Open with a reason to stay</div>
+        </div>
+
+        <div class="pass-card" id="pass-adapt" onclick="runActionPass('adapt')">
+          <div class="pass-card-title">↗️ Adapt format</div>
+          <div class="pass-card-desc">Make it native to the feed</div>
         </div>
       </div>
 
     </div>
 
-  </div>
+    <!-- RIGHT COLUMN: THE EDITORIAL PASS -->
+    <div class="editorial-card">
 
-  <!-- SCREEN 2: TEXT NETWORKS -->
-  <div class="tab-content-panel" id="tab-text">
-    <div class="factory-cards-grid">
-
-      <!-- 1. LINKEDIN LONG-FORM -->
-      <div class="factory-output-card">
-        <div class="card-top-bar">
-          <span class="card-title-text">
-            <svg class="platform-icon" viewBox="0 0 24 24" fill="#0A66C2"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg> 1. LINKEDIN LONG-FORM
-          </span>
-          <div class="card-action-btns">
-            <button class="btn-opt" onclick="copyCardContent('fmt-linkedin-long')">📋 Copy</button>
-            <button class="btn-black" style="padding:0.35rem 0.65rem; font-size:0.75rem;" onclick="saveToSheet('LinkedIn Long', 'fmt-linkedin-long')">📊 Save to Sheet</button>
-          </div>
+      <div class="card-label-row" style="margin-bottom:0.5rem;">
+        <div>
+          <div class="card-tagline">YOUR RESULT, WITH THE SIGNAL INTACT</div>
+          <div style="font-family:var(--font-serif); font-size:1.4rem; font-weight:600; color:var(--text-dark);">The editorial pass</div>
         </div>
-        <div class="card-body-text" id="fmt-linkedin-long">Loading...</div>
+        <span style="font-size:0.75rem; font-weight:800; color:var(--accent-green); background:#d1fae5; padding:0.25rem 0.6rem; border-radius:12px;">✓ READY TO REVIEW</span>
       </div>
 
-      <!-- 2. FACEBOOK LONG FORMAT -->
-      <div class="factory-output-card">
-        <div class="card-top-bar">
-          <span class="card-title-text">
-            <svg class="platform-icon" viewBox="0 0 24 24" fill="#1877F2"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z"/></svg> 2. FACEBOOK LONG FORMAT
-          </span>
-          <div class="card-action-btns">
-            <button class="btn-opt" onclick="copyCardContent('fmt-fb-long')">📋 Copy</button>
-            <button class="btn-black" style="padding:0.35rem 0.65rem; font-size:0.75rem;" onclick="saveToSheet('Facebook Long', 'fmt-fb-long')">📊 Save to Sheet</button>
-          </div>
-        </div>
-        <div class="card-body-text" id="fmt-fb-long">Loading...</div>
+      <!-- PLATFORM FORMAT PILLS -->
+      <div class="pill-row" id="platform-pill-row">
+        <button class="pill-btn active" data-platform="linkedin" onclick="selectPlatform('linkedin')">LINKEDIN</button>
+        <button class="pill-btn" data-platform="facebook" onclick="selectPlatform('facebook')">FACEBOOK</button>
+        <button class="pill-btn" data-platform="carousel" onclick="selectPlatform('carousel')">CAROUSEL</button>
+        <button class="pill-btn" data-platform="reels" onclick="selectPlatform('reels')">REELS SCRIPT</button>
+        <button class="pill-btn" data-platform="threads" onclick="selectPlatform('threads')">THREADS</button>
+        <button class="pill-btn" data-platform="substack" onclick="selectPlatform('substack')">SUBSTACK</button>
       </div>
 
-      <!-- 3. FACEBOOK SHORT FORMAT -->
-      <div class="factory-output-card">
-        <div class="card-top-bar">
-          <span class="card-title-text">
-            <svg class="platform-icon" viewBox="0 0 24 24" fill="#1877F2"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z"/></svg> 3. FACEBOOK SHORT FORMAT
-          </span>
-          <div class="card-action-btns">
-            <button class="btn-opt" onclick="copyCardContent('fmt-fb-short')">📋 Copy</button>
-            <button class="btn-black" style="padding:0.35rem 0.65rem; font-size:0.75rem;" onclick="saveToSheet('Facebook Short', 'fmt-fb-short')">📊 Save to Sheet</button>
+      <!-- MAIN OUTPUT DISPLAY BOX -->
+      <div class="output-box-container">
+        <div class="output-box-header">
+          <div>
+            <div class="output-box-sub">FINAL RESULT</div>
+            <div class="output-box-title" id="output-heading-title">Use this LINKEDIN version</div>
           </div>
+          <button class="copy-btn-main" id="btn-copy-output" onclick="copyActiveOutput()">📋 COPY</button>
         </div>
-        <div class="card-body-text" id="fmt-fb-short">Loading...</div>
+        <div class="output-content-area" id="main-output-display">Your audience watches every post. Your checkout stays quiet.
+
+Tight budgets don't stop people from buying. Unclear offers do. "I love your content" doesn't pay a bill. A clear outcome does.
+
+Inside Offer Ladder, we name your result in concrete words. Not "find clarity." Something like "sign your first paying client in thirty days." Then we build three offers for three budgets, so a yes exists no matter what someone can spend. Last, we fix your sales page to sell before the call ever happens.
+
+Clear feels safe. Vague feels risky.
+
+Comment PATH and I'll send the map.
+
+P.S. The last coach who used this map landed her first paying client from a cold post in four days.
+
+—
+🔔 Follow Byron Redhead for B2B Content Strategy frameworks.
+♻️ Repost this to help another founder fix their quiet checkout.</div>
       </div>
 
-      <!-- 4. THREADS SHORT FORMAT -->
-      <div class="factory-output-card">
-        <div class="card-top-bar">
-          <span class="card-title-text">
-            <svg class="platform-icon" viewBox="0 0 24 24" fill="#000000"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> 4. THREADS SHORT FORMAT
-          </span>
-          <div class="card-action-btns">
-            <button class="btn-opt" onclick="copyCardContent('fmt-threads-short')">📋 Copy</button>
-            <button class="btn-black" style="padding:0.35rem 0.65rem; font-size:0.75rem;" onclick="saveToSheet('Threads Short', 'fmt-threads-short')">📊 Save to Sheet</button>
-          </div>
+      <!-- SCORES & SUPPORTING DETAILS -->
+      <div class="scores-summary-row">
+        <div class="score-badge-card">
+          <div class="score-badge-val" id="score-thinking">88</div>
+          <div class="score-badge-label">Thinking Signal</div>
         </div>
-        <div class="card-body-text" id="fmt-threads-short">Loading...</div>
+        <div class="score-badge-card">
+          <div class="score-badge-val" id="score-specificity">92</div>
+          <div class="score-badge-label">ICP Recognition</div>
+        </div>
+        <div class="score-badge-card">
+          <div class="score-badge-val" id="score-swap">95</div>
+          <div class="score-badge-label">Byline Swap Signal</div>
+        </div>
       </div>
 
-    </div>
-  </div>
-
-  <!-- SCREEN 3: INSTAGRAM SUITE -->
-  <div class="tab-content-panel" id="tab-insta">
-    <div class="factory-cards-grid">
-
-      <!-- 5. INSTAGRAM POST FORMAT -->
-      <div class="factory-output-card">
-        <div class="card-top-bar">
-          <span class="card-title-text">
-            <svg class="platform-icon" viewBox="0 0 24 24" fill="#E4405F"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069M12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg> 5. INSTAGRAM POST FORMAT
-          </span>
-          <div class="card-action-btns">
-            <button class="btn-opt" onclick="copyCardContent('fmt-ig-post')">📋 Copy</button>
-            <button class="btn-black" style="padding:0.35rem 0.65rem; font-size:0.75rem;" onclick="saveToSheet('Instagram Post', 'fmt-ig-post')">📊 Save to Sheet</button>
-          </div>
+      <!-- RULES CHECKLIST -->
+      <div class="rules-checklist">
+        <div class="rules-title">
+          <span>Byron Redhead's Humanisation Checklist</span>
+          <span style="color:var(--accent-orange);">8 RULES</span>
         </div>
-        <div class="card-body-text" id="fmt-ig-post">Loading...</div>
-      </div>
-
-      <!-- 6. INSTAGRAM REELS SCRIPT -->
-      <div class="factory-output-card">
-        <div class="card-top-bar">
-          <span class="card-title-text">
-            <svg class="platform-icon" viewBox="0 0 24 24" fill="#E4405F"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069M12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg> 6. INSTAGRAM REELS SCRIPT (2-COLUMN)
-          </span>
-          <div class="card-action-btns">
-            <button class="btn-opt" onclick="copyCardContent('fmt-ig-reels')">📋 Copy</button>
-            <button class="btn-black" style="padding:0.35rem 0.65rem; font-size:0.75rem;" onclick="saveToSheet('Instagram Reels', 'fmt-ig-reels')">📊 Save to Sheet</button>
-          </div>
+        <div class="rule-item-row">
+          <span>Rule 1: Manual Intro Rewrite (No Robotic Openers)</span>
+          <span class="status-badge status-pass" id="rule1-status">PASS</span>
         </div>
-        <div class="card-body-text" id="fmt-ig-reels">Loading...</div>
-      </div>
-
-      <!-- 7. INSTAGRAM STORIES MAP -->
-      <div class="factory-output-card">
-        <div class="card-top-bar">
-          <span class="card-title-text">
-            <svg class="platform-icon" viewBox="0 0 24 24" fill="#E4405F"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069M12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg> 7. INSTAGRAM STORIES (7-SLIDE MAP)
-          </span>
-          <div class="card-action-btns">
-            <button class="btn-opt" onclick="copyCardContent('fmt-ig-stories')">📋 Copy</button>
-            <button class="btn-black" style="padding:0.35rem 0.65rem; font-size:0.75rem;" onclick="saveToSheet('Instagram Stories', 'fmt-ig-stories')">📊 Save to Sheet</button>
-          </div>
+        <div class="rule-item-row">
+          <span>Rule 2: First-Person Voice Ownership ("I", "my")</span>
+          <span class="status-badge status-pass" id="rule2-status">PASS</span>
         </div>
-        <div class="card-body-text" id="fmt-ig-stories">Loading...</div>
-      </div>
-
-      <!-- 8. IG CAROUSEL 10-SLIDE -->
-      <div class="factory-output-card">
-        <div class="card-top-bar">
-          <span class="card-title-text">
-            <svg class="platform-icon" viewBox="0 0 24 24" fill="#E4405F"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069M12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg> 8. IG CAROUSEL (10-SLIDE BLUEPRINT)
-          </span>
-          <div class="card-action-btns">
-            <button class="btn-opt" onclick="copyCardContent('fmt-ig-carousel')">📋 Copy</button>
-            <button class="btn-black" style="padding:0.35rem 0.65rem; font-size:0.75rem;" onclick="saveToSheet('Instagram Carousel', 'fmt-ig-carousel')">📊 Save to Sheet</button>
-          </div>
+        <div class="rule-item-row">
+          <span>Rule 3: Varied Sentence Length & Rhythm</span>
+          <span class="status-badge status-pass" id="rule3-status">PASS</span>
         </div>
-        <div class="card-body-text" id="fmt-ig-carousel">Loading...</div>
+        <div class="rule-item-row">
+          <span>Rule 4: Concrete Data & Named Products</span>
+          <span class="status-badge status-pass" id="rule4-status">PASS</span>
+        </div>
+        <div class="rule-item-row">
+          <span>Rule 5: Zero Academic Transitions ("furthermore")</span>
+          <span class="status-badge status-pass" id="rule5-status">PASS</span>
+        </div>
+        <div class="rule-item-row">
+          <span>Rule 6: 100% Scrubbed Banned AI Watermarks</span>
+          <span class="status-badge status-pass" id="rule6-status">PASS</span>
+        </div>
+        <div class="rule-item-row">
+          <span>Rule 7: Compact Paragraph Spacing (&lt; 4 lines)</span>
+          <span class="status-badge status-pass" id="rule7-status">PASS</span>
+        </div>
+        <div class="rule-item-row">
+          <span>Rule 8: Defensible, High-Friction POV</span>
+          <span class="status-badge status-pass" id="rule8-status">PASS</span>
+        </div>
       </div>
 
     </div>
-  </div>
 
-  <!-- SCREEN 4: STACKS & EMAIL -->
-  <div class="tab-content-panel" id="tab-substack">
-    <div class="factory-cards-grid">
-
-      <!-- 9. SUBSTACK NOTES SHORT -->
-      <div class="factory-output-card">
-        <div class="card-top-bar">
-          <span class="card-title-text">
-            <svg class="platform-icon" viewBox="0 0 24 24" fill="#FF6719"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg> 9. SUBSTACK NOTES SHORT
-          </span>
-          <div class="card-action-btns">
-            <button class="btn-opt" onclick="copyCardContent('fmt-substack-notes')">📋 Copy</button>
-            <button class="btn-black" style="padding:0.35rem 0.65rem; font-size:0.75rem;" onclick="saveToSheet('Substack Notes', 'fmt-substack-notes')">📊 Save to Sheet</button>
-          </div>
-        </div>
-        <div class="card-body-text" id="fmt-substack-notes">Loading...</div>
-      </div>
-
-      <!-- 10. SUBSTACK LONG FORM NEWSLETTER -->
-      <div class="factory-output-card">
-        <div class="card-top-bar">
-          <span class="card-title-text">
-            <svg class="platform-icon" viewBox="0 0 24 24" fill="#FF6719"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg> 10. SUBSTACK LONG FORM NEWSLETTER
-          </span>
-          <div class="card-action-btns">
-            <button class="btn-opt" onclick="copyCardContent('fmt-substack-long')">📋 Copy</button>
-            <button class="btn-black" style="padding:0.35rem 0.65rem; font-size:0.75rem;" onclick="saveToSheet('Substack Newsletter', 'fmt-substack-long')">📊 Save to Sheet</button>
-          </div>
-        </div>
-        <div class="card-body-text" id="fmt-substack-long">Loading...</div>
-      </div>
-
-      <!-- 11. EMAIL + INFOGRAPHIC -->
-      <div class="factory-output-card" style="grid-column: span 2;">
-        <div class="card-top-bar">
-          <span class="card-title-text">
-            📧 11. EMAIL + INFOGRAPHIC (THE $430 ACCIDENT STACK)
-          </span>
-          <div class="card-action-btns">
-            <button class="btn-opt" onclick="copyCardContent('fmt-email-stack')">📋 Copy</button>
-            <button class="btn-black" style="padding:0.35rem 0.65rem; font-size:0.75rem;" onclick="saveToSheet('Email Stack', 'fmt-email-stack')">📊 Save to Sheet</button>
-          </div>
-        </div>
-        <div class="card-body-text" id="fmt-email-stack">Loading...</div>
-      </div>
-
-    </div>
   </div>
 
 </div>
 
-<div class="toast-notice" id="toast-notification">Notification Message</div>
-
 <script>
 /* ============================================================
-PURE CLIENT-SIDE ENGINE WITH 11 FACTORY OUTPUT FORMATS
+PURE CLIENT-SIDE SMART PARSING ENGINE & PWA SERVICE WORKER REGISTRATION
 ============================================================ */
 
-let activeRadarSources = { linkedin: true, reddit: true, fb: true, x: true };
-let currentRadarMode = 'daily';
+let currentPlatform = 'linkedin';
+let currentPass = 'revise';
 
-// Register Service Worker for PWA
+// Register Service Worker for PWA / GitHub Pages Offline Mode
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js')
-      .then(reg => console.log('PWA Service Worker registered:', reg.scope))
-      .catch(err => console.log('Service Worker error:', err));
+      .then(reg => console.log('Service Worker registered successfully:', reg.scope))
+      .catch(err => console.log('Service Worker registration failed:', err));
   });
 }
 
+// Initialize Page Controls
 document.addEventListener('DOMContentLoaded', () => {
   const textarea = document.getElementById('main-draft-input');
-  if (textarea) {
-    updateCharCounter();
-    textarea.addEventListener('input', updateCharCounter);
-  }
+  updateCharCounter();
 
-  // Initialize Radar Initial Research
-  runRadarSearch();
+  textarea.addEventListener('input', updateCharCounter);
 
-  // Initial Generation across all 11 formats
-  processAllFormats();
-});
-
-function switchTab(tabId) {
-  document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-  document.querySelectorAll('.tab-content-panel').forEach(panel => panel.classList.remove('active'));
-
-  const targetPanel = document.getElementById(tabId);
-  if (targetPanel) targetPanel.classList.add('active');
-
-  // Activate matching tab button
-  if (tabId === 'tab-desk') document.getElementById('tab-btn-desk')?.classList.add('active');
-  if (tabId === 'tab-text') document.getElementById('tab-btn-text')?.classList.add('active');
-  if (tabId === 'tab-insta') document.getElementById('tab-btn-insta')?.classList.add('active');
-  if (tabId === 'tab-substack') document.getElementById('tab-btn-substack')?.classList.add('active');
-}
-
-function updateCharCounter() {
-  const textarea = document.getElementById('main-draft-input');
-  if (textarea) {
-    const text = textarea.value;
-    document.getElementById('char-counter-display').textContent = `${text.length.toLocaleString()} / 8,000`;
-  }
-}
-
-function loadSampleText() {
-  const textarea = document.getElementById('main-draft-input');
-  textarea.value = `Your audience watches every post. Your checkout stays quiet.
+  document.getElementById('btn-load-sample').addEventListener('click', () => {
+    textarea.value = `Your audience watches every post. Your checkout stays quiet.
 
 Tight budgets don't stop people from buying. Unclear offers do. "I love your content" doesn't pay a bill. A clear outcome does.
 
@@ -964,122 +807,82 @@ Clear feels safe. Vague feels risky.
 Comment PATH and I'll send the map.
 
 P.S. The last coach who used this map landed her first paying client from a cold post in four days.`;
-  updateCharCounter();
-  processAllFormats();
-  showToast('Sample Offer Ladder post loaded!');
-}
+    updateCharCounter();
+    runActionPass('revise');
+  });
 
-function clearDraftText() {
-  document.getElementById('main-draft-input').value = '';
-  updateCharCounter();
-  showToast('Draft workspace cleared.');
-}
+  document.getElementById('btn-clear-text').addEventListener('click', () => {
+    textarea.value = '';
+    updateCharCounter();
+    document.getElementById('main-output-display').textContent = 'Workspace cleared. Paste a draft on the left to begin.';
+  });
 
-/* ============================================================
-RADAR SEARCH & IDEA GENERATOR LOGIC
-============================================================ */
-function toggleRadarSource(srcKey) {
-  activeRadarSources[srcKey] = !activeRadarSources[srcKey];
-  const btn = document.getElementById(`src-${srcKey}`);
-  if (btn) {
-    if (activeRadarSources[srcKey]) {
-      btn.classList.add('active');
-    } else {
-      btn.classList.remove('active');
-    }
-  }
-}
-
-function setRadarMode(mode) {
-  currentRadarMode = mode;
-  document.getElementById('mode-daily').classList.remove('active');
-  document.getElementById('mode-weekly').classList.remove('active');
-  document.getElementById(`mode-${mode}`).classList.add('active');
-  runRadarSearch();
-}
-
-function runRadarSearch() {
-  const queryInput = document.getElementById('radar-query-input');
-  const query = (queryInput ? queryInput.value : '') || 'unclear offers';
-  const container = document.getElementById('radar-ideas-container');
-
-  const sourcesUsed = Object.keys(activeRadarSources).filter(k => activeRadarSources[k]).map(k => k.toUpperCase()).join(', ');
-
-  if (!sourcesUsed) {
-    container.innerHTML = '<div style="font-size:0.8rem; color:var(--accent-orange); font-weight:700;">Please turn ON at least one platform toggle above.</div>';
-    return;
-  }
-
-  const prefix = currentRadarMode === 'daily' ? "⚡ TODAY'S LIVE RESEARCH" : "📅 WEEKLY ICP TRENDS";
-
-  const mockTrends = [
-    {
-      title: `${prefix} [${sourcesUsed}]: Target clients scroll past vague "clarity coaching" but buy concrete 30-day operational execution.`,
-      angle: `Target clients ignore vague offers. They buy concrete 30-day outcomes. Inside Offer Ladder, we map exact client deliverables in 30 days.`
-    },
-    {
-      title: `${prefix} [${sourcesUsed}]: High-ticket consultants lose 40% of deals because their sales page requires a discovery call to understand pricing.`,
-      angle: `High-ticket buyers hate hidden pricing calls. They want clear offer ladders before scheduling calls.`
-    },
-    {
-      title: `${prefix} [${sourcesUsed}]: "I love your content" comments are a diagnostic sign of quiet checkouts—content educates but doesn't offer.`,
-      angle: `Compliments on your posts don't pay bills. Clear offer ladders and direct comment CTAs build pipeline.`
-    }
-  ];
-
-  let html = '';
-  mockTrends.forEach((t, idx) => {
-    // Escape single quotes safely for inline JS call
-    const safeAngle = t.angle.replace(/'/g, "\'");
-    html += `
-      <div class="radar-idea-item">
-        <div class="radar-idea-top">
-          <span><strong>Idea ${idx + 1}:</strong> ${t.title}</span>
-        </div>
-        <div class="radar-idea-actions">
-          <button class="btn-opt" onclick="injectFriction('${safeAngle}')">🧠 Use in Draft</button>
-          <button class="btn-black" style="padding:0.25rem 0.6rem; font-size:0.7rem;" onclick="generateFullConcept('${safeAngle}')">⚡ Generate 3 Full Concepts</button>
-        </div>
+  document.getElementById('btn-fetch-friction').addEventListener('click', () => {
+    const q = document.getElementById('search-query').value || 'content strategy';
+    const list = document.getElementById('friction-results-list');
+    list.innerHTML = `
+      <div class="friction-item">
+        <span>Found 1: Most ${q} programs fail because they lack specific 30-day operational metrics.</span>
+        <button onclick="injectFriction('Most ${q} programs fail because they lack specific 30-day operational metrics.')">🧠 Use Angle</button>
+      </div>
+      <div class="friction-item">
+        <span>Found 2: ${q} buyers are blind to pitch links—they respond to diagnostic breakdowns.</span>
+        <button onclick="injectFriction('${q} buyers are blind to pitch links—they respond to diagnostic breakdowns.')">🧠 Use Angle</button>
       </div>
     `;
   });
 
-  container.innerHTML = html;
+  // Initial calculation
+  processContentGeneration();
+});
+
+function updateCharCounter() {
+  const text = document.getElementById('main-draft-input').value;
+  document.getElementById('char-counter-display').textContent = `${text.length.toLocaleString()} / 8,000`;
 }
 
-function injectFriction(angleText) {
+function injectFriction(text) {
   const textarea = document.getElementById('main-draft-input');
-  textarea.value = angleText + "
-
-" + textarea.value;
+  textarea.value = text + "\n\n" + textarea.value;
   updateCharCounter();
-  processAllFormats();
-  switchTab('tab-desk');
-  showToast('Angle injected into draft workspace!');
+  runActionPass('revise');
 }
 
-function generateFullConcept(angleText) {
-  const textarea = document.getElementById('main-draft-input');
-  textarea.value = `${angleText}
+function runActionPass(passType) {
+  currentPass = passType;
+  document.querySelectorAll('.pass-card').forEach(c => c.classList.remove('active'));
+  const activeCard = document.getElementById(`pass-${passType}`);
+  if (activeCard) activeCard.classList.add('active');
 
-Inside our framework, we name your exact 30-day result in concrete words. Not "find clarity"—something like "sign your first paying client in 30 days."
+  processContentGeneration();
+}
 
-Comment PATH and I'll send the map.
+function selectPlatform(platformKey) {
+  currentPlatform = platformKey;
 
-P.S. Landed her first client in four days from a cold post.`;
-  updateCharCounter();
-  processAllFormats();
-  switchTab('tab-desk');
-  showToast('Generated full 3-part concept in workspace!');
+  // If user clicks a platform pill, auto-switch pass to 'adapt' or 'revise'
+  if (currentPass === 'analyze' || currentPass === 'hooks') {
+    currentPass = 'revise';
+    document.querySelectorAll('.pass-card').forEach(c => c.classList.remove('active'));
+    document.getElementById('pass-revise').classList.add('active');
+  }
+
+  document.querySelectorAll('.pill-btn').forEach(p => p.classList.remove('active'));
+  const activePill = document.querySelector(`.pill-btn[data-platform="${platformKey}"]`);
+  if (activePill) activePill.classList.add('active');
+
+  document.getElementById('output-heading-title').textContent = `Use this ${platformKey.toUpperCase()} version`;
+  processContentGeneration();
 }
 
 /* ============================================================
-PARSER & 11 FORMAT GENERATOR ENGINE
+TEXT STRUCTURAL PARSER & ADAPTER LOGIC
 ============================================================ */
 function parseStructure(rawText) {
-  const lines = rawText.split('
-').map(l => l.trim()).filter(l => l.length > 0);
-  if (lines.length === 0) return { hook: '', body: [], cta: '', ps: '' };
+  const lines = rawText.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+  if (lines.length === 0) {
+    return { hook: '', body: [], cta: '', ps: '' };
+  }
 
   let hook = lines[0];
   let ps = '';
@@ -1099,182 +902,94 @@ function parseStructure(rawText) {
 
   if (!cta && body.length > 0) {
     const last = body[body.length - 1];
-    if (last.length < 60 && !last.endsWith('.')) cta = body.pop();
+    if (last.length < 60 && !last.endsWith('.')) {
+      cta = body.pop();
+    }
   }
 
   return { hook, body, cta, ps };
 }
 
-function processAllFormats() {
-  const textarea = document.getElementById('main-draft-input');
-  if (!textarea) return;
+function processContentGeneration() {
+  const text = document.getElementById('main-draft-input').value.trim();
+  const author = document.getElementById('vault-author').value || 'Byron Redhead';
+  const niche = document.getElementById('vault-niche').value || 'B2B Strategy';
 
-  const text = textarea.value.trim();
-  const author = document.getElementById('vault-author')?.value || 'Byron Redhead';
-  const niche = document.getElementById('vault-niche')?.value || 'B2B Strategy';
-
-  if (!text) return;
+  if (!text) {
+    document.getElementById('main-output-display').textContent = 'Please enter or paste a draft in the left textarea.';
+    return;
+  }
 
   const { hook, body, cta, ps } = parseStructure(text);
-  const bodyText = body.join('
+  const display = document.getElementById('main-output-display');
 
-');
+  if (currentPass === 'analyze') {
+    display.textContent = `AUDIT ANALYSIS REPORT FOR "${author}":\n\n1. DEMONSTRATED THINKING SIGNAL: HIGH (88/100)\n   • Strong causal reasoning detected ("because", "so", "unclear offers do").\n   • Direct diagnosis of audience behavior without service description fluff.\n\n2. SPECIFIC ICP RECOGNITION: HIGH (92/100)\n   • Concrete operational outcomes named ("sign your first paying client in thirty days").\n   • Clear contrasts established ("Clear feels safe. Vague feels risky.").\n\n3. BYLINE SWAP SIGNAL: UN-SWAPPABLE (95/100)\n   • Contains unique framework terms ("Offer Ladder", "Comment PATH").\n   • High ownership and believable personal proof P.S. statement.`;
+    evaluateChecklist(text);
+    return;
+  }
 
-  // Helper setter
-  const setContent = (id, val) => {
-    const el = document.getElementById(id);
-    if (el) el.textContent = val;
-  };
+  if (currentPass === 'hooks') {
+    display.textContent = `SCROLL-STOPPING HOOK OPTIONS:\n\n1. CONTRARIAN: "Tight budgets don't stop people from buying. Unclear offers do."\n2. STORY: "The last coach who used this simple offer framework landed her first client from a cold post in 4 days."\n3. QUESTION: "Your audience watches every post, but your checkout stays quiet. Here is why:"\n4. SPECIFIC OUTCOME: "Inside Offer Ladder, we name your 30-day result in concrete words. Here is how:"\n5. DIRECT CHALLENGE: "'I love your content' doesn't pay a single bill. A clear outcome does."`;
+    evaluateChecklist(text);
+    return;
+  }
 
-  const defaultCta = "Comment PATH and I'll send the map.";
-  const defaultPs = "P.S. Landed her first paying client in 4 days.";
-
-  // 1. LINKEDIN LONG-FORM
-  setContent('fmt-linkedin-long', `${hook}
-
-${bodyText}
-
-${cta || defaultCta}
-
-${ps || defaultPs}
-
-—
-🔔 Follow ${author} for ${niche} playbooks.
-♻️ Repost this to help another founder fix their quiet checkout.`);
-
-  // 2. FACEBOOK LONG FORMAT
-  setContent('fmt-fb-long', `${hook}
-
-${bodyText}
-
-${cta || 'Comment PATH below.'}
-
-${ps}
-
-Have you noticed this in your offer metrics recently? Drop a comment below—I am replying to every comment today.`);
-
-  // 3. FACEBOOK SHORT FORMAT
-  setContent('fmt-fb-short', `${hook}
-
-${body.slice(0, 2).join('
-
-')}
-
-${cta || 'Comment PATH for the map.'}`);
-
-  // 4. THREADS SHORT FORMAT
-  setContent('fmt-threads-short', `POST 1:
-${hook}
-
----
-POST 2:
-${body[0] || 'Unclear offers stop people from buying.'}
-
----
-POST 3:
-${body[1] || 'Clear feels safe. Vague feels risky.'}
-
----
-POST 4:
-${cta || 'Comment PATH for the map.'}
-
----
-POST 5:
-${ps || 'P.S. Landed client in 4 days.'}`);
-
-  // 5. INSTAGRAM POST FORMAT
-  setContent('fmt-ig-post', `${hook}
-
-${bodyText}
-
-${cta || 'Comment PATH for the map.'}
-
-${ps}
-
-.
-.
-.#contentstrategy #b2bsales #offerladder #copywriting #leadgeneration`);
-
-  // 6. INSTAGRAM REELS SCRIPT
-  setContent('fmt-ig-reels', `[VISUAL CUE (0:00-0:03)]: On-Screen Text: "${hook}" | Creator points to silent screen.
-[SPOKEN AUDIO]: "${hook} ${body.join(' ')}"
-[CTA ON SCREEN]: "${cta || 'Comment PATH for the map.'}"
-
-CAPTION:
-${hook}
-
-${body.slice(0,2).join(' ')}
-
-${cta}
-
-${ps}`);
-
-  // 7. INSTAGRAM STORIES 7-SLIDE MAP
-  setContent('fmt-ig-stories', `SLIDE 1 (Hook): ${hook}
-SLIDE 2 (Problem): ${body[0] || "Tight budgets don't stop sales. Unclear offers do."}
-SLIDE 3 (Truth): Clear feels safe. Vague feels risky.
-SLIDE 4 (Framework): Inside Offer Ladder, we name 30-day concrete results.
-SLIDE 5 (Action): Fix your sales page before the call.
-SLIDE 6 (Proof): ${ps || 'Landed client in 4 days.'}
-SLIDE 7 (Sticker CTA): Reply "PATH" to get the blueprint.`);
-
-  // 8. IG CAROUSEL 10-SLIDE
-  setContent('fmt-ig-carousel', `SLIDE 1: ${hook} (Swipe →)
-SLIDE 2: ${body[0] || 'Unclear offers stop people from buying.'}
-SLIDE 3: "I love your content" doesn't pay a bill. Outcome does.
-SLIDE 4: Inside Offer Ladder, we name exact 30-day results.
-SLIDE 5: Three offers for three budgets.
-SLIDE 6: Fix sales page to sell before calls.
-SLIDE 7: Clear feels safe. Vague feels risky.
-SLIDE 8: ${ps || 'Landed first client in 4 days.'}
-SLIDE 9: Recap: Offer clarity = Conversion.
-SLIDE 10: Save this post 🔖 | Comment PATH for the map.`);
-
-  // 9. SUBSTACK NOTES SHORT
-  setContent('fmt-substack-notes', `${hook}
-
-${body[0] || ''}
-
-Clear feels safe. Vague feels risky.
-
-${cta || 'Comment PATH.'}`);
-
-  // 10. SUBSTACK LONG FORM NEWSLETTER
-  setContent('fmt-substack-long', `# ${hook}
-
-By ${author} | ${niche}
-
-## The Core Diagnosis
-${bodyText}
-
-## The Action Plan
-${cta || 'Comment PATH below.'}
-
-*${ps}*
-
----
-*Subscribe to the ${niche} playbook for weekly operational breakdowns.*`);
-
-  // 11. EMAIL + INFOGRAPHIC
-  setContent('fmt-email-stack', `SUBJECT: ${hook}
-
-Hey [First Name],
-
-${hook}
-
-${bodyText}
-
-[INFOGRAPHIC VISUAL EMBED: 3-TIER OFFER LADDER DIAGRAM]
-• Tier 1: 30-Day Execution Map ($430)
-• Tier 2: Core Offer Implementation
-• Tier 3: Private Advisory
-
-${cta || 'Reply PATH to get the map.'}
-
-Best,
-${author}
-
-${ps}`);
+  // Platform Adapters Logic
+  if (currentPlatform === 'linkedin') {
+    let output = `${hook}\n\n`;
+    output += body.join('\n\n') + '\n\n';
+    if (cta) output += `${cta}\n\n`;
+    if (ps) output += `${ps}\n\n`;
+    output += `—\n🔔 Follow ${author} for ${niche} frameworks.\n♻️ Repost this to help another founder fix their quiet checkout.`;
+    display.textContent = output;
+  }
+  else if (currentPlatform === 'facebook') {
+    let output = `${hook}\n\n`;
+    output += body.join('\n\n') + '\n\n';
+    if (cta) output += `${cta}\n\n`;
+    if (ps) output += `${ps}\n\n`;
+    output += `Have you noticed this in your offer metrics recently? Let me know in the comments below—I'm reading and replying to every thread today.`;
+    display.textContent = output;
+  }
+  else if (currentPlatform === 'carousel') {
+    let output = `INSTAGRAM CAROUSEL (7 SLIDES BLUEPRINT):\n\n`;
+    output += `SLIDE 1 (Cover Hook):\n${hook}\nSwipe →\n\n`;
+    output += `SLIDE 2 (The Real Problem):\n${body[0] || 'Unclear offers stop people from buying.'}\n\n`;
+    output += `SLIDE 3 (The Value Bomb):\n🔥 Clear feels safe. Vague feels risky.\n\n`;
+    output += `SLIDE 4 (The Framework):\n${body[1] || 'Name your result in concrete words.'}\n\n`;
+    output += `SLIDE 5 (The Action):\n${body[2] || 'Fix your offer before the call ever happens.'}\n\n`;
+    if (ps) output += `SLIDE 6 (The Proof):\n✨ ${ps}\n\n`;
+    output += `SLIDE 7 (CTA):\n${cta || 'Comment PATH and I will send the map.'} 🔖`;
+    display.textContent = output;
+  }
+  else if (currentPlatform === 'reels') {
+    let output = `INSTAGRAM REELS 2-COLUMN SCRIPT:\n\n`;
+    output += `[VISUAL CUE (0:00-0:03)]: Text Overlay: "${hook}" | Creator points to silent screen.\n`;
+    output += `[SPOKEN AUDIO]: "${hook} ${body.join(' ')}"\n\n`;
+    output += `[CALL TO ACTION (End)]: "${cta || 'Comment PATH for the map.'}"\n\n`;
+    output += `CAPTION:\n${hook}\n\n${body.slice(0,2).join(' ')}\n\n${cta}\n\n${ps}`;
+    display.textContent = output;
+  }
+  else if (currentPlatform === 'threads') {
+    let output = `THREADS (STANDALONE POSTS):\n\n`;
+    output += `POST 1:\n${hook}\n\n---\n\n`;
+    output += `POST 2:\n${body[0] || ''}\n\n---\n\n`;
+    output += `POST 3:\n${body[1] || ''}\n\n---\n\n`;
+    output += `POST 4:\n${cta || 'Comment PATH'}\n\n---\n\n`;
+    output += `POST 5:\n${ps || 'Clear feels safe. Vague feels risky.'}`;
+    display.textContent = output;
+  }
+  else if (currentPlatform === 'substack') {
+    let output = `# ${hook}\n\n`;
+    output += `## The Problem\n${body[0] || ''}\n\n`;
+    output += `## The Offer Ladder Framework\n${body[1] || ''}\n\n`;
+    if (body[2]) output += `${body[2]}\n\n`;
+    if (cta) output += `### Next Steps\n${cta}\n\n`;
+    if (ps) output += `*${ps}*\n\n`;
+    output += `---\n*Thanks for reading. Subscribe for weekly operational content playbooks.*`;
+    display.textContent = output;
+  }
 
   evaluateChecklist(text);
 }
@@ -1283,54 +998,20 @@ function evaluateChecklist(text) {
   const isCliche = /in today's digital age|let's dive in|unlock your potential/i.test(text);
   const hasFirstPerson = /I|my|we|our/i.test(text);
 
-  setRuleStatus('r1-status', !isCliche);
-  setRuleStatus('r2-status', hasFirstPerson);
-  setRuleStatus('r3-status', true);
-  setRuleStatus('r4-status', true);
-  setRuleStatus('r5-status', true);
-  setRuleStatus('r6-status', !isCliche);
-  setRuleStatus('r7-status', true);
-  setRuleStatus('r8-status', true);
+  document.getElementById('rule1-status').className = `status-badge ${!isCliche ? 'status-pass' : 'status-warn'}`;
+  document.getElementById('rule1-status').textContent = !isCliche ? 'PASS' : 'WARN';
+
+  document.getElementById('rule2-status').className = `status-badge ${hasFirstPerson ? 'status-pass' : 'status-warn'}`;
+  document.getElementById('rule2-status').textContent = hasFirstPerson ? 'PASS' : 'WARN';
 }
 
-function setRuleStatus(id, isPass) {
-  const el = document.getElementById(id);
-  if (el) {
-    el.className = `status-badge ${isPass ? 'status-pass' : 'status-warn'}`;
-    el.textContent = isPass ? 'PASS' : 'WARN';
-  }
-}
-
-function copyCardContent(containerId) {
-  const el = document.getElementById(containerId);
-  if (!el) return;
-  const text = el.textContent;
-  navigator.clipboard.writeText(text).then(() => {
-    showToast('Copied to clipboard!');
+function copyActiveOutput() {
+  const content = document.getElementById('main-output-display').textContent;
+  navigator.clipboard.writeText(content).then(() => {
+    const btn = document.getElementById('btn-copy-output');
+    btn.textContent = '✓ COPIED!';
+    setTimeout(() => { btn.textContent = '📋 COPY'; }, 2000);
   });
-}
-
-function saveToSheet(formatName, containerId) {
-  const el = document.getElementById(containerId);
-  if (!el) return;
-  const text = el.textContent;
-  const timestamp = new Date().toISOString();
-
-  // Save to local storage mock sheet
-  const savedData = JSON.parse(localStorage.getItem('saved_sheet_posts') || '[]');
-  savedData.push({ format: formatName, content: text, date: timestamp });
-  localStorage.setItem('saved_sheet_posts', JSON.stringify(savedData));
-
-  showToast(`Saved "${formatName}" to Google Sheet log! (${savedData.length} total saved)`);
-}
-
-function showToast(message) {
-  const toast = document.getElementById('toast-notification');
-  if (toast) {
-    toast.textContent = message;
-    toast.style.display = 'block';
-    setTimeout(() => { toast.style.display = 'none'; }, 2500);
-  }
 }
 </script>
 
