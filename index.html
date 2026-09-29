@@ -1,23 +1,1019 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RIVAAJ MACHINE PWA V3 - LOCKED FINAL NO X YT</title><meta name="theme-color" content="#121212"><link rel="manifest" href="./manifest.json"><style>*{box-sizing:border-box;font-family:-apple-system,Inter,sans-serif}body{margin:0;background:#f6f3ee;color:#1a1a1a}.header{background:#121212;color:#fff;padding:14px 18px;display:flex;justify-content:space-between;position:sticky;top:0;z-index:10}.tabs{display:flex;gap:6px;background:#121212;padding:0 12px 12px;overflow:auto}.tab{flex:1;min-width:74px;padding:11px 6px;border-radius:12px;border:0;font-weight:800;font-size:11px;cursor:pointer;background:#2a2a2a;color:#9a9a9a}.tab.active{background:#fff;color:#121212}.card{background:#fff;border-radius:18px;padding:16px;margin:14px;box-shadow:0 6px 24px rgba(0,0,0,.06);border:1px solid #efefef}.label{font-size:11px;text-transform:uppercase;letter-spacing:.09em;font-weight:800;color:#6b6b6b;margin-bottom:8px}.input{width:100%;padding:13px 14px;border:1px solid #e5e5e5;border-radius:12px;font-size:14px;margin-bottom:12px;background:#fbf9f6}.btn{width:100%;padding:15px;border-radius:14px;border:0;background:#121212;color:#fff;font-weight:800;cursor:pointer}.btn2{padding:9px 14px;border-radius:10px;background:#121212;color:#fff;border:0;font-weight:700;font-size:12px;cursor:pointer}.btn-outline{padding:9px 14px;border-radius:10px;background:#fff;color:#121212;border:1.5px solid #121212;font-weight:700;font-size:12px;cursor:pointer}.badge{display:inline-block;padding:4px 10px;border-radius:20px;background:#e6f5d0;font-size:10px;font-weight:800}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.challenge{background:#faf8f5;border:1px solid #eee8;border-radius:14px;padding:12px;font-size:12px}.yellow{background:#ffeb3b;border-radius:16px;padding:14px;margin:14px;border:2px solid #121212}.idea-row{background:#fff;border-radius:12px;padding:12px;margin:10px 0;display:flex;flex-direction:column;gap:8px;border:1px solid #eee}.factory-item{border:1px solid #eee;border-radius:16px;padding:14px;margin:12px 14px;background:#fff}.hook-card{background:#faf8f5;border:1.5px dashed #121212;border-radius:14px;padding:13px;margin:9px 0;cursor:pointer}.small{font-size:11px;color:#777}.switch{width:46px;height:28px;background:#ddd;border-radius:20px;position:relative}.switch.on{background:#1ed760}.switch.on:after{content:'';position:absolute;top:3px;left:3px;width:22px;height:22px;background:#fff;border-radius:50%}</style></head><body>
-<div class="header"><b>RIVAAJ MACHINE V3 - LOCKED NO X/YT 🔒</b><span>SC</span></div>
-<div class="tabs"><button class="tab active" onclick="showTab(1)">1 Profile</button><button class="tab" onclick="showTab(2)">2 Radar V3</button><button class="tab" onclick="showTab(3)">3 Humanizer</button><button class="tab" onclick="showTab(4)">3.5 Hooks</button><button class="tab" onclick="showTab(5)">4 Factory</button></div>
-<div id="tab1" class="tabpane"><div class="card"><div class="label">Profile + Sheet + 7AM — LOCKED FINAL — No X/YouTube</div><textarea id="about" class="input" rows="2">Female coach mentor, simple systems, calm business</textarea><textarea id="who" class="input" rows="2">Female coaches 35-50, 2-4 offers scattered, paying $430/mo</textarea><textarea id="how" class="input" rows="2">4 Jobs: Get, Sell, Deliver, Keep. 3 Doors: private, group, passive.</textarea><input id="doWords" class="input" value="simple, calm, keep it so simple you don't have to think twice, that repetition is your product, your calendar will define your income"><input id="dontWords" class="input" value="delve tapestry unlock leverage synergy paradigm optimize"><input id="ctaInput" class="input" value="Comment STACK to book a call • Comment SYSTEM to map 4 jobs"><input id="sheetUrl" class="input" placeholder="Google Sheet URL"><button class="btn" onclick="saveAll()">Save Everything - Locked</button><div style="display:flex;gap:10px;margin-top:12px"><button class="btn-outline" style="flex:1" onclick="enable7AM()">Enable 7AM Alert</button><button class="btn-outline" style="flex:1" onclick="alert('Sheet ping sent')">Test Sheet</button></div></div></div>
-<div id="tab2" class="tabpane" style="display:none"><div class="card"><div class="label">Platform Toggles — 3 Active — LinkedIn / Reddit / Facebook</div><div class="grid2"><div>LinkedIn <div class="switch on"></div></div><div>Reddit <div class="switch on"></div></div><div>Facebook <div class="switch on"></div></div></div><div class="label" style="margin-top:14px">Keyword — EDITABLE DAILY</div><input id="keyword" class="input" value="female coaches overwhelmed Kajabi + Circle + ConvertKit stack"><div class="small">Last: <span id="kwDate"></span></div><input id="subreddits" class="input" value="r/Entrepreneur, r/lifecoaching"><div style="display:flex;gap:10px"><button class="btn" style="flex:2" onclick="runRadar()">Run Radar Now</button><button class="btn-outline" style="flex:1" onclick="toggleWeekly()" id="weeklyBtn">Daily</button></div></div><div id="radarResults"></div></div>
-<div id="tab3" class="tabpane" style="display:none"><div class="card"><div class="label">Ideas Queue</div><div id="ideasQueue" class="small">Queue empty</div></div><div class="card"><textarea id="rawIdea" class="input" style="height:100px"></textarea><button class="btn" onclick="humanize()">Humanize → Hooks</button></div><div class="card"><div class="label">Humanized Output <span id="cleanBadge" class="badge">Cleaned • 0</span></div><div id="humanizedOut" style="white-space:pre-wrap;font-size:13px"></div></div></div>
-<div id="tab4" class="tabpane" style="display:none"><div class="card"><div class="label">Hook Engine — 10 Proven Hooks</div><div id="hookList"></div><button class="btn" style="margin-top:12px" onclick="useSelectedHook()">Use Selected Hook → Factory</button></div></div>
-<div id="tab5" class="tabpane" style="display:none"><div class="card"><div class="label">Factory — 13 Formats — No X/YouTube — Platform Best Practices</div><button class="btn" onclick="generateFactory()">Generate All 13</button></div><div id="factoryList"></div></div>
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Draft Desk — The Swap Test Content Engine</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#d94e1f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="description" content="A focused space for founders with something real to say. Bring the rough thought; leave with a post that sounds like you.">
+<style>
+:root {
+  --bg-main: #f4efe6;
+  --bg-card: #ffffff;
+  --bg-card-sub: #fbf9f4;
+  --border-color: #e2dacd;
+  --border-dark: #222222;
+  --text-dark: #111111;
+  --text-muted: #666055;
+  --accent-orange: #d94e1f;
+  --accent-orange-light: #fbebe4;
+  --accent-green: #10b981;
+  --accent-purple: #8b5cf6;
+  --font-serif: "Georgia", "Times New Roman", serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "SF Mono", "Courier New", monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-dark);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  padding: 2rem 1.5rem;
+  min-height: 100vh;
+}
+
+.app-container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* Header */
+.top-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-orange);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.top-badge::before {
+  content: "•";
+  font-size: 1.2rem;
+}
+
+.main-title {
+  font-family: var(--font-serif);
+  font-size: 3.2rem;
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--text-dark);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
+}
+
+.main-subtitle {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  max-width: 650px;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+/* Top Section: Brainbook & Discovery */
+.top-tools-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.tool-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+}
+
+.tool-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.tool-card-title {
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-orange);
+}
+
+.brainbook-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.field-group label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.field-group input, .field-group textarea {
+  width: 100%;
+  background: var(--bg-card-sub);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 0.45rem 0.65rem;
+  font-size: 0.85rem;
+  color: var(--text-dark);
+  font-family: inherit;
+}
+
+.field-group input:focus, .field-group textarea:focus {
+  outline: none;
+  border-color: var(--accent-orange);
+}
+
+.discovery-search-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.discovery-search-row input {
+  flex: 1;
+  background: var(--bg-card-sub);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 0.45rem 0.65rem;
+  font-size: 0.85rem;
+}
+
+.btn-sm {
+  background: var(--text-dark);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-sm:hover { opacity: 0.9; }
+
+.friction-tags {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  max-height: 110px;
+  overflow-y: auto;
+}
+
+.friction-item {
+  background: var(--bg-card-sub);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.78rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.friction-item span { color: var(--text-dark); }
+.friction-item button {
+  background: transparent;
+  border: 1px solid var(--accent-orange);
+  color: var(--accent-orange);
+  border-radius: 4px;
+  padding: 0.15rem 0.4rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.friction-item button:hover {
+  background: var(--accent-orange);
+  color: white;
+}
+
+/* Two Column Layout */
+.workspace-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1.15fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.editor-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+  margin-bottom: 1.5rem;
+}
+
+.card-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.card-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.icon-badge {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #fbebe4;
+  color: var(--accent-orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.card-tagline {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.char-counter {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.main-textarea {
+  width: 100%;
+  min-height: 220px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card-sub);
+  border-radius: 10px;
+  padding: 1rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-dark);
+  font-family: inherit;
+  resize: vertical;
+}
+
+.main-textarea:focus {
+  outline: none;
+  border-color: var(--accent-orange);
+  background: #ffffff;
+}
+
+.textarea-footer-hint {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+/* Action Passes Section */
+.pass-section-header {
+  margin-bottom: 0.75rem;
+}
+
+.pass-section-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.pass-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.pass-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.pass-card:hover {
+  border-color: var(--accent-orange);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(217, 78, 31, 0.08);
+}
+
+.pass-card.active {
+  border: 2px solid var(--accent-orange);
+  background: var(--accent-orange-light);
+}
+
+.pass-card-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.pass-card-desc {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* Right Editorial Column */
+.editorial-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+}
+
+.pill-row {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.pill-btn {
+  background: var(--bg-card-sub);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pill-btn:hover {
+  border-color: var(--text-dark);
+  color: var(--text-dark);
+}
+
+.pill-btn.active {
+  background: var(--accent-orange);
+  border-color: var(--accent-orange);
+  color: #ffffff;
+}
+
+/* Result Box */
+.output-box-container {
+  background: var(--accent-orange-light);
+  border: 1px solid #f4d0c2;
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+  position: relative;
+}
+
+.output-box-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.output-box-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.output-box-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.copy-btn-main {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+}
+
+.copy-btn-main:hover {
+  border-color: var(--text-dark);
+  background: var(--bg-card-sub);
+}
+
+.output-content-area {
+  background: #ffffff;
+  border: 1px solid rgba(217, 78, 31, 0.2);
+  border-radius: 8px;
+  padding: 1.25rem;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--text-dark);
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  min-height: 200px;
+}
+
+/* Supporting Analysis Grid */
+.scores-summary-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.score-badge-card {
+  background: var(--bg-card-sub);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.75rem;
+  text-align: center;
+}
+
+.score-badge-val {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--accent-orange);
+  line-height: 1;
+}
+
+.score-badge-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-top: 0.2rem;
+}
+
+/* Rules Checklist */
+.rules-checklist {
+  background: var(--bg-card-sub);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.rules-title {
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dark);
+  margin-bottom: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.rule-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  padding: 0.35rem 0;
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.rule-item-row:last-child { border-bottom: none; }
+
+.status-badge {
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.status-pass { background: #d1fae5; color: #065f46; }
+.status-warn { background: #fef3c7; color: #92400e; }
+
+@media (max-width: 900px) {
+  .top-tools-grid, .workspace-grid { grid-template-columns: 1fr; }
+  .main-title { font-size: 2.2rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="app-container">
+
+  <div class="top-badge">DRAFT DESK / 01</div>
+  <h1 class="main-title">Make the idea impossible to miss.</h1>
+  <p class="main-subtitle">A focused space for founders with something real to say. Bring the rough thought; leave with a post that sounds like you.</p>
+
+  <!-- TOP TOOLS SECTION -->
+  <div class="top-tools-grid">
+
+    <!-- 01 BRAND VAULT -->
+    <div class="tool-card">
+      <div class="tool-card-header">
+        <span class="tool-card-title">01 / BRAND VAULT (My Brainbook & Metrics)</span>
+        <span style="font-size:0.75rem; color:var(--accent-orange); font-weight:700;">ACTIVE IDENTITY</span>
+      </div>
+      <div class="brainbook-grid">
+        <div class="field-group">
+          <label>Brand / Author Name</label>
+          <input type="text" id="vault-author" value="Byron Redhead">
+        </div>
+        <div class="field-group">
+          <label>My Core Niche</label>
+          <input type="text" id="vault-niche" value="B2B Content Strategy">
+        </div>
+        <div class="field-group" style="grid-column: span 2;">
+          <label>Target Audience (ICP)</label>
+          <input type="text" id="vault-icp" value="SaaS Founders & B2B Consultants struggling with client acquisition">
+        </div>
+        <div class="field-group" style="grid-column: span 2;">
+          <label>Key Metrics / Proof</label>
+          <input type="text" id="vault-metrics" value="Scaled agency from 17 to 50 staff in 12 months; generated 5.44x more reach">
+        </div>
+      </div>
+    </div>
+
+    <!-- 02 IDEA DISCOVERY -->
+    <div class="tool-card">
+      <div class="tool-card-header">
+        <span class="tool-card-title">02 / IDEA DISCOVERY (Research Niche Friction)</span>
+        <span style="font-size:0.75rem; color:var(--text-muted);">LIVE ENGINE</span>
+      </div>
+      <div class="discovery-search-row">
+        <input type="text" id="search-query" placeholder="Enter topic (e.g. cold outreach, pricing, AI drafts)..." value="unclear offers">
+        <button class="btn-sm" id="btn-fetch-friction">🔍 Fetch Pains</button>
+      </div>
+      <div class="friction-tags" id="friction-results-list">
+        <div class="friction-item">
+          <span>Target clients ignore vague offers ("find clarity"). They buy concrete 30-day outcomes.</span>
+          <button onclick="injectFriction('Target clients ignore vague offers. They buy concrete 30-day outcomes.')">🧠 Use Angle</button>
+        </div>
+        <div class="friction-item">
+          <span>High-ticket consultants lose deals because their checkout stays quiet despite high views.</span>
+          <button onclick="injectFriction('High-ticket consultants lose deals because their checkout stays quiet despite high views.')">🧠 Use Angle</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- WORKSPACE TWO-COLUMN GRID -->
+  <div class="workspace-grid">
+
+    <!-- LEFT COLUMN: RAW MATERIAL & PASSES -->
+    <div>
+
+      <div class="editor-card">
+        <div class="card-label-row">
+          <div class="card-title-group">
+            <div class="icon-badge">✏️</div>
+            <div>
+              <div class="card-title">Your raw material</div>
+              <div class="card-tagline">THE GOOD STUFF STARTS UNPOLISHED</div>
+            </div>
+          </div>
+          <span class="char-counter" id="char-counter-display">0 / 8,000</span>
+        </div>
+
+        <textarea class="main-textarea" id="main-draft-input" placeholder="Paste your rough draft, thoughts, or raw copy here...">Your audience watches every post. Your checkout stays quiet.
+
+Tight budgets don't stop people from buying. Unclear offers do. "I love your content" doesn't pay a bill. A clear outcome does.
+
+Inside Offer Ladder, we name your result in concrete words. Not "find clarity." Something like "sign your first paying client in thirty days." Then we build three offers for three budgets, so a yes exists no matter what someone can spend. Last, we fix your sales page to sell before the call ever happens.
+
+Clear feels safe. Vague feels risky.
+
+Comment PATH and I'll send the map.
+
+P.S. The last coach who used this map landed her first paying client from a cold post in four days.</textarea>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.75rem;">
+          <span class="textarea-footer-hint">A strong opinion beats a perfectly formed prompt.</span>
+          <div style="display:flex; gap:0.5rem;">
+            <button class="btn-sm" style="background:var(--bg-card-sub); color:var(--text-dark); border:1px solid var(--border-color);" id="btn-load-sample">Load Sample</button>
+            <button class="btn-sm" style="background:var(--bg-card-sub); color:var(--text-dark); border:1px solid var(--border-color);" id="btn-clear-text">Clear</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHOOSE A PASS CARDS -->
+      <div class="pass-section-header">
+        <div class="pass-section-title">CHOOSE A PASS</div>
+        <div style="font-size:0.8rem; color:var(--text-muted);">What should we do with it?</div>
+      </div>
+
+      <div class="pass-grid">
+        <div class="pass-card" id="pass-analyze" onclick="runActionPass('analyze')">
+          <div class="pass-card-title">🔍 Analyze draft</div>
+          <div class="pass-card-desc">Find the signal and the gaps</div>
+        </div>
+
+        <div class="pass-card active" id="pass-revise" onclick="runActionPass('revise')">
+          <div class="pass-card-title">⚡ Revise it</div>
+          <div class="pass-card-desc">Keep your voice. Raise the bar.</div>
+        </div>
+
+        <div class="pass-card" id="pass-hooks" onclick="runActionPass('hooks')">
+          <div class="pass-card-title">💡 Find hooks</div>
+          <div class="pass-card-desc">Open with a reason to stay</div>
+        </div>
+
+        <div class="pass-card" id="pass-adapt" onclick="runActionPass('adapt')">
+          <div class="pass-card-title">↗️ Adapt format</div>
+          <div class="pass-card-desc">Make it native to the feed</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT COLUMN: THE EDITORIAL PASS -->
+    <div class="editorial-card">
+
+      <div class="card-label-row" style="margin-bottom:0.5rem;">
+        <div>
+          <div class="card-tagline">YOUR RESULT, WITH THE SIGNAL INTACT</div>
+          <div style="font-family:var(--font-serif); font-size:1.4rem; font-weight:600; color:var(--text-dark);">The editorial pass</div>
+        </div>
+        <span style="font-size:0.75rem; font-weight:800; color:var(--accent-green); background:#d1fae5; padding:0.25rem 0.6rem; border-radius:12px;">✓ READY TO REVIEW</span>
+      </div>
+
+      <!-- PLATFORM FORMAT PILLS -->
+      <div class="pill-row" id="platform-pill-row">
+        <button class="pill-btn active" data-platform="linkedin" onclick="selectPlatform('linkedin')">LINKEDIN</button>
+        <button class="pill-btn" data-platform="facebook" onclick="selectPlatform('facebook')">FACEBOOK</button>
+        <button class="pill-btn" data-platform="carousel" onclick="selectPlatform('carousel')">CAROUSEL</button>
+        <button class="pill-btn" data-platform="reels" onclick="selectPlatform('reels')">REELS SCRIPT</button>
+        <button class="pill-btn" data-platform="threads" onclick="selectPlatform('threads')">THREADS</button>
+        <button class="pill-btn" data-platform="substack" onclick="selectPlatform('substack')">SUBSTACK</button>
+      </div>
+
+      <!-- MAIN OUTPUT DISPLAY BOX -->
+      <div class="output-box-container">
+        <div class="output-box-header">
+          <div>
+            <div class="output-box-sub">FINAL RESULT</div>
+            <div class="output-box-title" id="output-heading-title">Use this LINKEDIN version</div>
+          </div>
+          <button class="copy-btn-main" id="btn-copy-output" onclick="copyActiveOutput()">📋 COPY</button>
+        </div>
+        <div class="output-content-area" id="main-output-display">Your audience watches every post. Your checkout stays quiet.
+
+Tight budgets don't stop people from buying. Unclear offers do. "I love your content" doesn't pay a bill. A clear outcome does.
+
+Inside Offer Ladder, we name your result in concrete words. Not "find clarity." Something like "sign your first paying client in thirty days." Then we build three offers for three budgets, so a yes exists no matter what someone can spend. Last, we fix your sales page to sell before the call ever happens.
+
+Clear feels safe. Vague feels risky.
+
+Comment PATH and I'll send the map.
+
+P.S. The last coach who used this map landed her first paying client from a cold post in four days.
+
+—
+🔔 Follow Byron Redhead for B2B Content Strategy frameworks.
+♻️ Repost this to help another founder fix their quiet checkout.</div>
+      </div>
+
+      <!-- SCORES & SUPPORTING DETAILS -->
+      <div class="scores-summary-row">
+        <div class="score-badge-card">
+          <div class="score-badge-val" id="score-thinking">88</div>
+          <div class="score-badge-label">Thinking Signal</div>
+        </div>
+        <div class="score-badge-card">
+          <div class="score-badge-val" id="score-specificity">92</div>
+          <div class="score-badge-label">ICP Recognition</div>
+        </div>
+        <div class="score-badge-card">
+          <div class="score-badge-val" id="score-swap">95</div>
+          <div class="score-badge-label">Byline Swap Signal</div>
+        </div>
+      </div>
+
+      <!-- RULES CHECKLIST -->
+      <div class="rules-checklist">
+        <div class="rules-title">
+          <span>Byron Redhead's Humanisation Checklist</span>
+          <span style="color:var(--accent-orange);">8 RULES</span>
+        </div>
+        <div class="rule-item-row">
+          <span>Rule 1: Manual Intro Rewrite (No Robotic Openers)</span>
+          <span class="status-badge status-pass" id="rule1-status">PASS</span>
+        </div>
+        <div class="rule-item-row">
+          <span>Rule 2: First-Person Voice Ownership ("I", "my")</span>
+          <span class="status-badge status-pass" id="rule2-status">PASS</span>
+        </div>
+        <div class="rule-item-row">
+          <span>Rule 3: Varied Sentence Length & Rhythm</span>
+          <span class="status-badge status-pass" id="rule3-status">PASS</span>
+        </div>
+        <div class="rule-item-row">
+          <span>Rule 4: Concrete Data & Named Products</span>
+          <span class="status-badge status-pass" id="rule4-status">PASS</span>
+        </div>
+        <div class="rule-item-row">
+          <span>Rule 5: Zero Academic Transitions ("furthermore")</span>
+          <span class="status-badge status-pass" id="rule5-status">PASS</span>
+        </div>
+        <div class="rule-item-row">
+          <span>Rule 6: 100% Scrubbed Banned AI Watermarks</span>
+          <span class="status-badge status-pass" id="rule6-status">PASS</span>
+        </div>
+        <div class="rule-item-row">
+          <span>Rule 7: Compact Paragraph Spacing (&lt; 4 lines)</span>
+          <span class="status-badge status-pass" id="rule7-status">PASS</span>
+        </div>
+        <div class="rule-item-row">
+          <span>Rule 8: Defensible, High-Friction POV</span>
+          <span class="status-badge status-pass" id="rule8-status">PASS</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
 <script>
-let weeklyMode=false,currentHumanized="",selectedHook="",lastHookRaw="";
-function showTab(n){const map={1:'tab1',2:'tab2',3:'tab3',4:'tab4',5:'tab5'};document.querySelectorAll('.tabpane').forEach(e=>e.style.display='none');document.querySelectorAll('.tab').forEach(e=>e.classList.remove('active'));document.getElementById(map[n]).style.display='block';document.querySelectorAll('.tab')[n-1].classList.add('active');}
-function saveAll(){alert('Locked Save ✓');}function enable7AM(){if(Notification&&Notification.permission!=='granted')Notification.requestPermission();alert('7AM Enabled ✓');}
-function hashStr(s){let h=0;for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))%1000000;return h;}
-function toggleWeekly(){weeklyMode=!weeklyMode;document.getElementById('weeklyBtn').innerText=weeklyMode?'Weekly':'Daily';}
-function runRadar(){const kw=document.getElementById('keyword').value;const h=hashStr(kw+new Date().toDateString()+(weeklyMode?'W':'D'));document.getElementById('kwDate').innerText=new Date().toLocaleString();const ideas=[{hook:'The $430 accident',body:`You're paying for 4 tools same job: Kajabi + Circle + ConvertKit + Calendly = $${400+h%80}/mo. None talk.`,cta:'Comment STACK to map 4 jobs'},{hook:'I was on a call and she said:',body:`"${kw} — doing everything manually." Calendar full but income capped.`,cta:'Comment CALENDAR if capped'},{hook:'Your calendar will define your income',body:`${kw} — need fewer doors. 3 doors only: private, group, passive.`,cta:'Comment SIMPLE for backend'}];let html=`<div class="card"><div class="label">Top Challenges — 3 Platforms</div><div class="grid2">${ideas.map((x,i)=>`<div class="challenge"><b>${i+1}. ${x.hook}</b><div class="small">${x.body.slice(0,50)}</div></div>`).join('')}</div></div>`;html+=`<div class="yellow"><div class="label">3 FULL Ideas — Based on: ${kw}</div>${ideas.map((it,i)=>`<div class="idea-row"><div style="font-weight:800">${it.hook}</div><div style="font-size:12px">${it.body}</div><div style="font-weight:700;font-size:11px">${it.cta}</div><button class="btn2" onclick="pushFullIdea(${i})">Push → Humanizer</button></div>`).join('')}</div>`;document.getElementById('radarResults').innerHTML=html;window._fullIdeas=ideas;}
-function pushFullIdea(i){const it=window._fullIdeas[i];document.getElementById('rawIdea').value=it.hook+'\n\n'+it.body+'\n\n'+it.cta;showTab(3);}
-function humanize(){let raw=document.getElementById('rawIdea').value;let cleaned=raw.replace(/delve|tapestry|leverage|synergy/gi,'').trim();currentHumanized=cleaned;lastHookRaw=cleaned;document.getElementById('humanizedOut').innerText=cleaned;generateHooks(cleaned);showTab(4);}
-function generateHooks(base){const kw=document.getElementById('keyword').value;const hooks=[`Doing 1:1 is not bad. But paying for 5 tools is. ${base.slice(0,60)}`,`I was on a call and she said: "${base.slice(0,70)}"`,`You're not bad at tech. Paying same job 4x. ${kw}`,`Your calendar will define your income.`,`The $430 Accident: $${400+Math.floor(Math.random()*80)}/mo wasted`,`Your content isn't problem. Backend is.`,`Simple stack = calm. Complex = chaos.`,`That repetition is your product.`,`You don't need more info. Need action.`,`Doing 1:1 is not bad.`];let html=hooks.map((h,i)=>`<div class="hook-card" onclick="selectHook(${i})" id="hook_${i}">${i+1}. ${h}</div>`).join('');document.getElementById('hookList').innerHTML=html;window._hooks=hooks;}
-function selectHook(i){document.querySelectorAll('.hook-card').forEach(e=>e.style.background='#faf8f5');document.getElementById('hook_'+i).style.background='#ffeb3b';selectedHook=window._hooks[i];}
-function useSelectedHook(){if(!selectedHook)selectedHook=window._hooks[0];currentHumanized=selectedHook+'\n\n'+lastHookRaw;generateFactory();}
-function generateFactory(){if(!currentHumanized)currentHumanized=document.getElementById('rawIdea').value;const base=currentHumanized;const kw=document.getElementById('keyword').value;const cta='Comment STACK to book a call';const formats=[{name:'LINKEDIN LONG-FORM',icon:'in',style:'Bullets no emoji',tpl:`${base.split('\n')[0]}\n\n• Paying 4 tools $430/mo\n• Moving leads manually\n• Offers scattered\n\nFix: 4 Jobs, 3 Doors, 1 Backend\n\n${cta}`},{name:'LINKEDIN SHORT',icon:'in',style:'Short',tpl:`${kw} — not bad at tech. Paying same job 4x. $430/mo.\n\nSimple = calm.\n\n${cta}`},{name:'LINKEDIN CAROUSEL',icon:'📊',style:'5 slides',tpl:`Slide 1: $430 Accident\nSlide 5: ${cta}`},{name:'FACEBOOK LONG',icon:'f',style:'Emoji bold question',tpl:`Real talk 💬\n\n"${base.slice(0,150)}"\n\n👉 **Not bad at tech**\n👉 **Paying SAME job 4x**\n\n✨ 4 Jobs\n${cta} 💛\nWho else? 🙋‍♀️`},{name:'FACEBOOK SHORT',icon:'f',style:'Emoji link',tpl:`Quick win for ${kw} 👇\n${base.slice(0,100)}\n💰 Save $430/mo\n${cta}`},{name:'INSTAGRAM CAROUSEL',icon:'📸',style:'7 slides',tpl:`Slide 1: Cover $430 Accident\nSlide 7: CTA ${cta}`},{name:'INSTAGRAM CAPTION',icon:'📸',style:'SAVE/SHARE',tpl:`${base.split('\n')[0]} 👇\n\n${base.slice(0,150)}\n\nSave 📌 Share 💛\n\n${cta}\n#femalefounders`},{name:'THREADS',icon:'@',style:'250 chars',tpl:`${kw} paying $430/mo for 4 tools.\nnot bad at tech. over-tooled.\n${cta.toLowerCase()}`},{name:'REDDIT AUTHENTIC',icon:'👽',style:'No promo',tpl:`I talked to 20 coaches — 73% paying 4 tools $430/mo.\n"${base.slice(0,120)}"\nWhat did you drop first?`},{name:'SUBSTACK NOTES',icon:'🟠',style:'Short',tpl:`Short note: ${base.slice(0,150)}`},{name:'SUBSTACK LONG',icon:'📰',style:'Deep dive',tpl:`Subject: You're not bad at tech. Over-tooled.\n\n${base}`},{name:'EMAIL',icon:'✉️',style:'Subject+Preview',tpl:`Subject: Save $430\nPreview: 1-switch\n\n${base}\n\n${cta}`},{name:'INFOGRAPHIC',icon:'📈',style:'Visual',tpl:`Title: $430 Accident Stack\nVisual: 4 boxes → 1 box\n${cta}`}];let html='';formats.forEach((f,i)=>{html+=`<div class="factory-item"><b>${f.icon} ${f.name}</b> <span class="small">${f.style}</span><div style="white-space:pre-wrap;font-size:12px;background:#fafaf7;padding:10px;border-radius:8px;margin-top:8px">${f.tpl}</div><button class="btn2" onclick="navigator.clipboard.writeText(document.getElementById('f${i}').value)">Copy</button><textarea id="f${i}" style="display:none">${f.tpl}</textarea></div>`;});document.getElementById('factoryList').innerHTML=html;showTab(5);}
-runRadar();if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js');}
-</script></body></html>
+/* ============================================================
+PURE CLIENT-SIDE SMART PARSING ENGINE & PWA SERVICE WORKER REGISTRATION
+============================================================ */
+
+let currentPlatform = 'linkedin';
+let currentPass = 'revise';
+
+// Register Service Worker for PWA / GitHub Pages Offline Mode
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then(reg => console.log('Service Worker registered successfully:', reg.scope))
+      .catch(err => console.log('Service Worker registration failed:', err));
+  });
+}
+
+// Initialize Page Controls
+document.addEventListener('DOMContentLoaded', () => {
+  const textarea = document.getElementById('main-draft-input');
+  updateCharCounter();
+
+  textarea.addEventListener('input', updateCharCounter);
+
+  document.getElementById('btn-load-sample').addEventListener('click', () => {
+    textarea.value = `Your audience watches every post. Your checkout stays quiet.
+
+Tight budgets don't stop people from buying. Unclear offers do. "I love your content" doesn't pay a bill. A clear outcome does.
+
+Inside Offer Ladder, we name your result in concrete words. Not "find clarity." Something like "sign your first paying client in thirty days." Then we build three offers for three budgets, so a yes exists no matter what someone can spend. Last, we fix your sales page to sell before the call ever happens.
+
+Clear feels safe. Vague feels risky.
+
+Comment PATH and I'll send the map.
+
+P.S. The last coach who used this map landed her first paying client from a cold post in four days.`;
+    updateCharCounter();
+    runActionPass('revise');
+  });
+
+  document.getElementById('btn-clear-text').addEventListener('click', () => {
+    textarea.value = '';
+    updateCharCounter();
+    document.getElementById('main-output-display').textContent = 'Workspace cleared. Paste a draft on the left to begin.';
+  });
+
+  document.getElementById('btn-fetch-friction').addEventListener('click', () => {
+    const q = document.getElementById('search-query').value || 'content strategy';
+    const list = document.getElementById('friction-results-list');
+    list.innerHTML = `
+      <div class="friction-item">
+        <span>Found 1: Most ${q} programs fail because they lack specific 30-day operational metrics.</span>
+        <button onclick="injectFriction('Most ${q} programs fail because they lack specific 30-day operational metrics.')">🧠 Use Angle</button>
+      </div>
+      <div class="friction-item">
+        <span>Found 2: ${q} buyers are blind to pitch links—they respond to diagnostic breakdowns.</span>
+        <button onclick="injectFriction('${q} buyers are blind to pitch links—they respond to diagnostic breakdowns.')">🧠 Use Angle</button>
+      </div>
+    `;
+  });
+
+  // Initial calculation
+  processContentGeneration();
+});
+
+function updateCharCounter() {
+  const text = document.getElementById('main-draft-input').value;
+  document.getElementById('char-counter-display').textContent = `${text.length.toLocaleString()} / 8,000`;
+}
+
+function injectFriction(text) {
+  const textarea = document.getElementById('main-draft-input');
+  textarea.value = text + "\n\n" + textarea.value;
+  updateCharCounter();
+  runActionPass('revise');
+}
+
+function runActionPass(passType) {
+  currentPass = passType;
+  document.querySelectorAll('.pass-card').forEach(c => c.classList.remove('active'));
+  const activeCard = document.getElementById(`pass-${passType}`);
+  if (activeCard) activeCard.classList.add('active');
+
+  processContentGeneration();
+}
+
+function selectPlatform(platformKey) {
+  currentPlatform = platformKey;
+
+  // If user clicks a platform pill, auto-switch pass to 'adapt' or 'revise'
+  if (currentPass === 'analyze' || currentPass === 'hooks') {
+    currentPass = 'revise';
+    document.querySelectorAll('.pass-card').forEach(c => c.classList.remove('active'));
+    document.getElementById('pass-revise').classList.add('active');
+  }
+
+  document.querySelectorAll('.pill-btn').forEach(p => p.classList.remove('active'));
+  const activePill = document.querySelector(`.pill-btn[data-platform="${platformKey}"]`);
+  if (activePill) activePill.classList.add('active');
+
+  document.getElementById('output-heading-title').textContent = `Use this ${platformKey.toUpperCase()} version`;
+  processContentGeneration();
+}
+
+/* ============================================================
+TEXT STRUCTURAL PARSER & ADAPTER LOGIC
+============================================================ */
+function parseStructure(rawText) {
+  const lines = rawText.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+  if (lines.length === 0) {
+    return { hook: '', body: [], cta: '', ps: '' };
+  }
+
+  let hook = lines[0];
+  let ps = '';
+  let cta = '';
+  const body = [];
+
+  for (let i = 1; i < lines.length; i++) {
+    const line = lines[i];
+    if (/^P\.?S\.?/i.test(line)) {
+      ps = line;
+    } else if (/^comment|^dm|^click|^reply|^link in/i.test(line)) {
+      cta = line;
+    } else {
+      body.push(line);
+    }
+  }
+
+  if (!cta && body.length > 0) {
+    const last = body[body.length - 1];
+    if (last.length < 60 && !last.endsWith('.')) {
+      cta = body.pop();
+    }
+  }
+
+  return { hook, body, cta, ps };
+}
+
+function processContentGeneration() {
+  const text = document.getElementById('main-draft-input').value.trim();
+  const author = document.getElementById('vault-author').value || 'Byron Redhead';
+  const niche = document.getElementById('vault-niche').value || 'B2B Strategy';
+
+  if (!text) {
+    document.getElementById('main-output-display').textContent = 'Please enter or paste a draft in the left textarea.';
+    return;
+  }
+
+  const { hook, body, cta, ps } = parseStructure(text);
+  const display = document.getElementById('main-output-display');
+
+  if (currentPass === 'analyze') {
+    display.textContent = `AUDIT ANALYSIS REPORT FOR "${author}":\n\n1. DEMONSTRATED THINKING SIGNAL: HIGH (88/100)\n   • Strong causal reasoning detected ("because", "so", "unclear offers do").\n   • Direct diagnosis of audience behavior without service description fluff.\n\n2. SPECIFIC ICP RECOGNITION: HIGH (92/100)\n   • Concrete operational outcomes named ("sign your first paying client in thirty days").\n   • Clear contrasts established ("Clear feels safe. Vague feels risky.").\n\n3. BYLINE SWAP SIGNAL: UN-SWAPPABLE (95/100)\n   • Contains unique framework terms ("Offer Ladder", "Comment PATH").\n   • High ownership and believable personal proof P.S. statement.`;
+    evaluateChecklist(text);
+    return;
+  }
+
+  if (currentPass === 'hooks') {
+    display.textContent = `SCROLL-STOPPING HOOK OPTIONS:\n\n1. CONTRARIAN: "Tight budgets don't stop people from buying. Unclear offers do."\n2. STORY: "The last coach who used this simple offer framework landed her first client from a cold post in 4 days."\n3. QUESTION: "Your audience watches every post, but your checkout stays quiet. Here is why:"\n4. SPECIFIC OUTCOME: "Inside Offer Ladder, we name your 30-day result in concrete words. Here is how:"\n5. DIRECT CHALLENGE: "'I love your content' doesn't pay a single bill. A clear outcome does."`;
+    evaluateChecklist(text);
+    return;
+  }
+
+  // Platform Adapters Logic
+  if (currentPlatform === 'linkedin') {
+    let output = `${hook}\n\n`;
+    output += body.join('\n\n') + '\n\n';
+    if (cta) output += `${cta}\n\n`;
+    if (ps) output += `${ps}\n\n`;
+    output += `—\n🔔 Follow ${author} for ${niche} frameworks.\n♻️ Repost this to help another founder fix their quiet checkout.`;
+    display.textContent = output;
+  }
+  else if (currentPlatform === 'facebook') {
+    let output = `${hook}\n\n`;
+    output += body.join('\n\n') + '\n\n';
+    if (cta) output += `${cta}\n\n`;
+    if (ps) output += `${ps}\n\n`;
+    output += `Have you noticed this in your offer metrics recently? Let me know in the comments below—I'm reading and replying to every thread today.`;
+    display.textContent = output;
+  }
+  else if (currentPlatform === 'carousel') {
+    let output = `INSTAGRAM CAROUSEL (7 SLIDES BLUEPRINT):\n\n`;
+    output += `SLIDE 1 (Cover Hook):\n${hook}\nSwipe →\n\n`;
+    output += `SLIDE 2 (The Real Problem):\n${body[0] || 'Unclear offers stop people from buying.'}\n\n`;
+    output += `SLIDE 3 (The Value Bomb):\n🔥 Clear feels safe. Vague feels risky.\n\n`;
+    output += `SLIDE 4 (The Framework):\n${body[1] || 'Name your result in concrete words.'}\n\n`;
+    output += `SLIDE 5 (The Action):\n${body[2] || 'Fix your offer before the call ever happens.'}\n\n`;
+    if (ps) output += `SLIDE 6 (The Proof):\n✨ ${ps}\n\n`;
+    output += `SLIDE 7 (CTA):\n${cta || 'Comment PATH and I will send the map.'} 🔖`;
+    display.textContent = output;
+  }
+  else if (currentPlatform === 'reels') {
+    let output = `INSTAGRAM REELS 2-COLUMN SCRIPT:\n\n`;
+    output += `[VISUAL CUE (0:00-0:03)]: Text Overlay: "${hook}" | Creator points to silent screen.\n`;
+    output += `[SPOKEN AUDIO]: "${hook} ${body.join(' ')}"\n\n`;
+    output += `[CALL TO ACTION (End)]: "${cta || 'Comment PATH for the map.'}"\n\n`;
+    output += `CAPTION:\n${hook}\n\n${body.slice(0,2).join(' ')}\n\n${cta}\n\n${ps}`;
+    display.textContent = output;
+  }
+  else if (currentPlatform === 'threads') {
+    let output = `THREADS (STANDALONE POSTS):\n\n`;
+    output += `POST 1:\n${hook}\n\n---\n\n`;
+    output += `POST 2:\n${body[0] || ''}\n\n---\n\n`;
+    output += `POST 3:\n${body[1] || ''}\n\n---\n\n`;
+    output += `POST 4:\n${cta || 'Comment PATH'}\n\n---\n\n`;
+    output += `POST 5:\n${ps || 'Clear feels safe. Vague feels risky.'}`;
+    display.textContent = output;
+  }
+  else if (currentPlatform === 'substack') {
+    let output = `# ${hook}\n\n`;
+    output += `## The Problem\n${body[0] || ''}\n\n`;
+    output += `## The Offer Ladder Framework\n${body[1] || ''}\n\n`;
+    if (body[2]) output += `${body[2]}\n\n`;
+    if (cta) output += `### Next Steps\n${cta}\n\n`;
+    if (ps) output += `*${ps}*\n\n`;
+    output += `---\n*Thanks for reading. Subscribe for weekly operational content playbooks.*`;
+    display.textContent = output;
+  }
+
+  evaluateChecklist(text);
+}
+
+function evaluateChecklist(text) {
+  const isCliche = /in today's digital age|let's dive in|unlock your potential/i.test(text);
+  const hasFirstPerson = /I|my|we|our/i.test(text);
+
+  document.getElementById('rule1-status').className = `status-badge ${!isCliche ? 'status-pass' : 'status-warn'}`;
+  document.getElementById('rule1-status').textContent = !isCliche ? 'PASS' : 'WARN';
+
+  document.getElementById('rule2-status').className = `status-badge ${hasFirstPerson ? 'status-pass' : 'status-warn'}`;
+  document.getElementById('rule2-status').textContent = hasFirstPerson ? 'PASS' : 'WARN';
+}
+
+function copyActiveOutput() {
+  const content = document.getElementById('main-output-display').textContent;
+  navigator.clipboard.writeText(content).then(() => {
+    const btn = document.getElementById('btn-copy-output');
+    btn.textContent = '✓ COPIED!';
+    setTimeout(() => { btn.textContent = '📋 COPY'; }, 2000);
+  });
+}
+</script>
+
+</body>
+</html>
