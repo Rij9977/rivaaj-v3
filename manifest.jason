@@ -1,7 +1,7 @@
 {
-  "name": "Draft Desk \u2014 The Swap Test Content Engine",
+  "name": "Draft Desk — The Swap Test Content Engine",
   "short_name": "Draft Desk",
-  "description": "A focused space for founders with something real to say. 11 factory output formats with multi-platform radar.",
+  "description": "A focused space for founders with something real to say. Bring the rough thought; leave with a post that sounds like you.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#fafafa",
