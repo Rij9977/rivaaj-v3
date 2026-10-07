@@ -1,24 +1,21 @@
 {
-  "name": "Draft Desk \u2014 The Swap Test Content Engine",
-  "short_name": "Draft Desk",
-  "description": "A focused space for founders with something real to say. Bring the rough thought; leave with a post that sounds like you.",
+  "name": "The Swap Test — Content Audit Engine",
+  "short_name": "Swap Test",
+  "description": "Heuristic analysis for AI-generic indicators in draft content",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#f4efe6",
-  "theme_color": "#d94e1f",
-  "orientation": "any",
+  "background_color": "#f4f1ea",
+  "theme_color": "#1f1c14",
   "icons": [
     {
-      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='100' fill='%23d94e1f'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='bold' font-size='280' fill='white'>D</text></svg>",
+      "src": "icon-192.png",
       "sizes": "192x192",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "type": "image/png"
     },
     {
-      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='100' fill='%23d94e1f'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='bold' font-size='280' fill='white'>D</text></svg>",
+      "src": "icon-512.png",
       "sizes": "512x512",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "type": "image/png"
     }
   ]
-
+}
