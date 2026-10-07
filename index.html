@@ -1,1019 +1,233 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Draft Desk — The Swap Test Content Engine</title>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#d94e1f">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="description" content="A focused space for founders with something real to say. Bring the rough thought; leave with a post that sounds like you.">
-<style>
-:root {
-  --bg-main: #f4efe6;
-  --bg-card: #ffffff;
-  --bg-card-sub: #fbf9f4;
-  --border-color: #e2dacd;
-  --border-dark: #222222;
-  --text-dark: #111111;
-  --text-muted: #666055;
-  --accent-orange: #d94e1f;
-  --accent-orange-light: #fbebe4;
-  --accent-green: #10b981;
-  --accent-purple: #8b5cf6;
-  --font-serif: "Georgia", "Times New Roman", serif;
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-mono: "SF Mono", "Courier New", monospace;
-}
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  background-color: var(--bg-main);
-  color: var(--text-dark);
-  font-family: var(--font-sans);
-  line-height: 1.5;
-  padding: 2rem 1.5rem;
-  min-height: 100vh;
-}
-
-.app-container {
-  max-width: 1280px;
-  margin: 0 auto;
-}
-
-/* Header */
-.top-badge {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--accent-orange);
-  margin-bottom: 0.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-.top-badge::before {
-  content: "•";
-  font-size: 1.2rem;
-}
-
-.main-title {
-  font-family: var(--font-serif);
-  font-size: 3.2rem;
-  font-weight: 400;
-  line-height: 1.1;
-  color: var(--text-dark);
-  margin-bottom: 0.75rem;
-  letter-spacing: -0.02em;
-}
-
-.main-subtitle {
-  color: var(--text-muted);
-  font-size: 1.05rem;
-  max-width: 650px;
-  margin-bottom: 2rem;
-  line-height: 1.6;
-}
-
-/* Top Section: Brainbook & Discovery */
-.top-tools-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.25rem;
-  margin-bottom: 1.5rem;
-}
-
-.tool-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 1.25rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-}
-
-.tool-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.75rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.tool-card-title {
-  font-size: 0.8rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--accent-orange);
-}
-
-.brainbook-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
-}
-
-.field-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-}
-
-.field-group label {
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--text-muted);
-  text-transform: uppercase;
-}
-
-.field-group input, .field-group textarea {
-  width: 100%;
-  background: var(--bg-card-sub);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  padding: 0.45rem 0.65rem;
-  font-size: 0.85rem;
-  color: var(--text-dark);
-  font-family: inherit;
-}
-
-.field-group input:focus, .field-group textarea:focus {
-  outline: none;
-  border-color: var(--accent-orange);
-}
-
-.discovery-search-row {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 0.75rem;
-}
-
-.discovery-search-row input {
-  flex: 1;
-  background: var(--bg-card-sub);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  padding: 0.45rem 0.65rem;
-  font-size: 0.85rem;
-}
-
-.btn-sm {
-  background: var(--text-dark);
-  color: #ffffff;
-  border: none;
-  border-radius: 6px;
-  padding: 0.45rem 0.85rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-  cursor: pointer;
-  white-space: nowrap;
-}
-.btn-sm:hover { opacity: 0.9; }
-
-.friction-tags {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  max-height: 110px;
-  overflow-y: auto;
-}
-
-.friction-item {
-  background: var(--bg-card-sub);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  padding: 0.4rem 0.6rem;
-  font-size: 0.78rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.friction-item span { color: var(--text-dark); }
-.friction-item button {
-  background: transparent;
-  border: 1px solid var(--accent-orange);
-  color: var(--accent-orange);
-  border-radius: 4px;
-  padding: 0.15rem 0.4rem;
-  font-size: 0.7rem;
-  font-weight: 700;
-  cursor: pointer;
-}
-.friction-item button:hover {
-  background: var(--accent-orange);
-  color: white;
-}
-
-/* Two Column Layout */
-.workspace-grid {
-  display: grid;
-  grid-template-columns: 1.05fr 1.15fr;
-  gap: 1.5rem;
-  align-items: start;
-}
-
-.editor-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-  margin-bottom: 1.5rem;
-}
-
-.card-label-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.75rem;
-}
-
-.card-title-group {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.icon-badge {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: #fbebe4;
-  color: var(--accent-orange);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;
-  font-weight: 700;
-}
-
-.card-title {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--text-dark);
-}
-
-.card-tagline {
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--text-muted);
-}
-
-.char-counter {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  color: var(--text-muted);
-}
-
-.main-textarea {
-  width: 100%;
-  min-height: 220px;
-  border: 1px solid var(--border-color);
-  background: var(--bg-card-sub);
-  border-radius: 10px;
-  padding: 1rem;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: var(--text-dark);
-  font-family: inherit;
-  resize: vertical;
-}
-
-.main-textarea:focus {
-  outline: none;
-  border-color: var(--accent-orange);
-  background: #ffffff;
-}
-
-.textarea-footer-hint {
-  font-size: 0.78rem;
-  color: var(--text-muted);
-  margin-top: 0.5rem;
-  font-style: italic;
-}
-
-/* Action Passes Section */
-.pass-section-header {
-  margin-bottom: 0.75rem;
-}
-
-.pass-section-title {
-  font-size: 0.95rem;
-  font-weight: 700;
-}
-
-.pass-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
-}
-
-.pass-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 1rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-}
-
-.pass-card:hover {
-  border-color: var(--accent-orange);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(217, 78, 31, 0.08);
-}
-
-.pass-card.active {
-  border: 2px solid var(--accent-orange);
-  background: var(--accent-orange-light);
-}
-
-.pass-card-title {
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--text-dark);
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-.pass-card-desc {
-  font-size: 0.78rem;
-  color: var(--text-muted);
-}
-
-/* Right Editorial Column */
-.editorial-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-}
-
-.pill-row {
-  display: flex;
-  gap: 0.4rem;
-  flex-wrap: wrap;
-  margin-bottom: 1rem;
-}
-
-.pill-btn {
-  background: var(--bg-card-sub);
-  border: 1px solid var(--border-color);
-  border-radius: 20px;
-  padding: 0.35rem 0.85rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--text-muted);
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.pill-btn:hover {
-  border-color: var(--text-dark);
-  color: var(--text-dark);
-}
-
-.pill-btn.active {
-  background: var(--accent-orange);
-  border-color: var(--accent-orange);
-  color: #ffffff;
-}
-
-/* Result Box */
-.output-box-container {
-  background: var(--accent-orange-light);
-  border: 1px solid #f4d0c2;
-  border-radius: 12px;
-  padding: 1.25rem;
-  margin-bottom: 1.25rem;
-  position: relative;
-}
-
-.output-box-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 0.75rem;
-}
-
-.output-box-title {
-  font-family: var(--font-serif);
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--text-dark);
-}
-
-.output-box-sub {
-  font-size: 0.78rem;
-  color: var(--text-muted);
-}
-
-.copy-btn-main {
-  background: #ffffff;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 0.4rem 0.85rem;
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--text-dark);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.04);
-}
-
-.copy-btn-main:hover {
-  border-color: var(--text-dark);
-  background: var(--bg-card-sub);
-}
-
-.output-content-area {
-  background: #ffffff;
-  border: 1px solid rgba(217, 78, 31, 0.2);
-  border-radius: 8px;
-  padding: 1.25rem;
-  font-size: 0.92rem;
-  line-height: 1.7;
-  color: var(--text-dark);
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  min-height: 200px;
-}
-
-/* Supporting Analysis Grid */
-.scores-summary-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.75rem;
-  margin-bottom: 1.25rem;
-}
-
-.score-badge-card {
-  background: var(--bg-card-sub);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 0.75rem;
-  text-align: center;
-}
-
-.score-badge-val {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--accent-orange);
-  line-height: 1;
-}
-
-.score-badge-label {
-  font-size: 0.7rem;
-  font-weight: 700;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  margin-top: 0.2rem;
-}
-
-/* Rules Checklist */
-.rules-checklist {
-  background: var(--bg-card-sub);
-  border: 1px solid var(--border-color);
-  border-radius: 10px;
-  padding: 1rem;
-}
-
-.rules-title {
-  font-size: 0.8rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--text-dark);
-  margin-bottom: 0.75rem;
-  display: flex;
-  justify-content: space-between;
-}
-
-.rule-item-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.82rem;
-  padding: 0.35rem 0;
-  border-bottom: 1px dashed var(--border-color);
-}
-
-.rule-item-row:last-child { border-bottom: none; }
-
-.status-badge {
-  font-size: 0.68rem;
-  font-weight: 800;
-  padding: 0.15rem 0.45rem;
-  border-radius: 4px;
-  text-transform: uppercase;
-}
-
-.status-pass { background: #d1fae5; color: #065f46; }
-.status-warn { background: #fef3c7; color: #92400e; }
-
-@media (max-width: 900px) {
-  .top-tools-grid, .workspace-grid { grid-template-columns: 1fr; }
-  .main-title { font-size: 2.2rem; }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Swap Test — Content Audit Engine</title>
+  <meta name="description" content="Heuristic analysis and AI-generic content audit engine for draft content.">
+  <meta name="theme-color" content="#1f1c14">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <a href="#draft-input" class="skip-link">Skip to main content</a>
 
-<div class="app-container">
-
-  <div class="top-badge">DRAFT DESK / 01</div>
-  <h1 class="main-title">Make the idea impossible to miss.</h1>
-  <p class="main-subtitle">A focused space for founders with something real to say. Bring the rough thought; leave with a post that sounds like you.</p>
-
-  <!-- TOP TOOLS SECTION -->
-  <div class="top-tools-grid">
-
-    <!-- 01 BRAND VAULT -->
-    <div class="tool-card">
-      <div class="tool-card-header">
-        <span class="tool-card-title">01 / BRAND VAULT (My Brainbook & Metrics)</span>
-        <span style="font-size:0.75rem; color:var(--accent-orange); font-weight:700;">ACTIVE IDENTITY</span>
-      </div>
-      <div class="brainbook-grid">
-        <div class="field-group">
-          <label>Brand / Author Name</label>
-          <input type="text" id="vault-author" value="Byron Redhead">
-        </div>
-        <div class="field-group">
-          <label>My Core Niche</label>
-          <input type="text" id="vault-niche" value="B2B Content Strategy">
-        </div>
-        <div class="field-group" style="grid-column: span 2;">
-          <label>Target Audience (ICP)</label>
-          <input type="text" id="vault-icp" value="SaaS Founders & B2B Consultants struggling with client acquisition">
-        </div>
-        <div class="field-group" style="grid-column: span 2;">
-          <label>Key Metrics / Proof</label>
-          <input type="text" id="vault-metrics" value="Scaled agency from 17 to 50 staff in 12 months; generated 5.44x more reach">
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <svg class="brand-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/>
+        </svg>
+        <div class="brand-text">
+          <span class="brand-name">The Swap Test</span>
+          <span class="brand-sub">Content Audit Engine</span>
         </div>
       </div>
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch theme">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
     </div>
+  </header>
 
-    <!-- 02 IDEA DISCOVERY -->
-    <div class="tool-card">
-      <div class="tool-card-header">
-        <span class="tool-card-title">02 / IDEA DISCOVERY (Research Niche Friction)</span>
-        <span style="font-size:0.75rem; color:var(--text-muted);">LIVE ENGINE</span>
-      </div>
-      <div class="discovery-search-row">
-        <input type="text" id="search-query" placeholder="Enter topic (e.g. cold outreach, pricing, AI drafts)..." value="unclear offers">
-        <button class="btn-sm" id="btn-fetch-friction">🔍 Fetch Pains</button>
-      </div>
-      <div class="friction-tags" id="friction-results-list">
-        <div class="friction-item">
-          <span>Target clients ignore vague offers ("find clarity"). They buy concrete 30-day outcomes.</span>
-          <button onclick="injectFriction('Target clients ignore vague offers. They buy concrete 30-day outcomes.')">🧠 Use Angle</button>
+  <!-- Main Content -->
+  <main class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1>The Swap Test</h1>
+      <p class="hero-lede">
+        Evaluate your draft content for AI-generic language, safe hedging, and swappable messaging before publishing.
+      </p>
+    </section>
+
+    <!-- Input Section -->
+    <section class="input-section">
+      <div class="input-panel">
+        <label for="draft-input" class="input-label">Draft Post</label>
+        <textarea id="draft-input" class="draft-input" placeholder="Paste your draft post here to run the audit..."></textarea>
+        <div class="input-meta">
+          <span id="char-count" class="char-count">0 characters</span>
+          <div class="input-actions">
+            <button id="sample-btn" type="button" class="btn btn-ghost">Load Sample</button>
+            <button id="clear-btn" type="button" class="btn btn-ghost">Clear</button>
+            <button id="run-btn" type="button" class="btn btn-primary">Run Swap Test</button>
+          </div>
         </div>
-        <div class="friction-item">
-          <span>High-ticket consultants lose deals because their checkout stays quiet despite high views.</span>
-          <button onclick="injectFriction('High-ticket consultants lose deals because their checkout stays quiet despite high views.')">🧠 Use Angle</button>
+      </div>
+    </section>
+
+    <!-- Results Section -->
+    <section id="results" class="results-section" hidden>
+      <!-- Overall Verdict Card -->
+      <div class="verdict-card">
+        <div class="verdict-score">
+          <span id="overall-score" class="score-number">--</span>
+          <span class="score-max">/100</span>
+        </div>
+        <div class="verdict-text">
+          <h2 id="verdict-label">Analysis Complete</h2>
+          <p id="verdict-summary" class="verdict-summary"></p>
         </div>
       </div>
-    </div>
 
-  </div>
+      <!-- Dimensions Grid -->
+      <div class="dimensions-grid">
+        <!-- Thinking Dimension -->
+        <div class="dimension-card">
+          <div class="dimension-header">
+            <span class="dimension-number">01</span>
+            <h3>Demonstrated Thinking</h3>
+            <span class="dimension-vs">vs Service Description</span>
+          </div>
+          <div class="dimension-score-bar">
+            <div class="score-track">
+              <div id="thinking-fill" class="score-fill"></div>
+            </div>
+            <span id="thinking-score" class="dimension-score-value">--</span>
+          </div>
+          <p id="thinking-desc" class="dimension-desc"></p>
+          <div id="thinking-signals" class="dimension-signals"></div>
+        </div>
 
-  <!-- WORKSPACE TWO-COLUMN GRID -->
-  <div class="workspace-grid">
+        <!-- Recognition Dimension -->
+        <div class="dimension-card">
+          <div class="dimension-header">
+            <span class="dimension-number">02</span>
+            <h3>Specific Recognition</h3>
+            <span class="dimension-vs">vs Broad Agreement</span>
+          </div>
+          <div class="dimension-score-bar">
+            <div class="score-track">
+              <div id="recognition-fill" class="score-fill"></div>
+            </div>
+            <span id="recognition-score" class="dimension-score-value">--</span>
+          </div>
+          <p id="recognition-desc" class="dimension-desc"></p>
+          <div id="recognition-signals" class="dimension-signals"></div>
+        </div>
 
-    <!-- LEFT COLUMN: RAW MATERIAL & PASSES -->
-    <div>
+        <!-- Swap Test Dimension -->
+        <div class="dimension-card">
+          <div class="dimension-header">
+            <span class="dimension-number">03</span>
+            <h3>Byline Swap Test</h3>
+            <span class="dimension-vs">Owner vs Swappable Signal</span>
+          </div>
+          <div class="dimension-score-bar">
+            <div class="score-track">
+              <div id="swap-fill" class="score-fill"></div>
+            </div>
+            <span id="swap-score" class="dimension-score-value">--</span>
+          </div>
+          <p id="swap-desc" class="dimension-desc"></p>
+          <div id="swap-signals" class="dimension-signals"></div>
+        </div>
+      </div>
 
-      <div class="editor-card">
-        <div class="card-label-row">
-          <div class="card-title-group">
-            <div class="icon-badge">✏️</div>
-            <div>
-              <div class="card-title">Your raw material</div>
-              <div class="card-tagline">THE GOOD STUFF STARTS UNPOLISHED</div>
+      <!-- Flagged Indicators -->
+      <section id="flags-section" class="flags-section">
+        <h3 class="section-heading">Flagged Indicators</h3>
+        <p class="section-sub">Specific phrases and missing signals that increase swappability</p>
+        <div id="flags-grid" class="flags-grid"></div>
+      </section>
+
+      <!-- Revision Prompts -->
+      <section id="prompts-section" class="prompts-section">
+        <h3 class="section-heading">Revision Prompts</h3>
+        <p class="section-sub">Actionable prompts to inject original thinking and sharpen your position</p>
+        <div id="prompts-list" class="prompts-list"></div>
+      </section>
+
+      <!-- Annotated Draft -->
+      <section id="annotated-section" class="annotated-section">
+        <h3 class="section-heading">Annotated Draft</h3>
+        <p class="section-sub">Hover over highlighted text to see the detected pattern</p>
+        <div id="annotated-draft" class="annotated-draft"></div>
+      </section>
+
+      <!-- AI Revision Engine -->
+      <section class="revise-section">
+        <h3 class="section-heading">AI Revision Engine</h3>
+        <p class="section-sub">Generate an automatic rewrite addressing all flagged issues using your backend API</p>
+        <div class="revise-actions">
+          <button id="revise-btn" type="button" class="btn btn-primary">Generate AI Rewrite</button>
+          <button id="copy-revised-btn" type="button" class="btn btn-ghost" hidden>Copy Text</button>
+        </div>
+        <div id="revise-loading" class="loading-state" hidden>
+          <div class="loading-spinner"></div>
+          <p>Rewriting draft post with AI...</p>
+        </div>
+        <div id="revise-error" class="error-state" hidden></div>
+        <div id="revise-output" class="revise-output" hidden></div>
+      </section>
+
+      <!-- Platform Adaptation Section -->
+      <section id="adapt-section" class="adapt-section" hidden>
+        <h3 class="section-heading">Adapt for Social Platforms</h3>
+        <p class="section-sub">Transform your revised post for specific channels</p>
+        <div id="platform-grid" class="platform-grid"></div>
+        <div id="adapt-loading" class="loading-state" hidden>
+          <div class="loading-spinner"></div>
+          <p id="adapt-loading-text">Adapting content...</p>
+        </div>
+        <div id="adapt-error" class="error-state" hidden></div>
+        <div id="adapt-output" class="adapt-output"></div>
+      </section>
+
+      <!-- Scoring Rubric Reference -->
+      <section class="rubric-reference">
+        <button id="rubric-toggle" type="button" class="rubric-toggle" aria-expanded="false">
+          <h3 class="section-heading">Scoring Rubric Reference</h3>
+          <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9l6 6 6-6"/>
+          </svg>
+        </button>
+        <div id="rubric-content" class="rubric-content" hidden>
+          <div class="rubric-grid">
+            <div class="rubric-block">
+              <h3>Dimension 1: Demonstrated Thinking</h3>
+              <p class="rubric-question">Does the post show original reasoning or just describe services?</p>
+              <div class="rubric-scale">
+                <div class="scale-row">
+                  <span class="scale-label score-strong">70–100: Strong Thinking</span>
+                  <p>Includes causal explanations ("because"), observations, or contrarian stances.</p>
+                </div>
+                <div class="scale-row">
+                  <span class="scale-label score-weak">0–44: Weak Thinking</span>
+                  <p>Dominated by generic promotional language and CTAs.</p>
+                </div>
+              </div>
+            </div>
+            <div class="rubric-block">
+              <h3>Dimension 2: Specific Recognition</h3>
+              <p class="rubric-question">Does the reader feel specifically recognized?</p>
+              <div class="rubric-scale">
+                <div class="scale-row">
+                  <span class="scale-label score-strong">70–100: Specific Detail</span>
+                  <p>Contains numbers, named tools, timeframes, or explicit scenarios.</p>
+                </div>
+                <div class="scale-row">
+                  <span class="scale-label score-weak">0–44: Broad Agreement</span>
+                  <p>Relies on vague generalities like "in today's world."</p>
+                </div>
+              </div>
             </div>
           </div>
-          <span class="char-counter" id="char-counter-display">0 / 8,000</span>
-        </div>
-
-        <textarea class="main-textarea" id="main-draft-input" placeholder="Paste your rough draft, thoughts, or raw copy here...">Your audience watches every post. Your checkout stays quiet.
-
-Tight budgets don't stop people from buying. Unclear offers do. "I love your content" doesn't pay a bill. A clear outcome does.
-
-Inside Offer Ladder, we name your result in concrete words. Not "find clarity." Something like "sign your first paying client in thirty days." Then we build three offers for three budgets, so a yes exists no matter what someone can spend. Last, we fix your sales page to sell before the call ever happens.
-
-Clear feels safe. Vague feels risky.
-
-Comment PATH and I'll send the map.
-
-P.S. The last coach who used this map landed her first paying client from a cold post in four days.</textarea>
-
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.75rem;">
-          <span class="textarea-footer-hint">A strong opinion beats a perfectly formed prompt.</span>
-          <div style="display:flex; gap:0.5rem;">
-            <button class="btn-sm" style="background:var(--bg-card-sub); color:var(--text-dark); border:1px solid var(--border-color);" id="btn-load-sample">Load Sample</button>
-            <button class="btn-sm" style="background:var(--bg-card-sub); color:var(--text-dark); border:1px solid var(--border-color);" id="btn-clear-text">Clear</button>
+          <div class="rubric-note">
+            <p><strong>Note:</strong> Scores are calculated in real time using client-side heuristic rules.</p>
           </div>
         </div>
-      </div>
+      </section>
+    </section>
+  </main>
 
-      <!-- CHOOSE A PASS CARDS -->
-      <div class="pass-section-header">
-        <div class="pass-section-title">CHOOSE A PASS</div>
-        <div style="font-size:0.8rem; color:var(--text-muted);">What should we do with it?</div>
-      </div>
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>The Swap Test — Content Audit Engine &copy; 2026. Built for GitHub PWA deployment.</p>
+  </footer>
 
-      <div class="pass-grid">
-        <div class="pass-card" id="pass-analyze" onclick="runActionPass('analyze')">
-          <div class="pass-card-title">🔍 Analyze draft</div>
-          <div class="pass-card-desc">Find the signal and the gaps</div>
-        </div>
-
-        <div class="pass-card active" id="pass-revise" onclick="runActionPass('revise')">
-          <div class="pass-card-title">⚡ Revise it</div>
-          <div class="pass-card-desc">Keep your voice. Raise the bar.</div>
-        </div>
-
-        <div class="pass-card" id="pass-hooks" onclick="runActionPass('hooks')">
-          <div class="pass-card-title">💡 Find hooks</div>
-          <div class="pass-card-desc">Open with a reason to stay</div>
-        </div>
-
-        <div class="pass-card" id="pass-adapt" onclick="runActionPass('adapt')">
-          <div class="pass-card-title">↗️ Adapt format</div>
-          <div class="pass-card-desc">Make it native to the feed</div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- RIGHT COLUMN: THE EDITORIAL PASS -->
-    <div class="editorial-card">
-
-      <div class="card-label-row" style="margin-bottom:0.5rem;">
-        <div>
-          <div class="card-tagline">YOUR RESULT, WITH THE SIGNAL INTACT</div>
-          <div style="font-family:var(--font-serif); font-size:1.4rem; font-weight:600; color:var(--text-dark);">The editorial pass</div>
-        </div>
-        <span style="font-size:0.75rem; font-weight:800; color:var(--accent-green); background:#d1fae5; padding:0.25rem 0.6rem; border-radius:12px;">✓ READY TO REVIEW</span>
-      </div>
-
-      <!-- PLATFORM FORMAT PILLS -->
-      <div class="pill-row" id="platform-pill-row">
-        <button class="pill-btn active" data-platform="linkedin" onclick="selectPlatform('linkedin')">LINKEDIN</button>
-        <button class="pill-btn" data-platform="facebook" onclick="selectPlatform('facebook')">FACEBOOK</button>
-        <button class="pill-btn" data-platform="carousel" onclick="selectPlatform('carousel')">CAROUSEL</button>
-        <button class="pill-btn" data-platform="reels" onclick="selectPlatform('reels')">REELS SCRIPT</button>
-        <button class="pill-btn" data-platform="threads" onclick="selectPlatform('threads')">THREADS</button>
-        <button class="pill-btn" data-platform="substack" onclick="selectPlatform('substack')">SUBSTACK</button>
-      </div>
-
-      <!-- MAIN OUTPUT DISPLAY BOX -->
-      <div class="output-box-container">
-        <div class="output-box-header">
-          <div>
-            <div class="output-box-sub">FINAL RESULT</div>
-            <div class="output-box-title" id="output-heading-title">Use this LINKEDIN version</div>
-          </div>
-          <button class="copy-btn-main" id="btn-copy-output" onclick="copyActiveOutput()">📋 COPY</button>
-        </div>
-        <div class="output-content-area" id="main-output-display">Your audience watches every post. Your checkout stays quiet.
-
-Tight budgets don't stop people from buying. Unclear offers do. "I love your content" doesn't pay a bill. A clear outcome does.
-
-Inside Offer Ladder, we name your result in concrete words. Not "find clarity." Something like "sign your first paying client in thirty days." Then we build three offers for three budgets, so a yes exists no matter what someone can spend. Last, we fix your sales page to sell before the call ever happens.
-
-Clear feels safe. Vague feels risky.
-
-Comment PATH and I'll send the map.
-
-P.S. The last coach who used this map landed her first paying client from a cold post in four days.
-
-—
-🔔 Follow Byron Redhead for B2B Content Strategy frameworks.
-♻️ Repost this to help another founder fix their quiet checkout.</div>
-      </div>
-
-      <!-- SCORES & SUPPORTING DETAILS -->
-      <div class="scores-summary-row">
-        <div class="score-badge-card">
-          <div class="score-badge-val" id="score-thinking">88</div>
-          <div class="score-badge-label">Thinking Signal</div>
-        </div>
-        <div class="score-badge-card">
-          <div class="score-badge-val" id="score-specificity">92</div>
-          <div class="score-badge-label">ICP Recognition</div>
-        </div>
-        <div class="score-badge-card">
-          <div class="score-badge-val" id="score-swap">95</div>
-          <div class="score-badge-label">Byline Swap Signal</div>
-        </div>
-      </div>
-
-      <!-- RULES CHECKLIST -->
-      <div class="rules-checklist">
-        <div class="rules-title">
-          <span>Byron Redhead's Humanisation Checklist</span>
-          <span style="color:var(--accent-orange);">8 RULES</span>
-        </div>
-        <div class="rule-item-row">
-          <span>Rule 1: Manual Intro Rewrite (No Robotic Openers)</span>
-          <span class="status-badge status-pass" id="rule1-status">PASS</span>
-        </div>
-        <div class="rule-item-row">
-          <span>Rule 2: First-Person Voice Ownership ("I", "my")</span>
-          <span class="status-badge status-pass" id="rule2-status">PASS</span>
-        </div>
-        <div class="rule-item-row">
-          <span>Rule 3: Varied Sentence Length & Rhythm</span>
-          <span class="status-badge status-pass" id="rule3-status">PASS</span>
-        </div>
-        <div class="rule-item-row">
-          <span>Rule 4: Concrete Data & Named Products</span>
-          <span class="status-badge status-pass" id="rule4-status">PASS</span>
-        </div>
-        <div class="rule-item-row">
-          <span>Rule 5: Zero Academic Transitions ("furthermore")</span>
-          <span class="status-badge status-pass" id="rule5-status">PASS</span>
-        </div>
-        <div class="rule-item-row">
-          <span>Rule 6: 100% Scrubbed Banned AI Watermarks</span>
-          <span class="status-badge status-pass" id="rule6-status">PASS</span>
-        </div>
-        <div class="rule-item-row">
-          <span>Rule 7: Compact Paragraph Spacing (&lt; 4 lines)</span>
-          <span class="status-badge status-pass" id="rule7-status">PASS</span>
-        </div>
-        <div class="rule-item-row">
-          <span>Rule 8: Defensible, High-Friction POV</span>
-          <span class="status-badge status-pass" id="rule8-status">PASS</span>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
-
-<script>
-/* ============================================================
-PURE CLIENT-SIDE SMART PARSING ENGINE & PWA SERVICE WORKER REGISTRATION
-============================================================ */
-
-let currentPlatform = 'linkedin';
-let currentPass = 'revise';
-
-// Register Service Worker for PWA / GitHub Pages Offline Mode
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js')
-      .then(reg => console.log('Service Worker registered successfully:', reg.scope))
-      .catch(err => console.log('Service Worker registration failed:', err));
-  });
-}
-
-// Initialize Page Controls
-document.addEventListener('DOMContentLoaded', () => {
-  const textarea = document.getElementById('main-draft-input');
-  updateCharCounter();
-
-  textarea.addEventListener('input', updateCharCounter);
-
-  document.getElementById('btn-load-sample').addEventListener('click', () => {
-    textarea.value = `Your audience watches every post. Your checkout stays quiet.
-
-Tight budgets don't stop people from buying. Unclear offers do. "I love your content" doesn't pay a bill. A clear outcome does.
-
-Inside Offer Ladder, we name your result in concrete words. Not "find clarity." Something like "sign your first paying client in thirty days." Then we build three offers for three budgets, so a yes exists no matter what someone can spend. Last, we fix your sales page to sell before the call ever happens.
-
-Clear feels safe. Vague feels risky.
-
-Comment PATH and I'll send the map.
-
-P.S. The last coach who used this map landed her first paying client from a cold post in four days.`;
-    updateCharCounter();
-    runActionPass('revise');
-  });
-
-  document.getElementById('btn-clear-text').addEventListener('click', () => {
-    textarea.value = '';
-    updateCharCounter();
-    document.getElementById('main-output-display').textContent = 'Workspace cleared. Paste a draft on the left to begin.';
-  });
-
-  document.getElementById('btn-fetch-friction').addEventListener('click', () => {
-    const q = document.getElementById('search-query').value || 'content strategy';
-    const list = document.getElementById('friction-results-list');
-    list.innerHTML = `
-      <div class="friction-item">
-        <span>Found 1: Most ${q} programs fail because they lack specific 30-day operational metrics.</span>
-        <button onclick="injectFriction('Most ${q} programs fail because they lack specific 30-day operational metrics.')">🧠 Use Angle</button>
-      </div>
-      <div class="friction-item">
-        <span>Found 2: ${q} buyers are blind to pitch links—they respond to diagnostic breakdowns.</span>
-        <button onclick="injectFriction('${q} buyers are blind to pitch links—they respond to diagnostic breakdowns.')">🧠 Use Angle</button>
-      </div>
-    `;
-  });
-
-  // Initial calculation
-  processContentGeneration();
-});
-
-function updateCharCounter() {
-  const text = document.getElementById('main-draft-input').value;
-  document.getElementById('char-counter-display').textContent = `${text.length.toLocaleString()} / 8,000`;
-}
-
-function injectFriction(text) {
-  const textarea = document.getElementById('main-draft-input');
-  textarea.value = text + "\n\n" + textarea.value;
-  updateCharCounter();
-  runActionPass('revise');
-}
-
-function runActionPass(passType) {
-  currentPass = passType;
-  document.querySelectorAll('.pass-card').forEach(c => c.classList.remove('active'));
-  const activeCard = document.getElementById(`pass-${passType}`);
-  if (activeCard) activeCard.classList.add('active');
-
-  processContentGeneration();
-}
-
-function selectPlatform(platformKey) {
-  currentPlatform = platformKey;
-
-  // If user clicks a platform pill, auto-switch pass to 'adapt' or 'revise'
-  if (currentPass === 'analyze' || currentPass === 'hooks') {
-    currentPass = 'revise';
-    document.querySelectorAll('.pass-card').forEach(c => c.classList.remove('active'));
-    document.getElementById('pass-revise').classList.add('active');
-  }
-
-  document.querySelectorAll('.pill-btn').forEach(p => p.classList.remove('active'));
-  const activePill = document.querySelector(`.pill-btn[data-platform="${platformKey}"]`);
-  if (activePill) activePill.classList.add('active');
-
-  document.getElementById('output-heading-title').textContent = `Use this ${platformKey.toUpperCase()} version`;
-  processContentGeneration();
-}
-
-/* ============================================================
-TEXT STRUCTURAL PARSER & ADAPTER LOGIC
-============================================================ */
-function parseStructure(rawText) {
-  const lines = rawText.split('\n').map(l => l.trim()).filter(l => l.length > 0);
-  if (lines.length === 0) {
-    return { hook: '', body: [], cta: '', ps: '' };
-  }
-
-  let hook = lines[0];
-  let ps = '';
-  let cta = '';
-  const body = [];
-
-  for (let i = 1; i < lines.length; i++) {
-    const line = lines[i];
-    if (/^P\.?S\.?/i.test(line)) {
-      ps = line;
-    } else if (/^comment|^dm|^click|^reply|^link in/i.test(line)) {
-      cta = line;
-    } else {
-      body.push(line);
-    }
-  }
-
-  if (!cta && body.length > 0) {
-    const last = body[body.length - 1];
-    if (last.length < 60 && !last.endsWith('.')) {
-      cta = body.pop();
-    }
-  }
-
-  return { hook, body, cta, ps };
-}
-
-function processContentGeneration() {
-  const text = document.getElementById('main-draft-input').value.trim();
-  const author = document.getElementById('vault-author').value || 'Byron Redhead';
-  const niche = document.getElementById('vault-niche').value || 'B2B Strategy';
-
-  if (!text) {
-    document.getElementById('main-output-display').textContent = 'Please enter or paste a draft in the left textarea.';
-    return;
-  }
-
-  const { hook, body, cta, ps } = parseStructure(text);
-  const display = document.getElementById('main-output-display');
-
-  if (currentPass === 'analyze') {
-    display.textContent = `AUDIT ANALYSIS REPORT FOR "${author}":\n\n1. DEMONSTRATED THINKING SIGNAL: HIGH (88/100)\n   • Strong causal reasoning detected ("because", "so", "unclear offers do").\n   • Direct diagnosis of audience behavior without service description fluff.\n\n2. SPECIFIC ICP RECOGNITION: HIGH (92/100)\n   • Concrete operational outcomes named ("sign your first paying client in thirty days").\n   • Clear contrasts established ("Clear feels safe. Vague feels risky.").\n\n3. BYLINE SWAP SIGNAL: UN-SWAPPABLE (95/100)\n   • Contains unique framework terms ("Offer Ladder", "Comment PATH").\n   • High ownership and believable personal proof P.S. statement.`;
-    evaluateChecklist(text);
-    return;
-  }
-
-  if (currentPass === 'hooks') {
-    display.textContent = `SCROLL-STOPPING HOOK OPTIONS:\n\n1. CONTRARIAN: "Tight budgets don't stop people from buying. Unclear offers do."\n2. STORY: "The last coach who used this simple offer framework landed her first client from a cold post in 4 days."\n3. QUESTION: "Your audience watches every post, but your checkout stays quiet. Here is why:"\n4. SPECIFIC OUTCOME: "Inside Offer Ladder, we name your 30-day result in concrete words. Here is how:"\n5. DIRECT CHALLENGE: "'I love your content' doesn't pay a single bill. A clear outcome does."`;
-    evaluateChecklist(text);
-    return;
-  }
-
-  // Platform Adapters Logic
-  if (currentPlatform === 'linkedin') {
-    let output = `${hook}\n\n`;
-    output += body.join('\n\n') + '\n\n';
-    if (cta) output += `${cta}\n\n`;
-    if (ps) output += `${ps}\n\n`;
-    output += `—\n🔔 Follow ${author} for ${niche} frameworks.\n♻️ Repost this to help another founder fix their quiet checkout.`;
-    display.textContent = output;
-  }
-  else if (currentPlatform === 'facebook') {
-    let output = `${hook}\n\n`;
-    output += body.join('\n\n') + '\n\n';
-    if (cta) output += `${cta}\n\n`;
-    if (ps) output += `${ps}\n\n`;
-    output += `Have you noticed this in your offer metrics recently? Let me know in the comments below—I'm reading and replying to every thread today.`;
-    display.textContent = output;
-  }
-  else if (currentPlatform === 'carousel') {
-    let output = `INSTAGRAM CAROUSEL (7 SLIDES BLUEPRINT):\n\n`;
-    output += `SLIDE 1 (Cover Hook):\n${hook}\nSwipe →\n\n`;
-    output += `SLIDE 2 (The Real Problem):\n${body[0] || 'Unclear offers stop people from buying.'}\n\n`;
-    output += `SLIDE 3 (The Value Bomb):\n🔥 Clear feels safe. Vague feels risky.\n\n`;
-    output += `SLIDE 4 (The Framework):\n${body[1] || 'Name your result in concrete words.'}\n\n`;
-    output += `SLIDE 5 (The Action):\n${body[2] || 'Fix your offer before the call ever happens.'}\n\n`;
-    if (ps) output += `SLIDE 6 (The Proof):\n✨ ${ps}\n\n`;
-    output += `SLIDE 7 (CTA):\n${cta || 'Comment PATH and I will send the map.'} 🔖`;
-    display.textContent = output;
-  }
-  else if (currentPlatform === 'reels') {
-    let output = `INSTAGRAM REELS 2-COLUMN SCRIPT:\n\n`;
-    output += `[VISUAL CUE (0:00-0:03)]: Text Overlay: "${hook}" | Creator points to silent screen.\n`;
-    output += `[SPOKEN AUDIO]: "${hook} ${body.join(' ')}"\n\n`;
-    output += `[CALL TO ACTION (End)]: "${cta || 'Comment PATH for the map.'}"\n\n`;
-    output += `CAPTION:\n${hook}\n\n${body.slice(0,2).join(' ')}\n\n${cta}\n\n${ps}`;
-    display.textContent = output;
-  }
-  else if (currentPlatform === 'threads') {
-    let output = `THREADS (STANDALONE POSTS):\n\n`;
-    output += `POST 1:\n${hook}\n\n---\n\n`;
-    output += `POST 2:\n${body[0] || ''}\n\n---\n\n`;
-    output += `POST 3:\n${body[1] || ''}\n\n---\n\n`;
-    output += `POST 4:\n${cta || 'Comment PATH'}\n\n---\n\n`;
-    output += `POST 5:\n${ps || 'Clear feels safe. Vague feels risky.'}`;
-    display.textContent = output;
-  }
-  else if (currentPlatform === 'substack') {
-    let output = `# ${hook}\n\n`;
-    output += `## The Problem\n${body[0] || ''}\n\n`;
-    output += `## The Offer Ladder Framework\n${body[1] || ''}\n\n`;
-    if (body[2]) output += `${body[2]}\n\n`;
-    if (cta) output += `### Next Steps\n${cta}\n\n`;
-    if (ps) output += `*${ps}*\n\n`;
-    output += `---\n*Thanks for reading. Subscribe for weekly operational content playbooks.*`;
-    display.textContent = output;
-  }
-
-  evaluateChecklist(text);
-}
-
-function evaluateChecklist(text) {
-  const isCliche = /in today's digital age|let's dive in|unlock your potential/i.test(text);
-  const hasFirstPerson = /I|my|we|our/i.test(text);
-
-  document.getElementById('rule1-status').className = `status-badge ${!isCliche ? 'status-pass' : 'status-warn'}`;
-  document.getElementById('rule1-status').textContent = !isCliche ? 'PASS' : 'WARN';
-
-  document.getElementById('rule2-status').className = `status-badge ${hasFirstPerson ? 'status-pass' : 'status-warn'}`;
-  document.getElementById('rule2-status').textContent = hasFirstPerson ? 'PASS' : 'WARN';
-}
-
-function copyActiveOutput() {
-  const content = document.getElementById('main-output-display').textContent;
-  navigator.clipboard.writeText(content).then(() => {
-    const btn = document.getElementById('btn-copy-output');
-    btn.textContent = '✓ COPIED!';
-    setTimeout(() => { btn.textContent = '📋 COPY'; }, 2000);
-  });
-}
-</script>
-
+  <script src="app.js"></script>
 </body>
 </html>
