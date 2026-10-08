@@ -318,6 +318,8 @@ If you want to stop guessing and build a system that converts consistently:
 
 Comment "SYSTEM" below and I'll send you our step-by-step audit framework for free.
 
+— ${profile.authorName}`;
+
   const inputEl = document.getElementById('draft-input');
   if (inputEl) {
     inputEl.value = fullPost;
