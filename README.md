@@ -1,74 +1,45 @@
-# The Swap Test — Content Audit Engine
+The Swap Test — Content Audit & Viral Creator Suite (v2.0)
+A 100% serverless, client-side Progressive Web App (PWA) that evaluates draft posts for AI clichés, humanizes tone, conducts ICP pain point research, and generates viral multi-platform social posts — with $0 operating costs and zero backend dependencies.
 
-A Progressive Web App (PWA) and heuristic content audit engine designed to evaluate draft writing for AI clichés, corporate jargon, generic messaging, and swappable brand claims.
-
----
-
-## 🌟 Overview
-
-**The Swap Test** helps content creators, marketers, and writers refine their drafts before publishing. It evaluates posts across three core heuristic dimensions:
-
-1. **Demonstrated Thinking vs. Service Description**: Checks if the content demonstrates original reasoning, causal logic, and contrarian insights rather than superficial promotion.
-2. **Specific Recognition vs. Broad Agreement**: Evaluates whether the reader feels specifically recognized through concrete details, numbers, named tools, and exact scenarios.
-3. **Byline Swap Test**: Detects whether the post could be copied and published by any competitor without changing a word.
-
----
-
-## 📁 Repository Structure
-
-```text
-├── index.html        # Main HTML web page structure and UI components
-├── style.css         # Complete design system (light/dark theme, responsive layout)
-├── app.js            # Client-side heuristic audit engine & API client
-├── manifest.json     # Web App Manifest for PWA installation
-├── sw.js             # Service Worker for offline caching
+🚀 What's New in Version 2.0
+1. ⚡ 100% Serverless & Zero-Cost Architecture
+Zero Backend Required: Runs entirely inside the user's web browser using client-side JavaScript (app.js).
+$0 Monthly API Fees: Performs heuristic auditing, humanizing, and platform rewrites without calling third-party LLM APIs or hosting Python backend servers.
+Turnkey Product: Ready to sell on Gumroad, LemonSqueezy, or host for free on GitHub Pages.
+2. 🧠 Humanizer Engine & LinkedIn Viral Hook Rules
+AI Vocabulary Stripper: Automatically detects and purges LLM vocabulary tells ("delve", "tapestry", "testament", "game-changer", "supercharge", "seamless").
+Em-Dash Clean-Up: Removes mechanical em-dashes (—) to create direct, natural human phrasing.
+Negative Parallelism Detector: Flags and rewrites cliché reframe patterns ("Not X, Y" or "It's not about X, it's about Y").
+13 Viral LinkedIn Hook Library: Applies proven mobile feed entry rules (command hooks, bold claims, parenthetical objection removers, colon pivots).
+3. 👤 Personal Brand & ICP Profile Manager
+Browser-Persisted Context: Store your Author Name, Target ICP, Tone/Voice Quirks, Core Offers, and Proof Metrics directly in localStorage.
+Contextual Alignment: The rewrite engine automatically weaves your personal voice, client proof, and specific offer context into every post.
+4. 🔥 ICP Topic & Pain Point Generator (Social Research Engine)
+Multi-Channel Social Intelligence: Simulates daily trend intelligence across Reddit, LinkedIn, Facebook Groups, and YouTube.
+Niche Selection: Switch between Online Coaching / Consulting, B2B SaaS, and Agency Services.
+One-Click Post Starters: Displays 3 top daily struggles/questions with a "Draft Post From This Topic" button that pre-loads primed content directly into the editor.
+5. 📱 Expanded Multi-Platform Adaptation Suite
+💼 LinkedIn Post: Optimized with viral 2-line fold hooks and engagement CTAs.
+🎨 6-Slide Carousel Deck: Built on the 6-template editorial system (01 Cover, 02 List/Problem, 03 Quote, 04 Data Point, 05 Scenario, 06 CTA).
+🐦 X / Twitter Thread: 280-character thread breakdown.
+📸 Instagram Caption & Reels Script: Line-by-line video script with visual cues and on-screen text.
+📬 Substack Note & Newsletter: Short provocative note + H2 structured long-form post.
+👥 Facebook Group Post: Peer-to-peer storytelling post.
+🧵 Threads Sequence: Fast-paced thought sequence.
+📁 Repository Structure
+├── index.html        # Web app layout, ICP profile forms, research grid, and results UI
+├── style.css         # Complete design system (Dark/Light tokens, carousel grid, responsive UI)
+├── app.js            # Standalone client-side audit, humanizer, ICP manager & rewrite engine
+├── manifest.json     # PWA metadata for desktop & mobile installation
+├── sw.js             # Service worker for offline caching
 └── README.md         # Project documentation (this file)
-```
-
----
-
-## 🚀 Quick Start / Deployment
-
-### 1. Host on GitHub Pages (Static Web / PWA)
-1. Push all files (`index.html`, `style.css`, `app.js`, `manifest.json`, `sw.js`, `README.md`) to the root of your GitHub repository.
-2. In GitHub, navigate to **Settings** > **Pages**.
-3. Under **Build and deployment** > **Source**, select `Deploy from a branch`.
-4. Choose the `main` (or `master`) branch and `/ (root)` folder, then click **Save**.
-5. Your app will be live at `https://<your-username>.github.io/<repository-name>/`.
-
----
-
-## 🐍 Backend API Setup (FastAPI Python Server)
-
-The app works locally in standalone heuristic mode, but can also connect to the AI revision backend server (`main.py`):
-
-1. **Install Dependencies**:
-   ```bash
-   pip install fastapi uvicorn google-genai pydantic python-dotenv
-   ```
-2. **Set Environment Variables**:
-   Create a `.env` file with your Gemini API key:
-   ```env
-   GEMINI_API_KEY=your_gemini_api_key_here
-   ```
-3. **Run the FastAPI Server**:
-   ```bash
-   uvicorn main:app --reload --port 8000
-   ```
-4. **Connect Frontend**:
-   By default, `app.js` connects to `http://localhost:8000`. You can update `window.API_BASE_URL` in `app.js` if deploying your backend to a cloud host (e.g., Render, Railway, or Hugging Face Spaces).
-
----
-
-## 🛠️ Features
-
-- 🔍 **Real-Time Client-Side Scoring**: Instant heuristic analysis without server dependency.
-- 🎨 **Responsive Light & Dark Modes**: Modern theme toggle adhering to system preferences.
-- 📱 **PWA Ready**: Can be installed on desktop and mobile devices.
-- 🤖 **AI Revision & Social Platform Adaptation**: Automatically rewrites content and formats posts for LinkedIn, Twitter/X, Instagram, Substack, and Facebook when connected to the backend.
-
----
-
-## 📄 License
-
-MIT License. Free to modify and distribute.
+🛠️ Deployment Instructions (GitHub Pages)
+Upload Files: Drag and drop app.js, style.css, manifest.json, sw.js, and README.md into your GitHub repository.
+Add index.html: Create a new file named index.html and paste the main HTML markup into it.
+Enable GitHub Pages:
+Go to Settings > Pages.
+Under Source, select Deploy from a branch.
+Choose main (or master) branch and / (root) folder, then click Save.
+Your application will be live at https://<your-username>.github.io/<repo-name>/ in 1–2 minutes!
+📄 License
+MIT License. Free to use, modify, and distribute commercially.
