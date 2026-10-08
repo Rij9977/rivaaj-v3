@@ -1,45 +1,44 @@
-The Swap Test — Content Audit & Viral Creator Suite (v2.0)
-A 100% serverless, client-side Progressive Web App (PWA) that evaluates draft posts for AI clichés, humanizes tone, conducts ICP pain point research, and generates viral multi-platform social posts — with $0 operating costs and zero backend dependencies.
+The Swap Test — Content Audit & Viral Creator Suite v2.0
+A 100% serverless, zero-API-cost Progressive Web Application (PWA) designed to audit, humanize, research, and adapt marketing content for creators, founders, and coaches.
 
-🚀 What's New in Version 2.0
-1. ⚡ 100% Serverless & Zero-Cost Architecture
-Zero Backend Required: Runs entirely inside the user's web browser using client-side JavaScript (app.js).
-$0 Monthly API Fees: Performs heuristic auditing, humanizing, and platform rewrites without calling third-party LLM APIs or hosting Python backend servers.
-Turnkey Product: Ready to sell on Gumroad, LemonSqueezy, or host for free on GitHub Pages.
-2. 🧠 Humanizer Engine & LinkedIn Viral Hook Rules
-AI Vocabulary Stripper: Automatically detects and purges LLM vocabulary tells ("delve", "tapestry", "testament", "game-changer", "supercharge", "seamless").
-Em-Dash Clean-Up: Removes mechanical em-dashes (—) to create direct, natural human phrasing.
-Negative Parallelism Detector: Flags and rewrites cliché reframe patterns ("Not X, Y" or "It's not about X, it's about Y").
-13 Viral LinkedIn Hook Library: Applies proven mobile feed entry rules (command hooks, bold claims, parenthetical objection removers, colon pivots).
-3. 👤 Personal Brand & ICP Profile Manager
-Browser-Persisted Context: Store your Author Name, Target ICP, Tone/Voice Quirks, Core Offers, and Proof Metrics directly in localStorage.
-Contextual Alignment: The rewrite engine automatically weaves your personal voice, client proof, and specific offer context into every post.
-4. 🔥 ICP Topic & Pain Point Generator (Social Research Engine)
-Multi-Channel Social Intelligence: Simulates daily trend intelligence across Reddit, LinkedIn, Facebook Groups, and YouTube.
-Niche Selection: Switch between Online Coaching / Consulting, B2B SaaS, and Agency Services.
-One-Click Post Starters: Displays 3 top daily struggles/questions with a "Draft Post From This Topic" button that pre-loads primed content directly into the editor.
-5. 📱 Expanded Multi-Platform Adaptation Suite
-💼 LinkedIn Post: Optimized with viral 2-line fold hooks and engagement CTAs.
-🎨 6-Slide Carousel Deck: Built on the 6-template editorial system (01 Cover, 02 List/Problem, 03 Quote, 04 Data Point, 05 Scenario, 06 CTA).
-🐦 X / Twitter Thread: 280-character thread breakdown.
-📸 Instagram Caption & Reels Script: Line-by-line video script with visual cues and on-screen text.
-📬 Substack Note & Newsletter: Short provocative note + H2 structured long-form post.
-👥 Facebook Group Post: Peer-to-peer storytelling post.
-🧵 Threads Sequence: Fast-paced thought sequence.
+🌟 What's New in Version 2.0 (Bug Fixes & Feature Additions)
+1. 🔥 Fixed ICP Topic & Pain Point Generator
+Dynamic Shuffling: Fixed the "Refresh Daily Topics" button so it instantly shuffles and rotates 3 distinct daily challenges every time it is clicked.
+5 Niche Industry Dropdowns:
+Online Coaching / Consulting
+B2B SaaS / Software
+Agency / Marketing Services
+E-commerce & DTC Brands (New)
+Creators & Digital Products (New)
+2. ✍️ Broad → Narrow → Niche Draft Generator
+Clicking "Draft Post From This Topic" builds a full-length, strategic post idea using your saved Brand & ICP Context following the 3-step structural framework:
+Lines 1-2 (Broad): Universal hook to stop feed scrolling.
+Middle Section (Narrow): Narrows down the core strategic failure for your ICP.
+Breakdown Section (Niche): Immediately actionable 3-step execution plan with real proof metrics.
+3. 🔍 Resolved Flagged Indicators & Swap Test Scoring Bugs
+Fixed regex pattern scanner in app.js to accurately isolate AI clichés ("delve", "tapestry", "game-changer", "supercharge"), corporate jargon, soft hedging, and em-dashes (—).
+Fixed real-time calculation of Demonstrated Thinking, Specific Recognition, Byline Swap Test, and Overall Verdict Score.
+4. 🧠 Humanizer & ICP-Aligned Rewrite Engine
+Removed Hardcoded Intro/Outro Cliches: Eliminated generic boilerplate sentences.
+Dynamic Scroll-Stopping Hooks: Generates viral hooks tailored to your specific authorName, icpTarget, and offersServices.
+Em-Dash & Parallelism Stripper: Replaces — with clean punctuation and replaces rigid "Not X, Y" reframes with direct assertions.
+5. 📱 Multi-Platform Adaptation Suite
+💼 LinkedIn: Viral 2-line hook, mobile double-space formatting, and lead-magnet comment triggers (Comment "BLUEPRINT" below).
+🎨 6-Slide Carousel Deck: Dynamically maps draft concepts into a 6-slide editorial framework (Cover, Problem, Mindset Quote, Framework, Proof, CTA).
+🧵 Threads: Clean, short-form feed post.
+📸 Instagram Reels Script: Timed script cues (Hook 0-3s, Body 3-30s, CTA 30-45s) with spoken dialogue and on-screen text.
+📬 Substack Note & Article: Short subscriber Note and long-form structured H2 newsletter outline.
+👥 Facebook: Formatted with emojis, bullet points, highlighted keywords, and comment triggers.
+💬 Threads Sequence: Sequential multi-post thread (1/4 to 4/4) breaking down your core message.
 📁 Repository Structure
-├── index.html        # Web app layout, ICP profile forms, research grid, and results UI
-├── style.css         # Complete design system (Dark/Light tokens, carousel grid, responsive UI)
-├── app.js            # Standalone client-side audit, humanizer, ICP manager & rewrite engine
-├── manifest.json     # PWA metadata for desktop & mobile installation
-├── sw.js             # Service worker for offline caching
-└── README.md         # Project documentation (this file)
-🛠️ Deployment Instructions (GitHub Pages)
-Upload Files: Drag and drop app.js, style.css, manifest.json, sw.js, and README.md into your GitHub repository.
-Add index.html: Create a new file named index.html and paste the main HTML markup into it.
-Enable GitHub Pages:
-Go to Settings > Pages.
-Under Source, select Deploy from a branch.
-Choose main (or master) branch and / (root) folder, then click Save.
-Your application will be live at https://<your-username>.github.io/<repo-name>/ in 1–2 minutes!
-📄 License
-MIT License. Free to use, modify, and distribute commercially.
+├── index.html        # Main HTML web page structure & UI components
+├── style.css         # Complete design system (light/dark mode, mobile responsive)
+├── app.js            # Standalone client-side audit & rewrite engine
+├── manifest.json     # PWA manifest for desktop & mobile home screen installation
+├── sw.js             # Service worker for offline functionality
+└── README.md         # Repository documentation
+🚀 How to Deploy on GitHub Pages ($0 Costs)
+Upload Files: Drag and drop app.js, style.css, manifest.json, sw.js, and README.md into your GitHub repository root.
+Create index.html: Create a file named index.html on GitHub and paste the HTML code.
+Publish: In GitHub, go to Settings > Pages, select the main branch, and click Save.
+Your app will be live at https://<your-username>.github.io/<repository-name>/ in 1–2 minutes!
