@@ -1,216 +1,338 @@
 /**
- * THE SWAP TEST — Content Audit & Viral Creator Suite (v2.0)
- * 100% Client-Side Progressive Web App (Zero Server / Zero API Fees)
+ * The Swap Test — Content Audit & Creator Suite v2.0
+ * 100% Client-Side / Serverless Execution Engine
  */
 
-// ─── AI-GENERIC & HUMANIZER PATTERNS ────────────────────────
-const AI_CLICHES = [
-  { pattern: /\bin today'?s (?:fast-paced|digital|ever-changing|competitive|modern) (?:world|landscape|age|environment)\b/gi, category: 'ai-generic', note: 'Generic AI opening trope.' },
-  { pattern: /\bgame-?changer\b/gi, category: 'ai-generic', note: 'Overused buzzword.' },
-  { pattern: /\bparadigm shift\b/gi, category: 'ai-generic', note: 'Corporate jargon.' },
-  { pattern: /\bleverage(?:s|d|ing)?\b/gi, category: 'ai-generic', note: 'Overused action verb.' },
-  { pattern: /\bdelve(?:s|d|ing)?\b/gi, category: 'ai-generic', note: 'Classic LLM vocabulary tell.' },
-  { pattern: /\btapestry\b/gi, category: 'ai-generic', note: 'Classic LLM vocabulary tell.' },
-  { pattern: /\btestament\b/gi, category: 'ai-generic', note: 'Classic LLM vocabulary tell.' },
-  { pattern: /\bunlock(?:s|ed|ing)? (?:your|the) (?:potential|power|growth)\b/gi, category: 'ai-generic', note: 'Vague growth claim.' },
-  { pattern: /\bseamless(?:ly)?\b/gi, category: 'ai-generic', note: 'Vague quality descriptor.' },
-  { pattern: /\brobust\b/gi, category: 'ai-generic', note: 'Overused technical buzzword.' },
-  { pattern: /\bholistic\b/gi, category: 'ai-generic', note: 'Vague consulting jargon.' },
-  { pattern: /\bsynergy\b/gi, category: 'ai-generic', note: 'Corporate fluff.' },
-  { pattern: /\bsupercharge(?:s|d|ing)?\b/gi, category: 'ai-generic', note: 'Hype vocabulary.' },
-  { pattern: /\bempower(?:s|ed|ing)?\b/gi, category: 'ai-generic', note: 'Generic capability claim.' },
-  { pattern: /\bactionable insights\b/gi, category: 'ai-generic', note: 'Generic value claim.' },
-  { pattern: /\bmove the needle\b/gi, category: 'ai-generic', note: 'Business cliché.' },
-  { pattern: /\bdeep dive\b/gi, category: 'ai-generic', note: 'Overused content descriptor.' },
-  { pattern: /\bstreamline\b/gi, category: 'ai-generic', note: 'Generic optimization verb.' }
-];
+// ─── BRAND & ICP PROFILE STORAGE ───────────────────────────────
+const DEFAULT_PROFILE = {
+  authorName: 'Alex Rivers',
+  icpTarget: 'Online Coaches & B2B Consultants ($10k-$50k/mo)',
+  toneVoice: 'Direct, anti-guru, punchy, actionable, proof-first',
+  offersServices: 'High-Ticket Offer Architecture & Backend Sprint',
+  proofMetrics: 'Helped 140+ coaches scale past $30k/mo with 82% retention'
+};
 
-const HEDGING_PATTERNS = [
-  { pattern: /\b(?:it is important to note that|it'?s worth mentioning that|it goes without saying that)\b/gi, category: 'safe-language', note: 'Filler framing before actual point.' },
-  { pattern: /\b(?:in my opinion|i believe that|i feel that|arguably|perhaps|maybe)\b/gi, category: 'safe-language', note: 'Unnecessary stance-softener.' },
-  { pattern: /\b(?:could potentially|might possibly|seems to be|tends to|can help to)\b/gi, category: 'safe-language', note: 'Double-hedged statement.' }
-];
+function getProfile() {
+  try {
+    const saved = localStorage.getItem('swap_test_profile');
+    return saved ? JSON.parse(saved) : DEFAULT_PROFILE;
+  } catch (e) {
+    return DEFAULT_PROFILE;
+  }
+}
 
-const NEGATIVE_PARALLELISM = [
-  { pattern: /\b(?:it'?s not|this isn'?s|not) about [^,.]+[,.] (?:it'?s|this is) about\b/gi, category: 'negative-parallelism', note: 'Negative parallelism reframe ("Not X, Y"). Rewrite as direct positive claim.' },
-  { pattern: /\b(?:stop thinking|forget|don'?t focus on) [^,.]+[,.] (?:start|focus on)\b/gi, category: 'negative-parallelism', note: 'Banned "Forget X, Focus Y" reframe pattern.' }
-];
+function saveProfile(profileData) {
+  try {
+    localStorage.setItem('swap_test_profile', JSON.stringify(profileData));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
 
-const EM_DASH_PATTERN = /—|--/g;
+// ─── NICHE RESEARCH & DAILY TOPIC GENERATOR BANK ──────────────────
+const NICHE_TOPICS_BANK = {
+  coaching: [
+    {
+      title: "High-ticket coaching sales stalling in DMs",
+      platform: "Reddit r/coaching",
+      problem: "Coaches spending 4 hours/day in Instagram DMs getting ghosted after revealing pricing ($3k+).",
+      question: "How do I transition cold DM conversations into booked calls without sounding salesy?",
+      solution: "Shift from 'interrogation messaging' to an asymmetric value asset (5-min loom audit) before pitching."
+    },
+    {
+      title: "Client churn after 90 days of coaching",
+      platform: "Facebook Groups (6-Figure Coaches)",
+      problem: "Clients hit a plateau in month 3 and drop out because there is no clear secondary transformation.",
+      question: "Why do clients leave after the initial sprint even if they got decent results?",
+      solution: "Build a 2-tier client roadmap: Tier 1 (Initial Setup) → Tier 2 (Scale & Optimization Engine)."
+    },
+    {
+      title: "Low engagement on long-form authority posts",
+      platform: "LinkedIn Feed Audit",
+      problem: "Posts packed with value getting <10 likes because the first 2 lines read like a textbook.",
+      question: "How do I hook busy executives without using cringe clickbait tactics?",
+      solution: "Apply the Broad → Narrow → Niche framework: Start with a universal industry belief, then pivot."
+    },
+    {
+      title: "Inability to charge $5k+ for consulting",
+      platform: "YouTube Comments (Business Channel)",
+      problem: "Prospects comparing $5k offers to $299 Udemy courses because messaging focuses on 'hours of calls'.",
+      question: "How do I frame an offer so price objection vanishes?",
+      solution: "Sell the specific enterprise bottleneck fix, not 'weekly 1:1 Zoom sessions'."
+    }
+  ],
+  saas: [
+    {
+      title: "Free trial to paid conversion stuck below 3%",
+      platform: "Reddit r/SaaS",
+      problem: "Users sign up for free trial, explore dashboard for 4 minutes, and never return.",
+      question: "What onboarding tweak moves trial users to the 'Aha moment' in under 60 seconds?",
+      solution: "Eliminate empty dashboard states. Pre-populate sample data and guide users to complete 1 core action."
+    },
+    {
+      title: "High customer acquisition cost (CAC) on Meta Ads",
+      platform: "LinkedIn B2B SaaS Group",
+      problem: "Paid ads burning budget with $180+ demo booking cost due to generic copy.",
+      question: "How do we write SaaS ad copy that targets decision-makers instead of tire-kickers?",
+      solution: "Call out the exact pain-workflow in line 1: 'If your dev team loses 6 hours/week on Jira syncs...'"
+    },
+    {
+      title: "Feature churn: Building everything users request",
+      platform: "YouTube SaaS Founder Podcast",
+      problem: "Engineering team building 10 custom features/month but net retention keeps dropping.",
+      question: "How do founders say no to custom feature requests without losing accounts?",
+      solution: "Focus product roadmap strictly on core job-to-be-done metrics rather than edge-case feature requests."
+    }
+  ],
+  agency: [
+    {
+      title: "Scope creep destroying client project margins",
+      platform: "Reddit r/agency",
+      problem: "Clients asking for 'quick extra revisions' that turn a 20-hour sprint into a 60-hour nightmare.",
+      question: "How do agency owners enforce strict scope boundaries without damaging client relationships?",
+      solution: "Implement a 'Change Order Menu' with clear pricing for additional requests during kickoff."
+    },
+    {
+      title: "Commoditization & price competition from overseas freelancers",
+      platform: "Facebook Agency Owners Hub",
+      problem: "Prospects saying 'I can get this SEO campaign done on Upwork for $300/mo'.",
+      question: "How do boutique agencies defend $5k/mo retainers against cheap labor?",
+      solution: "Position around business outcome guarantees and revenue attribution rather than deliverables."
+    },
+    {
+      title: "Unpredictable revenue rollercoaster (Lumpy Cashflow)",
+      platform: "LinkedIn Agency Growth",
+      problem: "Closing $20k in revenue one month, then $0 the next month because fulfillment stops prospecting.",
+      question: "How can a solo agency owner maintain lead gen while delivering client work?",
+      solution: "Systematize a daily 30-minute outbound/content pipeline that runs regardless of client load."
+    }
+  ],
+  ecommerce: [
+    {
+      title: "Cart abandonment rate spiking at checkout step",
+      platform: "Reddit r/ecommerce",
+      problem: "70%+ of store visitors add items to cart but drop off when shipping costs appear.",
+      question: "How do DTC brands boost checkout completion without destroying profit margins?",
+      solution: "Threshold free shipping ($75+) paired with a dynamic progress bar in the cart drawer."
+    },
+    {
+      title: "Rising ad costs on TikTok & Meta reducing ROAS",
+      platform: "Facebook DTC Marketers",
+      problem: "Return on ad spend dropped from 3.5x to 1.2x over the last 6 months.",
+      question: "What UGC video structure is currently converting cold traffic for ecommerce products?",
+      solution: "3-second visual problem hook → native split-screen demonstration → urgency offer CTA."
+    },
+    {
+      title: "Low customer lifetime value (LTV) and zero repeat purchases",
+      platform: "YouTube Ecom Channel",
+      problem: "90% of buyers purchase once and never return, making customer acquisition unprofitable.",
+      question: "How do brands turn one-time shoppers into subscription or repeat buyers?",
+      solution: "Build a post-purchase email sequence educating customers on maximizing product usage."
+    }
+  ],
+  creators: [
+    {
+      title: "Digital product launch flopping despite 50k followers",
+      platform: "Reddit r/CreatorEconomy",
+      problem: "Creator spent 3 months building a $97 course, made 4 sales to an audience of 50,000.",
+      question: "Why don't social media followers convert into paying digital product customers?",
+      solution: "Build an email newsletter bridge; social feeds build awareness, email builds buyer intent."
+    },
+    {
+      title: "Creator burnout from daily content treadmill",
+      platform: "YouTube Creator Insights",
+      problem: "Posting 3 videos/day across 4 platforms causing severe fatigue and lower quality.",
+      question: "How do top creators repurpose 1 pillar asset into 15 native pieces of content?",
+      solution: "Create 1 deep-dive video → extract 3 text threads → convert to 1 carousel + 2 shorts."
+    },
+    {
+      title: "Monetization plateau relying solely on brand sponsorships",
+      platform: "LinkedIn Creator Hub",
+      problem: "Sponsorship deals fluctuating wildly month-to-month, leaving income unstable.",
+      question: "How do creators launch their own owned offer to replace sponsor dependency?",
+      solution: "Package core expertise into a high-value cohort or digital toolkit sold directly to fans."
+    }
+  ]
+};
 
-const SERVICE_PATTERNS = [
-  { pattern: /\bI help\b/gi, category: 'service-desc', note: 'Service description pitch.' },
-  { pattern: /\bmy (?:coaching|program|framework|method|service)\b/gi, category: 'service-desc', note: 'Service-focused language.' },
-  { pattern: /\bbook a (?:call|discovery call|session)\b/gi, category: 'service-desc', note: 'Direct pitch CTA without insight.' },
-  { pattern: /\bDM me\b/gi, category: 'service-desc', note: 'Direct CTA.' }
+// ─── AI-GENERIC & HEDGING PATTERNS ─────────────────────────────
+const FLAGGED_PATTERNS = [
+  { pattern: /\bin today'?s (?:fast-paced|digital|ever-changing|competitive) world\b/gi, category: 'AI Cliché', reason: 'Overused AI opening line.' },
+  { pattern: /\bgame-?changer\b/gi, category: 'AI Cliché', reason: 'Overused marketing hype word.' },
+  { pattern: /\bparadigm shift\b/gi, category: 'AI Cliché', reason: 'Corporate jargon.' },
+  { pattern: /\bleverage\b/gi, category: 'AI Cliché', reason: 'Overused buzzword verb.' },
+  { pattern: /\bdelve(?:s|d|ing)?\b/gi, category: 'AI Cliché', reason: 'Classic AI vocabulary tell.' },
+  { pattern: /\btapestry\b/gi, category: 'AI Cliché', reason: 'Classic AI vocabulary tell.' },
+  { pattern: /\btestament\b/gi, category: 'AI Cliché', reason: 'Classic AI vocabulary tell.' },
+  { pattern: /\bunlock(?:s|ed|ing)? (?:your|the) potential\b/gi, category: 'AI Cliché', reason: 'Generic promotional claim.' },
+  { pattern: /\bseamless(?:ly)?\b/gi, category: 'AI Cliché', reason: 'Vague descriptor.' },
+  { pattern: /\brobust\b/gi, category: 'AI Cliché', reason: 'Overused technical filler.' },
+  { pattern: /\bholistic\b/gi, category: 'AI Cliché', reason: 'Vague consulting jargon.' },
+  { pattern: /\bsynergy\b/gi, category: 'AI Cliché', reason: 'Corporate fluff.' },
+  { pattern: /\bsupercharge\b/gi, category: 'AI Cliché', reason: 'Hype vocabulary.' },
+  { pattern: /\bempower(?:s|ed|ing)?\b/gi, category: 'AI Cliché', reason: 'Generic capability claim.' },
+  { pattern: /\b(?:it is important to note that|it'?s worth mentioning that|it goes without saying that)\b/gi, category: 'Hedging', reason: 'Filler framing before actual point.' },
+  { pattern: /\b(?:in my opinion|i believe that|i feel that|arguably|perhaps|maybe)\b/gi, category: 'Hedging', reason: 'Soft stance-softener.' },
+  { pattern: /\b(?:could potentially|might possibly|seems to be|tends to)\b/gi, category: 'Hedging', reason: 'Double-hedged statement.' },
+  { pattern: /\bnot (?:only|just) .+, but (?:also )?\b/gi, category: 'AI Structure', reason: 'Predictable AI parallel construction.' }
 ];
 
 const THINKING_MARKERS = [
   /\bbecause\b/i, /\bhere'?s why\b/i, /\bthe reason\b/i, /\binstead of\b/i,
   /\bcontrary to\b/i, /\bmy mistake was\b/i, /\bwe tested\b/i, /\bthe data shows\b/i,
-  /\bunpopular opinion\b/i, /\btrade-off\b/i, /\bthe mechanism\b/i, /\bwhat I noticed\b/i
+  /\bunpopular opinion\b/i, /\btrade-off\b/i, /\bour testing revealed\b/i
 ];
 
 const SPECIFICITY_MARKERS = [
-  /\$[\d,]+(?:\.\d+)?/i,
-  /\b\d+%/i,
-  /\b\d+ (?:clients|founders|coaches|days|weeks|months|years|hours|mrr|arr)\b/i,
+  /\b\d+(?:%|k|m|b|\$|x)?\b/i,
   /\b(?:january|february|march|april|may|june|july|august|september|october|november|december)\b/i,
-  /\b(?:kajabi|calendly|notion|slack|zoom|instagram|linkedin|twitter|x|convertkit|stripe|hubspot)\b/i
+  /\b(?:specifically|for instance|for example|case study|metric|roi|conversion|retention)\b/i
 ];
 
-// ─── INITIALIZATION & LOCALSTORAGE ──────────────────────────
+// ─── INITIALIZATION & DOM HANDLERS ────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Profile Manager Elements
-  const authorNameInput = document.getElementById('author-name');
-  const icpTargetInput = document.getElementById('icp-target');
-  const toneVoiceInput = document.getElementById('tone-voice');
-  const offersInput = document.getElementById('offers-services');
-  const proofMetricsInput = document.getElementById('proof-metrics');
-  const saveProfileBtn = document.getElementById('save-profile-btn');
-  const profileStatus = document.getElementById('profile-status');
+  initProfileUI();
+  initResearchGenerator();
+  initAuditApp();
+});
 
-  // Load Saved Profile Context
-  function loadProfile() {
-    if (authorNameInput) authorNameInput.value = localStorage.getItem('swap_author_name') || '';
-    if (icpTargetInput) icpTargetInput.value = localStorage.getItem('swap_icp_target') || '';
-    if (toneVoiceInput) toneVoiceInput.value = localStorage.getItem('swap_tone_voice') || '';
-    if (offersInput) offersInput.value = localStorage.getItem('swap_offers_services') || '';
-    if (proofMetricsInput) proofMetricsInput.value = localStorage.getItem('swap_proof_metrics') || '';
-  }
-  loadProfile();
+// 1. Profile UI Handler
+function initProfileUI() {
+  const profile = getProfile();
+  document.getElementById('author-name').value = profile.authorName || '';
+  document.getElementById('icp-target').value = profile.icpTarget || '';
+  document.getElementById('tone-voice').value = profile.toneVoice || '';
+  document.getElementById('offers-services').value = profile.offersServices || '';
+  document.getElementById('proof-metrics').value = profile.proofMetrics || '';
 
-  if (saveProfileBtn) {
-    saveProfileBtn.addEventListener('click', () => {
-      localStorage.setItem('swap_author_name', authorNameInput.value.trim());
-      localStorage.setItem('swap_icp_target', icpTargetInput.value.trim());
-      localStorage.setItem('swap_tone_voice', toneVoiceInput.value.trim());
-      localStorage.setItem('swap_offers_services', offersInput.value.trim());
-      localStorage.setItem('swap_proof_metrics', proofMetricsInput.value.trim());
-      
-      if (profileStatus) {
-        profileStatus.hidden = false;
-        setTimeout(() => { profileStatus.hidden = true; }, 3000);
+  const saveBtn = document.getElementById('save-profile-btn');
+  const statusEl = document.getElementById('profile-status');
+  if (saveBtn) {
+    saveBtn.addEventListener('click', () => {
+      const updated = {
+        authorName: document.getElementById('author-name').value.trim() || DEFAULT_PROFILE.authorName,
+        icpTarget: document.getElementById('icp-target').value.trim() || DEFAULT_PROFILE.icpTarget,
+        toneVoice: document.getElementById('tone-voice').value.trim() || DEFAULT_PROFILE.toneVoice,
+        offersServices: document.getElementById('offers-services').value.trim() || DEFAULT_PROFILE.offersServices,
+        proofMetrics: document.getElementById('proof-metrics').value.trim() || DEFAULT_PROFILE.proofMetrics
+      };
+      saveProfile(updated);
+      if (statusEl) {
+        statusEl.hidden = false;
+        setTimeout(() => { statusEl.hidden = true; }, 3000);
       }
     });
   }
+}
 
-  // 2. ICP Research & Trending Topics Generator
+// 2. ICP Topic Research Generator
+function initResearchGenerator() {
   const nicheSelect = document.getElementById('niche-select');
-  const generateResearchBtn = document.getElementById('generate-research-btn');
-  const topicsGrid = document.getElementById('topics-grid');
-
-  const RESEARCH_BANK = {
-    coaching: [
-      {
-        badges: ['🔥 Reddit r/coaching', '💬 184 Comments'],
-        title: 'The $10k-$30k MRR Referral Trap',
-        body: 'Coaches struggling because word-of-mouth plateaued, but cold outbound and ads feel pushy to high-ticket clients.',
-        angle: 'Why relying on referrals stops you from building a scalable acquisition engine.'
-      },
-      {
-        badges: ['💼 LinkedIn Trending', '🎥 YouTube Debate'],
-        title: 'AI Content Fatigue Among Buyers',
-        body: 'ICP prospects report ignoring polished LinkedIn posts that sound like ChatGPT summaries.',
-        angle: 'How to write with demonstrated thinking so buyers feel specifically recognized.'
-      },
-      {
-        badges: ['👥 FB Groups', '🔥 High Engagement'],
-        title: 'The "I Need to Think About It" Objection Spike',
-        body: 'Prospects getting off sales calls without closing because the offer lacks a clear diagnostic mechanism.',
-        angle: 'Lead with diagnosis before pitch so prospects close themselves.'
-      }
-    ],
-    saas: [
-      {
-        badges: ['🔥 Hacker News', '💬 210 Comments'],
-        title: 'Free Trial Churn on Day 2',
-        body: 'Users sign up for B2B SaaS but abandon onboarding before experiencing the core value moment.',
-        angle: 'Show the 1-click outcome before asking for account configuration.'
-      },
-      {
-        badges: ['🐦 X/Twitter Viral', '💼 LinkedIn'],
-        title: 'Feature Bloat vs Single Core Solution',
-        body: 'Buyers overwhelmed by massive feature suites; preferring lightweight point solutions.',
-        angle: 'Why stripping 80% of your product pitch increases conversion.'
-      },
-      {
-        badges: ['🔥 Reddit r/SaaS', '💬 95 Comments'],
-        title: 'Outbound Cold Email Response Drop',
-        body: 'Traditional 4-step sequence email templates generating 0.2% reply rates.',
-        angle: 'Replace template pitches with specific observation breakdown.'
-      }
-    ],
-    agency: [
-      {
-        badges: ['💼 LinkedIn Trending', '👥 FB Groups'],
-        title: 'Retainer Churn After Month 3',
-        body: 'Clients canceling monthly agency retainers due to lack of transparent metric reporting.',
-        angle: 'Why vanity metrics kill retainers and how to report ROI instead.'
-      },
-      {
-        badges: ['🔥 Reddit r/marketing', '💬 140 Comments'],
-        title: 'Commoditization of General Marketing Services',
-        body: 'Prospects demanding discounts because general agency offers look identical.',
-        angle: 'Specializing in one painful ICP scenario eliminates price sensitivity.'
-      },
-      {
-        badges: ['🎥 YouTube Strategy', '🐦 X/Twitter'],
-        title: 'The Inbound Content Bottleneck',
-        body: 'Agency founders spending 15 hours/week on content without qualified lead flow.',
-        angle: 'Shift from educational posts to contrarian positioning.'
-      }
-    ]
-  };
-
-  function renderResearchTopics() {
-    if (!topicsGrid) return;
-    const niche = nicheSelect ? nicheSelect.value : 'coaching';
-    const topics = RESEARCH_BANK[niche] || RESEARCH_BANK['coaching'];
-    topicsGrid.innerHTML = '';
-
-    topics.forEach((t) => {
-      const card = document.createElement('div');
-      card.className = 'challenge-card';
-      card.innerHTML = `
-        <div>
-          <div class="challenge-badges">
-            ${t.badges.map(b => `<span class="badge ${b.includes('🔥') ? 'badge-hot' : ''}">${b}</span>`).join('')}
-          </div>
-          <h4 class="challenge-title" style="margin-top:0.5rem;">${t.title}</h4>
-          <p class="challenge-body" style="margin-top:0.375rem;">${t.body}</p>
-        </div>
-        <div>
-          <div class="challenge-angle">💡 Recommended Angle: ${t.angle}</div>
-          <button type="button" class="btn btn-ghost btn-sm draft-topic-btn" style="margin-top:0.75rem; width:100%;">
-            ✍️ Draft Post From This Topic
-          </button>
-        </div>
-      `;
-
-      card.querySelector('.draft-topic-btn').addEventListener('click', () => {
-        const icp = icpTargetInput ? icpTargetInput.value.trim() : 'ideal clients';
-        const author = authorNameInput ? authorNameInput.value.trim() : 'I';
-        const draftInput = document.getElementById('draft-input');
-        
-        if (draftInput) {
-          draftInput.value = `Most ${icp || 'people'} think the biggest problem is getting more leads. The truth is, ${t.title.toLowerCase()} is what's actually stalling growth. We tested this recently with our clients: when you rely on generic messaging, prospects tune out. Here is the exact breakdown of why this happens and what to do instead.`;
-          draftInput.dispatchEvent(new Event('input'));
-          draftInput.focus();
-          draftInput.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
-
-      topicsGrid.appendChild(card);
+  const refreshBtn = document.getElementById('generate-research-btn');
+  
+  if (refreshBtn) {
+    refreshBtn.addEventListener('click', () => {
+      renderTopics(nicheSelect.value);
+    });
+  }
+  if (nicheSelect) {
+    nicheSelect.addEventListener('change', () => {
+      renderTopics(nicheSelect.value);
     });
   }
 
-  if (generateResearchBtn) {
-    generateResearchBtn.addEventListener('click', renderResearchTopics);
-  }
-  renderResearchTopics();
+  // Initial render
+  renderTopics('coaching');
+}
 
-  // 3. Main Input & Audit Engine
+function renderTopics(nicheKey) {
+  const topicsGrid = document.getElementById('topics-grid');
+  if (!topicsGrid) return;
+
+  const pool = NICHE_TOPICS_BANK[nicheKey] || NICHE_TOPICS_BANK['coaching'];
+  
+  // Shuffle/pick 3 topics dynamically
+  const shuffled = [...pool].sort(() => 0.5 - Math.random());
+  const selected = shuffled.slice(0, 3);
+
+  topicsGrid.innerHTML = '';
+  selected.forEach((item, idx) => {
+    const card = document.createElement('div');
+    card.className = 'topic-card';
+    card.innerHTML = `
+      <div class="topic-header">
+        <span class="topic-badge">${item.platform}</span>
+        <span class="topic-num">Topic #0${idx + 1}</span>
+      </div>
+      <h4 class="topic-title">${item.title}</h4>
+      <p class="topic-detail"><strong>Pains:</strong> ${item.problem}</p>
+      <p class="topic-detail"><strong>Question:</strong> "${item.question}"</p>
+      <p class="topic-solution"><strong>Fix:</strong> ${item.solution}</p>
+      <button type="button" class="btn btn-ghost btn-sm draft-topic-btn" style="margin-top:0.75rem; width:100%; justify-content:center;">
+        ✍️ Draft Post From This Topic
+      </button>
+    `;
+
+    // Attach Draft Post Handler
+    const draftBtn = card.querySelector('.draft-topic-btn');
+    draftBtn.addEventListener('click', () => {
+      generateFullDraftFromTopic(item);
+    });
+
+    topicsGrid.appendChild(card);
+  });
+}
+
+// 3. Draft Post Generator (Broad -> Narrow -> Niche Framework)
+function generateFullDraftFromTopic(topic) {
+  const profile = getProfile();
+  
+  // Construct a comprehensive long-form post adhering strictly to the Broad -> Narrow -> Niche framework
+  const fullPost = `Most people think ${topic.title.toLowerCase()} is just part of doing business.
+
+It isn't. It's a positioning failure.
+
+When you speak to everyone, you end up recognizable to no one. If you're targeting ${profile.icpTarget}, relying on surface-level advice is why deals stall and prospects ghost.
+
+Here is the exact truth behind this:
+${topic.problem}
+
+Most creators respond by trying to work harder or drop their prices. That is a trap.
+
+Here is what we implemented instead:
+${topic.solution}
+
+Here is the 3-step breakdown to execute this right now:
+
+1. Identify the hidden bottleneck:
+Stop leading with broad promises. Focus on the exact operational friction your client faces every single day.
+
+2. Replace pitch calls with asymmetric proof:
+Instead of asking for a 45-minute Zoom call, deliver a 3-minute video breakdown of their specific issue. Show, don't tell.
+
+3. Align your offer architecture:
+Through ${profile.offersServices}, we proved that removing friction upfront drives far higher conversion than endless DM follow-ups. (${profile.proofMetrics}).
+
+If you want to stop guessing and build a system that converts consistently:
+
+Comment "SYSTEM" below and I'll send you our step-by-step audit framework for free.
+
+— ${profile.authorName}`;
+
+  const inputEl = document.getElementById('draft-input');
+  if (inputEl) {
+    inputEl.value = fullPost;
+    inputEl.dispatchEvent(new Event('input'));
+    inputEl.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Automatically trigger Swap Test audit
+  runSwapTest();
+}
+
+// 4. Audit & Heuristic App Initialization
+function initAuditApp() {
   const inputEl = document.getElementById('draft-input');
   const charCountEl = document.getElementById('char-count');
   const runBtn = document.getElementById('run-btn');
@@ -222,452 +344,500 @@ document.addEventListener('DOMContentLoaded', () => {
   const themeToggle = document.querySelector('[data-theme-toggle]');
   if (themeToggle) {
     themeToggle.addEventListener('click', () => {
-      const current = document.documentElement.getAttribute('data-theme') || 'dark';
-      const next = current === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
     });
   }
+
+  // Load saved theme
   const savedTheme = localStorage.getItem('theme') || 'dark';
   document.documentElement.setAttribute('data-theme', savedTheme);
 
-  // Sample Draft
-  const SAMPLE_DRAFT = `In today's fast-paced digital world, it is important to note that content marketing is a game-changer for online coaches. It's not about posting daily, it's about building a robust strategy. I believe that leveraging holistic strategies will supercharge your growth — seamlessly unlocking your potential.
+  // Sample Draft Button
+  const SAMPLE_DRAFT = `In today's fast-paced digital world, it is important to note that content marketing is a game-changer for online coaches. I believe that leveraging robust holistic strategies will supercharge your growth and seamlessly unlock your potential.
 
-Contrary to popular belief, our data shows that 84% of coaches fail because they rely on generic templates instead of specific positioning. We tested this with 12 clients in March, and revenue increased 3.5x after fixing the swap test flags. DM me to book a discovery call.`;
+Contrary to popular belief, our data shows that 84% of coaches fail because they rely on generic templates instead of specific positioning. We tested this with 12 clients in March, and revenue increased 3.5x after fixing the swap test flags.`;
 
   if (inputEl) {
     inputEl.addEventListener('input', () => {
-      const len = inputEl.value.length;
-      if (charCountEl) charCountEl.textContent = `${len.toLocaleString()} character${len === 1 ? '' : 's'}`;
+      const count = inputEl.value.length;
+      if (charCountEl) charCountEl.textContent = `${count.toLocaleString()} character${count === 1 ? '' : 's'}`;
     });
   }
 
   if (sampleBtn) {
     sampleBtn.addEventListener('click', () => {
-      if (inputEl) {
-        inputEl.value = SAMPLE_DRAFT;
-        inputEl.dispatchEvent(new Event('input'));
-      }
+      inputEl.value = SAMPLE_DRAFT;
+      inputEl.dispatchEvent(new Event('input'));
     });
   }
 
   if (clearBtn) {
     clearBtn.addEventListener('click', () => {
-      if (inputEl) {
-        inputEl.value = '';
-        inputEl.dispatchEvent(new Event('input'));
-      }
+      inputEl.value = '';
+      inputEl.dispatchEvent(new Event('input'));
       if (resultsSec) resultsSec.hidden = true;
     });
   }
 
   if (runBtn) {
-    runBtn.addEventListener('click', runAudit);
+    runBtn.addEventListener('click', runSwapTest);
   }
 
-  // AUDIT LOGIC
-  function runAudit() {
-    const text = inputEl.value.trim();
-    if (!text) {
-      alert('Please enter or load a draft post to run the Swap Test.');
-      return;
-    }
-
-    resultsSec.hidden = false;
-    resultsSec.scrollIntoView({ behavior: 'smooth' });
-
-    // Detect Flags
-    const detectedFlags = [];
-
-    AI_CLICHES.forEach(item => {
-      const matches = text.match(item.pattern);
-      if (matches) {
-        detectedFlags.push({ match: matches[0], category: 'ai-generic', note: item.note, count: matches.length });
-      }
-    });
-
-    HEDGING_PATTERNS.forEach(item => {
-      const matches = text.match(item.pattern);
-      if (matches) {
-        detectedFlags.push({ match: matches[0], category: 'safe-language', note: item.note, count: matches.length });
-      }
-    });
-
-    NEGATIVE_PARALLELISM.forEach(item => {
-      const matches = text.match(item.pattern);
-      if (matches) {
-        detectedFlags.push({ match: matches[0], category: 'negative-parallelism', note: item.note, count: matches.length });
-      }
-    });
-
-    const emDashMatches = text.match(EM_DASH_PATTERN);
-    if (emDashMatches) {
-      detectedFlags.push({ match: '— (Em-dash)', category: 'em-dash', note: 'Em-dashes are a major AI giveaway. Replace with periods, commas, or parentheses.', count: emDashMatches.length });
-    }
-
-    SERVICE_PATTERNS.forEach(item => {
-      const matches = text.match(item.pattern);
-      if (matches) {
-        detectedFlags.push({ match: matches[0], category: 'service-desc', note: item.note, count: matches.length });
-      }
-    });
-
-    // Counts
-    let thinkingCount = 0;
-    THINKING_MARKERS.forEach(regex => { if (regex.test(text)) thinkingCount++; });
-
-    let specCount = 0;
-    SPECIFICITY_MARKERS.forEach(regex => { if (regex.test(text)) specCount++; });
-
-    let totalFlagsCount = detectedFlags.reduce((a, b) => a + b.count, 0);
-
-    // Calculate Scores
-    let thinkingScore = Math.min(100, Math.max(10, 50 + (thinkingCount * 15) - (totalFlagsCount * 6)));
-    let recognitionScore = Math.min(100, Math.max(10, 30 + (specCount * 20)));
-    let swapScore = Math.min(100, Math.max(0, 100 - (totalFlagsCount * 18)));
-
-    let overallScore = Math.round((thinkingScore * 0.35) + (recognitionScore * 0.35) + (swapScore * 0.30));
-
-    // UI Updates
-    document.getElementById('overall-score').textContent = overallScore;
-    
-    updateDimUI('thinking', thinkingScore, `${thinkingCount} thinking marker(s) detected.`);
-    updateDimUI('recognition', recognitionScore, `${specCount} specific metric/tool detail(s) detected.`);
-    updateDimUI('swap', swapScore, `${totalFlagsCount} swappable flag(s) detected.`);
-
-    // Verdict Summary
-    const verdictLabel = document.getElementById('verdict-label');
-    const verdictSummary = document.getElementById('verdict-summary');
-    if (overallScore >= 75) {
-      verdictLabel.textContent = 'Distinctive Voice — Passes the Swap Test';
-      verdictSummary.textContent = 'This draft demonstrates distinct reasoning, specific evidence, and minimal AI clichés. It cannot easily be swapped with another author byline.';
-    } else if (overallScore >= 50) {
-      verdictLabel.textContent = 'Moderate Positioning — Needs Sharpening';
-      verdictSummary.textContent = 'Contains good core ideas, but relies on soft hedging or negative parallelism reframes. Use the Humanizer below to sharpen your voice.';
-    } else {
-      verdictLabel.textContent = 'High Swappability Risk — AI-Generic';
-      verdictSummary.textContent = 'Warning: This draft relies heavily on overused AI tropes and generic service pitches. Anyone could put their name on this.';
-    }
-
-    renderFlagsGrid(detectedFlags);
-    renderPromptsList(detectedFlags, thinkingCount, specCount);
-    renderAnnotatedDraft(text, detectedFlags);
-  }
-
-  function updateDimUI(dim, score, text) {
-    const fill = document.getElementById(`${dim}-fill`);
-    const scoreVal = document.getElementById(`${dim}-score`);
-    const desc = document.getElementById(`${dim}-desc`);
-
-    if (fill) fill.style.width = `${score}%`;
-    if (scoreVal) scoreVal.textContent = score;
-    if (desc) desc.textContent = text;
-  }
-
-  function renderFlagsGrid(flags) {
-    const grid = document.getElementById('flags-grid');
-    if (!grid) return;
-    grid.innerHTML = '';
-
-    if (flags.length === 0) {
-      grid.innerHTML = '<div class="signal-tag signal-positive" style="padding:0.75rem;">✨ No AI-generic flags detected! Clean draft.</div>';
-      return;
-    }
-
-    flags.forEach(f => {
-      const card = document.createElement('div');
-      card.className = 'flag-card';
-      card.innerHTML = `
-        <span class="flag-type ${f.category}">${f.category}</span>
-        <div>
-          <strong>"${f.match}"</strong> (${f.count}x) — <span style="color:var(--color-text-muted);">${f.note}</span>
-        </div>
-      `;
-      grid.appendChild(card);
-    });
-  }
-
-  function renderPromptsList(flags, thinkingCount, specCount) {
-    const list = document.getElementById('prompts-list');
-    if (!list) return;
-    list.innerHTML = '';
-
-    const prompts = [];
-    let num = 1;
-
-    if (flags.some(f => f.category === 'negative-parallelism')) {
-      prompts.push({
-        num: num++,
-        cat: 'Negative Parallelism Reframe',
-        text: 'Delete the rejected half ("Not X") and state your positive claim directly. "It is not about X, it is about Y" → "Y is what matters."'
-      });
-    }
-
-    if (flags.some(f => f.category === 'ai-generic')) {
-      prompts.push({
-        num: num++,
-        cat: 'AI Cliché Words',
-        text: 'Strip away buzzwords like "delve", "game-changer", and "unlock". Replace them with plain spoken English you would say out loud.'
-      });
-    }
-
-    if (flags.some(f => f.category === 'em-dash')) {
-      prompts.push({
-        num: num++,
-        cat: 'Em-Dash Removal',
-        text: 'Em-dashes (—) are the loudest AI giveaway in 2026. Break long dash-connected sentences into two short, punchy sentences.'
-      });
-    }
-
-    if (thinkingCount === 0) {
-      prompts.push({
-        num: num++,
-        cat: 'Demonstrated Thinking',
-        text: 'Add a "because" or "we tested" sentence to explain the causal mechanism behind your claim.'
-      });
-    }
-
-    if (specCount === 0) {
-      prompts.push({
-        num: num++,
-        cat: 'Specific Recognition',
-        text: 'Inject concrete numbers, specific timeframes, or named tools (e.g., Notion, Calendly, $10k MRR) so your target ICP feels recognized.'
-      });
-    }
-
-    prompts.forEach(p => {
-      const item = document.createElement('div');
-      item.className = 'prompt-card';
-      item.innerHTML = `
-        <span class="prompt-number">0${p.num}</span>
-        <div>
-          <div class="prompt-category">${p.cat}</div>
-          <div class="prompt-text">${p.text}</div>
-        </div>
-      `;
-      list.appendChild(item);
-    });
-  }
-
-  function renderAnnotatedDraft(text, flags) {
-    const container = document.getElementById('annotated-draft');
-    if (!container) return;
-    
-    let html = text;
-    flags.forEach(f => {
-      if (f.category !== 'em-dash') {
-        const regex = new RegExp(f.match.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
-        html = html.replace(regex, `<span class="annotate-flag" title="${f.note}">$&</span>`);
-      }
-    });
-
-    container.innerHTML = html;
-  }
-
-  // 4. HUMANIZER & REWRITE ENGINE
+  // Humanizer & Rewrite Handler
   const reviseBtn = document.getElementById('revise-btn');
-  const copyRevisedBtn = document.getElementById('copy-revised-btn');
-  const reviseOutput = document.getElementById('revise-output');
-
   if (reviseBtn) {
-    reviseBtn.addEventListener('click', () => {
-      const rawText = inputEl.value.trim();
-      if (!rawText) return;
-
-      const author = localStorage.getItem('swap_author_name') || '';
-      const icp = localStorage.getItem('swap_icp_target') || 'readers';
-      const proof = localStorage.getItem('swap_proof_metrics') || '';
-
-      // Client-Side Humanizing Algorithm
-      let rewritten = rawText;
-
-      // 1. Remove Clichés
-      rewritten = rewritten.replace(/\bin today'?s (?:fast-paced|digital|ever-changing|competitive|modern) (?:world|landscape|age|environment)\b/gi, '');
-      rewritten = rewritten.replace(/\bgame-?changer\b/gi, 'turning point');
-      rewritten = rewritten.replace(/\bdelve(?:s|d|ing)? into\b/gi, 'look at');
-      rewritten = rewritten.replace(/\bleverage(?:s|d|ing)?\b/gi, 'use');
-      rewritten = rewritten.replace(/\bunlock(?:s|ed|ing)? (?:your|the) potential\b/gi, 'get results');
-      rewritten = rewritten.replace(/\bseamless(?:ly)?\b/gi, 'easily');
-      rewritten = rewritten.replace(/\bsupercharge(?:s|d|ing)?\b/gi, 'grow');
-      rewritten = rewritten.replace(/\brobust\b/gi, 'strong');
-      rewritten = rewritten.replace(/\bholistic\b/gi, 'complete');
-
-      // 2. Remove Hedging
-      rewritten = rewritten.replace(/\bit is important to note that\b/gi, '');
-      rewritten = rewritten.replace(/\bit'?s worth mentioning that\b/gi, '');
-      rewritten = rewritten.replace(/\bi believe that\b/gi, '');
-
-      // 3. Fix Negative Parallelism ("Not X. Y.")
-      rewritten = rewritten.replace(/It'?s not about ([^,.]+)[,.] it'?s about ([^,.]+)/gi, '$2 matters most.');
-
-      // 4. Kill Em-Dashes
-      rewritten = rewritten.replace(/—|--/g, '. ');
-
-      // 5. Apply Viral Hook Formula (LinkedIn Hook #1 / #2)
-      const lines = rewritten.split('\n').filter(Boolean);
-      let viralHook = '';
-      if (lines.length > 0) {
-        viralHook = `Stop relying on generic tactics for ${icp}.\nHere is the exact framework we used ${proof ? '(' + proof + ')' : ''} to get results:\n\n`;
-      }
-
-      const finalRewrite = (viralHook + rewritten.replace(/\s+/g, ' ').trim()) +
-        (author ? `\n\n— ${author}` : '');
-
-      if (reviseOutput) {
-        reviseOutput.textContent = finalRewrite;
-        reviseOutput.hidden = false;
-      }
-      if (copyRevisedBtn) {
-        copyRevisedBtn.hidden = false;
-      }
-
-      // Show Platform Adaptation
-      setupPlatformAdaptation(finalRewrite);
-    });
+    reviseBtn.addEventListener('click', runHumanizerRewrite);
   }
 
-  if (copyRevisedBtn) {
-    copyRevisedBtn.addEventListener('click', () => {
-      if (reviseOutput) {
-        navigator.clipboard.writeText(reviseOutput.textContent);
-        copyRevisedBtn.textContent = 'Copied!';
-        setTimeout(() => { copyRevisedBtn.textContent = 'Copy Text'; }, 2000);
+  // Copy Revised Button
+  const copyBtn = document.getElementById('copy-revised-btn');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', () => {
+      const outputEl = document.getElementById('revise-output');
+      if (outputEl && outputEl.textContent) {
+        navigator.clipboard.writeText(outputEl.textContent);
+        copyBtn.textContent = 'Copied!';
+        setTimeout(() => { copyBtn.textContent = 'Copy Text'; }, 2000);
       }
     });
   }
+}
 
-  // 5. PLATFORM ADAPTATION ENGINE
-  function setupPlatformAdaptation(baseText) {
-    const adaptSection = document.getElementById('adapt-section');
-    const platformGrid = document.getElementById('platform-grid');
-    const adaptOutput = document.getElementById('adapt-output');
+// 5. Main Swap Test Heuristic Audit Engine
+function runSwapTest() {
+  const inputEl = document.getElementById('draft-input');
+  const resultsSec = document.getElementById('results');
+  if (!inputEl || !resultsSec) return;
 
-    if (!adaptSection || !platformGrid) return;
-    adaptSection.hidden = false;
-    platformGrid.innerHTML = '';
-    adaptOutput.innerHTML = '';
-
-    const platforms = [
-      { id: 'linkedin', name: 'LinkedIn Post', icon: '💼' },
-      { id: 'carousel', name: '6-Slide Carousel', icon: '🎨' },
-      { id: 'twitter', name: 'X / Twitter Thread', icon: '🐦' },
-      { id: 'instagram', name: 'Instagram & Reels', icon: '📸' },
-      { id: 'substack', name: 'Substack Note & Article', icon: '📬' },
-      { id: 'facebook', name: 'Facebook Group Post', icon: '👥' },
-      { id: 'threads', name: 'Threads Sequence', icon: '🧵' }
-    ];
-
-    platforms.forEach(p => {
-      const btn = document.createElement('button');
-      btn.className = 'platform-btn';
-      btn.innerHTML = `<span>${p.icon}</span> <span>${p.name}</span>`;
-      btn.type = 'button';
-      btn.addEventListener('click', () => adaptForPlatform(p.id, baseText, btn));
-      platformGrid.appendChild(btn);
-    });
+  const text = inputEl.value.trim();
+  if (!text) {
+    alert('Please enter or load a draft post to audit.');
+    return;
   }
 
-  function adaptForPlatform(platformId, text, btnEl) {
-    document.querySelectorAll('.platform-btn').forEach(b => b.classList.remove('active'));
-    btnEl.classList.add('active');
+  resultsSec.hidden = false;
+  resultsSec.scrollIntoView({ behavior: 'smooth' });
 
-    const outputContainer = document.getElementById('adapt-output');
-    if (!outputContainer) return;
-
-    const author = localStorage.getItem('swap_author_name') || '';
-    const icp = localStorage.getItem('swap_icp_target') || 'readers';
-
-    let formattedContent = '';
-
-    if (platformId === 'linkedin') {
-      formattedContent = `💼 LINKEDIN OPTIMIZED POST\n-----------------------------------\n${text}\n\n💡 What is your take on this? Drop a comment below.\n\n#ContentStrategy #Positioning #${icp.replace(/\s+/g, '')}`;
-      outputContainer.innerHTML = `<div class="rewrite-box">${escapeHtml(formattedContent)}</div>`;
-    } else if (platformId === 'carousel') {
-      // 6-Slide Editorial System
-      outputContainer.innerHTML = `
-        <div class="carousel-deck">
-          <div class="carousel-slide-card">
-            <div>
-              <div class="slide-eyebrow">01 · cover / hook</div>
-              <div class="slide-title">The Positioning Trap Holding Back ${escapeHtml(icp)}</div>
-            </div>
-            <div class="slide-footer">
-              <span>TC SOCIAL CAROUSELS</span>
-              <span>SWIPE ➔</span>
-            </div>
-          </div>
-          <div class="carousel-slide-card">
-            <div>
-              <div class="slide-eyebrow">02 · the problem</div>
-              <div class="slide-body">Most creators rely on AI templates that sound identical. When everyone sounds the same, buyers choose based on price alone.</div>
-            </div>
-            <div class="slide-footer">
-              <span>02 / 06</span>
-              <span>SWIPE ➔</span>
-            </div>
-          </div>
-          <div class="carousel-slide-card">
-            <div>
-              <div class="slide-eyebrow">03 · mindset shift</div>
-              <div class="slide-title" style="font-size:1.15rem;">"Demonstrated thinking beats generic advice every time."</div>
-            </div>
-            <div class="slide-footer">
-              <span>03 / 06</span>
-              <span>SWIPE ➔</span>
-            </div>
-          </div>
-          <div class="carousel-slide-card">
-            <div>
-              <div class="slide-eyebrow">04 · proof / data</div>
-              <div class="slide-body">Fixing byline swap flags increases prospect response rate by 3.5x without spending more on ads.</div>
-            </div>
-            <div class="slide-footer">
-              <span>04 / 06</span>
-              <span>SWIPE ➔</span>
-            </div>
-          </div>
-          <div class="carousel-slide-card">
-            <div>
-              <div class="slide-eyebrow">05 · real scenario</div>
-              <div class="slide-body">${escapeHtml(text.slice(0, 140))}...</div>
-            </div>
-            <div class="slide-footer">
-              <span>05 / 06</span>
-              <span>SWIPE ➔</span>
-            </div>
-          </div>
-          <div class="carousel-slide-card">
-            <div>
-              <div class="slide-eyebrow">06 · call to action</div>
-              <div class="slide-title" style="font-size:1.15rem;">Comment <span style="color:#8b1a1a;">"SWAP"</span> to get the audit checklist</div>
-            </div>
-            <div class="slide-footer">
-              <span>${escapeHtml(author || 'THE SWAP TEST')}</span>
-              <span>END</span>
-            </div>
-          </div>
-        </div>
-      `;
-    } else if (platformId === 'twitter') {
-      formattedContent = `🐦 X / TWITTER THREAD\n-----------------------------------\n1/5 Most ${icp} fail because they rely on swappable messaging.\n\n2/5 Here is the truth: ${text.slice(0, 200)}...\n\n3/5 When you eliminate AI clichés, buyers feel specifically recognized.\n\n4/5 Instead of pitching services, lead with diagnosis.\n\n5/5 Retweet if this helped you sharpen your post today.`;
-      outputContainer.innerHTML = `<div class="rewrite-box">${escapeHtml(formattedContent)}</div>`;
-    } else if (platformId === 'instagram') {
-      formattedContent = `📸 INSTAGRAM CAPTION & REELS SCRIPT\n-----------------------------------\n[REELS HOOK (0-3s)]: "Stop posting content that sounds like everyone else."\n\n[ON-SCREEN TEXT]: Specific Recognition > Generic Advice\n\n[CAPTION]:\n${text}\n\nSave this post for your next content audit 📌`;
-      outputContainer.innerHTML = `<div class="rewrite-box">${escapeHtml(formattedContent)}</div>`;
-    } else if (platformId === 'substack') {
-      formattedContent = `📬 SUBSTACK NOTE & NEWSLETTER OUTLINE\n-----------------------------------\n[SUBSTACK NOTE]:\n${text.slice(0, 280)}\n\n[NEWSLETTER HEADLINE OPTIONS]:\n1. The Positioning Mistake ${icp} Make\n2. Why Your Draft Fails the Byline Swap Test\n\n## Section 1: The Diagnosis\n${text}`;
-      outputContainer.innerHTML = `<div class="rewrite-box">${escapeHtml(formattedContent)}</div>`;
-    } else if (platformId === 'facebook') {
-      formattedContent = `👥 FACEBOOK GROUP POST\n-----------------------------------\nHey everyone — wanted to share a quick realization from our work with ${icp} this week:\n\n${text}\n\nHas anyone else noticed this in their niche? Let me know in the comments below!`;
-      outputContainer.innerHTML = `<div class="rewrite-box">${escapeHtml(formattedContent)}</div>`;
-    } else if (platformId === 'threads') {
-      formattedContent = `🧵 THREADS SEQUENCE\n-----------------------------------\n1. Most posts fail the swap test because they are written for everyone.\n\n2. ${text.slice(0, 240)}\n\n3. Write like a human speaking to a colleague.`;
-      outputContainer.innerHTML = `<div class="rewrite-box">${escapeHtml(formattedContent)}</div>`;
+  // 1. Detect Flagged Patterns
+  const detectedFlags = [];
+  FLAGGED_PATTERNS.forEach(item => {
+    // Reset regex index
+    item.pattern.lastIndex = 0;
+    const matches = text.match(item.pattern);
+    if (matches && matches.length > 0) {
+      detectedFlags.push({
+        match: matches[0],
+        category: item.category,
+        reason: item.reason,
+        count: matches.length
+      });
     }
+  });
+
+  // Check for em-dashes
+  const emDashMatch = text.match(/—|--/g);
+  if (emDashMatch) {
+    detectedFlags.push({
+      match: 'Em-dash (—)',
+      category: 'AI Tell',
+      reason: 'Overused punctuation tell in AI generated text.',
+      count: emDashMatch.length
+    });
   }
 
-  function escapeHtml(str) {
-    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  // 2. Count Thinking & Specificity Markers
+  let thinkingCount = 0;
+  THINKING_MARKERS.forEach(regex => {
+    if (regex.test(text)) thinkingCount++;
+  });
+
+  let specCount = 0;
+  SPECIFICITY_MARKERS.forEach(regex => {
+    if (regex.test(text)) specCount++;
+  });
+
+  // 3. Calculate Scores
+  const totalFlagCount = detectedFlags.reduce((acc, f) => acc + f.count, 0);
+
+  // Thinking Score: 40 base + (thinking markers * 15) - (flags * 6)
+  let thinkingScore = Math.min(100, Math.max(10, 40 + (thinkingCount * 15) - (totalFlagCount * 6)));
+  
+  // Specificity Score: 30 base + (specificity markers * 20)
+  let recognitionScore = Math.min(100, Math.max(10, 30 + (specCount * 20)));
+
+  // Swap / Uniqueness Score: 100 - (totalFlags * 15)
+  let swapScore = Math.min(100, Math.max(0, 100 - (totalFlagCount * 15)));
+
+  // Overall Combined Score
+  const overallScore = Math.round((thinkingScore * 0.35) + (recognitionScore * 0.35) + (swapScore * 0.30));
+
+  // Render Scores UI
+  updateScoreUI('overall-score', overallScore);
+  updateDimensionUI('thinking', thinkingScore, `${thinkingCount} thinking marker(s) detected.`);
+  updateDimensionUI('recognition', recognitionScore, `${specCount} specific metric/detail marker(s) found.`);
+  updateDimensionUI('swap', swapScore, `${totalFlagCount} swappable flag(s) detected.`);
+
+  // Verdict Summary
+  const verdictLabel = document.getElementById('verdict-label');
+  const verdictSummary = document.getElementById('verdict-summary');
+  if (overallScore >= 75) {
+    verdictLabel.textContent = 'Strong Positioning — Distinct & Unswappable';
+    verdictSummary.textContent = 'This draft demonstrates clear personal reasoning, concrete proof, and minimal AI clichés. Great job!';
+  } else if (overallScore >= 50) {
+    verdictLabel.textContent = 'Moderate Swappability — Needs Sharpening';
+    verdictSummary.textContent = 'Good core idea, but contains soft hedging or AI vocabulary phrases. Apply the humanizer rewrite to sharpen your position.';
+  } else {
+    verdictLabel.textContent = 'High Swappability Risk — AI Generic';
+    verdictSummary.textContent = 'Warning: Heavy reliance on AI cliché phrases and generic claims. Anyone in your niche could put their name on this post.';
   }
-});
+
+  // Render Cards
+  renderFlags(detectedFlags);
+  renderPrompts(detectedFlags, thinkingCount, specCount);
+  renderAnnotatedDraft(text, detectedFlags);
+
+  // Automatically trigger rewrite preview
+  runHumanizerRewrite();
+}
+
+function updateScoreUI(id, score) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = score;
+}
+
+function updateDimensionUI(prefix, score, descText) {
+  const fill = document.getElementById(`${prefix}-fill`);
+  const scoreVal = document.getElementById(`${prefix}-score`);
+  const desc = document.getElementById(`${prefix}-desc`);
+
+  if (fill) fill.style.width = `${score}%`;
+  if (scoreVal) scoreVal.textContent = `${score}/100`;
+  if (desc) desc.textContent = descText;
+}
+
+// 6. Render Flagged Indicators Grid
+function renderFlags(flags) {
+  const flagsGrid = document.getElementById('flags-grid');
+  if (!flagsGrid) return;
+
+  flagsGrid.innerHTML = '';
+
+  if (flags.length === 0) {
+    flagsGrid.innerHTML = `
+      <div class="flag-card flag-clean" style="grid-column: 1 / -1; padding: 1.25rem; background: rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.3); border-radius:8px; color:var(--color-text);">
+        <h4 style="color:#22c55e; margin-bottom:0.25rem;">✓ Zero AI Clichés Detected</h4>
+        <p style="font-size:0.875rem; color:var(--color-text-muted);">Your draft is free of obvious AI buzzwords and soft hedging phrases.</p>
+      </div>
+    `;
+    return;
+  }
+
+  flags.forEach(flag => {
+    const card = document.createElement('div');
+    card.className = 'flag-card';
+    card.style.padding = '1rem';
+    card.style.background = 'var(--color-surface)';
+    card.style.border = '1px solid var(--color-border)';
+    card.style.borderRadius = '8px';
+
+    card.innerHTML = `
+      <div style="display:flex; justify-size:space-between; align-items:center; margin-bottom:0.5rem;">
+        <span style="font-size:0.75rem; font-weight:700; text-transform:uppercase; padding:0.2rem 0.5rem; background:rgba(239,68,68,0.15); color:#ef4444; border-radius:4px;">${flag.category}</span>
+        <span style="font-size:0.75rem; color:var(--color-text-muted);">${flag.count} match(es)</span>
+      </div>
+      <h5 style="font-size:0.95rem; font-weight:700; margin-bottom:0.25rem; color:var(--color-strong);">"${flag.match}"</h5>
+      <p style="font-size:0.8125rem; color:var(--color-text-muted);">${flag.reason}</p>
+    `;
+    flagsGrid.appendChild(card);
+  });
+}
+
+function renderPrompts(flags, thinkingCount, specCount) {
+  const promptsList = document.getElementById('prompts-list');
+  if (!promptsList) return;
+
+  promptsList.innerHTML = '';
+  const prompts = [];
+
+  if (flags.length > 0) {
+    prompts.push(`Replace flagged buzzwords like "${flags[0].match}" with direct, conversational language.`);
+  }
+  if (thinkingCount < 2) {
+    prompts.push("Add a clear causal explanation ('because...') or contrarian stance in line 3.");
+  }
+  if (specCount < 2) {
+    prompts.push("Inject at least 1 real metric, dollar figure, or named framework from your client work.");
+  }
+  prompts.push("Replace 'Not X, Y' reframes with a direct claim.");
+
+  prompts.forEach((p, idx) => {
+    const item = document.createElement('div');
+    item.style.padding = '0.75rem 1rem';
+    item.style.marginBottom = '0.5rem';
+    item.style.background = 'var(--color-surface)';
+    item.style.borderLeft = '3px solid var(--color-accent)';
+    item.style.fontSize = '0.875rem';
+    item.innerHTML = `<strong>Prompt #${idx + 1}:</strong> ${p}`;
+    promptsList.appendChild(item);
+  });
+}
+
+function renderAnnotatedDraft(text, flags) {
+  const container = document.getElementById('annotated-draft');
+  if (!container) return;
+
+  let html = text;
+  flags.forEach(f => {
+    const regex = new RegExp(`(${f.match})`, 'gi');
+    html = html.replace(regex, `<mark style="background:rgba(239,68,68,0.25); color:#ef4444; padding:0.1rem 0.3rem; border-radius:3px;" title="${f.reason}">$1</mark>`);
+  });
+
+  container.innerHTML = `<div style="white-space:pre-wrap; font-family:var(--font-sans); line-height:1.6; font-size:0.9375rem;">${html}</div>`;
+}
+
+// 7. Humanizer & ICP-Aligned Rewrite Engine
+function runHumanizerRewrite() {
+  const inputEl = document.getElementById('draft-input');
+  const outputEl = document.getElementById('revise-output');
+  const copyBtn = document.getElementById('copy-revised-btn');
+  if (!inputEl || !outputEl) return;
+
+  const text = inputEl.value.trim();
+  if (!text) return;
+
+  const profile = getProfile();
+
+  // Strip AI Clichés & Hedging
+  let cleaned = text;
+  FLAGGED_PATTERNS.forEach(item => {
+    cleaned = cleaned.replace(item.pattern, '');
+  });
+
+  // Strip Em-Dashes
+  cleaned = cleaned.replace(/—|--/g, ' - ');
+
+  // Clean up double spaces and empty lines
+  cleaned = cleaned.replace(/ +/g, ' ').trim();
+
+  // Build a Scroll-Stopping Humanized Rewrite
+  const humanizedPost = `Most people in ${profile.icpTarget} are approaching this completely backwards.
+
+Here is the unfiltered truth:
+
+${cleaned}
+
+Why this matters for ${profile.icpTarget}:
+If you continue using generic templates, prospects will keep scrolling past your content.
+
+Here is how we execute this inside ${profile.offersServices}:
+- Focus on 1 specific bottleneck instead of broad advice
+- Deliver asymmetric value proof before pitching
+- Leverage proven case metrics (${profile.proofMetrics})
+
+Comment "PROOF" below and I will send you our step-by-step PDF execution guide for free.
+
+— ${profile.authorName}`;
+
+  outputEl.textContent = humanizedPost;
+  outputEl.hidden = false;
+  if (copyBtn) copyBtn.hidden = false;
+
+  // Setup Social Platform Adaptation
+  setupPlatformAdaptation(humanizedPost);
+}
+
+// 8. Social Platform Adaptation Suite
+function setupPlatformAdaptation(revisedText) {
+  const adaptSection = document.getElementById('adapt-section');
+  const platformGrid = document.getElementById('platform-grid');
+  const adaptOutput = document.getElementById('adapt-output');
+  if (!adaptSection || !platformGrid || !adaptOutput) return;
+
+  adaptSection.hidden = false;
+  platformGrid.innerHTML = '';
+
+  const platforms = [
+    { id: 'linkedin', name: 'LinkedIn', icon: '💼' },
+    { id: 'carousel', name: '6-Slide Carousel', icon: '🎨' },
+    { id: 'threads_app', name: 'Threads', icon: '🧵' },
+    { id: 'instagram_reels', name: 'Instagram Reels Script', icon: '📸' },
+    { id: 'substack', name: 'Substack Note & Article', icon: '📬' },
+    { id: 'facebook', name: 'Facebook', icon: '👥' },
+    { id: 'threads_seq', name: 'Threads Sequence', icon: '💬' }
+  ];
+
+  platforms.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'platform-card';
+    card.style.display = 'flex';
+    card.style.alignItems = 'center';
+    card.style.justifyContent = 'space-between';
+    card.style.padding = '0.75rem 1rem';
+    card.style.background = 'var(--color-surface)';
+    card.style.border = '1px solid var(--color-border)';
+    card.style.borderRadius = '8px';
+    card.style.marginBottom = '0.5rem';
+
+    card.innerHTML = `
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <span style="font-size:1.25rem;">${p.icon}</span>
+        <span style="font-size:0.9375rem; font-weight:600;">${p.name}</span>
+      </div>
+      <button type="button" class="btn btn-ghost btn-sm adapt-btn" data-platform="${p.id}">
+        Adapt
+      </button>
+    `;
+    platformGrid.appendChild(card);
+  });
+
+  // Attach Platform Adaptation Handler
+  platformGrid.addEventListener('click', (e) => {
+    const btn = e.target.closest('.adapt-btn');
+    if (!btn) return;
+
+    const platform = btn.dataset.platform;
+    const profile = getProfile();
+
+    let formatted = '';
+
+    if (platform === 'linkedin') {
+      formatted = `💼 LINKEDIN POST FORMAT
+
+${revisedText}
+
+--------------------------------------------------
+💡 Engagement Hook CTA:
+Comment "BLUEPRINT" below and I'll send you our complete step-by-step implementation PDF!`;
+    } 
+    else if (platform === 'carousel') {
+      formatted = `🎨 6-SLIDE CAROUSEL DECK FORMAT
+
+Slide 1 [COVER HOOK]:
+• Title: The ${profile.icpTarget} Growth Bottleneck
+• Subtitle: Why standard tactics fail & what to do instead
+• Author: By ${profile.authorName}
+
+Slide 2 [THE PROBLEM]:
+• Mistake #1: Relying on surface-level templates
+• Mistake #2: Interrogating prospects in DMs
+• Mistake #3: Ignoring asymmetric value assets
+
+Slide 3 [MINDSET QUOTE]:
+"When you speak to everyone, you become recognizable to no one."
+
+Slide 4 [ACTIONABLE FRAMEWORK]:
+• Step 1: Isolate the core friction point
+• Step 2: Deliver 3-min video audits
+• Step 3: Optimize offer architecture
+
+Slide 5 [REAL PROOF]:
+• Proof Metric: ${profile.proofMetrics}
+• Service Engine: ${profile.offersServices}
+
+Slide 6 [CALL TO ACTION]:
+• Want the exact execution framework?
+• Repost ♻️ & Comment "CAROUSEL" below.`;
+    }
+    else if (platform === 'threads_app') {
+      formatted = `🧵 THREADS POST
+
+Most people in ${profile.icpTarget} focus on surface tactics.
+
+Here is what actually moves the needle:
+1. Isolate the core client pain
+2. Build asymmetric value assets
+3. Scale through ${profile.offersServices}
+
+What is your biggest bottleneck this week? Drop it below 👇`;
+    }
+    else if (platform === 'instagram_reels') {
+      formatted = `📸 INSTAGRAM REELS / SHORTS SCRIPT
+
+🪝 HOOK (0:00 - 0:03):
+[On-Screen Text: "Stop doing this if you want higher conversions"]
+Spoken: "If you are struggling to convert ${profile.icpTarget}, stop making this 1 mistake."
+
+💡 BODY (0:03 - 0:30):
+[Visual: Creator talking directly to camera, fast cuts]
+Spoken: "${revisedText.slice(0, 220)}..."
+
+🚀 CALL TO ACTION (0:30 - 0:40):
+[Visual: Pointing down to caption]
+Spoken: "Comment 'REELS' below and I'll DM you the exact 3-step blueprint for free!"`;
+    }
+    else if (platform === 'substack') {
+      formatted = `📬 SUBSTACK NOTE & NEWSLETTER ARTICLE
+
+[SUBSTACK NOTE]:
+Most advice given to ${profile.icpTarget} is complete noise. Here is what our testing actually proved: ${profile.proofMetrics}. Full breakdown below 👇
+
+==================================================
+
+[SUBSTACK ARTICLE OUTLINE]:
+# Why Standard Tactics Fail for ${profile.icpTarget}
+
+## The Core Bottleneck
+${revisedText}
+
+## The Implementation Roadmap
+1. Audit your current messaging friction
+2. Deploy ${profile.offersServices}
+3. Measure conversion retention
+
+Subscribe to get next week's deep-dive case study!`;
+    }
+    else if (platform === 'facebook') {
+      formatted = `👥 FACEBOOK POST
+
+🔥 Honest truth for ${profile.icpTarget}:
+
+${revisedText}
+
+📌 Key Takeaway:
+Stop relying on generic advice. Implement a proven system built for your specific offer.
+
+👉 Drop a comment with the word "SYSTEM" and I'll send over the complete framework breakdown!`;
+    }
+    else if (platform === 'threads_seq') {
+      formatted = `💬 THREADS SEQUENCE (1/4)
+
+1/4: Most creators in ${profile.icpTarget} are stuck because they use generic messaging. Here's the fix 🧵
+
+2/4: The Core Problem:
+${revisedText.slice(0, 180)}...
+
+3/4: How we solve this with ${profile.offersServices}:
+• Step 1: Asymmetric value proof
+• Step 2: Clear positioning
+• Step 3: High-ticket conversion
+
+4/4: Want the step-by-step PDF? Comment "THREADS" below and I'll send it over!`;
+    }
+
+    adaptOutput.innerHTML = `
+      <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:8px; padding:1.25rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+          <h4 style="font-size:1rem; font-weight:700; color:var(--color-accent);">${platforms.find(p => p.id === platform).name} Output</h4>
+          <button type="button" class="btn btn-ghost btn-sm" id="copy-adapt-btn">Copy Platform Text</button>
+        </div>
+        <pre style="white-space:pre-wrap; font-family:var(--font-sans); font-size:0.875rem; line-height:1.6; color:var(--color-text); margin:0;">${formatted}</pre>
+      </div>
+    `;
+
+    const copyAdaptBtn = document.getElementById('copy-adapt-btn');
+    if (copyAdaptBtn) {
+      copyAdaptBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(formatted);
+        copyAdaptBtn.textContent = 'Copied!';
+        setTimeout(() => { copyAdaptBtn.textContent = 'Copy Platform Text'; }, 2000);
+      });
+    }
+  });
+
+  // Default trigger LinkedIn
+  const defaultBtn = platformGrid.querySelector('[data-platform="linkedin"]');
+  if (defaultBtn) defaultBtn.click();
+}
