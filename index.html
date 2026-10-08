@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Swap Test — Content Audit Engine</title>
-  <meta name="description" content="Heuristic analysis and AI-generic content audit engine for draft content.">
-  <meta name="theme-color" content="#1f1c14">
+  <title>The Swap Test — Content Audit & Viral Creator Suite</title>
+  <meta name="description" content="Client-side content audit, humanizer, ICP research, and viral platform rewrite engine for creators.">
+  <meta name="theme-color" content="#14130d">
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <a href="#draft-input" class="skip-link">Skip to main content</a>
+  <a href="#draft-input" class="skip-link" style="position:absolute;left:-9999px;">Skip to main content</a>
 
   <!-- Header -->
   <header class="site-header">
@@ -21,32 +21,101 @@
         </svg>
         <div class="brand-text">
           <span class="brand-name">The Swap Test</span>
-          <span class="brand-sub">Content Audit Engine</span>
+          <span class="brand-sub">Content Audit & Creator Suite</span>
         </div>
       </div>
       <button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch theme">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          <circle cx="12" cy="12" r="5"/>
+          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
         </svg>
       </button>
     </div>
   </header>
 
-  <!-- Main Content -->
+  <!-- Main Container -->
   <main class="container">
     <!-- Hero Section -->
     <section class="hero">
       <h1>The Swap Test</h1>
       <p class="hero-lede">
-        Evaluate your draft content for AI-generic language, safe hedging, and swappable messaging before publishing.
+        Evaluate your draft content for AI-generic clichés, humanize your tone, research daily ICP pain points, and generate viral platform-adapted posts — 100% serverless.
       </p>
     </section>
 
-    <!-- Input Section -->
+    <!-- SECTION 1: Personal Brand & ICP Profile Manager -->
+    <section class="panel-card">
+      <div class="panel-header">
+        <div class="panel-title">
+          <span>👤</span>
+          <span>Your Brand & ICP Context</span>
+        </div>
+      </div>
+      <p class="panel-sub">
+        Save your company details, ideal client profile (ICP), and core offers. The rewrite engine will automatically weave your voice and proof points into your posts.
+      </p>
+      <div class="profile-grid">
+        <div class="input-group">
+          <label for="author-name">Author / Company Name</label>
+          <input type="text" id="author-name" class="text-input" placeholder="e.g. Jane Doe, Growth Coach">
+        </div>
+        <div class="input-group">
+          <label for="icp-target">Target ICP (Ideal Customer)</label>
+          <input type="text" id="icp-target" class="text-input" placeholder="e.g. B2B Founders doing $10k-$50k MRR">
+        </div>
+        <div class="input-group">
+          <label for="tone-voice">Tone & Voice Quirks</label>
+          <input type="text" id="tone-voice" class="text-input" placeholder="e.g. Direct, punchy, anti-guru, no fluff">
+        </div>
+        <div class="input-group">
+          <label for="offers-services">Core Offer / Service</label>
+          <input type="text" id="offers-services" class="text-input" placeholder="e.g. 1:1 Founder Coaching, 90-Day Sprint">
+        </div>
+      </div>
+      <div class="input-group" style="margin-bottom:1rem;">
+        <label for="proof-metrics">Key Metrics & Proof Points</label>
+        <textarea id="proof-metrics" class="textarea-sm" placeholder="e.g. Scaled 12 founders to $1M ARR, 84% client retention rate"></textarea>
+      </div>
+      <div style="display:flex; align-items:center; gap:0.75rem;">
+        <button type="button" id="save-profile-btn" class="btn btn-primary btn-sm">
+          💾 Save Profile Context
+        </button>
+        <span id="profile-status" style="font-size:0.8125rem; color:var(--color-strong);" hidden>
+          ✓ Saved to browser storage!
+        </span>
+      </div>
+    </section>
+
+    <!-- SECTION 2: ICP Research & Trending Topics Generator -->
+    <section class="panel-card">
+      <div class="panel-header">
+        <div class="panel-title">
+          <span>🔥</span>
+          <span>ICP Topic & Pain Point Generator</span>
+        </div>
+      </div>
+      <p class="panel-sub">
+        Simulated social intelligence across Reddit, LinkedIn, Facebook Groups, and YouTube. Surface top struggles to inspire your next post.
+      </p>
+      <div class="research-controls">
+        <label for="niche-select" style="font-size:0.8125rem; font-weight:600; text-transform:uppercase; color:var(--color-text-muted);">Niche Industry:</label>
+        <select id="niche-select" class="select-input" style="max-width:220px;">
+          <option value="coaching">Online Coaching / Consulting</option>
+          <option value="saas">B2B SaaS / Software</option>
+          <option value="agency">Agency / Marketing Services</option>
+        </select>
+        <button type="button" id="generate-research-btn" class="btn btn-ghost btn-sm">
+          🔄 Refresh Daily Topics
+        </button>
+      </div>
+      <div id="topics-grid" class="topics-grid"></div>
+    </section>
+
+    <!-- SECTION 3: Draft Input Section -->
     <section class="input-section">
       <div class="input-panel">
         <label for="draft-input" class="input-label">Draft Post</label>
-        <textarea id="draft-input" class="draft-input" placeholder="Paste your draft post here to run the audit..."></textarea>
+        <textarea id="draft-input" class="draft-input" placeholder="Paste your draft post here, or click 'Draft Post From This Topic' above..."></textarea>
         <div class="input-meta">
           <span id="char-count" class="char-count">0 characters</span>
           <div class="input-actions">
@@ -58,7 +127,7 @@
       </div>
     </section>
 
-    <!-- Results Section -->
+    <!-- SECTION 4: Results Section -->
     <section id="results" class="results-section" hidden>
       <!-- Overall Verdict Card -->
       <div class="verdict-card">
@@ -77,7 +146,6 @@
         <!-- Thinking Dimension -->
         <div class="dimension-card">
           <div class="dimension-header">
-            <span class="dimension-number">01</span>
             <h3>Demonstrated Thinking</h3>
             <span class="dimension-vs">vs Service Description</span>
           </div>
@@ -88,13 +156,11 @@
             <span id="thinking-score" class="dimension-score-value">--</span>
           </div>
           <p id="thinking-desc" class="dimension-desc"></p>
-          <div id="thinking-signals" class="dimension-signals"></div>
         </div>
 
         <!-- Recognition Dimension -->
         <div class="dimension-card">
           <div class="dimension-header">
-            <span class="dimension-number">02</span>
             <h3>Specific Recognition</h3>
             <span class="dimension-vs">vs Broad Agreement</span>
           </div>
@@ -105,15 +171,13 @@
             <span id="recognition-score" class="dimension-score-value">--</span>
           </div>
           <p id="recognition-desc" class="dimension-desc"></p>
-          <div id="recognition-signals" class="dimension-signals"></div>
         </div>
 
-        <!-- Swap Test Dimension -->
+        <!-- Byline Swap Dimension -->
         <div class="dimension-card">
           <div class="dimension-header">
-            <span class="dimension-number">03</span>
             <h3>Byline Swap Test</h3>
-            <span class="dimension-vs">Owner vs Swappable Signal</span>
+            <span class="dimension-vs">Uniqueness & Voice</span>
           </div>
           <div class="dimension-score-bar">
             <div class="score-track">
@@ -122,110 +186,53 @@
             <span id="swap-score" class="dimension-score-value">--</span>
           </div>
           <p id="swap-desc" class="dimension-desc"></p>
-          <div id="swap-signals" class="dimension-signals"></div>
         </div>
       </div>
 
       <!-- Flagged Indicators -->
-      <section id="flags-section" class="flags-section">
-        <h3 class="section-heading">Flagged Indicators</h3>
-        <p class="section-sub">Specific phrases and missing signals that increase swappability</p>
+      <section>
+        <h3 style="font-size:1.125rem; font-weight:700; margin-bottom:0.25rem;">Flagged Indicators</h3>
+        <p style="font-size:0.875rem; color:var(--color-text-muted); margin-bottom:1rem;">Overused phrases and missing signals that increase swappability</p>
         <div id="flags-grid" class="flags-grid"></div>
       </section>
 
       <!-- Revision Prompts -->
-      <section id="prompts-section" class="prompts-section">
-        <h3 class="section-heading">Revision Prompts</h3>
-        <p class="section-sub">Actionable prompts to inject original thinking and sharpen your position</p>
+      <section>
+        <h3 style="font-size:1.125rem; font-weight:700; margin-bottom:0.25rem;">Revision Prompts</h3>
+        <p style="font-size:0.875rem; color:var(--color-text-muted); margin-bottom:1rem;">Actionable guidance to inject original thinking and sharpen your position</p>
         <div id="prompts-list" class="prompts-list"></div>
       </section>
 
       <!-- Annotated Draft -->
-      <section id="annotated-section" class="annotated-section">
-        <h3 class="section-heading">Annotated Draft</h3>
-        <p class="section-sub">Hover over highlighted text to see the detected pattern</p>
+      <section>
+        <h3 style="font-size:1.125rem; font-weight:700; margin-bottom:0.25rem;">Annotated Draft</h3>
+        <p style="font-size:0.875rem; color:var(--color-text-muted); margin-bottom:1rem;">Hover over highlighted passages to see flagged rules</p>
         <div id="annotated-draft" class="annotated-draft"></div>
       </section>
 
-      <!-- AI Revision Engine -->
-      <section class="revise-section">
-        <h3 class="section-heading">AI Revision Engine</h3>
-        <p class="section-sub">Generate an automatic rewrite addressing all flagged issues using your backend API</p>
-        <div class="revise-actions">
-          <button id="revise-btn" type="button" class="btn btn-primary">Generate AI Rewrite</button>
+      <!-- SECTION 5: Humanizer & AI Rewrite Engine -->
+      <section class="panel-card" style="margin-top:2rem;">
+        <h3 style="font-size:1.125rem; font-weight:700; margin-bottom:0.25rem;">Humanizer & ICP-Aligned Rewrite Engine</h3>
+        <p style="font-size:0.875rem; color:var(--color-text-muted); margin-bottom:1rem;">Generate an instant, humanized rewrite incorporating your saved brand context and viral hook formulas.</p>
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:1rem;">
+          <button id="revise-btn" type="button" class="btn btn-primary">Generate Humanized & ICP Rewrite</button>
           <button id="copy-revised-btn" type="button" class="btn btn-ghost" hidden>Copy Text</button>
         </div>
-        <div id="revise-loading" class="loading-state" hidden>
-          <div class="loading-spinner"></div>
-          <p>Rewriting draft post with AI...</p>
-        </div>
-        <div id="revise-error" class="error-state" hidden></div>
-        <div id="revise-output" class="revise-output" hidden></div>
+        <div id="revise-output" class="rewrite-box" hidden></div>
       </section>
 
-      <!-- Platform Adaptation Section -->
-      <section id="adapt-section" class="adapt-section" hidden>
-        <h3 class="section-heading">Adapt for Social Platforms</h3>
-        <p class="section-sub">Transform your revised post for specific channels</p>
+      <!-- SECTION 6: Platform Adaptation Suite -->
+      <section id="adapt-section" class="panel-card" hidden>
+        <h3 style="font-size:1.125rem; font-weight:700; margin-bottom:0.25rem;">Adapt for Social Platforms</h3>
+        <p style="font-size:0.875rem; color:var(--color-text-muted); margin-bottom:1rem;">Select a platform to format your revised post into native channel templates.</p>
         <div id="platform-grid" class="platform-grid"></div>
-        <div id="adapt-loading" class="loading-state" hidden>
-          <div class="loading-spinner"></div>
-          <p id="adapt-loading-text">Adapting content...</p>
-        </div>
-        <div id="adapt-error" class="error-state" hidden></div>
-        <div id="adapt-output" class="adapt-output"></div>
-      </section>
-
-      <!-- Scoring Rubric Reference -->
-      <section class="rubric-reference">
-        <button id="rubric-toggle" type="button" class="rubric-toggle" aria-expanded="false">
-          <h3 class="section-heading">Scoring Rubric Reference</h3>
-          <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M6 9l6 6 6-6"/>
-          </svg>
-        </button>
-        <div id="rubric-content" class="rubric-content" hidden>
-          <div class="rubric-grid">
-            <div class="rubric-block">
-              <h3>Dimension 1: Demonstrated Thinking</h3>
-              <p class="rubric-question">Does the post show original reasoning or just describe services?</p>
-              <div class="rubric-scale">
-                <div class="scale-row">
-                  <span class="scale-label score-strong">70–100: Strong Thinking</span>
-                  <p>Includes causal explanations ("because"), observations, or contrarian stances.</p>
-                </div>
-                <div class="scale-row">
-                  <span class="scale-label score-weak">0–44: Weak Thinking</span>
-                  <p>Dominated by generic promotional language and CTAs.</p>
-                </div>
-              </div>
-            </div>
-            <div class="rubric-block">
-              <h3>Dimension 2: Specific Recognition</h3>
-              <p class="rubric-question">Does the reader feel specifically recognized?</p>
-              <div class="rubric-scale">
-                <div class="scale-row">
-                  <span class="scale-label score-strong">70–100: Specific Detail</span>
-                  <p>Contains numbers, named tools, timeframes, or explicit scenarios.</p>
-                </div>
-                <div class="scale-row">
-                  <span class="scale-label score-weak">0–44: Broad Agreement</span>
-                  <p>Relies on vague generalities like "in today's world."</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="rubric-note">
-            <p><strong>Note:</strong> Scores are calculated in real time using client-side heuristic rules.</p>
-          </div>
-        </div>
+        <div id="adapt-output" style="margin-top:1.25rem;"></div>
       </section>
     </section>
   </main>
 
-  <!-- Footer -->
   <footer class="site-footer">
-    <p>The Swap Test — Content Audit Engine &copy; 2026. Built for GitHub PWA deployment.</p>
+    <p>The Swap Test — Content Audit & Viral Creator Suite &copy; 2026. 100% Client-Side PWA.</p>
   </footer>
 
   <script src="app.js"></script>
