@@ -1,1207 +1,673 @@
-/* ============================================================
-THE SWAP TEST — Content Audit Engine
-Heuristic analysis for AI-generic indicators in draft content
-============================================================ */
+/**
+ * THE SWAP TEST — Content Audit & Viral Creator Suite (v2.0)
+ * 100% Client-Side Progressive Web App (Zero Server / Zero API Fees)
+ */
 
-// ─── AI-GENERIC PHRASE LIBRARY ──────────────────────────────
-const AI_GENERIC_PHRASES = [
-  // Openers & transitions
-  { phrase: /in today'?s (world|landscape|digital age|fast-paced world|society)/gi, category: 'ai-generic', note: 'Generic opener that signals AI-polished content.' },
-  { phrase: /in the world of/gi, category: 'ai-generic', note: 'Vague framing that adds no specificity.' },
-  { phrase: /when it comes to/gi, category: 'ai-generic', note: 'Overused transition. Get to the point.' },
-  { phrase: /let'?s dive in/gi, category: 'ai-generic', note: 'Filler transition. Just start the insight.' },
-  { phrase: /let'?s (explore|break down|unpack|dig into)/gi, category: 'ai-generic', note: 'Generic transition that delays the actual content.' },
-  { phrase: /here'?s the thing/gi, category: 'ai-generic', note: 'Overused hook. Lead with the insight itself.' },
-  { phrase: /here'?s why/gi, category: 'ai-generic', note: 'Generic setup phrase.' },
-  { phrase: /at the end of the day/gi, category: 'ai-generic', note: 'Cliché summary phrase.' },
-  { phrase: /it'?s (important to note|worth noting|worth mentioning|worth considering)/gi, category: 'safe-language', note: 'Hedging qualifier. The author takes no stance.' },
-  { phrase: /it goes without saying/gi, category: 'ai-generic', note: 'If it goes without saying, don\'t say it.' },
-  { phrase: /needless to say/gi, category: 'ai-generic', note: 'Filler. Remove and start with the point.' },
-
-  // Benefit / transformation language
-  { phrase: /unlock (your|the) (potential|power|success|growth)/gi, category: 'ai-generic', note: 'Vague transformation language.' },
-  { phrase: /(take|elevate|level up) (your|it) to the next level/gi, category: 'ai-generic', note: 'Generic growth claim.' },
-  { phrase: /(transform|revolutionize|disrupt) (your|the)/gi, category: 'ai-generic', note: 'Hyperbolic transformation language.' },
-  { phrase: /(skyrocket|boost|supercharge|turbocharge|amplify) (your|the)/gi, category: 'ai-generic', note: 'Inflated verb that signals AI generation.' },
-  { phrase: /the power of/gi, category: 'ai-generic', note: 'Overused abstraction.' },
-  { phrase: /empower (yourself|others|your team)/gi, category: 'ai-generic', note: 'Corporate empowerment language.' },
-  { phrase: /game.?changer/gi, category: 'ai-generic', note: 'Overused buzzword.' },
-  { phrase: /paradigm shift/gi, category: 'ai-generic', note: 'Corporate jargon.' },
-  { phrase: /cutting.?edge/gi, category: 'ai-generic', note: 'Vague innovation claim.' },
-  { phrase: /holistic approach/gi, category: 'ai-generic', note: 'Overused methodology claim.' },
-  { phrase: /seamless (integration|experience|process)/gi, category: 'ai-generic', note: 'Generic product language.' },
-  { phrase: /robust solution/gi, category: 'ai-generic', note: 'Corporate jargon.' },
-  { phrase: /best practices/gi, category: 'ai-generic', note: 'Signals conformity, not unique thinking.' },
-  { phrase: /actionable insights/gi, category: 'ai-generic', note: 'Generic value claim.' },
-  { phrase: /low.?hanging fruit/gi, category: 'ai-generic', note: 'Overused business metaphor.' },
-  { phrase: /move the needle/gi, category: 'ai-generic', note: 'Corporate cliché.' },
-  { phrase: /deep dive/gi, category: 'ai-generic', note: 'Overused content descriptor.' },
-  { phrase: /value proposition/gi, category: 'ai-generic', note: 'Corporate jargon.' },
-  { phrase: /competitive (advantage|edge)/gi, category: 'ai-generic', note: 'Generic business language.' },
-  { phrase: /streamline (your|the|processes)/gi, category: 'ai-generic', note: 'Generic optimization language.' },
-  { phrase: /scalable (solution|approach|model)/gi, category: 'ai-generic', note: 'Corporate buzzword.' },
-  { phrase: /frictionless/gi, category: 'ai-generic', note: 'Generic UX jargon.' },
-
-  // Engagement bait
-  { phrase: /what if I told you/gi, category: 'ai-generic', note: 'Clickbait hook pattern.' },
-  { phrase: /let that sink in/gi, category: 'ai-generic', note: 'Engagement bait.' },
-  { phrase: /this\.\s*this right here\./gi, category: 'ai-generic', note: 'Engagement bait pattern.' },
-  { phrase: /hot take/gi, category: 'ai-generic', note: 'Often precedes a conventional opinion.' },
-  { phrase: /unpopular opinion/gi, category: 'ai-generic', note: 'Usually followed by a popular opinion.' },
-  { phrase: /plot twist/gi, category: 'ai-generic', note: 'Narrative gimmick.' },
-  { phrase: /nobody talks about/gi, category: 'ai-generic', note: 'Overused hook claiming novelty.' },
-  { phrase: /the secret to/gi, category: 'ai-generic', note: 'Generic promise of hidden knowledge.' },
-  { phrase: /proven strategies/gi, category: 'ai-generic', note: 'Generic credibility claim.' },
-  { phrase: /results.?driven/gi, category: 'ai-generic', note: 'Generic corporate language.' },
-
-  // Listicle patterns
-  { phrase: /\d+ (reasons|ways|tips|strategies|secrets|lessons) (why|to|for|I)/gi, category: 'ai-generic', note: 'Listicle title pattern.' },
-  { phrase: /the ultimate guide to/gi, category: 'ai-generic', note: 'Generic content promise.' },
-  { phrase: /everything you need to know about/gi, category: 'ai-generic', note: 'Generic content promise.' },
-  { phrase: /you'?re doing \w+ wrong/gi, category: 'ai-generic', note: 'Generic contrarian hook.' },
-  { phrase: /stop doing \w+/gi, category: 'ai-generic', note: 'Generic advice hook.' },
-  { phrase: /start doing \w+/gi, category: 'ai-generic', note: 'Generic advice hook.' },
-
-  // Broad agreement
-  { phrase: /everyone knows/gi, category: 'broad-agreement', note: 'Assumes agreement rather than earning it.' },
-  { phrase: /we all (want|know|need|struggle)/gi, category: 'broad-agreement', note: 'Universal claim that lacks specificity.' },
-  { phrase: /success requires/gi, category: 'broad-agreement', note: 'Generic platitude.' },
-  { phrase: /the key to success/gi, category: 'broad-agreement', note: 'Reduces complex topics to a single "key."' },
-  { phrase: /gone are the days/gi, category: 'broad-agreement', note: 'Generic framing of change.' },
-  { phrase: /in this day and age/gi, category: 'broad-agreement', note: 'Vague temporal framing.' },
-
-  // Hedge words
-  { phrase: /\b(might|could|may) potentially/gi, category: 'safe-language', note: 'Redundant hedging.' },
-  { phrase: /\bpossibly\b/gi, category: 'safe-language', note: 'Hedge word that weakens the claim.' },
-  { phrase: /\bperhaps\b/gi, category: 'safe-language', note: 'Hedge word that weakens the claim.' },
-  { phrase: /\barguably\b/gi, category: 'safe-language', note: 'Hedge word that avoids commitment.' },
-  { phrase: /\bto some extent\b/gi, category: 'safe-language', note: 'Hedge that dilutes the point.' },
-  { phrase: /\bcan help\b/gi, category: 'safe-language', note: 'Non-committal benefit claim.' },
-  { phrase: /\bhas the potential to\b/gi, category: 'safe-language', note: 'Hedged future claim.' },
-  { phrase: /\bmay lead to\b/gi, category: 'safe-language', note: 'Hedged causal claim.' },
-  { phrase: /\bit is (often|sometimes|generally|typically|usually) (said|thought|believed)\b/gi, category: 'safe-language', note: 'Passive hedge that avoids attribution.' },
-  { phrase: /\bin many ways\b/gi, category: 'safe-language', note: 'Vague qualifier.' },
-  { phrase: /\bto a certain (extent|degree)\b/gi, category: 'safe-language', note: 'Hedge that dilutes the claim.' },
-
-  // Over-polishing transitions
-  { phrase: /\bfurthermore\b/gi, category: 'over-polishing', note: 'Academic transition. Use conversational flow.' },
-  { phrase: /\bmoreover\b/gi, category: 'over-polishing', note: 'Academic transition. Use conversational flow.' },
-  { phrase: /\badditionally\b/gi, category: 'over-polishing', note: 'Academic transition. Use conversational flow.' },
-  { phrase: /\bconsequently\b/gi, category: 'over-polishing', note: 'Academic transition.' },
-  { phrase: /\bnevertheless\b/gi, category: 'over-polishing', note: 'Academic transition.' },
-  { phrase: /\bnonetheless\b/gi, category: 'over-polishing', note: 'Academic transition.' },
-  { phrase: /\bnotwithstanding\b/gi, category: 'over-polishing', note: 'Overly formal transition.' },
-  { phrase: /\bin conclusion\b/gi, category: 'over-polishing', note: 'Essay-style closing.' },
-  { phrase: /\bin summary\b/gi, category: 'over-polishing', note: 'Essay-style closing.' },
-  { phrase: /\bto summarize\b/gi, category: 'over-polishing', note: 'Essay-style closing.' },
-  { phrase: /\bas (previously )?mentioned\b/gi, category: 'over-polishing', note: 'Academic callback.' },
-  { phrase: /\bit is (crucial|essential|vital|imperative) (to|that)\b/gi, category: 'over-polishing', note: 'Overwrought importance claim.' },
+// ─── AI-GENERIC & HUMANIZER PATTERNS ────────────────────────
+const AI_CLICHES = [
+  { pattern: /\bin today'?s (?:fast-paced|digital|ever-changing|competitive|modern) (?:world|landscape|age|environment)\b/gi, category: 'ai-generic', note: 'Generic AI opening trope.' },
+  { pattern: /\bgame-?changer\b/gi, category: 'ai-generic', note: 'Overused buzzword.' },
+  { pattern: /\bparadigm shift\b/gi, category: 'ai-generic', note: 'Corporate jargon.' },
+  { pattern: /\bleverage(?:s|d|ing)?\b/gi, category: 'ai-generic', note: 'Overused action verb.' },
+  { pattern: /\bdelve(?:s|d|ing)?\b/gi, category: 'ai-generic', note: 'Classic LLM vocabulary tell.' },
+  { pattern: /\btapestry\b/gi, category: 'ai-generic', note: 'Classic LLM vocabulary tell.' },
+  { pattern: /\btestament\b/gi, category: 'ai-generic', note: 'Classic LLM vocabulary tell.' },
+  { pattern: /\bunlock(?:s|ed|ing)? (?:your|the) (?:potential|power|growth)\b/gi, category: 'ai-generic', note: 'Vague growth claim.' },
+  { pattern: /\bseamless(?:ly)?\b/gi, category: 'ai-generic', note: 'Vague quality descriptor.' },
+  { pattern: /\brobust\b/gi, category: 'ai-generic', note: 'Overused technical buzzword.' },
+  { pattern: /\bholistic\b/gi, category: 'ai-generic', note: 'Vague consulting jargon.' },
+  { pattern: /\bsynergy\b/gi, category: 'ai-generic', note: 'Corporate fluff.' },
+  { pattern: /\bsupercharge(?:s|d|ing)?\b/gi, category: 'ai-generic', note: 'Hype vocabulary.' },
+  { pattern: /\bempower(?:s|ed|ing)?\b/gi, category: 'ai-generic', note: 'Generic capability claim.' },
+  { pattern: /\bactionable insights\b/gi, category: 'ai-generic', note: 'Generic value claim.' },
+  { pattern: /\bmove the needle\b/gi, category: 'ai-generic', note: 'Business cliché.' },
+  { pattern: /\bdeep dive\b/gi, category: 'ai-generic', note: 'Overused content descriptor.' },
+  { pattern: /\bstreamline\b/gi, category: 'ai-generic', note: 'Generic optimization verb.' }
 ];
 
-// ─── SERVICE DESCRIPTION PATTERNS ───────────────────────────
+const HEDGING_PATTERNS = [
+  { pattern: /\b(?:it is important to note that|it'?s worth mentioning that|it goes without saying that)\b/gi, category: 'safe-language', note: 'Filler framing before actual point.' },
+  { pattern: /\b(?:in my opinion|i believe that|i feel that|arguably|perhaps|maybe)\b/gi, category: 'safe-language', note: 'Unnecessary stance-softener.' },
+  { pattern: /\b(?:could potentially|might possibly|seems to be|tends to|can help to)\b/gi, category: 'safe-language', note: 'Double-hedged statement.' }
+];
+
+const NEGATIVE_PARALLELISM = [
+  { pattern: /\b(?:it'?s not|this isn'?s|not) about [^,.]+[,.] (?:it'?s|this is) about\b/gi, category: 'negative-parallelism', note: 'Negative parallelism reframe ("Not X, Y"). Rewrite as direct positive claim.' },
+  { pattern: /\b(?:stop thinking|forget|don'?t focus on) [^,.]+[,.] (?:start|focus on)\b/gi, category: 'negative-parallelism', note: 'Banned "Forget X, Focus Y" reframe pattern.' }
+];
+
+const EM_DASH_PATTERN = /—|--/g;
+
 const SERVICE_PATTERNS = [
-  { phrase: /\bI help\b/gi, type: 'service-desc', note: 'Service description language.' },
-  { phrase: /\bwe (offer|provide|deliver|specialize in)\b/gi, type: 'service-desc', note: 'Service description language.' },
-  { phrase: /\bmy (program|coaching|course|service|framework|method|system|approach|methodology)\b/gi, type: 'service-desc', note: 'Service description language.' },
-  { phrase: /\bbook a (call|session|consultation|discovery call)\b/gi, type: 'service-desc', note: 'Direct CTA without preceding insight.' },
-  { phrase: /\bDM me\b/gi, type: 'service-desc', note: 'Direct CTA.' },
-  { phrase: /\blink in bio\b/gi, type: 'service-desc', note: 'Direct CTA.' },
-  { phrase: /\bwork with me\b/gi, type: 'service-desc', note: 'Service description language.' },
-  { phrase: /\b(join|enroll in|sign up for|apply for) my\b/gi, type: 'service-desc', note: 'Direct enrollment language.' },
-  { phrase: /\bfree consultation\b/gi, type: 'service-desc', note: 'Service offering language.' },
-  { phrase: /\bstrategy session\b/gi, type: 'service-desc', note: 'Service offering language.' },
-  { phrase: /\bdiscovery call\b/gi, type: 'service-desc', note: 'Service offering language.' },
-  { phrase: /\bmy (clients|students|members) (get|receive|have access to)\b/gi, type: 'service-desc', note: 'Feature description rather than insight.' },
-  { phrase: /\b(exclusive|premium|proprietary) (content|access|strategy|framework)\b/gi, type: 'service-desc', note: 'Marketing language.' },
-  { phrase: /\b(spots|seats) (are )?(limited|available|filling up)\b/gi, type: 'service-desc', note: 'Scarcity marketing language.' },
-  { phrase: /\benroll(ment)? (now )?(open|closing|closes)\b/gi, type: 'service-desc', note: 'Enrollment marketing language.' },
+  { pattern: /\bI help\b/gi, category: 'service-desc', note: 'Service description pitch.' },
+  { pattern: /\bmy (?:coaching|program|framework|method|service)\b/gi, category: 'service-desc', note: 'Service-focused language.' },
+  { pattern: /\bbook a (?:call|discovery call|session)\b/gi, category: 'service-desc', note: 'Direct pitch CTA without insight.' },
+  { pattern: /\bDM me\b/gi, category: 'service-desc', note: 'Direct CTA.' }
 ];
 
-// ─── THINKING / ORIGINALITY MARKERS ──────────────────────────
 const THINKING_MARKERS = [
-  /\bbecause\b/gi,
-  /\bthe reason\b/gi,
-  /\bhere'?s why\b/gi,
-  /\bwhat (I'?ve |I )?(noticed|observed|seen|found)\b/gi,
-  /\bthe (problem|issue|mistake|trap) (is|with)\b/gi,
-  /\bwhat (actually|really) happens\b/gi,
-  /\bthe truth is\b/gi,
-  /\bnobody tells you\b/gi,
-  /\bI (disagree|push back|take issue)\b/gi,
-  /\bcontrary to\b/gi,
-  /\bmost people (think|believe|assume)\b/gi,
-  /\bthe conventional (wisdom|approach) (is|says)\b/gi,
-  /\bI (believe|think|argue|contend|maintain)\b/gi,
-  /\bI'?ve (found|learned|realized|discovered)\b/gi,
-  /\bthe mechanism\b/gi,
-  /\bhow this (works|actually works)\b/gi,
-  /\bwhat I mean is\b/gi,
-  /\bhere'?s the (problem|issue|thing nobody)\b/gi,
-  /\bthe pattern I see\b/gi,
-  /\bin my experience\b/gi,
-  /\bwhat I'?ve come to realize\b/gi,
-  /\bthe real (problem|issue|reason|cost|question)\b/gi,
-  /\bthis is (why|because)\b/gi,
-  /\bthe mistake (is|here is|I see)\b/gi,
+  /\bbecause\b/i, /\bhere'?s why\b/i, /\bthe reason\b/i, /\binstead of\b/i,
+  /\bcontrary to\b/i, /\bmy mistake was\b/i, /\bwe tested\b/i, /\bthe data shows\b/i,
+  /\bunpopular opinion\b/i, /\btrade-off\b/i, /\bthe mechanism\b/i, /\bwhat I noticed\b/i
 ];
 
-// ─── SPECIFICITY MARKERS ────────────────────────────────────
 const SPECIFICITY_MARKERS = [
-  /\$[\d,]+(\.\d+)?/,
-  /\b\d+%/g,
-  /\b\d+ (clients|customers|students|hours|days|weeks|months|years)\b/gi,
-  /\b\d+(am|pm|:00)\b/gi,
-  /\b(monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b/gi,
-  /\b(q[1-4]|quarter [1-4])\b/gi,
-  /\b(january|february|march|april|may|june|july|august|september|october|november|december)\b/gi,
-  /\b(kajabi|calendly|notion|slack|zoom|instagram|linkedin|twitter|x|tiktok|youtube|stripe|convertkit|mailchimp|clickfunnels|zapier|airtable|asana|slack|hubspot|salesforce|wordpress|squarespace|webflow|canva|premiere|final cut|photoshop|figma)\b/gi,
-  /\b\d+ (year|month|week|day)s? ago\b/gi,
-  /\blast (week|month|year|quarter|tuesday|wednesday|thursday|friday|monday|saturday|sunday)\b/gi,
-  /\byesterday\b/gi,
-  /\bthis (morning|afternoon|evening|week|month)\b/gi,
+  /\$[\d,]+(?:\.\d+)?/i,
+  /\b\d+%/i,
+  /\b\d+ (?:clients|founders|coaches|days|weeks|months|years|hours|mrr|arr)\b/i,
+  /\b(?:january|february|march|april|may|june|july|august|september|october|november|december)\b/i,
+  /\b(?:kajabi|calendly|notion|slack|zoom|instagram|linkedin|twitter|x|convertkit|stripe|hubspot)\b/i
 ];
 
-// ─── FIRST-PERSON / OWNERSHIP MARKERS ────────────────────────
-const OWNERSHIP_MARKERS = [
-  /\bI\b/g,
-  /\bmy\b/g,
-  /\bI'?ve\b/g,
-  /\bI'?m\b/g,
-  /\bme\b/gi,
-  /\bmy (client|customer|student|member)s?\b/gi,
-];
-
-// ─── CONTRARIAN / UNIQUE POV MARKERS ────────────────────────
-const CONTRARIAN_MARKERS = [
-  /\bI disagree\b/gi,
-  /\bmost people (think|believe|assume|say|do)\b/gi,
-  /\bcontrary to\b/gi,
-  /\bthe conventional (wisdom|approach) (is wrong|is broken|fails|misses)\b/gi,
-  /\bthis is backwards\b/gi,
-  /\bthis is wrong\b/gi,
-  /\bthat'?s (a myth|not true|false|wrong|the problem)\b/gi,
-  /\beveryone (is wrong|got it wrong|misses|overlooks)\b/gi,
-  /\bthe opposite is true\b/gi,
-  /\bhere'?s what (no one|nobody) (tells|talks about)\b/gi,
-  /\bunpopular opinion\b/gi,
-  /\bhot take\b/gi,
-  /\bI (push back|take issue|disagree|reject)\b/gi,
-];
-
-// ─── ICP / COACHING-SPECIFIC MARKERS ─────────────────────────
-const ICP_MARKERS = [
-  /\blaunch\b/gi,
-  /\benrollment\b/gi,
-  /\b(high.?ticket|premium) (offer|program|client|sale|coaching)\b/gi,
-  /\bsales call\b/gi,
-  /\bwebinar\b/gi,
-  /\bfunnel\b/gi,
-  /\bcohort\b/gi,
-  /\bobjection\b/gi,
-  /\bclient win\b/gi,
-  /\bniche\b/gi,
-  /\bprogram (launch|fill|close)\b/gi,
-  /\b(refund|cancel|churn)\b/gi,
-  /\b(DM|message) from\b/gi,
-  /\b(hater|troll|skeptic)\b/gi,
-  /\bguest (podcast|post|speaking|lecture)\b/gi,
-  /\b(email list|subscriber|newsletter)\b/gi,
-  /\b(LinkedIn|Instagram|TikTok) (post|DM|comment)\b/gi,
-  /\b(follower|audience|community)\b/gi,
-  /\b(overdeliver|underpromise|overdeliver)\b/gi,
-  /\b(onboarding|offboarding)\b/gi,
-  /\b(retention|lifetime value|LTV)\b/gi,
-  /\b(messenger|inbox|calendar)\b/gi,
-  /\b(no.?show|flake|ghost)\b/gi,
-  /\b(stripe|paypal|venmo)\b/gi,
-  /\b(contract|agreement|proposal)\b/gi,
-  /\b(group call|1:1|one.on.one|private call)\b/gi,
-];
-
-// ─── SAMPLE TEXT ────────────────────────────────────────────
-const SAMPLE_TEXT = `In today's digital landscape, every coach knows that building a personal brand is important. It's essential to note that your online presence can help you unlock your potential and take your business to the next level.
-
-Here are 5 strategies to elevate your coaching business:
-1. Optimize your profile for maximum visibility
-2. Create actionable insights that move the needle
-3. Leverage best practices for content creation
-4. Build a scalable solution for client onboarding
-5. Streamline your processes for frictionless growth
-
-At the end of the day, success requires dedication and the right mindset. When it comes to growing your coaching business, it's worth noting that consistency is the key to success.
-
-I help coaches transform their businesses with proven strategies. DM me to book a discovery call and let's dive in.`;
-
-// ============================================================
-// ANALYSIS ENGINE
-// ============================================================
-function analyzeContent(text) {
-  if (!text || text.trim().length < 20) return null;
-
-  const flags = [];
-  const signals = {
-    thinking: { positive: [], negative: [] },
-    recognition: { positive: [], negative: [] },
-    swap: { positive: [], negative: [] },
-  };
-
-  // --- 1. AI-GENERIC PHRASE DETECTION ---
-  AI_GENERIC_PHRASES.forEach(({ phrase, category, note }) => {
-    let match;
-    const reFlags = phrase.flags.includes('g') ? phrase.flags : phrase.flags + 'g';
-    const regex = new RegExp(phrase.source, reFlags);
-    while ((match = regex.exec(text)) !== null) {
-      flags.push({
-        type: category,
-        text: match[0],
-        index: match.index,
-        note: note,
-      });
-      if (match.index === regex.lastIndex) regex.lastIndex++;
-    }
-  });
-
-  // --- 2. SERVICE DESCRIPTION DETECTION ---
-  SERVICE_PATTERNS.forEach(({ phrase, type, note }) => {
-    let match;
-    const reFlags = phrase.flags.includes('g') ? phrase.flags : phrase.flags + 'g';
-    const regex = new RegExp(phrase.source, reFlags);
-    while ((match = regex.exec(text)) !== null) {
-      flags.push({
-        type: type,
-        text: match[0],
-        index: match.index,
-        note: note,
-      });
-      if (match.index === regex.lastIndex) regex.lastIndex++;
-    }
-  });
-
-  // --- 3. COUNT THINKING MARKERS ---
-  let thinkingCount = 0;
-  const thinkingMatches = [];
-  THINKING_MARKERS.forEach((pattern) => {
-    const reFlags = pattern.flags.includes('g') ? pattern.flags : pattern.flags + 'g';
-    const regex = new RegExp(pattern.source, reFlags);
-    let match;
-    while ((match = regex.exec(text)) !== null) {
-      thinkingCount++;
-      thinkingMatches.push(match[0]);
-    }
-  });
-
-  // --- 4. COUNT SPECIFICITY MARKERS ---
-  let specificityCount = 0;
-  const specificityMatches = [];
-  SPECIFICITY_MARKERS.forEach((pattern) => {
-    const reFlags = pattern.flags.includes('g') ? pattern.flags : pattern.flags + 'g';
-    const regex = new RegExp(pattern.source, reFlags);
-    let match;
-    while ((match = regex.exec(text)) !== null) {
-      specificityCount++;
-      specificityMatches.push(match[0]);
-    }
-  });
-
-  // --- 5. COUNT OWNERSHIP MARKERS ---
-  let ownershipCount = 0;
-  OWNERSHIP_MARKERS.forEach((pattern) => {
-    const reFlags = pattern.flags.includes('g') ? pattern.flags : pattern.flags + 'g';
-    const regex = new RegExp(pattern.source, reFlags);
-    let match;
-    while ((match = regex.exec(text)) !== null) {
-      ownershipCount++;
-    }
-  });
-
-  // --- 6. COUNT CONTRARIAN MARKERS ---
-  let contrarianCount = 0;
-  CONTRARIAN_MARKERS.forEach((pattern) => {
-    const reFlags = pattern.flags.includes('g') ? pattern.flags : pattern.flags + 'g';
-    const regex = new RegExp(pattern.source, reFlags);
-    let match;
-    while ((match = regex.exec(text)) !== null) {
-      contrarianCount++;
-    }
-  });
-
-  // --- 6b. COUNT ICP / COACHING-SPECIFIC MARKERS ---
-  let icpCount = 0;
-  ICP_MARKERS.forEach((pattern) => {
-    const reFlags = pattern.flags.includes('g') ? pattern.flags : pattern.flags + 'g';
-    const regex = new RegExp(pattern.source, reFlags);
-    let match;
-    while ((match = regex.exec(text)) !== null) {
-      icpCount++;
-    }
-  });
-
-  // --- 7. COUNT SENTENCES & PARAGRAPHS ---
-  const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 5);
-  const sentenceCount = Math.max(sentences.length, 1);
-  const words = text.trim().split(/\s+/).filter(Boolean);
-  const wordCount = Math.max(words.length, 1);
-  const paragraphs = text.split(/\n\n+/).filter(p => p.trim().length > 0);
-  const paragraphCount = Math.max(paragraphs.length, 1);
-
-  // --- 8. COUNT FLAG CATEGORIES ---
-  const flagByCategory = {
-    'ai-generic': flags.filter(f => f.type === 'ai-generic').length,
-    'safe-language': flags.filter(f => f.type === 'safe-language').length,
-    'over-polishing': flags.filter(f => f.type === 'over-polishing').length,
-    'service-desc': flags.filter(f => f.type === 'service-desc').length,
-    'broad-agreement': flags.filter(f => f.type === 'broad-agreement').length,
-  };
-
-  const serviceDescCount = flagByCategory['service-desc'];
-  const safeLangCount = flagByCategory['safe-language'];
-  const aiGenericCount = flagByCategory['ai-generic'] + flagByCategory['broad-agreement'];
-  const overPolishCount = flagByCategory['over-polishing'];
-
-  // --- 9. SCORE DIMENSION 1: DEMONSTRATED THINKING vs SERVICE DESCRIPTION ---
-  let thinkingScore = 50;
-  if (thinkingCount > 0) {
-    thinkingScore += Math.min(thinkingCount * 8, 30);
-    signals.thinking.positive.push(`${thinkingCount} thinking marker${thinkingCount > 1 ? 's' : ''}`);
-  }
-  if (contrarianCount > 0) {
-    thinkingScore += Math.min(contrarianCount * 10, 15);
-    signals.thinking.positive.push(`${contrarianCount} contrarian stance${contrarianCount > 1 ? 's' : ''}`);
-  }
-  if (serviceDescCount > 0) {
-    const penalty = Math.min(serviceDescCount * 12, 40);
-    thinkingScore -= penalty;
-    signals.thinking.negative.push(`${serviceDescCount} service description${serviceDescCount > 1 ? 's' : ''}`);
-  }
-  if (thinkingCount === 0) {
-    thinkingScore -= 15;
-    signals.thinking.negative.push('No original thinking detected');
-  }
-  thinkingScore = Math.max(5, Math.min(100, Math.round(thinkingScore)));
-
-  // --- 10. SCORE DIMENSION 2: SPECIFIC RECOGNITION vs BROAD AGREEMENT ---
-  let recognitionScore = 50;
-  if (specificityCount > 0) {
-    recognitionScore += Math.min(specificityCount * 9, 35);
-    signals.recognition.positive.push(`${specificityCount} specific detail${specificityCount > 1 ? 's' : ''}`);
-  }
-  if (aiGenericCount > 0) {
-    const penalty = Math.min(aiGenericCount * 8, 35);
-    recognitionScore -= penalty;
-    signals.recognition.negative.push(`${aiGenericCount} broad agreement phrase${aiGenericCount > 1 ? 's' : ''}`);
-  }
-  if (specificityCount === 0) {
-    recognitionScore -= 20;
-    signals.recognition.negative.push('No specific details detected');
-  }
-  recognitionScore = Math.max(5, Math.min(100, Math.round(recognitionScore)));
-
-  // --- 11. SCORE DIMENSION 3: BYLINE SWAP TEST ---
-  let swapScore = 50;
-  if (ownershipCount > 0) {
-    const ownershipDensity = ownershipCount / sentenceCount;
-    if (ownershipDensity > 0.3) {
-      swapScore += 15;
-      signals.swap.positive.push('Strong first-person voice');
-    } else if (ownershipDensity > 0.1) {
-      swapScore += 8;
-      signals.swap.positive.push('Some first-person markers');
-    }
-  } else {
-    swapScore -= 20;
-    signals.swap.negative.push('No first-person voice');
-  }
-  if (contrarianCount > 0) {
-    swapScore += Math.min(contrarianCount * 12, 25);
-    signals.swap.positive.push(`${contrarianCount} unique POV marker${contrarianCount > 1 ? 's' : ''}`);
-  }
-  const totalGenericFlags = aiGenericCount + safeLangCount + overPolishCount;
-  if (totalGenericFlags > 0) {
-    const penalty = Math.min(totalGenericFlags * 5, 35);
-    swapScore -= penalty;
-    signals.swap.negative.push(`${totalGenericFlags} AI-generic indicator${totalGenericFlags > 1 ? 's' : ''}`);
-  }
-  if (contrarianCount === 0 && ownershipCount < 2) {
-    swapScore -= 15;
-    signals.swap.negative.push('No unique perspective detected');
-  }
-  swapScore = Math.max(5, Math.min(100, Math.round(swapScore)));
-
-  // --- 12. OVERALL SCORE ---
-  const overallScore = Math.round((thinkingScore + recognitionScore + swapScore) / 3);
-
-  // --- 12b. DIAGNOSTIC FLAGS ---
-  const diagnosticFlags = [];
-  if (thinkingCount === 0 && contrarianCount === 0) {
-    diagnosticFlags.push({
-      type: 'missing-thinking',
-      text: 'No demonstrated thinking detected',
-      note: 'The post contains no causal reasoning ("because"), diagnosis ("the problem is"), or original observation. It reads as description, not thinking.',
-    });
-  }
-  if (specificityCount === 0) {
-    diagnosticFlags.push({
-      type: 'missing-specificity',
-      text: 'No specific ICP recognition details',
-      note: 'No numbers, named tools, specific timeframes, or recognizable coaching scenarios found. The reader won\'t feel "seen."',
-    });
-  }
-  if (contrarianCount === 0) {
-    diagnosticFlags.push({
-      type: 'missing-pov',
-      text: 'No unique perspective or contrarian stance',
-      note: 'The post takes no position another coach would disagree with. It could be the average of every post on this topic.',
-    });
-  }
-  if (ownershipCount === 0) {
-    diagnosticFlags.push({
-      type: 'missing-ownership',
-      text: 'No first-person voice',
-      note: 'The post is written in third person or passive voice. No "I," "my," or "I\'ve seen" markers. The reader can\'t feel a person behind the words.',
-    });
-  } else if (ownershipCount / sentenceCount < 0.1) {
-    diagnosticFlags.push({
-      type: 'thin-ownership',
-      text: 'Weak first-person voice',
-      note: 'First-person markers appear too rarely. The post feels distant and impersonal rather than like a person speaking.',
-    });
-  }
-  if (icpCount === 0) {
-    diagnosticFlags.push({
-      type: 'missing-icp',
-      text: 'No coaching-specific ICP signals',
-      note: 'No mentions of launches, enrollment, sales calls, webinars, funnels, objections, client wins, or other coaching-specific scenarios. Name the exact coach and moment this is for.',
-    });
-  }
-
-  const allFlags = [...flags, ...diagnosticFlags];
-
-  // --- 13. GENERATE REVISION PROMPTS ---
-  const prompts = generatePrompts({
-    thinkingCount, specificityCount, contrarianCount, ownershipCount,
-    serviceDescCount, safeLangCount, aiGenericCount, overPolishCount,
-    sentenceCount, wordCount, flags: allFlags, thinkingScore, recognitionScore, swapScore, icpCount,
-  });
-
-  // --- 14. BUILD ANNOTATED TEXT ---
-  const annotatedSegments = buildAnnotatedText(text, flags);
-
-  return {
-    overallScore,
-    thinkingScore,
-    recognitionScore,
-    swapScore,
-    flags: allFlags,
-    phraseFlags: flags,
-    diagnosticFlags,
-    prompts,
-    signals,
-    annotatedSegments,
-    stats: { wordCount, sentenceCount, paragraphCount, thinkingCount, specificityCount, ownershipCount, contrarianCount, icpCount },
-  };
-}
-
-// ============================================================
-// REVISION PROMPT GENERATOR
-// ============================================================
-function generatePrompts(data) {
-  const prompts = [];
-  const {
-    thinkingCount, specificityCount, contrarianCount, ownershipCount,
-    serviceDescCount, safeLangCount, aiGenericCount, overPolishCount,
-    sentenceCount, flags, thinkingScore, recognitionScore, swapScore, icpCount,
-  } = data;
-  let num = 1;
-
-  if (safeLangCount > 0) {
-    const safeFlags = flags.filter(f => f.type === 'safe-language');
-    const examples = safeFlags.slice(0, 3).map(f => `"${f.text}"`).join(', ');
-    prompts.push({
-      number: num++,
-      category: 'Safe Language',
-      text: 'Replace every hedging phrase with a direct claim. Instead of "it\'s important to note" or "can help," state what you actually believe. Commit to a position.',
-      context: `Detected: ${examples}${safeLangCount > 3 ? `, and ${safeLangCount - 3} more` : ''}`,
-    });
-  }
-
-  if (aiGenericCount > 0) {
-    const aiFlags = flags.filter(f => f.type === 'ai-generic' || f.type === 'broad-agreement');
-    const examples = aiFlags.slice(0, 3).map(f => `"${f.text}"`).join(', ');
-    prompts.push({
-      number: num++,
-      category: 'AI-Generic Language',
-      text: 'These phrases are the fingerprint of AI-polished content. Delete each one and rewrite the sentence in your own voice — the way you\'d actually say it out loud to a client.',
-      context: `Detected: ${examples}${aiGenericCount > 3 ? `, and ${aiGenericCount - 3} more` : ''}`,
-    });
-  }
-
-  if (overPolishCount > 0) {
-    const overFlags = flags.filter(f => f.type === 'over-polishing');
-    const examples = overFlags.slice(0, 3).map(f => `"${f.text}"`).join(', ');
-    prompts.push({
-      number: num++,
-      category: 'Over-Polishing',
-      text: 'Academic transitions and essay-style closings make this read like a polished paper, not a person thinking out loud. Replace with conversational connectors — or just start the next sentence directly.',
-      context: `Detected: ${examples}`,
-    });
-  }
-
-  if (serviceDescCount > 0 && thinkingScore < 60) {
-    const svcFlags = flags.filter(f => f.type === 'service-desc');
-    const examples = svcFlags.slice(0, 3).map(f => `"${f.text}"`).join(', ');
-    prompts.push({
-      number: num++,
-      category: 'Service Description Overload',
-      text: 'Convert this service description into a diagnosis. Before mentioning what you offer, describe the problem you observe. Lead with the insight, earn the mention. The reader should think "that\'s exactly my situation" before you introduce the solution.',
-      context: `Detected: ${examples}`,
-    });
-  }
-
-  if (thinkingCount === 0) {
-    prompts.push({
-      number: num++,
-      category: 'Missing Demonstrated Thinking',
-      text: 'This post contains no causal reasoning, diagnosis, or original observation. Add a "because" sentence. Explain why something happens — the mechanism, the reason, the pattern you see. Show your thinking, not just your conclusion.',
-    });
-  }
-
-  if (specificityCount === 0) {
-    prompts.push({
-      number: num++,
-      category: 'Lack of Specific Recognition',
-      text: 'This post contains no concrete details — no numbers, named tools, specific timeframes, or recognizable scenarios. Replace a broad statement with a specific moment your ICP has actually experienced. Name the situation, the symptom, the exact feeling.',
-    });
-  } else if (specificityCount < 2 && recognitionScore < 65) {
-    prompts.push({
-      number: num++,
-      category: 'Thin Specificity',
-      text: 'You have one specific detail — add two more. Anchor a claim with a number, a named tool, a timeframe, or a concrete scenario the ICP would immediately recognize.',
-    });
-  }
-
-  if (contrarianCount === 0) {
-    prompts.push({
-      number: num++,
-      category: 'No Unique Perspective',
-      text: 'State a belief that another coach in your space might disagree with. Take a position. If the average of every post on this topic would produce your draft, you haven\'t said anything yet. What do you actually believe that others don\'t?',
-    });
-  }
-
-  if (swapScore < 55) {
-    prompts.push({
-      number: num++,
-      category: 'Byline Swap Risk',
-      text: 'This post could be published under any coach\'s name. Add a sentence only you could write — reference a specific client experience, a personal realization, or a belief you\'ve formed through your work. Make it unmistakably yours.',
-    });
-  }
-
-  const listicleMatch = flags.filter(f => /\d+ (reasons|ways|tips|strategies)/.test(f.text));
-  if (listicleMatch.length > 0) {
-    prompts.push({
-      number: num++,
-      category: 'Listicle Structure',
-      text: 'The numbered-list format signals templated content. Consider restructuring as a single argument or narrative. If you keep the list, make each point a specific insight — not a generic tip anyone could write.',
-    });
-  }
-
-  if (ownershipCount > 0 && ownershipCount / sentenceCount < 0.15) {
-    prompts.push({
-      number: num++,
-      category: 'Weak First-Person Voice',
-      text: 'Your first-person voice appears too rarely. Weave in more "I" statements — not about your services, but about your observations, beliefs, and experiences. The reader should feel a person behind the words.',
-    });
-  } else if (ownershipCount === 0) {
-    prompts.push({
-      number: num++,
-      category: 'No First-Person Voice',
-      text: 'This post is written in the third person or passive voice. Shift to first-person. Use "I," "my," "I\'ve seen." Let the reader hear you, not a narrator.',
-    });
-  }
-
-  if (icpCount === 0) {
-    prompts.push({
-      number: num++,
-      category: 'Missing ICP Relevance',
-      text: 'This post contains no coaching-specific scenarios — no launches, enrollment, sales calls, webinars, objections, client wins, or recognizable coaching moments. Name the exact coach and situation this is for. What specific moment in their journey would make them stop scrolling?',
-    });
-  }
-
-  if (prompts.length === 0) {
-    prompts.push({
-      number: 1,
-      category: 'Strong Content',
-      text: 'This post passes the Swap Test with strong signals across all dimensions. No major AI-generic indicators detected. Before publishing, do one final read: does this sound like you speaking, or like you writing?',
-    });
-  }
-
-  return prompts;
-}
-
-// ============================================================
-// ANNOTATED TEXT BUILDER
-// ============================================================
-function buildAnnotatedText(text, flags) {
-  if (flags.length === 0) return [{ text, flagged: false }];
-
-  const sorted = [...flags].sort((a, b) => a.index - b.index);
-  const merged = [];
-  for (const flag of sorted) {
-    const last = merged[merged.length - 1];
-    if (last && flag.index <= last.index + last.text.length) {
-      const end = flag.index + flag.text.length;
-      const lastEnd = last.index + last.text.length;
-      if (end > lastEnd) {
-        last.text = text.substring(last.index, end);
-      }
-      last.types = last.types || new Set([last.type]);
-      last.types.add(flag.type);
-    } else {
-      merged.push({
-        index: flag.index,
-        text: flag.text,
-        type: flag.type,
-        types: new Set([flag.type]),
-        note: flag.note,
-      });
-    }
-  }
-
-  const segments = [];
-  let lastEnd = 0;
-  for (const flag of merged) {
-    if (flag.index > lastEnd) {
-      segments.push({ text: text.substring(lastEnd, flag.index), flagged: false });
-    }
-    const types = Array.from(flag.types);
-    const dominantType = types.includes('ai-generic') ? 'ai-generic'
-      : types.includes('safe-language') ? 'safe-language'
-      : types.includes('over-polishing') ? 'over-polishing'
-      : types[0];
-    segments.push({
-      text: flag.text,
-      flagged: true,
-      type: dominantType,
-      note: flag.note,
-    });
-    lastEnd = flag.index + flag.text.length;
-  }
-  if (lastEnd < text.length) {
-    segments.push({ text: text.substring(lastEnd), flagged: false });
-  }
-
-  return segments;
-}
-
-// ============================================================
-// SCORE HELPERS
-// ============================================================
-function getScoreColor(score) {
-  if (score >= 70) return 'strong';
-  if (score >= 45) return 'mid';
-  return 'weak';
-}
-
-function getVerdict(score) {
-  if (score >= 80) {
-    return {
-      label: 'Distinctive — passes the Swap Test',
-      summary: 'This content demonstrates strong original thinking, specific recognition, and a perspective that could only be yours. Minor polish may help, but the foundation is sharp and ICP-relevant.',
-    };
-  } else if (score >= 65) {
-    return {
-      label: 'Close — needs sharpening',
-      summary: 'The content has personality and some specific thinking, but a few AI-generic patterns dilute your voice. Address the flagged passages and revision prompts to make it unmistakably yours.',
-    };
-  } else if (score >= 45) {
-    return {
-      label: 'At risk — reads as AI-polished',
-      summary: 'Several AI-generic indicators are present. The content could be attributed to multiple coaches. Focus on the revision prompts to inject demonstrated thinking, specific recognition, and unique perspective.',
-    };
-  } else {
-    return {
-      label: 'Fails the Swap Test — too generic',
-      summary: 'This content is highly swappable. Any coach could publish it word-for-word. The AI-generic indicators are dominant. Use the revision prompts below to rebuild it around your unique point of view before publishing.',
-    };
-  }
-}
-
-function getDimensionLabel(score, dimension) {
-  if (score >= 70) {
-    const labels = {
-      thinking: 'Strong demonstrated thinking',
-      recognition: 'Strong specific recognition',
-      swap: 'Strong owner signal',
-    };
-    return labels[dimension];
-  } else if (score >= 45) {
-    const labels = {
-      thinking: 'Mixed — thinking and service language',
-      recognition: 'Some specificity, mostly broad',
-      swap: 'Needs sharper POV',
-    };
-    return labels[dimension];
-  } else {
-    const labels = {
-      thinking: 'Service description, not thinking',
-      recognition: 'Broad agreement only',
-      swap: 'Easily swappable',
-    };
-    return labels[dimension];
-  }
-}
-
-// ============================================================
-// UI RENDERING
-// ============================================================
-function renderResults(result) {
-  const resultsSection = document.getElementById('results');
-  resultsSection.hidden = false;
-
-  const scoreColor = getScoreColor(result.overallScore);
-  const verdict = getVerdict(result.overallScore);
-  document.getElementById('overall-score').textContent = result.overallScore;
-  document.getElementById('overall-score').className = 'score-number score-color-' + scoreColor;
-  document.getElementById('verdict-label').textContent = verdict.label;
-  document.getElementById('verdict-summary').textContent = verdict.summary;
-
-  renderDimension('thinking', result.thinkingScore, result.signals.thinking, result);
-  renderDimension('recognition', result.recognitionScore, result.signals.recognition, result);
-  renderDimension('swap', result.swapScore, result.signals.swap, result);
-
-  renderFlags(result.flags);
-  renderPrompts(result.prompts);
-  renderAnnotated(result.annotatedSegments);
-
-  resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-function renderDimension(dim, score, signals, result) {
-  const color = getScoreColor(score);
-  const fill = document.getElementById(`${dim}-fill`);
-  const scoreEl = document.getElementById(`${dim}-score`);
-  const descEl = document.getElementById(`${dim}-desc`);
-  const signalsEl = document.getElementById(`${dim}-signals`);
-
-  fill.className = 'score-fill fill-' + color;
-  fill.style.width = score + '%';
-  scoreEl.textContent = score;
-  scoreEl.className = 'dimension-score-value score-color-' + color;
-  descEl.textContent = getDimensionLabel(score, dim);
-
-  signalsEl.innerHTML = '';
-  signals.positive.forEach(s => {
-    const tag = document.createElement('span');
-    tag.className = 'signal-tag signal-positive';
-    tag.textContent = '+ ' + s;
-    signalsEl.appendChild(tag);
-  });
-  signals.negative.forEach(s => {
-    const tag = document.createElement('span');
-    tag.className = 'signal-tag signal-negative';
-    tag.textContent = '− ' + s;
-    signalsEl.appendChild(tag);
-  });
-}
-
-function renderFlags(flags) {
-  const grid = document.getElementById('flags-grid');
-  grid.innerHTML = '';
-
-  if (flags.length === 0) {
-    const el = document.createElement('div');
-    el.className = 'no-flags';
-    el.textContent = 'No AI-generic indicators detected. Strong signal.';
-    grid.appendChild(el);
-    return;
-  }
-
-  const grouped = {};
-  flags.forEach(f => {
-    if (!grouped[f.type]) grouped[f.type] = [];
-    grouped[f.type].push(f);
-  });
-
-  const typeLabels = {
-    'ai-generic': 'AI-Generic Phrase',
-    'safe-language': 'Safe Language',
-    'over-polishing': 'Over-Polishing',
-    'service-desc': 'Service Description',
-    'broad-agreement': 'Broad Agreement',
-    'missing-thinking': 'Missing: Demonstrated Thinking',
-    'missing-specificity': 'Missing: Specific Recognition',
-    'missing-pov': 'Missing: Unique Perspective',
-    'missing-ownership': 'Missing: First-Person Voice',
-    'thin-ownership': 'Thin: First-Person Voice',
-    'missing-icp': 'Missing: ICP Relevance',
-  };
-
-  const typeOrder = ['safe-language', 'ai-generic', 'over-polishing', 'service-desc', 'broad-agreement', 'missing-thinking', 'missing-specificity', 'missing-pov', 'missing-ownership', 'thin-ownership', 'missing-icp'];
-  typeOrder.forEach(type => {
-    if (!grouped[type]) return;
-    const group = grouped[type];
-    group.forEach(flag => {
-      const card = document.createElement('div');
-      card.className = 'flag-card';
-
-      const typeEl = document.createElement('span');
-      typeEl.className = 'flag-type ' + type;
-      typeEl.textContent = typeLabels[type] || type;
-
-      const textEl = document.createElement('div');
-      textEl.className = 'flag-text';
-      if (flag.text && flag.index !== undefined) {
-        textEl.innerHTML = `<span class="flag-quote">${escapeHtml(flag.text)}</span> — ${escapeHtml(flag.note)}`;
-      } else {
-        textEl.innerHTML = `<strong>${escapeHtml(flag.text)}</strong> — ${escapeHtml(flag.note)}`;
-      }
-
-      card.appendChild(typeEl);
-      card.appendChild(textEl);
-      grid.appendChild(card);
-    });
-  });
-}
-
-function renderPrompts(prompts) {
-  const list = document.getElementById('prompts-list');
-  list.innerHTML = '';
-
-  prompts.forEach(prompt => {
-    const card = document.createElement('div');
-    card.className = 'prompt-card';
-
-    const num = document.createElement('span');
-    num.className = 'prompt-number';
-    num.textContent = prompt.number;
-
-    const body = document.createElement('div');
-    body.className = 'prompt-body';
-
-    const cat = document.createElement('div');
-    cat.className = 'prompt-category';
-    cat.textContent = prompt.category;
-
-    const text = document.createElement('p');
-    text.className = 'prompt-text';
-    text.textContent = prompt.text;
-
-    body.appendChild(cat);
-    body.appendChild(text);
-
-    if (prompt.context) {
-      const ctx = document.createElement('p');
-      ctx.className = 'prompt-context';
-      ctx.textContent = prompt.context;
-      body.appendChild(ctx);
-    }
-
-    card.appendChild(num);
-    card.appendChild(body);
-    list.appendChild(card);
-  });
-}
-
-function renderAnnotated(segments) {
-  const container = document.getElementById('annotated-draft');
-  container.innerHTML = '';
-
-  segments.forEach(seg => {
-    if (seg.flagged) {
-      const span = document.createElement('span');
-      span.className = 'annotate-flag';
-      span.dataset.type = seg.type;
-      span.textContent = seg.text;
-      span.title = seg.note || '';
-      container.appendChild(span);
-    } else {
-      container.appendChild(document.createTextNode(seg.text));
-    }
-  });
-}
-
-function escapeHtml(str) {
-  const div = document.createElement('div');
-  div.textContent = str;
-  return div.innerHTML;
-}
-
-// ============================================================
-// API & SERVICE WORKER CONFIG
-// ============================================================
-const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-  ? 'http://localhost:8000'
-  : (window.API_BASE_URL || 'http://localhost:8000');
-
-let currentResult = null;
-let revisedText = '';
-const generatedPlatforms = new Set();
-
-const PLATFORM_DEFS = {
-  instagram_carousel: { name: 'Instagram Carousel', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>' },
-  instagram_stories: { name: 'Instagram Stories', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5"/></svg>' },
-  instagram_reels: { name: 'Instagram Reels', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v6M15 3v6"/><path d="M10 12l5 3-5 3z" fill="currentColor"/></svg>' },
-  facebook: { name: 'Facebook', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 00-5 5v3H8v4h2v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>' },
-  substack_note: { name: 'Substack Note', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>' },
-  substack_article: { name: 'Substack Article', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>' },
-  threads: { name: 'Threads', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>' },
-};
-
-// Register Service Worker for PWA
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js')
-      .then(reg => console.log('Service Worker registered:', reg.scope))
-      .catch(err => console.error('Service Worker registration failed:', err));
-  });
-}
-
-// ============================================================
-// EVENT HANDLERS
-// ============================================================
+// ─── INITIALIZATION & LOCALSTORAGE ──────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  const textarea = document.getElementById('draft-input');
+  // 1. Profile Manager Elements
+  const authorNameInput = document.getElementById('author-name');
+  const icpTargetInput = document.getElementById('icp-target');
+  const toneVoiceInput = document.getElementById('tone-voice');
+  const offersInput = document.getElementById('offers-services');
+  const proofMetricsInput = document.getElementById('proof-metrics');
+  const saveProfileBtn = document.getElementById('save-profile-btn');
+  const profileStatus = document.getElementById('profile-status');
+
+  // Load Saved Profile Context
+  function loadProfile() {
+    if (authorNameInput) authorNameInput.value = localStorage.getItem('swap_author_name') || '';
+    if (icpTargetInput) icpTargetInput.value = localStorage.getItem('swap_icp_target') || '';
+    if (toneVoiceInput) toneVoiceInput.value = localStorage.getItem('swap_tone_voice') || '';
+    if (offersInput) offersInput.value = localStorage.getItem('swap_offers_services') || '';
+    if (proofMetricsInput) proofMetricsInput.value = localStorage.getItem('swap_proof_metrics') || '';
+  }
+  loadProfile();
+
+  if (saveProfileBtn) {
+    saveProfileBtn.addEventListener('click', () => {
+      localStorage.setItem('swap_author_name', authorNameInput.value.trim());
+      localStorage.setItem('swap_icp_target', icpTargetInput.value.trim());
+      localStorage.setItem('swap_tone_voice', toneVoiceInput.value.trim());
+      localStorage.setItem('swap_offers_services', offersInput.value.trim());
+      localStorage.setItem('swap_proof_metrics', proofMetricsInput.value.trim());
+      
+      if (profileStatus) {
+        profileStatus.hidden = false;
+        setTimeout(() => { profileStatus.hidden = true; }, 3000);
+      }
+    });
+  }
+
+  // 2. ICP Research & Trending Topics Generator
+  const nicheSelect = document.getElementById('niche-select');
+  const generateResearchBtn = document.getElementById('generate-research-btn');
+  const topicsGrid = document.getElementById('topics-grid');
+
+  const RESEARCH_BANK = {
+    coaching: [
+      {
+        badges: ['🔥 Reddit r/coaching', '💬 184 Comments'],
+        title: 'The $10k-$30k MRR Referral Trap',
+        body: 'Coaches struggling because word-of-mouth plateaued, but cold outbound and ads feel pushy to high-ticket clients.',
+        angle: 'Why relying on referrals stops you from building a scalable acquisition engine.'
+      },
+      {
+        badges: ['💼 LinkedIn Trending', '🎥 YouTube Debate'],
+        title: 'AI Content Fatigue Among Buyers',
+        body: 'ICP prospects report ignoring polished LinkedIn posts that sound like ChatGPT summaries.',
+        angle: 'How to write with demonstrated thinking so buyers feel specifically recognized.'
+      },
+      {
+        badges: ['👥 FB Groups', '🔥 High Engagement'],
+        title: 'The "I Need to Think About It" Objection Spike',
+        body: 'Prospects getting off sales calls without closing because the offer lacks a clear diagnostic mechanism.',
+        angle: 'Lead with diagnosis before pitch so prospects close themselves.'
+      }
+    ],
+    saas: [
+      {
+        badges: ['🔥 Hacker News', '💬 210 Comments'],
+        title: 'Free Trial Churn on Day 2',
+        body: 'Users sign up for B2B SaaS but abandon onboarding before experiencing the core value moment.',
+        angle: 'Show the 1-click outcome before asking for account configuration.'
+      },
+      {
+        badges: ['🐦 X/Twitter Viral', '💼 LinkedIn'],
+        title: 'Feature Bloat vs Single Core Solution',
+        body: 'Buyers overwhelmed by massive feature suites; preferring lightweight point solutions.',
+        angle: 'Why stripping 80% of your product pitch increases conversion.'
+      },
+      {
+        badges: ['🔥 Reddit r/SaaS', '💬 95 Comments'],
+        title: 'Outbound Cold Email Response Drop',
+        body: 'Traditional 4-step sequence email templates generating 0.2% reply rates.',
+        angle: 'Replace template pitches with specific observation breakdown.'
+      }
+    ],
+    agency: [
+      {
+        badges: ['💼 LinkedIn Trending', '👥 FB Groups'],
+        title: 'Retainer Churn After Month 3',
+        body: 'Clients canceling monthly agency retainers due to lack of transparent metric reporting.',
+        angle: 'Why vanity metrics kill retainers and how to report ROI instead.'
+      },
+      {
+        badges: ['🔥 Reddit r/marketing', '💬 140 Comments'],
+        title: 'Commoditization of General Marketing Services',
+        body: 'Prospects demanding discounts because general agency offers look identical.',
+        angle: 'Specializing in one painful ICP scenario eliminates price sensitivity.'
+      },
+      {
+        badges: ['🎥 YouTube Strategy', '🐦 X/Twitter'],
+        title: 'The Inbound Content Bottleneck',
+        body: 'Agency founders spending 15 hours/week on content without qualified lead flow.',
+        angle: 'Shift from educational posts to contrarian positioning.'
+      }
+    ]
+  };
+
+  function renderResearchTopics() {
+    if (!topicsGrid) return;
+    const niche = nicheSelect ? nicheSelect.value : 'coaching';
+    const topics = RESEARCH_BANK[niche] || RESEARCH_BANK['coaching'];
+    topicsGrid.innerHTML = '';
+
+    topics.forEach((t) => {
+      const card = document.createElement('div');
+      card.className = 'challenge-card';
+      card.innerHTML = `
+        <div>
+          <div class="challenge-badges">
+            ${t.badges.map(b => `<span class="badge ${b.includes('🔥') ? 'badge-hot' : ''}">${b}</span>`).join('')}
+          </div>
+          <h4 class="challenge-title" style="margin-top:0.5rem;">${t.title}</h4>
+          <p class="challenge-body" style="margin-top:0.375rem;">${t.body}</p>
+        </div>
+        <div>
+          <div class="challenge-angle">💡 Recommended Angle: ${t.angle}</div>
+          <button type="button" class="btn btn-ghost btn-sm draft-topic-btn" style="margin-top:0.75rem; width:100%;">
+            ✍️ Draft Post From This Topic
+          </button>
+        </div>
+      `;
+
+      card.querySelector('.draft-topic-btn').addEventListener('click', () => {
+        const icp = icpTargetInput ? icpTargetInput.value.trim() : 'ideal clients';
+        const author = authorNameInput ? authorNameInput.value.trim() : 'I';
+        const draftInput = document.getElementById('draft-input');
+        
+        if (draftInput) {
+          draftInput.value = `Most ${icp || 'people'} think the biggest problem is getting more leads. The truth is, ${t.title.toLowerCase()} is what's actually stalling growth. We tested this recently with our clients: when you rely on generic messaging, prospects tune out. Here is the exact breakdown of why this happens and what to do instead.`;
+          draftInput.dispatchEvent(new Event('input'));
+          draftInput.focus();
+          draftInput.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+
+      topicsGrid.appendChild(card);
+    });
+  }
+
+  if (generateResearchBtn) {
+    generateResearchBtn.addEventListener('click', renderResearchTopics);
+  }
+  renderResearchTopics();
+
+  // 3. Main Input & Audit Engine
+  const inputEl = document.getElementById('draft-input');
+  const charCountEl = document.getElementById('char-count');
   const runBtn = document.getElementById('run-btn');
-  const clearBtn = document.getElementById('clear-btn');
   const sampleBtn = document.getElementById('sample-btn');
-  const charCount = document.getElementById('char-count');
-  const rubricToggle = document.getElementById('rubric-toggle');
-  const rubricContent = document.getElementById('rubric-content');
+  const clearBtn = document.getElementById('clear-btn');
+  const resultsSec = document.getElementById('results');
 
-  // Character count
-  textarea.addEventListener('input', () => {
-    const len = textarea.value.length;
-    charCount.textContent = `${len} character${len !== 1 ? 's' : ''}`;
-  });
+  // Theme Toggle
+  const themeToggle = document.querySelector('[data-theme-toggle]');
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+  }
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
 
-  // Run analysis
-  runBtn.addEventListener('click', () => {
-    const text = textarea.value.trim();
-    if (text.length < 20) {
-      textarea.focus();
-      textarea.style.borderColor = 'var(--color-weak)';
-      setTimeout(() => { textarea.style.borderColor = ''; }, 2000);
+  // Sample Draft
+  const SAMPLE_DRAFT = `In today's fast-paced digital world, it is important to note that content marketing is a game-changer for online coaches. It's not about posting daily, it's about building a robust strategy. I believe that leveraging holistic strategies will supercharge your growth — seamlessly unlocking your potential.
+
+Contrary to popular belief, our data shows that 84% of coaches fail because they rely on generic templates instead of specific positioning. We tested this with 12 clients in March, and revenue increased 3.5x after fixing the swap test flags. DM me to book a discovery call.`;
+
+  if (inputEl) {
+    inputEl.addEventListener('input', () => {
+      const len = inputEl.value.length;
+      if (charCountEl) charCountEl.textContent = `${len.toLocaleString()} character${len === 1 ? '' : 's'}`;
+    });
+  }
+
+  if (sampleBtn) {
+    sampleBtn.addEventListener('click', () => {
+      if (inputEl) {
+        inputEl.value = SAMPLE_DRAFT;
+        inputEl.dispatchEvent(new Event('input'));
+      }
+    });
+  }
+
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      if (inputEl) {
+        inputEl.value = '';
+        inputEl.dispatchEvent(new Event('input'));
+      }
+      if (resultsSec) resultsSec.hidden = true;
+    });
+  }
+
+  if (runBtn) {
+    runBtn.addEventListener('click', runAudit);
+  }
+
+  // AUDIT LOGIC
+  function runAudit() {
+    const text = inputEl.value.trim();
+    if (!text) {
+      alert('Please enter or load a draft post to run the Swap Test.');
       return;
     }
-    const result = analyzeContent(text);
-    if (result) {
-      currentResult = result;
-      revisedText = '';
-      generatedPlatforms.clear();
-      document.getElementById('revise-output').hidden = true;
-      document.getElementById('copy-revised-btn').hidden = true;
-      document.getElementById('adapt-section').hidden = true;
-      document.getElementById('adapt-output').innerHTML = '';
-      renderResults(result);
+
+    resultsSec.hidden = false;
+    resultsSec.scrollIntoView({ behavior: 'smooth' });
+
+    // Detect Flags
+    const detectedFlags = [];
+
+    AI_CLICHES.forEach(item => {
+      const matches = text.match(item.pattern);
+      if (matches) {
+        detectedFlags.push({ match: matches[0], category: 'ai-generic', note: item.note, count: matches.length });
+      }
+    });
+
+    HEDGING_PATTERNS.forEach(item => {
+      const matches = text.match(item.pattern);
+      if (matches) {
+        detectedFlags.push({ match: matches[0], category: 'safe-language', note: item.note, count: matches.length });
+      }
+    });
+
+    NEGATIVE_PARALLELISM.forEach(item => {
+      const matches = text.match(item.pattern);
+      if (matches) {
+        detectedFlags.push({ match: matches[0], category: 'negative-parallelism', note: item.note, count: matches.length });
+      }
+    });
+
+    const emDashMatches = text.match(EM_DASH_PATTERN);
+    if (emDashMatches) {
+      detectedFlags.push({ match: '— (Em-dash)', category: 'em-dash', note: 'Em-dashes are a major AI giveaway. Replace with periods, commas, or parentheses.', count: emDashMatches.length });
     }
-  });
 
-  // Clear
-  clearBtn.addEventListener('click', () => {
-    textarea.value = '';
-    charCount.textContent = '0 characters';
-    document.getElementById('results').hidden = true;
-    textarea.focus();
-  });
+    SERVICE_PATTERNS.forEach(item => {
+      const matches = text.match(item.pattern);
+      if (matches) {
+        detectedFlags.push({ match: matches[0], category: 'service-desc', note: item.note, count: matches.length });
+      }
+    });
 
-  // Sample text
-  sampleBtn.addEventListener('click', () => {
-    textarea.value = SAMPLE_TEXT;
-    charCount.textContent = `${SAMPLE_TEXT.length} characters`;
-    textarea.focus();
-  });
+    // Counts
+    let thinkingCount = 0;
+    THINKING_MARKERS.forEach(regex => { if (regex.test(text)) thinkingCount++; });
 
-  // Rubric toggle
-  rubricToggle.addEventListener('click', () => {
-    const expanded = rubricToggle.getAttribute('aria-expanded') === 'true';
-    rubricToggle.setAttribute('aria-expanded', !expanded);
-    rubricContent.hidden = expanded;
-  });
+    let specCount = 0;
+    SPECIFICITY_MARKERS.forEach(regex => { if (regex.test(text)) specCount++; });
 
-  // Theme toggle
-  const themeToggleBtn = document.querySelector('[data-theme-toggle]');
-  if (themeToggleBtn) {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    let currentTheme = prefersDark ? 'dark' : 'light';
-    document.documentElement.setAttribute('data-theme', currentTheme);
+    let totalFlagsCount = detectedFlags.reduce((a, b) => a + b.count, 0);
 
-    const updateThemeIcon = (theme) => {
-      themeToggleBtn.setAttribute('aria-label', 'Switch to ' + (theme === 'dark' ? 'light' : 'dark') + ' mode');
-      themeToggleBtn.innerHTML = theme === 'dark'
-        ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
-        : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
-    };
-    updateThemeIcon(currentTheme);
+    // Calculate Scores
+    let thinkingScore = Math.min(100, Math.max(10, 50 + (thinkingCount * 15) - (totalFlagsCount * 6)));
+    let recognitionScore = Math.min(100, Math.max(10, 30 + (specCount * 20)));
+    let swapScore = Math.min(100, Math.max(0, 100 - (totalFlagsCount * 18)));
 
-    themeToggleBtn.addEventListener('click', () => {
-      currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', currentTheme);
-      updateThemeIcon(currentTheme);
+    let overallScore = Math.round((thinkingScore * 0.35) + (recognitionScore * 0.35) + (swapScore * 0.30));
+
+    // UI Updates
+    document.getElementById('overall-score').textContent = overallScore;
+    
+    updateDimUI('thinking', thinkingScore, `${thinkingCount} thinking marker(s) detected.`);
+    updateDimUI('recognition', recognitionScore, `${specCount} specific metric/tool detail(s) detected.`);
+    updateDimUI('swap', swapScore, `${totalFlagsCount} swappable flag(s) detected.`);
+
+    // Verdict Summary
+    const verdictLabel = document.getElementById('verdict-label');
+    const verdictSummary = document.getElementById('verdict-summary');
+    if (overallScore >= 75) {
+      verdictLabel.textContent = 'Distinctive Voice — Passes the Swap Test';
+      verdictSummary.textContent = 'This draft demonstrates distinct reasoning, specific evidence, and minimal AI clichés. It cannot easily be swapped with another author byline.';
+    } else if (overallScore >= 50) {
+      verdictLabel.textContent = 'Moderate Positioning — Needs Sharpening';
+      verdictSummary.textContent = 'Contains good core ideas, but relies on soft hedging or negative parallelism reframes. Use the Humanizer below to sharpen your voice.';
+    } else {
+      verdictLabel.textContent = 'High Swappability Risk — AI-Generic';
+      verdictSummary.textContent = 'Warning: This draft relies heavily on overused AI tropes and generic service pitches. Anyone could put their name on this.';
+    }
+
+    renderFlagsGrid(detectedFlags);
+    renderPromptsList(detectedFlags, thinkingCount, specCount);
+    renderAnnotatedDraft(text, detectedFlags);
+  }
+
+  function updateDimUI(dim, score, text) {
+    const fill = document.getElementById(`${dim}-fill`);
+    const scoreVal = document.getElementById(`${dim}-score`);
+    const desc = document.getElementById(`${dim}-desc`);
+
+    if (fill) fill.style.width = `${score}%`;
+    if (scoreVal) scoreVal.textContent = score;
+    if (desc) desc.textContent = text;
+  }
+
+  function renderFlagsGrid(flags) {
+    const grid = document.getElementById('flags-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
+
+    if (flags.length === 0) {
+      grid.innerHTML = '<div class="signal-tag signal-positive" style="padding:0.75rem;">✨ No AI-generic flags detected! Clean draft.</div>';
+      return;
+    }
+
+    flags.forEach(f => {
+      const card = document.createElement('div');
+      card.className = 'flag-card';
+      card.innerHTML = `
+        <span class="flag-type ${f.category}">${f.category}</span>
+        <div>
+          <strong>"${f.match}"</strong> (${f.count}x) — <span style="color:var(--color-text-muted);">${f.note}</span>
+        </div>
+      `;
+      grid.appendChild(card);
     });
   }
 
-  // Keyboard shortcut: Ctrl/Cmd + Enter to run
-  textarea.addEventListener('keydown', (e) => {
-    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
-      e.preventDefault();
-      runBtn.click();
-    }
-  });
+  function renderPromptsList(flags, thinkingCount, specCount) {
+    const list = document.getElementById('prompts-list');
+    if (!list) return;
+    list.innerHTML = '';
 
-  // === Revise Button ===
+    const prompts = [];
+    let num = 1;
+
+    if (flags.some(f => f.category === 'negative-parallelism')) {
+      prompts.push({
+        num: num++,
+        cat: 'Negative Parallelism Reframe',
+        text: 'Delete the rejected half ("Not X") and state your positive claim directly. "It is not about X, it is about Y" → "Y is what matters."'
+      });
+    }
+
+    if (flags.some(f => f.category === 'ai-generic')) {
+      prompts.push({
+        num: num++,
+        cat: 'AI Cliché Words',
+        text: 'Strip away buzzwords like "delve", "game-changer", and "unlock". Replace them with plain spoken English you would say out loud.'
+      });
+    }
+
+    if (flags.some(f => f.category === 'em-dash')) {
+      prompts.push({
+        num: num++,
+        cat: 'Em-Dash Removal',
+        text: 'Em-dashes (—) are the loudest AI giveaway in 2026. Break long dash-connected sentences into two short, punchy sentences.'
+      });
+    }
+
+    if (thinkingCount === 0) {
+      prompts.push({
+        num: num++,
+        cat: 'Demonstrated Thinking',
+        text: 'Add a "because" or "we tested" sentence to explain the causal mechanism behind your claim.'
+      });
+    }
+
+    if (specCount === 0) {
+      prompts.push({
+        num: num++,
+        cat: 'Specific Recognition',
+        text: 'Inject concrete numbers, specific timeframes, or named tools (e.g., Notion, Calendly, $10k MRR) so your target ICP feels recognized.'
+      });
+    }
+
+    prompts.forEach(p => {
+      const item = document.createElement('div');
+      item.className = 'prompt-card';
+      item.innerHTML = `
+        <span class="prompt-number">0${p.num}</span>
+        <div>
+          <div class="prompt-category">${p.cat}</div>
+          <div class="prompt-text">${p.text}</div>
+        </div>
+      `;
+      list.appendChild(item);
+    });
+  }
+
+  function renderAnnotatedDraft(text, flags) {
+    const container = document.getElementById('annotated-draft');
+    if (!container) return;
+    
+    let html = text;
+    flags.forEach(f => {
+      if (f.category !== 'em-dash') {
+        const regex = new RegExp(f.match.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+        html = html.replace(regex, `<span class="annotate-flag" title="${f.note}">$&</span>`);
+      }
+    });
+
+    container.innerHTML = html;
+  }
+
+  // 4. HUMANIZER & REWRITE ENGINE
   const reviseBtn = document.getElementById('revise-btn');
-  const reviseLoading = document.getElementById('revise-loading');
-  const reviseError = document.getElementById('revise-error');
-  const reviseOutput = document.getElementById('revise-output');
   const copyRevisedBtn = document.getElementById('copy-revised-btn');
-  const adaptSection = document.getElementById('adapt-section');
+  const reviseOutput = document.getElementById('revise-output');
 
   if (reviseBtn) {
-    reviseBtn.addEventListener('click', async () => {
-      if (!currentResult) return;
+    reviseBtn.addEventListener('click', () => {
+      const rawText = inputEl.value.trim();
+      if (!rawText) return;
 
-      reviseBtn.disabled = true;
-      reviseLoading.hidden = false;
-      reviseError.hidden = true;
-      reviseOutput.hidden = true;
-      copyRevisedBtn.hidden = true;
+      const author = localStorage.getItem('swap_author_name') || '';
+      const icp = localStorage.getItem('swap_icp_target') || 'readers';
+      const proof = localStorage.getItem('swap_proof_metrics') || '';
 
-      try {
-        const res = await fetch(`${API_BASE}/api/revise`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            original_text: textarea.value.trim(),
-            flags: currentResult.flags,
-            prompts: currentResult.prompts,
-            scores: {
-              overall: currentResult.overallScore,
-              thinking: currentResult.thinkingScore,
-              recognition: currentResult.recognitionScore,
-              swap: currentResult.swapScore,
-            },
-          }),
-        });
+      // Client-Side Humanizing Algorithm
+      let rewritten = rawText;
 
-        if (!res.ok) throw new Error(`Server error (${res.status})`);
-        const data = await res.json();
-        revisedText = data.revised_text;
+      // 1. Remove Clichés
+      rewritten = rewritten.replace(/\bin today'?s (?:fast-paced|digital|ever-changing|competitive|modern) (?:world|landscape|age|environment)\b/gi, '');
+      rewritten = rewritten.replace(/\bgame-?changer\b/gi, 'turning point');
+      rewritten = rewritten.replace(/\bdelve(?:s|d|ing)? into\b/gi, 'look at');
+      rewritten = rewritten.replace(/\bleverage(?:s|d|ing)?\b/gi, 'use');
+      rewritten = rewritten.replace(/\bunlock(?:s|ed|ing)? (?:your|the) potential\b/gi, 'get results');
+      rewritten = rewritten.replace(/\bseamless(?:ly)?\b/gi, 'easily');
+      rewritten = rewritten.replace(/\bsupercharge(?:s|d|ing)?\b/gi, 'grow');
+      rewritten = rewritten.replace(/\brobust\b/gi, 'strong');
+      rewritten = rewritten.replace(/\bholistic\b/gi, 'complete');
 
-        reviseOutput.textContent = revisedText;
-        reviseOutput.hidden = false;
-        copyRevisedBtn.hidden = false;
-        adaptSection.hidden = false;
-        renderPlatformButtons();
-      } catch (err) {
-        reviseError.textContent = `Unable to connect to revision backend (${err.message}). Ensure the Python FastAPI server is running on ${API_BASE}.`;
-        reviseError.hidden = false;
-      } finally {
-        reviseBtn.disabled = false;
-        reviseLoading.hidden = true;
+      // 2. Remove Hedging
+      rewritten = rewritten.replace(/\bit is important to note that\b/gi, '');
+      rewritten = rewritten.replace(/\bit'?s worth mentioning that\b/gi, '');
+      rewritten = rewritten.replace(/\bi believe that\b/gi, '');
+
+      // 3. Fix Negative Parallelism ("Not X. Y.")
+      rewritten = rewritten.replace(/It'?s not about ([^,.]+)[,.] it'?s about ([^,.]+)/gi, '$2 matters most.');
+
+      // 4. Kill Em-Dashes
+      rewritten = rewritten.replace(/—|--/g, '. ');
+
+      // 5. Apply Viral Hook Formula (LinkedIn Hook #1 / #2)
+      const lines = rewritten.split('\n').filter(Boolean);
+      let viralHook = '';
+      if (lines.length > 0) {
+        viralHook = `Stop relying on generic tactics for ${icp}.\nHere is the exact framework we used ${proof ? '(' + proof + ')' : ''} to get results:\n\n`;
       }
+
+      const finalRewrite = (viralHook + rewritten.replace(/\s+/g, ' ').trim()) +
+        (author ? `\n\n— ${author}` : '');
+
+      if (reviseOutput) {
+        reviseOutput.textContent = finalRewrite;
+        reviseOutput.hidden = false;
+      }
+      if (copyRevisedBtn) {
+        copyRevisedBtn.hidden = false;
+      }
+
+      // Show Platform Adaptation
+      setupPlatformAdaptation(finalRewrite);
     });
   }
 
-  // Copy revised text
   if (copyRevisedBtn) {
     copyRevisedBtn.addEventListener('click', () => {
-      navigator.clipboard.writeText(revisedText).then(() => {
-        copyRevisedBtn.textContent = 'Copied';
+      if (reviseOutput) {
+        navigator.clipboard.writeText(reviseOutput.textContent);
+        copyRevisedBtn.textContent = 'Copied!';
         setTimeout(() => { copyRevisedBtn.textContent = 'Copy Text'; }, 2000);
-      });
+      }
     });
   }
 
-  // === Platform Adaptation ===
-  function renderPlatformButtons() {
-    const grid = document.getElementById('platform-grid');
-    grid.innerHTML = '';
-    Object.entries(PLATFORM_DEFS).forEach(([key, def]) => {
+  // 5. PLATFORM ADAPTATION ENGINE
+  function setupPlatformAdaptation(baseText) {
+    const adaptSection = document.getElementById('adapt-section');
+    const platformGrid = document.getElementById('platform-grid');
+    const adaptOutput = document.getElementById('adapt-output');
+
+    if (!adaptSection || !platformGrid) return;
+    adaptSection.hidden = false;
+    platformGrid.innerHTML = '';
+    adaptOutput.innerHTML = '';
+
+    const platforms = [
+      { id: 'linkedin', name: 'LinkedIn Post', icon: '💼' },
+      { id: 'carousel', name: '6-Slide Carousel', icon: '🎨' },
+      { id: 'twitter', name: 'X / Twitter Thread', icon: '🐦' },
+      { id: 'instagram', name: 'Instagram & Reels', icon: '📸' },
+      { id: 'substack', name: 'Substack Note & Article', icon: '📬' },
+      { id: 'facebook', name: 'Facebook Group Post', icon: '👥' },
+      { id: 'threads', name: 'Threads Sequence', icon: '🧵' }
+    ];
+
+    platforms.forEach(p => {
       const btn = document.createElement('button');
-      btn.className = 'platform-btn' + (generatedPlatforms.has(key) ? ' generated' : '');
-      btn.dataset.platform = key;
+      btn.className = 'platform-btn';
+      btn.innerHTML = `<span>${p.icon}</span> <span>${p.name}</span>`;
       btn.type = 'button';
-      btn.innerHTML = `<span class="platform-icon">${def.icon}</span><span>${def.name}</span>`;
-      btn.addEventListener('click', () => adaptToPlatform(key));
-      grid.appendChild(btn);
+      btn.addEventListener('click', () => adaptForPlatform(p.id, baseText, btn));
+      platformGrid.appendChild(btn);
     });
   }
 
-  async function adaptToPlatform(platformKey) {
-    if (!revisedText) return;
+  function adaptForPlatform(platformId, text, btnEl) {
+    document.querySelectorAll('.platform-btn').forEach(b => b.classList.remove('active'));
+    btnEl.classList.add('active');
 
-    const platformDef = PLATFORM_DEFS[platformKey];
-    const clickedBtn = document.querySelector(`.platform-btn[data-platform="${platformKey}"]`);
-    clickedBtn.disabled = true;
+    const outputContainer = document.getElementById('adapt-output');
+    if (!outputContainer) return;
 
-    const loading = document.getElementById('adapt-loading');
-    const loadingText = document.getElementById('adapt-loading-text');
-    const error = document.getElementById('adapt-error');
-    const output = document.getElementById('adapt-output');
+    const author = localStorage.getItem('swap_author_name') || '';
+    const icp = localStorage.getItem('swap_icp_target') || 'readers';
 
-    loadingText.textContent = `Adapting for ${platformDef.name}...`;
-    loading.hidden = false;
-    error.hidden = true;
+    let formattedContent = '';
 
-    try {
-      const res = await fetch(`${API_BASE}/api/adapt`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          revised_text: revisedText,
-          platform: platformKey,
-        }),
-      });
-
-      if (!res.ok) throw new Error(`Server error (${res.status})`);
-      const data = await res.json();
-
-      generatedPlatforms.add(platformKey);
-      clickedBtn.classList.add('generated');
-
-      const existing = document.getElementById(`result-${platformKey}`);
-      if (existing) existing.remove();
-
-      const resultCard = document.createElement('div');
-      resultCard.className = 'platform-result';
-      resultCard.id = `result-${platformKey}`;
-      resultCard.innerHTML = `
-        <div class="platform-result-header">
-          <span class="platform-result-title">${platformDef.name}</span>
-          <div class="platform-result-actions">
-            <button class="platform-copy-btn" type="button">Copy</button>
+    if (platformId === 'linkedin') {
+      formattedContent = `💼 LINKEDIN OPTIMIZED POST\n-----------------------------------\n${text}\n\n💡 What is your take on this? Drop a comment below.\n\n#ContentStrategy #Positioning #${icp.replace(/\s+/g, '')}`;
+      outputContainer.innerHTML = `<div class="rewrite-box">${escapeHtml(formattedContent)}</div>`;
+    } else if (platformId === 'carousel') {
+      // 6-Slide Editorial System
+      outputContainer.innerHTML = `
+        <div class="carousel-deck">
+          <div class="carousel-slide-card">
+            <div>
+              <div class="slide-eyebrow">01 · cover / hook</div>
+              <div class="slide-title">The Positioning Trap Holding Back ${escapeHtml(icp)}</div>
+            </div>
+            <div class="slide-footer">
+              <span>TC SOCIAL CAROUSELS</span>
+              <span>SWIPE ➔</span>
+            </div>
+          </div>
+          <div class="carousel-slide-card">
+            <div>
+              <div class="slide-eyebrow">02 · the problem</div>
+              <div class="slide-body">Most creators rely on AI templates that sound identical. When everyone sounds the same, buyers choose based on price alone.</div>
+            </div>
+            <div class="slide-footer">
+              <span>02 / 06</span>
+              <span>SWIPE ➔</span>
+            </div>
+          </div>
+          <div class="carousel-slide-card">
+            <div>
+              <div class="slide-eyebrow">03 · mindset shift</div>
+              <div class="slide-title" style="font-size:1.15rem;">"Demonstrated thinking beats generic advice every time."</div>
+            </div>
+            <div class="slide-footer">
+              <span>03 / 06</span>
+              <span>SWIPE ➔</span>
+            </div>
+          </div>
+          <div class="carousel-slide-card">
+            <div>
+              <div class="slide-eyebrow">04 · proof / data</div>
+              <div class="slide-body">Fixing byline swap flags increases prospect response rate by 3.5x without spending more on ads.</div>
+            </div>
+            <div class="slide-footer">
+              <span>04 / 06</span>
+              <span>SWIPE ➔</span>
+            </div>
+          </div>
+          <div class="carousel-slide-card">
+            <div>
+              <div class="slide-eyebrow">05 · real scenario</div>
+              <div class="slide-body">${escapeHtml(text.slice(0, 140))}...</div>
+            </div>
+            <div class="slide-footer">
+              <span>05 / 06</span>
+              <span>SWIPE ➔</span>
+            </div>
+          </div>
+          <div class="carousel-slide-card">
+            <div>
+              <div class="slide-eyebrow">06 · call to action</div>
+              <div class="slide-title" style="font-size:1.15rem;">Comment <span style="color:#8b1a1a;">"SWAP"</span> to get the audit checklist</div>
+            </div>
+            <div class="slide-footer">
+              <span>${escapeHtml(author || 'THE SWAP TEST')}</span>
+              <span>END</span>
+            </div>
           </div>
         </div>
-        <div class="platform-result-body"></div>
       `;
-      resultCard.querySelector('.platform-result-body').textContent = data.adapted_text;
-
-      const platformOrder = Object.keys(PLATFORM_DEFS);
-      const insertIndex = platformOrder.indexOf(platformKey);
-      const existingResults = output.querySelectorAll('.platform-result');
-      let inserted = false;
-      for (const existingResult of existingResults) {
-        const existingKey = existingResult.id.replace('result-', '');
-        if (platformOrder.indexOf(existingKey) > insertIndex) {
-          output.insertBefore(resultCard, existingResult);
-          inserted = true;
-          break;
-        }
-      }
-      if (!inserted) output.appendChild(resultCard);
-
-      resultCard.querySelector('.platform-copy-btn').addEventListener('click', (e) => {
-        const btn = e.target;
-        navigator.clipboard.writeText(data.adapted_text).then(() => {
-          btn.textContent = 'Copied';
-          setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
-        });
-      });
-    } catch (err) {
-      error.textContent = `Unable to adapt for ${platformDef.name}. ${err.message}. Please try again.`;
-      error.hidden = false;
-    } finally {
-      clickedBtn.disabled = false;
-      loading.hidden = true;
+    } else if (platformId === 'twitter') {
+      formattedContent = `🐦 X / TWITTER THREAD\n-----------------------------------\n1/5 Most ${icp} fail because they rely on swappable messaging.\n\n2/5 Here is the truth: ${text.slice(0, 200)}...\n\n3/5 When you eliminate AI clichés, buyers feel specifically recognized.\n\n4/5 Instead of pitching services, lead with diagnosis.\n\n5/5 Retweet if this helped you sharpen your post today.`;
+      outputContainer.innerHTML = `<div class="rewrite-box">${escapeHtml(formattedContent)}</div>`;
+    } else if (platformId === 'instagram') {
+      formattedContent = `📸 INSTAGRAM CAPTION & REELS SCRIPT\n-----------------------------------\n[REELS HOOK (0-3s)]: "Stop posting content that sounds like everyone else."\n\n[ON-SCREEN TEXT]: Specific Recognition > Generic Advice\n\n[CAPTION]:\n${text}\n\nSave this post for your next content audit 📌`;
+      outputContainer.innerHTML = `<div class="rewrite-box">${escapeHtml(formattedContent)}</div>`;
+    } else if (platformId === 'substack') {
+      formattedContent = `📬 SUBSTACK NOTE & NEWSLETTER OUTLINE\n-----------------------------------\n[SUBSTACK NOTE]:\n${text.slice(0, 280)}\n\n[NEWSLETTER HEADLINE OPTIONS]:\n1. The Positioning Mistake ${icp} Make\n2. Why Your Draft Fails the Byline Swap Test\n\n## Section 1: The Diagnosis\n${text}`;
+      outputContainer.innerHTML = `<div class="rewrite-box">${escapeHtml(formattedContent)}</div>`;
+    } else if (platformId === 'facebook') {
+      formattedContent = `👥 FACEBOOK GROUP POST\n-----------------------------------\nHey everyone — wanted to share a quick realization from our work with ${icp} this week:\n\n${text}\n\nHas anyone else noticed this in their niche? Let me know in the comments below!`;
+      outputContainer.innerHTML = `<div class="rewrite-box">${escapeHtml(formattedContent)}</div>`;
+    } else if (platformId === 'threads') {
+      formattedContent = `🧵 THREADS SEQUENCE\n-----------------------------------\n1. Most posts fail the swap test because they are written for everyone.\n\n2. ${text.slice(0, 240)}\n\n3. Write like a human speaking to a colleague.`;
+      outputContainer.innerHTML = `<div class="rewrite-box">${escapeHtml(formattedContent)}</div>`;
     }
+  }
+
+  function escapeHtml(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   }
 });
