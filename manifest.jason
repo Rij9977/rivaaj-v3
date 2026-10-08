@@ -1,9 +1,16 @@
 {
-  "name": "The Swap Test \u2014 Content Audit & Viral Creator Suite",
+  "name": "The Swap Test — Content Audit & Creator Suite",
   "short_name": "Swap Test",
   "description": "Client-side content audit, humanizer, ICP research, and viral platform rewrite engine.",
-  "start_url": "./index.html",
+  "start_url": "index.html",
   "display": "standalone",
   "background_color": "#14130d",
-  "theme_color": "#a0522d"
+  "theme_color": "#f59e0b",
+  "icons": [
+    {
+      "src": "manifest.json",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
 }
