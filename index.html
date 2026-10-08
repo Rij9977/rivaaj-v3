@@ -57,7 +57,7 @@
       <div class="profile-grid">
         <div class="input-group">
           <label for="author-name">Author / Company Name</label>
-          <input type="text" id="author-name" class="text-input" placeholder="e.g. Jane Doe, Growth Coach">
+          <input type="text" id="author-name" class="text-input" placeholder="e.g. Alex Rivers, Growth Coach">
         </div>
         <div class="input-group">
           <label for="icp-target">Target ICP (Ideal Customer)</label>
@@ -65,22 +65,22 @@
         </div>
         <div class="input-group">
           <label for="tone-voice">Tone & Voice Quirks</label>
-          <input type="text" id="tone-voice" class="text-input" placeholder="e.g. Direct, punchy, anti-guru, no fluff">
+          <input type="text" id="tone-voice" class="text-input" placeholder="e.g. Direct, punchy, anti-guru, proof-first">
         </div>
         <div class="input-group">
           <label for="offers-services">Core Offer / Service</label>
-          <input type="text" id="offers-services" class="text-input" placeholder="e.g. 1:1 Founder Coaching, 90-Day Sprint">
+          <input type="text" id="offers-services" class="text-input" placeholder="e.g. High-Ticket Offer Architecture">
         </div>
       </div>
       <div class="input-group" style="margin-bottom:1rem;">
         <label for="proof-metrics">Key Metrics & Proof Points</label>
-        <textarea id="proof-metrics" class="textarea-sm" placeholder="e.g. Scaled 12 founders to $1M ARR, 84% client retention rate"></textarea>
+        <textarea id="proof-metrics" class="textarea-sm" placeholder="e.g. Scaled 140+ coaches to $30k/mo with 82% client retention"></textarea>
       </div>
       <div style="display:flex; align-items:center; gap:0.75rem;">
         <button type="button" id="save-profile-btn" class="btn btn-primary btn-sm">
           💾 Save Profile Context
         </button>
-        <span id="profile-status" style="font-size:0.8125rem; color:var(--color-strong);" hidden>
+        <span id="profile-status" style="font-size:0.8125rem; color:var(--color-success);" hidden>
           ✓ Saved to browser storage!
         </span>
       </div>
@@ -99,10 +99,12 @@
       </p>
       <div class="research-controls">
         <label for="niche-select" style="font-size:0.8125rem; font-weight:600; text-transform:uppercase; color:var(--color-text-muted);">Niche Industry:</label>
-        <select id="niche-select" class="select-input" style="max-width:220px;">
+        <select id="niche-select" class="select-input" style="max-width:240px;">
           <option value="coaching">Online Coaching / Consulting</option>
           <option value="saas">B2B SaaS / Software</option>
           <option value="agency">Agency / Marketing Services</option>
+          <option value="ecommerce">E-commerce & DTC Brands</option>
+          <option value="creators">Creators & Digital Products</option>
         </select>
         <button type="button" id="generate-research-btn" class="btn btn-ghost btn-sm">
           🔄 Refresh Daily Topics
